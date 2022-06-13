@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>ㅋ킥킥ㅋ</title>
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/header-footer.css">
 <script src="https://kit.fontawesome.com/7bb5347123.js" crossorigin="anonymous"></script>
 </head>
 <body>
