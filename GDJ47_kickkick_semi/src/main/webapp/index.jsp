@@ -1,16 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" %>
-<%
+    pageEncoding="UTF-8"%>
+    
+<%@ include file="/views/common/header.jsp" %>
 
-%>	
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>KickKick-시작</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-	
-</body>
-</html>
+
+
+<%@ include file="/views/common/footer.jsp" %>
