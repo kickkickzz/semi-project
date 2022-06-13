@@ -3,6 +3,8 @@
     
 <%@ include file="/views/common/header.jsp" %>
 
-
+<section>
+	
+</section>
 
 <%@ include file="/views/common/footer.jsp" %>

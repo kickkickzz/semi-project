@@ -42,9 +42,6 @@ nav input{
 	padding-left:20px;
 	margin:18px 0px;
 }
-div#search{
-	align-items: center;
-}
 div#icons{
 	justify-content: space-between;
 	margin:20px 0px;
@@ -57,7 +54,7 @@ div#icons>i{
 }
 i#searchicon{
 	position:absolute;
-	margin-top:1.8%;
+	margin-top:28px;
 	margin-left:-2.3%;
 	font-size:20px;
 }
