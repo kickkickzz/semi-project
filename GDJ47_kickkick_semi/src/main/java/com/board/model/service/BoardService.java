@@ -2,6 +2,7 @@ package com.board.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import static common.JDBCTemplate.*;
 
 import com.board.model.dao.BoardDao;
 import com.board.model.vo.Board;
