@@ -33,6 +33,7 @@ public class StadiumServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		List<Stadium> staArr = new ReservationService().selectStadium();
+		request.getRequestDispatcher("/views/stadium/stadium.jsp").forward(request, response);
 		 
 	}
 
