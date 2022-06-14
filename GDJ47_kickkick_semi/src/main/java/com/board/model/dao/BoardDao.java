@@ -1,6 +1,6 @@
 package com.board.model.dao;
 
-import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.*;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -31,15 +31,15 @@ public class BoardDao {
 		
 	}
 
-	public ArrayList<Board> selectList(Connection conn) {
+	public List<Board> selectList(Connection conn) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		ArrayList<Board> list=new ArrayList();
+		List<Board> list=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectNoticeList"));
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				/* list.add(getBoard(rs)); */
+				list.add(getBoard(rs));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -48,5 +48,35 @@ public class BoardDao {
 			close(pstmt);
 		}return list;
 	}
+
+	private Board getBoard(ResultSet rs) throws SQLException{
+		return Board.builder()
+				.boardNum(rs.getInt("board_no"))
+				.boardWriter(rs.getString("board_writer"))
+				.boardWriterEmail(rs.getString("board_writer_email"))
+				.boardTitle(rs.getString("board_title"))
+				.boardContent(rs.getString("board_content"))
+				.boardImgPath(rs.getString("board_img_path"))
+				.boardDate(rs.getDate("board_date"))
+				.boardDeleteStatus(rs.getString("board_deledte_status"))
+				.build();
+	}
+
+	public int insertBoard(Connection conn, Board b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public Board selectBoard(Connection conn, int bo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getBoardListCount(Connection conn) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
 
 }

@@ -34,13 +34,20 @@
 		</div>
 		<div id="header-bottom">
 			<ul id="header-menu">
-				<li>공지사항</li>
+				<li id="notice" onclick="fn_notice();">공지사항</li>
 				<li>구장</li>
-				<li>예약</li>
+				<li onclick="fn_stadium();">예약</li>
 				<li>용품</li>
 				<li>매칭</li>
 			</ul>
 		</div>
 	</nav>
 </header>
-
+<script>
+	const fn_stadium=()=>{
+		location.assign('<%=request.getContextPath()%>/stadium.do');
+	}
+	const fn_notice=()=>{
+		location.assign('<%=request.getContextPath() %>/boardlist.do');
+	}
+</script>

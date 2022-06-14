@@ -1,4 +1,4 @@
-package com.board.controller;
+package com.reservation.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.board.model.service.BoardService;
-import com.board.model.vo.Board;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.reservation.model.service.ReservationService;
+import com.reservation.model.vo.Stadium;
 
 /**
- * Servlet implementation class BoardListServlet
+ * Servlet implementation class StadiumServlet
  */
-@WebServlet("/boardlist.do")
-public class BoardListServlet extends HttpServlet {
+@WebServlet("/stadium.do")
+public class StadiumServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListServlet() {
+    public StadiumServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,14 +32,9 @@ public class BoardListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Board> list = new BoardService().selectList();
-
-		request.setAttribute("list",list);
-		
-		request.getRequestDispatcher("/views/board/notice.jsp").forward(request, response);
-//		response.setContentType("application/json; charset=UTF-8");
-//		Gson gson=new GsonBuilder().setDateFormat("yyyy��  MM�� dd��").create();
-//		gson.toJson(list, response.getWriter());
+		List<Stadium> staArr = new ReservationService().selectStadium();
+		request.getRequestDispatcher("/views/stadium/stadium.jsp").forward(request, response);
+		 
 	}
 
 	/**
