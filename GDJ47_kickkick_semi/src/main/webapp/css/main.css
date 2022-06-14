@@ -23,6 +23,29 @@ div.card{
 	border-bottom:2px solid black;
 	border-right:2px solid black;
 }
+div.card-body{
+	padding:20px;
+}
+.card-title{
+	font-weight:bold;
+	margin-bottom: 0;
+	height:60px;
+}
+.card-body-list{
+	padding-left:0;
+}
+.card-body-list>li{
+	display: flex;
+}
+.sch-rslt{
+	padding-left:16px;
+}
+li>b{
+	padding-right:24px;
+}
+.place-name{
+	margin-top:20px;
+}
 
 
 

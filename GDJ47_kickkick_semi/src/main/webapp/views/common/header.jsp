@@ -7,7 +7,6 @@
 <title>ㅋ킥킥ㅋ</title>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300&display=swap" rel="stylesheet">
-<script src="<%=request.getContextPath()%>/js/main.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/header-footer.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/main.css">
 <script src="https://kit.fontawesome.com/7bb5347123.js" crossorigin="anonymous"></script>

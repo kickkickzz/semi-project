@@ -5,8 +5,11 @@ ul{
 
 /* header */
 nav#header-container{
+	background-color:white;
 	width:100%;
 	height:145px;
+	position: fixed;
+	z-index: 100;
 }
 div#header-top{
 	display:flex;
@@ -71,6 +74,7 @@ ul#header-menu{
 	justify-content: space-between;
 	padding:0 13%;
 	margin-top:16px;
+	letter-spacing: 8px;
 }
 ul#header-menu>li{
 	font-size:18px;
@@ -86,6 +90,9 @@ ul#header-menu>li{
 
 
 /* section */
+section{
+	padding-top:150px;
+}
 div#img-container{
 	border: 1px solid red;
 	width:100%;
@@ -114,6 +121,7 @@ div#img1{
 div#footer{
 	width: 100%;
 	height: 300px;
+	background-color: #e9e9e9;
 }
 div#footer-header{
 	border-bottom:1px solid lightgray;
@@ -143,6 +151,9 @@ div#fheader-right li{
 	font-size:14px;
 	padding:0px 15px;
 
+}
+div#fheader-right {
+	margin-top: 10px;
 }
 
 /* footer-body */
