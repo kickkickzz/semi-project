@@ -39,7 +39,7 @@
 				</p>
 			</div>
 			<div id="fbody-right">
-				<h3>고객센터 1588-1588</h3>
+				<h4>고객센터 1588-1588</h4>
 				<p>
 					운영시간 : 평일 09:00 ~ 18:00<br>
 					고객센터 바로가기&nbsp&nbsp<i class="fa-solid fa-chevron-right"style="font-size:3px;"></i><br>
