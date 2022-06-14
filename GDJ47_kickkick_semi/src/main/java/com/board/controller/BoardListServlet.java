@@ -1,7 +1,7 @@
 package com.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +34,7 @@ public class BoardListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ArrayList<Board> list = new BoardService().selectList();
+		List<Board> list = new BoardService().selectList();
 
 		response.setContentType("application/json; charset=UTF-8");
 		Gson gson=new GsonBuilder().setDateFormat("yyyy³â  MM¿ù ddÀÏ").create();
