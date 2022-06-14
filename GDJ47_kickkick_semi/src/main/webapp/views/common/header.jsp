@@ -35,7 +35,7 @@
 		</div>
 		<div id="header-bottom">
 			<ul id="header-menu">
-				<li>공지사항</li>
+				<li id="notice"><a href="<%=request.getContextPath() %>/boardlist.do">공지사항</a></li>
 				<li>구장</li>
 				<li>예약</li>
 				<li>용품</li>

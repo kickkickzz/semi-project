@@ -36,9 +36,12 @@ public class BoardListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		List<Board> list = new BoardService().selectList();
 
-		response.setContentType("application/json; charset=UTF-8");
-		Gson gson=new GsonBuilder().setDateFormat("yyyy년  MM월 dd일").create();
-		gson.toJson(list, response.getWriter());
+		request.setAttribute("list",list);
+		
+		request.getRequestDispatcher("/views/notice/noticeList.jsp").forward(request, response);
+//		response.setContentType("application/json; charset=UTF-8");
+//		Gson gson=new GsonBuilder().setDateFormat("yyyy년  MM월 dd일").create();
+//		gson.toJson(list, response.getWriter());
 	}
 
 	/**
