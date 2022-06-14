@@ -38,9 +38,9 @@ public class BoardListServlet extends HttpServlet {
 
 		request.setAttribute("list",list);
 		
-		request.getRequestDispatcher("/views/notice/noticeList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/board/notice.jsp").forward(request, response);
 //		response.setContentType("application/json; charset=UTF-8");
-//		Gson gson=new GsonBuilder().setDateFormat("yyyy³â  MM¿ù ddÀÏ").create();
+//		Gson gson=new GsonBuilder().setDateFormat("yyyyï¿½ï¿½  MMï¿½ï¿½ ddï¿½ï¿½").create();
 //		gson.toJson(list, response.getWriter());
 	}
 

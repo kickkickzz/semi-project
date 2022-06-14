@@ -35,7 +35,7 @@
 		</div>
 		<div id="header-bottom">
 			<ul id="header-menu">
-				<li id="notice"><a href="<%=request.getContextPath() %>/boardlist.do">공지사항</a></li>
+				<li id="notice" onclick="fn_notice();">공지사항</li>
 				<li>구장</li>
 				<li onclick="fn_stadium();">예약</li>
 				<li>용품</li>
@@ -47,5 +47,8 @@
 <script>
 	const fn_stadium=()=>{
 		location.assign('<%=request.getContextPath()%>/stadium.do');
+	}
+	const fn_notice=()=>{
+		location.assign('<%=request.getContextPath() %>/boardlist.do');
 	}
 </script>
