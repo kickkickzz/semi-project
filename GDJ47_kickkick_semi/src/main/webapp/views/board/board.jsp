@@ -60,7 +60,6 @@
 								<td></td>
 								<!-- 작성자 -->
 							</tr>
-
 						</tbody>
 					</table>
 				</div>

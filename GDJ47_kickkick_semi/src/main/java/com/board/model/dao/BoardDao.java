@@ -30,7 +30,7 @@ public class BoardDao {
 		}
 		
 	}
-	//공지사항게시판 글 목록
+	//공지사항게시판 글 목록 조회
 	public List<Board> selectList(Connection conn) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
