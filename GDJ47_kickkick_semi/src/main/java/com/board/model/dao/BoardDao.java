@@ -30,13 +30,13 @@ public class BoardDao {
 		}
 		
 	}
-
+	//공지사항게시판 글 목록
 	public List<Board> selectList(Connection conn) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Board> list=new ArrayList();
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("selectNoticeList"));
+			pstmt=conn.prepareStatement(prop.getProperty("selectBoardList"));
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				list.add(getBoard(rs));
@@ -58,7 +58,7 @@ public class BoardDao {
 				.boardContent(rs.getString("board_content"))
 				.boardImgPath(rs.getString("board_img_path"))
 				.boardDate(rs.getDate("board_date"))
-				.boardDeleteStatus(rs.getString("board_deledte_status"))
+				.boardDeleteStatus(rs.getString("board_delete_status"))
 				.build();
 	}
 

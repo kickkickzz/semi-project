@@ -37,7 +37,7 @@
 				<%if(loginMember!=null){ %>
 					<div id="wellcome-user">loginMember.getName()님 환영합니다!</div>
 				<%}%>
-				<i id="home" class="fa-solid fa-user"></i>
+				<i id="home" class="fa-solid fa-user" onclick="location.assign('<%=request.getContextPath()%>/member/memberView.do')"></i>
 				<i id="alert" class="fa-solid fa-bell"></i>
 				<i id="like" class="fa-solid fa-heart"></i>
 				<i id="menu" class="fa-solid fa-bars"></i>
@@ -45,7 +45,7 @@
 		</div>
 		<div id="header-bottom">
 			<ul id="header-menu">
-				<li id="notice" onclick="fn_notice();">공지사항</li>
+				<li id="notice" onclick="fn_board();">공지사항</li>
 				<li>구장</li>
 				<li onclick="fn_stadium();">예약</li>
 				<li>용품</li>
@@ -58,7 +58,7 @@
 	const fn_stadium=()=>{
 		location.assign('<%=request.getContextPath()%>/stadium.do');
 	}
-	const fn_notice=()=>{
+	const fn_board=()=>{
 		location.assign('<%=request.getContextPath() %>/boardlist.do');
 	}
 </script>
