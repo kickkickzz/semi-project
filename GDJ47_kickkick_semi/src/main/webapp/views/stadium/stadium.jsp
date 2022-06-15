@@ -20,7 +20,7 @@
 		<h1 class="text-center"><a>reservation</a></h1>
 		<br>
 		<br>
-		<form action="<%=request.getContextPath()%>/searchstadium.do">
+		<form action="<%=request.getContextPath()%>/searchstadium.do" onsubmit="return fn_searchData(event);">
 		<input type="text" name="searchstadium" placeholder="검색할 구장명을 입력하세요" size="25" onkeyup="submit"> 
 		
 		</form>
@@ -52,7 +52,7 @@
 			for(Stadium s:result){%>
 			<tbody>
 			
-			<tr onclick="fn_stainfo();">
+			<tr onclick="location.assign('<%=request.getContextPath()%>/reservation.do?stanum=<%=s.getStadium_num()%>')">
 				<td><%=s.getStadium_num() %></td>
 				<td><%=s.getBranch_img() %></td>
 				<td><%=s.getBranch_address() %></td>
@@ -77,8 +77,12 @@
 	</div>
 	
 	<script>
-		const fn_stainfo=()=>{
-			location.assign('<%=request.getContextPath()%>/stadiuminfo.do');
+	
+		const fn_searchData=e=>{
+			if($(e.target).find("input").val().length==0){
+				alert("값을 입력하고 조회하세요.");
+				return false;
+			}
 		}
 	
 	</script>
