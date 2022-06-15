@@ -21,5 +21,17 @@ public class ReservationService {
 		close(conn);
 		return result;
 	}
+	public List<Stadium> searchstadium(String keyword,int cPage,int numPerpage){
+		Connection conn = getConnection();
+		List<Stadium> result = dao.searchstadium(conn,keyword,cPage,numPerpage);
+		close(conn);
+		return result;
+	}
+	public int searchstadiumcount(String keyword) {
+		Connection conn = getConnection();
+		int result = dao.searchstadiumcount(conn,keyword);
+		close(conn);
+		return result;
+	}
 
 }

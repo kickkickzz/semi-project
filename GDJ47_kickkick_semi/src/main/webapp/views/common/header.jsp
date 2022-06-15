@@ -22,8 +22,11 @@
 				<p>ㅋ킥킥ㅋ</p>
 			</div>
 			<div id="search">
-				<input type="text" placeholder="찾으시는 지역 및 구장을 입력하세요!">
+				<form action="<%=request.getContextPath()%>/searchstadium.do">
+				<input type="text" placeholder="찾으시는 지역 및 구장을 입력하세요!" name="searchstadium" onkeyup="submit">
+				
 				<i id="searchicon" class="fa-solid fa-magnifying-glass"></i>
+				</form>
 			</div>
 			<div id="icons">
 				<i id="home" class="fa-solid fa-user"></i>

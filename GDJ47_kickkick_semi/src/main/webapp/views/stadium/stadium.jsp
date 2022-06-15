@@ -16,10 +16,14 @@
 	<div class="container">
 		<br>
 		<br>
+		
 		<h1 class="text-center"><a>reservation</a></h1>
 		<br>
 		<br>
-		<input type="text"> <button>검색</button>
+		<form action="<%=request.getContextPath()%>/searchstadium.do">
+		<input type="text" name="searchstadium" placeholder="검색할 구장명을 입력하세요" size="25" onkeyup="submit"> 
+		
+		</form>
 		<br>
 		<br>
 			
@@ -30,6 +34,7 @@
 				<td>no</td>
 				<td>이미지</td>
 				<td>장소</td>
+				<td>구장명</td>
 				<td>구장</td>
 				<td>매치</td>
 				<td>예약가능</td>
@@ -51,8 +56,9 @@
 				<td><%=s.getStadium_num() %></td>
 				<td><%=s.getBranch_img() %></td>
 				<td><%=s.getBranch_address() %></td>
+				<td><%=s.getBranch_num() %></td>
 				<td><%=s.getStadium_name() %></td>
-				<td><%=s.getStadium_reservation_start_time()%>시~<%=s.getStadium_reservation_end_time()%>시까지</td>
+				<td><%=s.getStadium_reservation_start_time()%> : 00 ~ <%=s.getStadium_reservation_end_time()%> : 00</td>
 				<td><%=s.getStadium_match_member() %></td>
 				<td><%=s.getBranch_phone()%></td>
 				
@@ -64,7 +70,7 @@
 	
 	
 	</table>
-		<div id="pageBar" style="text-align:center">
+		<div class ="" id="pageBar" style="text-align:center">
 		<%=pagebar %></div>
 		
 	
