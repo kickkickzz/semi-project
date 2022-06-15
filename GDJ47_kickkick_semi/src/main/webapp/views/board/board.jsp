@@ -20,19 +20,19 @@
 
 <body>
 	<div class="main-container" id="main-container">
-		<div class="notice-main-container">
-			<div class="notice_total_container">
-				<div class="notice_title_box">
-					<h1 class="notice-title">공지사항</h1>
+		<div class="board-main-container">
+			<div class="board_total_container">
+				<div class="board_title_box">
+					<h1 class="board-title">공지사항</h1>
 					<hr>
 				</div>
 				<!-- 공지작성은 관리자만-->
-				<div class="notice_button_box">
+				<div class="board_button_box">
 					<div></div>
 					<button type="button" class="btn btn-primary" id="insertBtn" onclick="">등록하기</button>
 				</div>
 				<!-- 테이블 형식으로 구성되어있다. -->
-				<div class="notice_table_container">
+				<div class="board_table_container">
 					<table class="table table-hover" id="listArea">
 						<thead class="thead-dark">
 							<!-- table attributes -->
@@ -64,8 +64,8 @@
 						</tbody>
 					</table>
 				</div>
-				<!-- pagenation을 담는 컨테이너이다. -->
-				<div class="notice_pagenation">
+				<!-- pagenation을 담는 컨테이너-->
+				<div class="board_pagenation">
 					<nav>
 						<ul class="pagination">
 							<%-- 맨처음버튼: 현재페이지를 1로 한다. --%>
@@ -90,7 +90,7 @@
 							</li>
 							<%-- 가장마지막 버튼 --%>
 							<li class="page-item">
-								<button id="last_next" class="page-link"	onclick=""></button>
+								<button id="last_next" class="page-link" onclick=""></button>
 							</li>
 						</ul>
 					</nav>

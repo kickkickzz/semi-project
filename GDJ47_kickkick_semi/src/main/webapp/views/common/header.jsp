@@ -34,7 +34,7 @@
 		</div>
 		<div id="header-bottom">
 			<ul id="header-menu">
-				<li id="notice" onclick="fn_notice();">공지사항</li>
+				<li id="notice" onclick="fn_board();">공지사항</li>
 				<li>구장</li>
 				<li onclick="fn_stadium();">예약</li>
 				<li>용품</li>
@@ -47,7 +47,7 @@
 	const fn_stadium=()=>{
 		location.assign('<%=request.getContextPath()%>/stadium.do');
 	}
-	const fn_notice=()=>{
+	const fn_board=()=>{
 		location.assign('<%=request.getContextPath() %>/boardlist.do');
 	}
 </script>
