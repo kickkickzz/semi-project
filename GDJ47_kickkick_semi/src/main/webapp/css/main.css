@@ -4,15 +4,39 @@
 div#carouselExampleControls{
 	width: 90%;
 	margin-left: 5%;
-	margin-bottom:10%;
+	margin-bottom:5%;
 }
 
+/*  */
+
+div#content-banner{
+	font-family:"Nanum Pen Script";
+	display: flex;
+	font-size:50px;
+	padding: 13% 13% 0px 13%;
+	justify-content: space-between;
+}
+div>img#p1-img{
+	width:50%;
+	height:40%;
+}
+p#p1{
+	margin:0;
+	padding:50px 0px;
+}
+p#p1>span{
+	font-size:60px;
+	color:red;
+}
+
+/*  */
 
 /* 공지사항 박스 */
 div#notice-box1{
-	padding:0px 13%;
+	padding:100px 13%;
 	display:flex;
 	justify-content: space-between;
+	background-color:#f0f0f0;
 }
 
 /* 경기장 리스트 */
@@ -52,3 +76,4 @@ li>b{
 
 
 /* 실험쥐 */
+

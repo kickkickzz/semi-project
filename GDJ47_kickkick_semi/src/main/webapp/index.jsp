@@ -29,6 +29,14 @@
 	</div>
 <!-- 이미지 슬라이더 끝 -->
 
+	<div id="content-banner">
+		<p id="p1">
+			풋살이 하고싶다면!?<br>
+			지금 바로 <span>킥킥</span>에서 찾아보세요!!
+		</p>
+		<img id="p1-img" src="https://img2.itravelgo.co.kr/data/service/8/php6hZjeD.jpg">
+	</div>
+
 <!-- 공지사항 목록 -->
 	<div id="notice-box1">
 		<div class="card border-light mb-3 text-center" style="max-width: 18rem; padding:0px 15px;">
