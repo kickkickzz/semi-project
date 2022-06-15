@@ -9,11 +9,21 @@ div#carouselExampleControls{
 
 /*  */
 
+div#content-banner-box{
+	background-color:#f0f0f0;
+}
 div#content-banner{
 	font-family:"Nanum Pen Script";
 	display: flex;
 	font-size:50px;
-	padding: 13% 13% 0px 13%;
+	padding: 10% 13% 0px 13%;
+	justify-content: space-between;
+}
+div#content-banner-2{
+	font-family:"Nanum Pen Script";
+	display: flex;
+	font-size:50px;
+	padding: 3% 13% 10% 13%;
 	justify-content: space-between;
 }
 div>img#p1-img{
@@ -23,8 +33,15 @@ div>img#p1-img{
 p#p1{
 	margin:0;
 	padding:50px 0px;
+	font-size:50px;
 }
-p#p1>span{
+p#p2{
+	margin:0;
+	padding:50px 0px;
+	text-align: right;
+	font-size:50px;
+}
+p>span{
 	font-size:60px;
 	color:red;
 }
@@ -33,10 +50,9 @@ p#p1>span{
 
 /* 공지사항 박스 */
 div#notice-box1{
-	padding:100px 13%;
+	padding:13% 13% 0px 13%;
 	display:flex;
 	justify-content: space-between;
-	background-color:#f0f0f0;
 }
 
 /* 경기장 리스트 */
@@ -44,8 +60,8 @@ div.row, .row-cols-1, .row-cols-md-3, .g-4{
 	padding:13% 13%;
 }
 div.card{
-	border-bottom:2px solid black;
-	border-right:2px solid black;
+	border-bottom:2px solid lightgray;
+	border-right:2px solid lightgray;
 }
 div.card-body{
 	padding:20px;
