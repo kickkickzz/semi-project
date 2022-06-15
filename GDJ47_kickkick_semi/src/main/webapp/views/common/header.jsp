@@ -48,7 +48,7 @@
 				<li id="notice" onclick="fn_board();">공지사항</li>
 				<li>구장</li>
 				<li onclick="fn_stadium();">예약</li>
-				<li>용품</li>
+				<li onclick="fn_team();">팀 관리</li>
 				<li>매칭</li>
 			</ul>
 		</div>
@@ -60,5 +60,8 @@
 	}
 	const fn_board=()=>{
 		location.assign('<%=request.getContextPath() %>/boardlist.do');
+	}
+	const fn_team=()=>{
+		location.assign('<%=request.getContextPath()%>/team.do');
 	}
 </script>
