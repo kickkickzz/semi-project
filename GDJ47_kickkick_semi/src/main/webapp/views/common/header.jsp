@@ -26,7 +26,7 @@
 				<i id="searchicon" class="fa-solid fa-magnifying-glass"></i>
 			</div>
 			<div id="icons">
-				<i id="home" class="fa-solid fa-user"></i>
+				<i id="home" class="fa-solid fa-user" onclick="location.assign('<%=request.getContextPath()%>/member/memberView.do')"></i>
 				<i id="alert" class="fa-solid fa-bell"></i>
 				<i id="like" class="fa-solid fa-heart"></i>
 				<i id="menu" class="fa-solid fa-bars"></i>
