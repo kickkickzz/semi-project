@@ -32,8 +32,57 @@ public class StadiumServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Stadium> staArr = new ReservationService().selectStadium();
+		int cPage;
+		int numPerpage;
+		try {
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
+		try {
+			numPerpage=Integer.parseInt(request.getParameter("numPerpage"));
+		}catch(NumberFormatException e) {
+			numPerpage=7;
+		}
+		List<Stadium> staArr = new ReservationService().selectStadium(cPage,numPerpage);
+		request.setAttribute("staArr", staArr);
+		
+		int totaldata = new ReservationService().selectStadiumCount();
+		int totalpage = (int)Math.ceil((double)totaldata/numPerpage);
+		int pageBarsize=5;
+		int pageNo = ((cPage-1)/pageBarsize)*pageBarsize+1;
+		int pageEnd= pageNo+pageBarsize-1;
+		String pageBar="";
+		if(pageNo==1) {
+			pageBar+="<span>[이전]</span>";
+		}else {
+			pageBar+="<a href='"+request.getContextPath()+
+					"/stadium.do?cPage="+(pageNo-1)+
+					"&numPerPage="+numPerpage+"'>[이전]</a>";
+					
+		}
+		while(!(pageNo>pageEnd||pageNo>totalpage)) {
+			if(cPage==pageNo) {
+				pageBar+="<span>"+pageNo+"</span>";
+				
+			}else {
+				pageBar+="<a href='"+request.getContextPath()+
+						"/stadium.do?cPage="+(pageNo)
+						+"&numPerPage="+numPerpage+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		
+		if(pageNo>totalpage) {
+			pageBar+="<span>[다음]</span>";
+		}else {
+			pageBar+="<a href='"+request.getContextPath()+"/stadium.do?cPage="+(pageNo)
+					+"&numPerPage="+numPerpage+"'>[다음]</a>";
+			
+		}
+		request.setAttribute("pageBar", pageBar);
 		request.getRequestDispatcher("/views/stadium/stadium.jsp").forward(request, response);
+		
 		 
 	}
 

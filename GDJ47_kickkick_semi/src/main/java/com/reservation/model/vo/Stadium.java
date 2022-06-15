@@ -24,4 +24,7 @@ public class Stadium {
 	private String branch_option_shoes;
 	private String branch_option_ball;
 	private String branch_option_inout;
+	private String branch_branchInfo;
+	private String branch_detailInfo;
+	private String branch_notes;
 }
