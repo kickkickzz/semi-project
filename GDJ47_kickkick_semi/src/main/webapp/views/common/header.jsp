@@ -27,8 +27,8 @@
 				<p>ㅋ킥킥ㅋ</p>
 			</div>
 			<div id="search">
-				<form action="<%=request.getContextPath()%>/searchstadium.do">
-				<input type="text" placeholder="찾으시는 지역 및 구장을 입력하세요!" name="searchstadium" onkeyup="submit">
+				<form action="<%=request.getContextPath()%>/searchstadium.do" onsubmit="return fn_searchData(event);">
+				<input type="text" placeholder="찾으시는 지역 및 구장을 입력하세요!" name="searchstadium" onkeyup="checkData(event);" id="search-sta">
 				
 				<i id="searchicon" class="fa-solid fa-magnifying-glass"></i>
 				</form>
@@ -61,7 +61,18 @@
 	const fn_board=()=>{
 		location.assign('<%=request.getContextPath() %>/boardlist.do');
 	}
+
 	const fn_team=()=>{
 		location.assign('<%=request.getContextPath()%>/team.do');
 	}
 </script>
+
+	const fn_searchData=e=>{
+		if($(e.target).find("input").val().length==0){
+			alert("값을 입력하고 조회하세요.");
+			return false;
+		}
+	}
+
+	</script>
+
