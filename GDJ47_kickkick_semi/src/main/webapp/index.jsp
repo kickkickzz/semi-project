@@ -61,14 +61,20 @@
 		</div>
 	</div>
 <!-- 공지사항 목록 끝 -->
+<!-- 구장 리스트 시작 -->
 	<div id="stadium-list">
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 			 <div class="col">
 			 	<div class="card">
 			    	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
-			        	<h5 class="card-title">응애 풋살장</h5>
-			        	<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+			        	<h5 class="card-title">7월 서서울호수공원 풋살장 대여 (주말주간,야간) 6월14일 오후2시 접수</h5>
+			        	<ul class="card-body-list">
+							<li class="place-name"><b class="place">장소명</b> <div class="sch-rslt txt2 card-line">서서울호수공원(양천구)</div></li>
+							<li class="li-user"><b class="user">이용대상</b> <div class="div-user txt2 card-line">제한없음</div></li>
+							<li class="li-date"><b class="date1">접수기간</b> 2022.06.14 ~ 2022.07.30</li>
+							<li class="li-date"><b class="date2">이용기간</b> 2022.07.01 ~ 2022.07.31</li>
+						</ul>
 			      	</div>
 			    </div>
 			  </div>
@@ -77,7 +83,12 @@
 			      	<img src="./images/함송 족구장.jpeg" class="card-img-top" alt="...">
 			      	<div class="card-body">
 			        	<h5 class="card-title">응애 풋살장</h5>
-			        	<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+			        	<ul class="card-body-list">
+							<li class="place-name"><b class="place">장소명</b> <div class="sch-rslt txt2 card-line">서서울호수공원(양천구)</div></li>
+							<li class="li-user"><b class="user">이용대상</b> <div class="div-user txt2 card-line">제한없음</div></li>
+							<li class="li-date"><b class="date1">접수기간</b> 2022.06.14 ~ 2022.07.30</li>
+							<li class="li-date"><b class="date2">이용기간</b> 2022.07.01 ~ 2022.07.31</li>
+						</ul>
 			      	</div>
 			    </div>
 			  </div>
@@ -86,7 +97,12 @@
 			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
 			        	<h5 class="card-title">응애 풋살장</h5>
-			        	<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+			        	<ul class="card-body-list">
+							<li class="place-name"><b class="place">장소명</b> <div class="sch-rslt txt2 card-line">서서울호수공원(양천구)</div></li>
+							<li class="li-user"><b class="user">이용대상</b> <div class="div-user txt2 card-line">제한없음</div></li>
+							<li class="li-date"><b class="date1">접수기간</b> 2022.06.14 ~ 2022.07.30</li>
+							<li class="li-date"><b class="date2">이용기간</b> 2022.07.01 ~ 2022.07.31</li>
+						</ul>
 			      </div>
 			    </div>
 			  </div>
@@ -95,7 +111,12 @@
 			      	<img src="./images/함송 족구장.jpeg" class="card-img-top" alt="...">
 			      	<div class="card-body">
 			       		<h5 class="card-title">응애 풋살장</h5>
-			        	<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+			        	<ul class="card-body-list">
+							<li class="place-name"><b class="place">장소명</b> <div class="sch-rslt txt2 card-line">서서울호수공원(양천구)</div></li>
+							<li class="li-user"><b class="user">이용대상</b> <div class="div-user txt2 card-line">제한없음</div></li>
+							<li class="li-date"><b class="date1">접수기간</b> 2022.06.14 ~ 2022.07.30</li>
+							<li class="li-date"><b class="date2">이용기간</b> 2022.07.01 ~ 2022.07.31</li>
+						</ul>
 			      	</div>
 			    </div>
 			  </div>
@@ -104,7 +125,12 @@
 			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
 			       		<h5 class="card-title">응애 풋살장</h5>
-			        	<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+			        	<ul class="card-body-list">
+							<li class="place-name"><b class="place">장소명</b> <div class="sch-rslt txt2 card-line">서서울호수공원(양천구)</div></li>
+							<li class="li-user"><b class="user">이용대상</b> <div class="div-user txt2 card-line">제한없음</div></li>
+							<li class="li-date"><b class="date1">접수기간</b> 2022.06.14 ~ 2022.07.30</li>
+							<li class="li-date"><b class="date2">이용기간</b> 2022.07.01 ~ 2022.07.31</li>
+						</ul>
 			      	</div>
 			    </div>
 			  </div>
@@ -113,12 +139,18 @@
 			      	<img src="./images/함송 족구장.jpeg" class="card-img-top" alt="...">
 			      	<div class="card-body">
 			       		<h5 class="card-title">응애 풋살장</h5>
-			        	<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+			        	<ul class="card-body-list">
+							<li class="place-name"><b class="place">장소명</b> <div class="sch-rslt txt2 card-line">서서울호수공원(양천구)</div></li>
+							<li class="li-user"><b class="user">이용대상</b> <div class="div-user txt2 card-line">제한없음</div></li>
+							<li class="li-date"><b class="date1">접수기간</b> 2022.06.14 ~ 2022.07.30</li>
+							<li class="li-date"><b class="date2">이용기간</b> 2022.07.01 ~ 2022.07.31</li>
+						</ul>
 			      	</div>
 			    </div>
 			  </div>
 		</div>
 	</div>
+<!-- 구장 리스트 끝 -->
 </section>
 
 <%@ include file="/views/common/footer.jsp" %>
