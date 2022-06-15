@@ -1,7 +1,9 @@
 package com.member.model.service;
 
 import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
@@ -17,5 +19,15 @@ public class MemberService {
 		Member m = dao.LoginMember(conn,email,pwd);
 		close(conn);
 		return m;
+	}
+	
+	//회원가입하기
+	public boolean EnrollMember(Member m) {
+		Connection conn = getConnection();
+		boolean flag = dao.EnrollMember(conn,m);
+		if(flag) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return flag;
 	}
 }

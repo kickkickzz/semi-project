@@ -33,5 +33,11 @@ public class ReservationService {
 		close(conn);
 		return result;
 	}
+	public Stadium searchstadiumnum(int stanum) {
+		Connection conn = getConnection();
+		Stadium s = dao.searchstadiumnum(conn,stanum);
+		close(conn);
+		return s;
+	}
 
 }
