@@ -28,13 +28,21 @@
   		</button>
 	</div>
 <!-- 이미지 슬라이더 끝 -->
-
-	<div id="content-banner">
-		<p id="p1">
-			풋살이 하고싶다면!?<br>
-			지금 바로 <span>킥킥</span>에서 찾아보세요!!
-		</p>
-		<img id="p1-img" src="https://img2.itravelgo.co.kr/data/service/8/php6hZjeD.jpg">
+	<div id="content-banner-box">
+		<div id="content-banner">
+			<p id="p1">
+				풋살이 하고싶다면!?<br>
+				지금 바로 <span>킥킥</span>에서 찾아보세요!!
+			</p>
+			<img id="p1-img" src="https://img2.itravelgo.co.kr/data/service/8/php6hZjeD.jpg">
+		</div>
+		<div id="content-banner-2">
+			<img id="p1-img" src="https://file.mk.co.kr/meet/yonhap/2020/04/22/image_readtop_2020_421056_0_204211.jpg">
+			<p id="p2">
+				직접 구성한 팀원들과 함께!!<br>
+				원하는 상대팀을 선택하여 <br>진행하는 <span style="color:lime">풋살</span>게임!
+			</p>
+		</div>
 	</div>
 
 <!-- 공지사항 목록 -->

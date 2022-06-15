@@ -2,6 +2,9 @@
 ul{
 	list-style: none;
 }
+input[type="submit"]{
+	font-family: FontAwesome;
+}
 
 /* header */
 nav#header-container{

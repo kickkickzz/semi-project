@@ -16,7 +16,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-<script src="<%=request.getContextPath()%>/js/main.js"></script>
 </head>
 <body>
 <header>
@@ -27,17 +26,20 @@
 				<p>ㅋ킥킥ㅋ</p>
 			</div>
 			<div id="search">
+
 				<form action="<%=request.getContextPath()%>/searchstadium.do" onsubmit="return fn_searchData(event);">
 				<input type="text" placeholder="찾으시는 지역 및 구장을 입력하세요!" name="searchstadium" onkeyup="checkData(event);" id="search-sta">
-				
+
 				<i id="searchicon" class="fa-solid fa-magnifying-glass"></i>
-				</form>
 			</div>
 			<div id="icons">
 				<%if(loginMember!=null){ %>
 					<div id="wellcome-user">loginMember.getName()님 환영합니다!</div>
 				<%}%>
+
 				<i id="home" class="fa-solid fa-user" onclick="location.assign('<%=request.getContextPath()%>/member/memberView.do')"></i>
+
+				<i id="home" class="fa-solid fa-user"></i>
 				<i id="alert" class="fa-solid fa-bell"></i>
 				<i id="like" class="fa-solid fa-heart"></i>
 				<i id="menu" class="fa-solid fa-bars"></i>
@@ -45,7 +47,7 @@
 		</div>
 		<div id="header-bottom">
 			<ul id="header-menu">
-				<li id="notice" onclick="fn_board();">공지사항</li>
+				<li id="notice" onclick="fn_notice();">공지사항</li>
 				<li>구장</li>
 				<li onclick="fn_stadium();">예약</li>
 				<li onclick="fn_team();">팀 관리</li>
@@ -58,14 +60,14 @@
 	const fn_stadium=()=>{
 		location.assign('<%=request.getContextPath()%>/stadium.do');
 	}
-	const fn_board=()=>{
+	const fn_notice=()=>{
 		location.assign('<%=request.getContextPath() %>/boardlist.do');
 	}
 
 	const fn_team=()=>{
 		location.assign('<%=request.getContextPath()%>/team.do');
 	}
-</script>
+
 
 	const fn_searchData=e=>{
 		if($(e.target).find("input").val().length==0){
