@@ -1,5 +1,7 @@
 package com.reservation.model.dao;
 
+import static common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -7,10 +9,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 import java.util.Properties;
-import static common.JDBCTemplate.*;
 
+import com.reservation.model.vo.ReservationInfo;
 import com.reservation.model.vo.Stadium;
 
 public class ReservationDao {
@@ -151,6 +154,32 @@ public class ReservationDao {
 			close(rs);
 			close(pstmt);
 			
+		}
+		return result;
+	}
+	public List<ReservationInfo> selectReservationDateList(Connection conn,int stanum,String dat){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<ReservationInfo> result = new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectReservationDateList"));
+			pstmt.setInt(1, stanum);
+			pstmt.setString(2, dat);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				ReservationInfo r = ReservationInfo.builder().reservation_code(rs.getString(1)).reservation_email(rs.getString(2))
+						.reservation_branch_num(rs.getString(3)).reservation_stadium_num(rs.getInt(4)).reservation_num(rs.getInt(5))
+						.reservation_price(rs.getInt(6)).reservation_usage_start_time(rs.getInt(7))
+						.reservation_usage_time(rs.getInt(8)).reservation_usage_end_time(rs.getInt(9)).reservation_usage_start_date(rs.getDate(10))
+						.reservation_status(rs.getString(11)).build();
+				result.add(r);
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
 		}
 		return result;
 	}

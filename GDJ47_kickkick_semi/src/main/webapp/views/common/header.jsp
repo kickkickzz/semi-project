@@ -31,6 +31,7 @@
 				<input type="text" placeholder="찾으시는 지역 및 구장을 입력하세요!" name="searchstadium" onkeyup="checkData(event);" id="search-sta">
 
 				<i id="searchicon" class="fa-solid fa-magnifying-glass"></i>
+				</form>
 			</div>
 			<div id="icons">
 				<%if(loginMember!=null){ %>
