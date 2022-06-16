@@ -50,9 +50,11 @@ public class LoginMember extends HttpServlet {
 		if(m!=null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", m);
+			request.getRequestDispatcher(request.getContextPath()).forward(request, response);
+		}else {
+			request.getRequestDispatcher(request.getContextPath()+"").forward(request, response);			
 		}
 		
-		request.getRequestDispatcher(request.getContextPath()).forward(request, response);
 	}
 
 	/**

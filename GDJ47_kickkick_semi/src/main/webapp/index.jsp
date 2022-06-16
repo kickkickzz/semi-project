@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
     
 <%@ include file="/views/common/header.jsp" %>
-
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 
 <section>
 <!-- 이미지 슬라이더 시작 -->
@@ -45,38 +46,6 @@
 		</div>
 	</div>
 
-<!-- 공지사항 목록 -->
-	<div id="notice-box1">
-		<div class="card border-light mb-3 text-center" style="max-width: 18rem; padding:0px 15px;">
-		  <div class="card-header">공지사항 제목</div>
-		  <div class="card-body">
-		    <h5 class="card-title">Light card title</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		  </div>
-		</div>
-		<div class="card border-light mb-3 text-center" style="max-width: 18rem; padding:0px 15px;" >
-		  <div class="card-header">공지사항 제목</div>
-		  <div class="card-body">
-		    <h5 class="card-title">Light card title</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		  </div>
-		</div>
-		<div class="card border-light mb-3 text-center" style="max-width: 18rem ; padding:0px 15px;">
-		  <div class="card-header">공지사항 제목</div>
-		  <div class="card-body">
-		    <h5 class="card-title">Light card title</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		  </div>
-		</div>
-		<div class="card border-light mb-3 text-center" style="max-width: 18rem; padding:0px 15px;">
-		  <div class="card-header">공지사항 제목</div>
-		  <div class="card-body">
-		    <h5 class="card-title">Light card title</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		  </div>
-		</div>
-	</div>
-<!-- 공지사항 목록 끝 -->
 <!-- 구장 리스트 시작 -->
 	<div id="stadium-list">
 		<div class="row row-cols-1 row-cols-md-3 g-4">
@@ -167,7 +136,84 @@
 		</div>
 	</div>
 <!-- 구장 리스트 끝 -->
+	
+
+<!-- 공지사항 목록 -->
+	<div class="main-sc9-notice">
+			<div class="main-sc9-tit">알려드립니다.</div>
+			<div class="main-notice-list">
+					<div class="notice-list-item">
+						<a href="/customer/noticeView?bbsDetailSeq=181">
+							<dl>
+								<dt>
+									[브랜드 론칭 이벤트] 신규 브랜드 '킥킥' 초성퀴즈 이벤트 당첨자 발표
+								</dt>
+								<dd>
+									2022-05-30
+								</dd>
+							</dl>
+						</a>
+					</div>
+					<div class="notice-list-item">
+						<a href="/customer/noticeView?bbsDetailSeq=68">
+							<dl>
+								<dt>
+									브랜드 명 변경 안내(22/05/29)
+								</dt>
+								<dd>
+									2022-05-24
+								</dd>
+							</dl>
+						</a>
+					</div>
+					<div class="notice-list-item">
+						<a href="/customer/noticeView?bbsDetailSeq=10">
+							<dl>
+								<dt>
+									이용후기 / 만족도조사 이벤트 변경 안내
+								</dt>
+								<dd>
+									2022-05-11
+								</dd>
+							</dl>
+						</a>
+					</div>
+					<div class="notice-list-item">
+						<a href="/customer/noticeView?bbsDetailSeq=11">
+							<dl>
+								<dt>
+									이용상품권 사용안내
+								</dt>
+								<dd>
+									2022-05-11
+								</dd>
+							</dl>
+						</a>
+					</div>
+			</div>
+		</div>
+<!-- 공지사항 목록 끝 -->
+
 </section>
+
+<script>
+var lastScrollTop = 0, delta = 15;
+
+$(window).scroll(function(){
+    var scrollTop = $(this).scrollTop() /* 스크롤바 수직 위치를 가져옵니다, 괄호 안에 값(value)이 있을 경우 스크롤바의 수직 위치를 정합니다. */
+    // Math.abs: 주어진 숫자의 절대값을 반환(return)합니다.
+    if(Math.abs(lastScrollTop - scrollTop) <= delta) // 스크롤 값을 받아서 ~
+    return; // ~ 리턴
+
+    if ((scrollTop > lastScrollTop) && (lastScrollTop>0)) {
+    	/* 화면에 나오지 않을 때, top값은 요소가 보이지 않을 정도로 사용해야함 */
+        $("#header-bottom").css("top","-100px");
+    } else {
+        $("#header-bottom").css("top","76.5px");
+    }
+    lastScrollTop = scrollTop;
+});
+</script>
 
 <%@ include file="/views/common/footer.jsp" %>
 

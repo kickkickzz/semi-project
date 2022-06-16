@@ -36,10 +36,11 @@
 				<%if(loginMember!=null){ %>
 					<div id="wellcome-user">loginMember.getName()님 환영합니다!</div>
 				<%}%>
-
-				<i id="home" class="fa-solid fa-user" onclick="location.assign('<%=request.getContextPath()%>/member/memberView.do')"></i>
-
-				<i id="home" class="fa-solid fa-user"></i>
+				<%if(loginMember!=null){ %>
+					<i id="home" class="fa-solid fa-user" onclick="location.assign('<%=request.getContextPath()%>/member/memberView.do')"></i>
+				<%}else{%>
+					<i id="home" class="fa-solid fa-user" onclick="location.assign('<%=request.getContextPath()%>/loginPage.do')"></i>
+				<%} %>
 				<i id="alert" class="fa-solid fa-bell"></i>
 				<i id="like" class="fa-solid fa-heart"></i>
 				<i id="menu" class="fa-solid fa-bars"></i>
