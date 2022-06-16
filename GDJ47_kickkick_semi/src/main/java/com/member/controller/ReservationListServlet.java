@@ -8,19 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/member/playlist.do")
-public class PlayListServlet extends HttpServlet {
+@WebServlet("/member/reservationlist.do")
+public class ReservationListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
-    public PlayListServlet() {
+    public ReservationListServlet() {
         super();
         
     }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/member/playlist.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/reservationlist.jsp").forward(request, response);
 	}
 
 	/**
