@@ -1,47 +1,33 @@
 let flag = 0;
 $(()=>{	
-	//버튼값에 따라 로그인할지 회원가입할지 정하기
-	//form태그 생성해서 데이터 넣어서 보내기
+	
 	$("#bb").click(function() {
-	const bval = $("#bb").val();
+		var bval = $("#bb").val();
 		if(bval=="회원가입하기"){
-			var form = document.createElement('form');
-			var objs;
-			//이메일 담기
-			objs = document.createElement('input');
-			objs.setAttribute('type', 'text');
-			objs.setAttribute('name', 'email');
-			objs.setAttribute('value', $('.email').val());
-			form.appendChild(objs);
-			//비밀번호담기
-			objs = document.createElement('input');
-			objs.setAttribute('type', 'text');
-			objs.setAttribute('name', 'password');
-			objs.setAttribute('value', $('.password').val());
-			form.appendChild(objs);
-			//이름담기
-			objs = document.createElement('input');
-			objs.setAttribute('type', 'text');
-			objs.setAttribute('name', 'name');
-			objs.setAttribute('value', $('.name').val());
-			form.appendChild(objs);
-			//전화번호담기
-			objs = document.createElement('input');
-			objs.setAttribute('type', 'text');
-			objs.setAttribute('name', 'phone');
-			objs.setAttribute('value', $('.phone').val());
-			form.appendChild(objs);
-			//전송
-			form.setAttribute('method', 'post');
-			form.setAttribute('action', "<%=request.getContextPath()%>/enrollMember.do");
-			document.body.appendChild(form);
+			const form = $("#h-form");
+			const email = $(".email").val();
+			const password = $(".password").val();
+			const name = $(".name").val();
+			const phone = $(".phone").val();
+			$("#email").val(email);
+			$("#password").val(password);
+			$("#name").val(name);
+			$("#phone").val(phone);
+			form.attr("action","http://localhost:9090/GDJ47_kickkick_semi/enrollMember.do");
 			form.submit();
-
-
 		}else{
-			
+			const form = $("#h-form");
+			const email = $(".email").val();
+			const password = $(".password").val();
+			$("#email").val(email);
+			$("#password").val(password);
+			form.attr("action","http://localhost:9090/GDJ47_kickkick_semi/loginMember.do");
+			form.submit();
 		}
 	});
+	
+
+	
 	
 
 	

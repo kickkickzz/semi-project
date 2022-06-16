@@ -41,17 +41,15 @@
 			    	<input type="submit" id="bb" class="b-button normal" value="회원가입하기">
 			</div>
 			<div id="hidden-form">
-				<form action="" method="post">
-					<input type="text" value="">
-					<input type="text" value="">
+				<form id="h-form" action="" method="post">
+					<input id="email" type="text" name="email" value="">
+					<input id="password" type="text" name="password" value="">
+					<input id="name" type="text" name="name" value="">
+					<input id="phone" type="text" name="phone" value="">
 				</form>
 			</div>
 		</div>	
 	</div>
 </div>
-
-<script>
-	
-</script>
 
 <%-- <%@ include file="/views/common/footer.jsp" %> --%>

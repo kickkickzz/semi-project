@@ -84,9 +84,9 @@ public class MemberDao {
 			pstmt.setString(1, m.getEmail());
 			pstmt.setString(2, m.getPassword());
 			pstmt.setString(3, m.getName());
+//			pstmt.setString(4, m.getGender());
 			pstmt.setString(4, m.getPhone());
 			pstmt.setString(5, m.getAddress());
-			pstmt.setString(6, m.getGender());
 			result = pstmt.executeUpdate();
 			if(result>0) flag = true;
 		}catch(SQLException e) {

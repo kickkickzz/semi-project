@@ -34,17 +34,10 @@ public class LoginMember extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String pwd = request.getParameter("password");
-		String saveId = request.getParameter("saveId");
 		
 		Member m = new MemberService().LoginMember(email,pwd);
 		
 		
-		//cookie생성
-		if(saveId!=null) {
-			Cookie cookie = new Cookie("saveId",email);
-			cookie.setMaxAge(24*60*60*7);
-			response.addCookie(cookie);
-		}
 		
 		//session생성
 		if(m!=null) {

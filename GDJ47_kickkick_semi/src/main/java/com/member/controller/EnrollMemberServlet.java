@@ -30,12 +30,19 @@ public class EnrollMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Member m = Member.builder().build();
+		Member m = Member.builder()
+				.email(request.getParameter("email"))
+				.password(request.getParameter("password"))
+				.name(request.getParameter("name"))
+				.phone(request.getParameter("phone"))
+				.build();
+		
+		
 		boolean flag = new MemberService().EnrollMember(m);
 		if(flag) {
-			
+			System.out.println("성공");
 		}else {
-			
+			System.out.println("실패");
 		}
 	}
 
