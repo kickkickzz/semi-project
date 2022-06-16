@@ -99,7 +99,7 @@ public class MemberDao {
 	
 	
 	//회원정보 수정
-	public int updateMember(Connection conn , Date birth , String phone, String address, String gender) {
+	public int updateMember(Connection conn , String email, Date birth , String phone, String address, String gender) {
 		PreparedStatement pstmt = null;
 		int result=0;
 		try {
@@ -108,6 +108,24 @@ public class MemberDao {
 			pstmt.setString(2, phone);
 			pstmt.setString(3, address);
 			pstmt.setString(4, gender);
+			pstmt.setString(5, email); //where절 에 있는 ? 에 값넣기
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	//비밀번호 변경
+	public int updatePassword(Connection conn, String email, String newPw) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("updatePassword"));
+			pstmt.setString(1, newPw);
+			pstmt.setString(2, email); //where절에 넣는값
 			result = pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
