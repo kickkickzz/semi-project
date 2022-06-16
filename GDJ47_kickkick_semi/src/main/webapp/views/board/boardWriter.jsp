@@ -13,7 +13,7 @@
 					<h1 class="board_title">공지사항 등록하기</h1>
 					<hr>
 				</div>
-				<form action="<%=request.getContextPath()%>/" id="write_board_form" method="post" encType="multipart/form-data">
+				<form action="<%=request.getContextPath()%>/insertBoard.do" id="write_board_form" method="post" encType="multipart/form-data">
 					<!-- 타이틀 영역박스-->
 					<div class="title-container">
 						<input id="board-write-title" type="text" name="title"
@@ -42,26 +42,22 @@
 								onkeyup=""></textarea>
 							<div class="content-byte-box">
 								<p class="content-data-count">
-									
+									<em id="Byte">0</em>/1000 bytes
 								</p>
 							</div>
 						</div>
-						<script>
-							
-						</script>
 					</div>
-					</form>
-
+				</form>
 					<!--버튼 등록-->
 					<div class="button-container">
 						<div class="cancel_write_board-box">
 							<button class="btn btn-secondary" 
-									onclick="">취소</button>
+									onclick="location.href='<%=request.getContextPath()%>/showBoardList.do'">취소</button>
 						</div>
 						<div></div>
 						<div class="insert_write_board-box">
 							<!-- button은 input:submit 과 동일함-->
-							<button type="submit"  form="write_board_form" class="btn btn-primary">작성</button>
+							<button type="submit" form="write_board_form" class="btn btn-primary">작성</button>
 						</div>
 					</div>
 			</div>
