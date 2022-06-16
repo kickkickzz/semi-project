@@ -6,17 +6,9 @@
 	//
 	
 %>
+<link href="<%=request.getContextPath()%>/css/boardList.css" type="text/css" rel="stylesheet">
 <%-- header을 호출 --%>
-	<%@include file="/views/common/header.jsp"%>
-<!--파비콘아이콘-->
-<link rel="shortcut icon"
-	href="<%=request.getContextPath()%>/resources/common/favicon/favicon.ico"
-	type="image/x-icon">
-
-<!-- api : bootstrap -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
+<%@include file="/views/common/header.jsp"%>
 <body>
 	<div class="main-container" id="main-container">
 		<div class="board-main-container">
