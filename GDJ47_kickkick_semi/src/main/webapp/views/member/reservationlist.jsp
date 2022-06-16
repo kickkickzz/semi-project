@@ -5,8 +5,8 @@
 
     
 
-<!-- Bootstrap core CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -37,10 +37,10 @@
     </style>
 
     
-<!-- Custom styles for this template -->
-<link href="dashboard.css" rel="stylesheet">
-</head>
-<body>
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+  </head>
+  <body>
     
 
 <div class="container-fluid">
@@ -57,14 +57,14 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<%=request.getContextPath()%>/member/reservationlist.do" style="color: black">
+            <a class="nav-link" href="" style="color: black">
                 <i class="fa-solid fa-list"></i>
                 <span data-feather="file"></span>
               예약현황
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="" style="color: black">
+            <a class="nav-link" href="<%=request.getContextPath()%>/member/myteam.do" style="color: black">
               <i class="fa-solid fa-people-group"></i>
               <span data-feather="shopping-cart"></span>
               나의 팀 정보
@@ -77,25 +77,29 @@
               로그아웃
             </a>
           </li>
+
         </ul>
+        
       </div>
     </nav>
+
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <h2>나의 팀 정보</h2><br>
+      <h2>예약 현황</h2><br>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th scope="col">No</th>
-              <th scope="col">로고</th>
-              <th scope="col">이름</th>
-              <th scope="col">정보</th>
-              <th scope="col">탈퇴</th>
+              <th scope="col">구장이름</th>
+              <th scope="col">예약자명</th>
+              <th scope="col">예약날짜</th>
+              <th scope="col">이용시간</th>
+              <th scope="col">입금/환불상태</th>
             </tr>
           </thead>
           <tbody>
+          <!-- 이메일로 검색해서 구장을 리스트로 갖고온다음 여기서 리스트 for문써서 활용 -->
              <tr>
-             	<td >1</td>
+             	<td>1</td>
              	<td>1</td>
              	<td>1</td>
              	<td>1</td>
@@ -113,6 +117,7 @@
     </main>
   </div>
 </div>
+
 <style>
 .col-lg-2 {
     height : 700px;
@@ -120,8 +125,9 @@
 div.row{
 	padding : 9% 8% 2%;
 }
-.two{
-
-}
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+
 <%@ include file="/views/common/footer.jsp" %>

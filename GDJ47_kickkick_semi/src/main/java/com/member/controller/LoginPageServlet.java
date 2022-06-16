@@ -7,20 +7,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-@WebServlet("/memberview.do")
-public class MemberViewServlet extends HttpServlet {
+/**
+ * Servlet implementation class LoginPageServlet
+ */
+@WebServlet("/loginPage.do")
+public class LoginPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
-    public MemberViewServlet() {
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public LoginPageServlet() {
         super();
-       
+        // TODO Auto-generated constructor stub
     }
 
-	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/member/memberview.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/loginPage.jsp").forward(request, response);
 	}
 
 	/**

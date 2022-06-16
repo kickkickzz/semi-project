@@ -2,6 +2,13 @@
 body{
 	margin: 0;
 }
+#hidden-form{
+	display: none;
+}
+
+
+
+
 div#login-container{
 	display: flex;
 	width:100%;
@@ -90,7 +97,6 @@ body{
   text-align:center;
   z-index:20;
   background-color:#2ecc71;
-  background-image:url("http://www.pixmy.tech/Projects/Codepen/SlideForm/bg.jpg");
   background-size:cover;
   background-position:left;
   transition:all .4s ease;
@@ -195,16 +201,15 @@ p{
 .icon{
   width:30px;
   height:30px;
-  border:1px solid lightgray;
   border-radius:50%;
   text-align:center;
   cursor:pointer;
   line-height:30px;
   display:inline-block;
+	margin-right: 15px;
 }
 
 .icon:hover{
-  background-color:#000;
   color:white;
 }
 
@@ -213,12 +218,25 @@ p{
 }
 
 .icons{
-  text-aling:center;
-  margin-bottom:20px;
+	display:flex;
+  	text-align:center;
+  	margin-bottom:20px;
+  	vertical-align: middle;
+  	align-items:center;
+  	justify-content: center;
+  	color:gray;
 }
 
 .forgot{
   display:none;
+  font-size:14px;
+  color:#c8c8c8;
+}
+.forgot:hover{
+	color:black;
+	text-decoration: underline;
+	cursor:pointer;
+	
 }
 
 .form{
@@ -246,4 +264,12 @@ input{
   color:#fff;
   font-size:14px;
   border-radius:25px;
+}
+.b-button.normal:hover{
+	background-color:rgba(0,0,0,.8);
+	transition: all .4s ease;
+}
+
+.kakao-icon{
+	width:31px;
 }

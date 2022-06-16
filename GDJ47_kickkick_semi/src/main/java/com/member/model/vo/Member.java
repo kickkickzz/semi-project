@@ -15,7 +15,6 @@ public class Member {
 	private String phone;
 	private String address;
 	private String memberWithdrawalStatus;
-	private String kakaoMembership;
 	private String gender;
 	private String type;
 }

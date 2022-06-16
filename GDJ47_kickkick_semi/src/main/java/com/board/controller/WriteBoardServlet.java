@@ -1,4 +1,4 @@
-package com.member.controller;
+package com.board.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,26 +8,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/memberview.do")
-public class MemberViewServlet extends HttpServlet {
+@WebServlet("/writeBoardForm.do")
+public class WriteBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public MemberViewServlet() {
+    public WriteBoardServlet() {
         super();
-       
     }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/member/memberview.jsp").forward(request, response);
-	}
+		request.getRequestDispatcher("/views/board/boardWriter.jsp").forward(request, response);
+		}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -1,10 +1,14 @@
 @charset "UTF-8";
 
+/* 공용 */
+
+
+
 /* 이미지슬라이더 */
 div#carouselExampleControls{
 	width: 90%;
 	margin-left: 5%;
-	margin-bottom:5%;
+	margin-bottom:13%;
 }
 
 /*  */
@@ -49,19 +53,45 @@ p>span{
 /*  */
 
 /* 공지사항 박스 */
-div#notice-box1{
-	padding:13% 13% 0px 13%;
-	display:flex;
+.main-sc9-notice{
+	padding: 13% 13%;
+	width:60%;
+}
+.main-sc9-tit{
+	font-size:50px;
+}
+.notice-list-item{
+	border-bottom: 1px solid rgb(229, 229, 229);
+}
+.notice-list-item dl{
+	padding: 21px 0px;
+	display: flex;
 	justify-content: space-between;
+	color:black;
+	margin-top:16px;
+}
+dt{
+	width:70%;
+	overflow: hidden;
+	font-family: "Nanum Gothic Coding";
+}
+
+.notice-list-item>a{
+	text-decoration: none;
+}
+.main-sc9-tit{
+	font-family: "Noto Sans KR";
+	margin-bottom:10px;
 }
 
 /* 경기장 리스트 */
 div.row, .row-cols-1, .row-cols-md-3, .g-4{
-	padding:13% 13%;
+	padding:13% 13% 0px 13%;
 }
 div.card{
 	border-bottom:2px solid lightgray;
 	border-right:2px solid lightgray;
+	border-radius: 1rem;
 }
 div.card-body{
 	padding:20px;
@@ -87,9 +117,4 @@ li>b{
 	margin-top:20px;
 }
 
-
-
-
-
 /* 실험쥐 */
-
