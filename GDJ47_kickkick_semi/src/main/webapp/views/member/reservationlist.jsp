@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-<!-- 여기가 마이페이지 초기화면 -->
  <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
 
     
@@ -57,7 +56,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="" style="color: black">
+            <a class="nav-link" href="#" style="color: black">
                 <i class="fa-solid fa-list"></i>
                 <span data-feather="file"></span>
               예약현황
@@ -82,62 +81,51 @@
         
       </div>
     </nav>
-     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-     <h2>회원 정보</h2>
-	<form action="" method="post">
-                    <div class="update">
-                        <p style="margin-bottom : 3px;" class="pp">이메일</p>
-                        <input type="text" value="" style="margin-bottom : 7px;">
-                    </div>  
-                    <div class="update">
-                          <p style="margin-bottom : 3px;" class="pp">이름</p>
-                          <input type="text" value="" readonly style="margin-bottom : 7px;">
-                    </div>
-                    <div class="update">
-                          <p style="margin-bottom : 3px;">비밀번호</p>
-                          <button onclick="">비밀번호 변경</button>
-                    </div>  
-                    <div class="update">
-                          <p style="margin-bottom : 3px;">생년월일</p>
-                          <input type="text" name="birthday"  value="" placeholder="yyyyMMdd" style="margin-bottom : 7px;">
-                    </div>
-                    <div class="update">
-                          <p style="margin-bottom : 3px;">연락처</p>
-                          <input type="text" name="phone" value="" placeholder="-없이 입력" maxlength="11" style="margin-bottom : 7px;">
-                    </div>
-                    <div class="update">
-                          <p style="margin-bottom : 3px;">주소</p>
-                          <input type="text" name="address" value="" placeholder="띄어쓰기로 구분" style="margin-bottom : 7px;">
-                    </div>
-                    <div class="update">
-                          <p style="margin-bottom : 3px;">성별</p>
-                          <input type="radio" name="gender" id="gender0" value="M" style="margin-bottom : 10px;">
-                                        <label for="gender0">남</label>
-                                        <input type="radio" name="gender" id="gender1" value="F">
-                                        <label for="gender1">여</label>
-                    </div>
-                    <br>
-                    <br>
-                    <input type="button" value="수정">
-                       <input type="button" value="취소">
-                     </form>
-                     
-  </main>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <h2>예약 현황</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Header</th>
+              <th scope="col">Header</th>
+              <th scope="col">Header</th>
+              <th scope="col">Header</th>
+            </tr>
+          </thead>
+          <tbody>
+             <tr>
+             	<td>1</td>
+             	<td>1</td>
+             	<td>1</td>
+             	<td>1</td>
+             	<td>1</td>
+             </tr>
+              <tr>
+             	<td>2</td>
+             	<td>2</td>
+             	<td>2</td>
+             	<td>2</td>
+             	<td>2</td>
+             </tr>
+        </table>
+      </div>
+    </main>
   </div>
- <style>
+</div>
+
+<style>
 .col-lg-2 {
     height : 700px;
 }
 div.row{
 	padding : 9% 8% 2%;
 }
-.col-md-9{
-
-}
-.pp{
-}
-.col-lg-10 {
-    width : 800px;
-}
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+
 <%@ include file="/views/common/footer.jsp" %>
