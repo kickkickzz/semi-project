@@ -37,7 +37,7 @@
 					<div id="wellcome-user">loginMember.getName()님 환영합니다!</div>
 				<%}%>
 
-				<i id="home" class="fa-solid fa-user" onclick="location.assign('<%=request.getContextPath()%>/member/memberView.do')"></i>
+				<i id="home" class="fa-solid fa-user" onclick="location.assign('<%=request.getContextPath()%>/memberview.do')"></i>
 
 				<i id="home" class="fa-solid fa-user"></i>
 				<i id="alert" class="fa-solid fa-bell"></i>

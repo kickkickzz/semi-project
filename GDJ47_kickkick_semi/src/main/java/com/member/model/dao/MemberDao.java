@@ -1,13 +1,16 @@
 package com.member.model.dao;
 
+import static common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
-import static common.JDBCTemplate.*;
+
 import com.member.model.vo.Member;
 
 public class MemberDao {
@@ -95,6 +98,24 @@ public class MemberDao {
 	}
 	
 	
+	//회원정보 수정
+	public int updateMember(Connection conn , Date birth , String phone, String address, String gender) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("updateMember"));
+			pstmt.setDate(1, birth);
+			pstmt.setString(2, phone);
+			pstmt.setString(3, address);
+			pstmt.setString(4, gender);
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 }

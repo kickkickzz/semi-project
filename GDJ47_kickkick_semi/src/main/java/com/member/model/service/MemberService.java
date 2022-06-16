@@ -6,6 +6,7 @@ import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.sql.Date;
 
 import com.member.model.dao.MemberDao;
 import com.member.model.vo.Member;
@@ -29,5 +30,17 @@ public class MemberService {
 		else rollback(conn);
 		close(conn);
 		return flag;
+	}
+	
+	
+	//회원정보수정하기
+	public int updateMember(Date birth,String phone,String address,String gender) {
+		Connection conn = getConnection();
+		int result = dao.updateMember(conn,birth,phone,address,gender);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
 	}
 }

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/member/playlist.do")
+@WebServlet("/member/reservationlist.do")
 public class ReservationListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -48,29 +48,30 @@
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
+          <li><p></p></li>
           <li class="nav-item">
-            <a class="nav-link active" href="#" style="color: black">
+            <a class="nav-link active" href="<%=request.getContextPath()%>/memberview.do" style="color: black">
               <i class="fa-solid fa-user"></i>
               <span data-feather="home"></span>
               회원 정보
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">
+            <a class="nav-link" href="" style="color: black">
                 <i class="fa-solid fa-list"></i>
                 <span data-feather="file"></span>
               예약현황
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">
+            <a class="nav-link" href="<%=request.getContextPath()%>/member/myteam.do" style="color: black">
               <i class="fa-solid fa-people-group"></i>
               <span data-feather="shopping-cart"></span>
               나의 팀 정보
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">
+            <a class="nav-link" href="" style="color: black">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
               <span data-feather="users"></span>
               로그아웃
@@ -83,19 +84,20 @@
     </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <h2>예약 현황</h2>
+      <h2>예약 현황</h2><br>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
+              <th scope="col">구장이름</th>
+              <th scope="col">예약자명</th>
+              <th scope="col">예약날짜</th>
+              <th scope="col">이용시간</th>
+              <th scope="col">입금/환불상태</th>
             </tr>
           </thead>
           <tbody>
+          <!-- 이메일로 검색해서 구장을 리스트로 갖고온다음 여기서 리스트 for문써서 활용 -->
              <tr>
              	<td>1</td>
              	<td>1</td>
