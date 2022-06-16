@@ -28,14 +28,15 @@ public class UpdateMemberServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("실행됐다");
+		String email = request.getParameter("email");
+		String birthday = request.getParameter("birthday");
 		String phone = request.getParameter("phone");
 		String gender = request.getParameter("gender");
-		String birthday = request.getParameter("birthday");
-		System.out.println("실행됐다");
+
 		Date birth = null;
 		if(birthday!=null) {
 			String[] birthArr = birthday.split("-");
-			
 			int year = Integer.parseInt(birthArr[0]);
 			int month = Integer.parseInt(birthArr[1])-1;
 			int day = Integer.parseInt(birthArr[2]);
@@ -46,12 +47,12 @@ public class UpdateMemberServlet extends HttpServlet {
 		
 		String address = null;
 		String address2 = request.getParameter("address2");
-		String address3 = request.getParameter("address2");
-		String address4 = request.getParameter("address2");
+		String address3 = request.getParameter("address3");
+		String address4 = request.getParameter("address4");
 		ArrayList<String> addArr = new ArrayList();
 		addArr.add(address2);
-		addArr.add(address2);
-		addArr.add(address2);
+		addArr.add(address3);
+		addArr.add(address4);
 		for(int i=0; i<addArr.size(); i++) {
 			if(i==2) {
 				address  += addArr.get(i);
@@ -60,7 +61,7 @@ public class UpdateMemberServlet extends HttpServlet {
 			}
 		}
 		
-		int result = new MemberService().updateMember(birth,phone,address,gender); //where 절에 추가할 이메일 매개변수로 추가해야함!
+		int result = new MemberService().updateMember(email,birth,phone,address,gender);
 		
 		String msg="", loc="";
 		if(result>0) {
@@ -72,7 +73,7 @@ public class UpdateMemberServlet extends HttpServlet {
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/view/common/msg.jsp").forward(request, response);
+		request.getRequestDispatcher("/view/msg/msg.jsp").forward(request, response); 
 		
 	}
 

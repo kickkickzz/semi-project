@@ -13,9 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.board.model.vo.Board;
-
-
-
+import com.board.model.vo.PageInfo;
 import com.board.model.dao.BoardDao;
 
 public class BoardDao {
@@ -68,13 +66,45 @@ public class BoardDao {
 	}
 
 	public Board selectBoard(Connection conn, int bo) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Board b=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectBoard"));
+			pstmt.setInt(1, bo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) b=getBoard(rs);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(pstmt);
+		}return b;
 	}
 
 	public int getBoardListCount(Connection conn) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public List<Board> selectBoardList(Connection conn, int cPage, int numPerpage) {
+		PreparedStatement pstmt=null;
+		List<Board> result=new ArrayList();
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectBoardList"));
+			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getBoard(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
 	}
 
 	

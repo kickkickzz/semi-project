@@ -1,4 +1,4 @@
-package com.board.controller;
+package com.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,21 +7,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-@WebServlet("/writeBoardForm.do")
-public class WriteBoardServlet extends HttpServlet {
+/**
+ * Servlet implementation class UpdatePasswordServlet
+ */
+@WebServlet("/updatepassword.do")
+public class UpdatePasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
-    public WriteBoardServlet() {
+   
+    public UpdatePasswordServlet() {
         super();
+        
     }
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/board/boardWriter.jsp").forward(request, response);
-		}
+		request.getRequestDispatcher("/views/member/updatepassword.jsp").forward(request, response);
+	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

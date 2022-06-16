@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.board.model.dao.BoardDao;
 import com.board.model.vo.Board;
+import com.board.model.vo.PageInfo;
 
 public class BoardService {
 	private BoardDao dao=new BoardDao();
@@ -19,6 +20,12 @@ public class BoardService {
 		List<Board> list= new BoardDao().selectList(conn);
 		close(conn);
 		return list;
+	}
+	public int getBoardListCount() {
+		Connection conn=getConnection();
+		int result=new BoardDao().getBoardListCount(conn);
+		close(conn);
+		return result;
 	}
 	
 	public int insertBoard(Board b) {
@@ -38,23 +45,25 @@ public class BoardService {
 		return b;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public int getBoardListCount() {
+	public List<Board> selectBoardList(int cPage, int numPerpage){
 		Connection conn=getConnection();
-		int result=new BoardDao().getBoardListCount(conn);
+		List<Board> result=dao.selectBoardList(conn,cPage,numPerpage);
 		close(conn);
 		return result;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
 
 }

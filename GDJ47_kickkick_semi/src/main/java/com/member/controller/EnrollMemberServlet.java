@@ -41,8 +41,10 @@ public class EnrollMemberServlet extends HttpServlet {
 		boolean flag = new MemberService().EnrollMember(m);
 		if(flag) {
 			request.setAttribute("msg", "회원가입에 성공하였습니다!");
+			request.setAttribute("loc","");
 		}else {
 			request.setAttribute("msg", "회원가입에 실패하였습니다!ㅠㅠ");
+			request.setAttribute("loc","");
 		}
 		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
 	}

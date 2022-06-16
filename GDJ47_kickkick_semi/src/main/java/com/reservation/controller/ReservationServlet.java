@@ -34,6 +34,7 @@ public class ReservationServlet extends HttpServlet {
 		int stanum=Integer.parseInt(request.getParameter("stanum"));
 		Stadium s = new ReservationService().searchstadiumnum(stanum);
 		System.out.println(s);
+		request.setAttribute("stadium", s);
 		
 		request.getRequestDispatcher("/views/reservation/reservation.jsp").forward(request, response);
 	}

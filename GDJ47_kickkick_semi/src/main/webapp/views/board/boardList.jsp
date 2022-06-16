@@ -3,7 +3,7 @@
 <%
 	//로그인 하지 않아도 다 열람 가능
 	//작성 권한은 관리자만
-	//
+	List<Board> list=(List<Board>)request.getAttribute("list");
 	
 %>
 <link href="<%=request.getContextPath()%>/css/boardList.css" type="text/css" rel="stylesheet">
@@ -18,10 +18,12 @@
 					<hr>
 				</div>
 				<!-- 공지작성은 관리자만-->
+				<%//if(loginMember!=null&&loginMember.getEmail().equals("admin")){ %>
 				<div class="board_button_box">
 					<div></div>
-					<button type="button" class="btn btn-primary" id="insertBtn" onclick="location.href='writeBoardForm.do'">등록하기</button>
+					<button type="button" class="btn btn-primary" id="insertBtn" onclick="location.assign('<%=request.getContextPath() %>/writeBoardForm.do')">등록하기</button>
 				</div>
+				<%//} %>
 				<!-- 테이블 형식으로 구성되어있다. -->
 				<div class="board_table_container">
 					<table class="table table-hover" id="listArea">
@@ -35,26 +37,32 @@
 							</tr>
 						</thead>
 						<tbody>
-							<!-- jsp로 데이터 삽입-->
+						<!-- jsp로 데이터 삽입-->
+						<%if(list.isEmpty()){ %>
 							<tr>
 								<td colspan="6">공지사항이 없습니다!</td>
 							</tr>
+						<%}else{
+							for(Board b:list){%>	
 							<tr>
 								<th scope="row">
-									<input type="hidden" value=""/>
+									<input type="hidden" value="<%=b.getBoardNum()%>"/>
 								</th>
 								<!--번호-->
-								<td></td>
+								<td><%b.getBoardNum(); %></td>
 								<!--작성날짜 -->
-								<td colspan=3></td>
-								<!-- 제목 -->
-								<td></td>
+								<td><%b.getBoardDate(); %></td>
+								<!-- 공지내용 요약-제목 -->
+								<td colspan=3><%b.getBoardTitle(); %></td>
 								<!-- 작성자 -->
+								<td><%b.getBoardWriter(); %></td>
 							</tr>
+						<% }
+						}%>	
 						</tbody>
 					</table>
 				</div>
-				<!-- pagenation을 담는 컨테이너-->
+				<!-- 페이징처리-->
 				<div class="board_pagenation">
 					<nav>
 						<ul class="pagination">
@@ -89,7 +97,7 @@
 		</div>
 	</div>
 	<%-- footer을 호출 --%>
-	<%@include file="/views/common/footer.jsp"%>
+<%@include file="/views/common/footer.jsp"%>
 <script>
 	
 </script>

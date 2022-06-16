@@ -24,7 +24,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 
-    <style>
+<style>
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -38,102 +38,102 @@
           font-size: 3.5rem;
         }
       }
-    </style>
+</style>
 
     
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
-  </head>
-  <body>
+    
+</head>
+<body>
     
 
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-      <div class="position-sticky pt-3">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-          <li><p></p></li>
-            <a class="nav-link active" href="" style="color: black">
-              <i class="fa-solid fa-user"></i>
-              <span data-feather="home"></span>
-              회원 정보
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<%=request.getContextPath()%>/member/reservationlist.do" style="color: black">
-                <i class="fa-solid fa-list"></i>
-                <span data-feather="file"></span>
-              예약현황
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<%=request.getContextPath()%>/member/myteam.do" style="color: black">
-              <i class="fa-solid fa-people-group"></i>
-              <span data-feather="shopping-cart"></span>
-              나의 팀 정보
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="" style="color: black">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-              <span data-feather="users"></span>
-              로그아웃
-            </a>
-          </li>
-
-        </ul>
-        
-      </div>
-    </nav>
-     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-     <h2>회원 정보 수정</h2><br><br>
-		<form id="submitForm" action="<%=request.getContextPath()%>/updatemember.do" method="post" >
-                    <div class="update">
-                        <p style="margin-bottom : 3px;" class="pp">이메일</p>
-                        <input type="text" value="" style="margin-bottom : 7px;" size="63" readonly>
-                    </div>  
-                    <div class="update">
-                          <p style="margin-bottom : 3px;" class="pp">이름</p>
-                          <input type="text" value="" readonly style="margin-bottom : 10px;" size="63">
-                    </div>
-                    <div class="update">
-                          <p style="margin-bottom : 3px;">비밀번호</p>
-                          <input type="text" value="비밀번호 변경을 원하시면 하단 비밀번호 변경 버튼을 누르세요" readonly style="margin-bottom : 10px;" size="63">
-                    </div>  
-                    <div class="update">
-                          <p style="margin-bottom : 3px;">생년월일</p>
-                          <input type="Date" name="birthday"  value="" placeholder="yyyyMMdd" style="margin-bottom : 10px;" size="63">
-                    </div>
-                    <div class="update">
-                          <p style="margin-bottom : 3px;">연락처</p>
-                          <input type="text" name="phone" value="" placeholder="-없이 입력" maxlength="11" style="margin-bottom : 10px;" size="63">
-                    </div>
-                    <div class="update">
-                    <p style="margin-bottom : 3px;">주소</p>
-                          <input type="text" id="sample6_postcode" placeholder="우편번호" style="margin-bottom : 3px;">
-						  <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" ><br>
-						  <input type="text" id="sample6_address" placeholder="주소" size="29" style="margin-bottom : 3px;">
-						  <input type="text" id="sample6_extraAddress" placeholder="참고항목"><br>
-						  <input type="text" id="sample6_detailAddress" placeholder="상세주소" size="29" style="margin-bottom : 13px;">
-                    </div>
-                    <div class="update">
-                          <p style="margin-bottom : 3px;">성별</p>
-                          <input type="radio" name="gender" id="gender0" value="M" style="margin-bottom : 10px;" size="20">
-                                        <label for="gender0">남</label>
-                                        <input type="radio" name="gender" id="gender1" value="F">
-                                        <label for="gender1">여</label>
-                    </div>
-                    <br>
-                    <br>
-                    <input type="button" onclick="submit();" value="수정"/>
-                    <input type="reset" value="취소">
-                    
-              </form>
-                    <input type="button" onclick="updatePw()" value="비밀번호 변경"></button>    
-  </main>
+   <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <div class="position-sticky pt-3">
+     <ul class="nav flex-column">
+      <li class="nav-item">
+      <li>
+       <p></p>
+      </li>
+      <li>
+        <a class="nav-link active" href="" style="color: black">
+         <i class="fa-solid fa-user"></i>
+         <span data-feather="home"></span>
+         회원 정보
+        </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="<%=request.getContextPath()%>/member/reservationlist.do" style="color: black">
+       <i class="fa-solid fa-list"></i>
+       <span data-feather="file"></span>
+       예약현황
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="<%=request.getContextPath()%>/member/myteam.do" style="color: black">
+        <i class="fa-solid fa-people-group"></i>
+        <span data-feather="shopping-cart"></span>
+        나의 팀 정보
+        </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="" style="color: black">
+       <i class="fa-solid fa-arrow-right-from-bracket"></i>
+       <span data-feather="users"></span>
+       로그아웃
+       </a>
+      </li>
+     </ul>  
+    </div>
+   </nav>
+   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <h2>회원 정보 수정</h2><br><br>
+    <form></form>
+    <form id="updateForm" action="<%=request.getContextPath()%>/updatemember.do" method="post">
+     <div>
+      <p style="margin-bottom : 3px;" class="pp">이메일</p>
+      <input type="text" name="email" value="" style="margin-bottom : 7px;" size="63" readonly>
+     </div>  
+     <div>
+      <p style="margin-bottom : 3px;" class="pp">이름</p>
+      <input type="text" name="name" value="" readonly style="margin-bottom : 10px;" size="63">
+     </div>
+     <div>
+      <p style="margin-bottom : 3px;">비밀번호</p>
+      <input type="text" value="비밀번호 변경을 원하시면 하단 비밀번호 변경 버튼을 누르세요" readonly style="margin-bottom : 10px;" size="63">
+     </div>  
+     <div>
+      <p style="margin-bottom : 3px;">생년월일</p>
+      <input type="Date" name="birthday"  value="" placeholder="yyyyMMdd" style="margin-bottom : 10px;" size="63">
+     </div>
+     <div>
+      <p style="margin-bottom : 3px;">연락처</p>
+      <input type="text" name="phone" value="" placeholder="-없이 입력" maxlength="11" style="margin-bottom : 10px;" size="63">
+     </div>
+     <div>
+      <p style="margin-bottom : 3px;">주소</p>
+      <input type="text" id="sample6_postcode" placeholder="우편번호" style="margin-bottom : 3px;">
+	  <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" ><br>
+	  <input type="text" id="sample6_address" placeholder="주소" size="29" style="margin-bottom : 3px;">
+	  <input type="text" id="sample6_extraAddress" placeholder="참고항목"><br>
+	  <input type="text" id="sample6_detailAddress" placeholder="상세주소" size="29" style="margin-bottom : 13px;">
+     </div>
+     <div class="update">
+      <p style="margin-bottom : 3px;">성별</p>
+      <input type="radio" name="gender" id="gender0" value="M" style="margin-bottom : 10px;" size="20"
+       >
+       <label for="gender0">남</label>
+      <input type="radio" name="gender" id="gender1" value="F"
+       >
+       <label for="gender1">여</label>
+     </div><br><br>
+      <input type="button" onclick="fn_update();" value="수정"/>
+      <input type="reset" value="취소">
+    </form>
+      <input type="button" onclick="updatePw()" value="비밀번호 변경"> 
+   </main>
   </div>
-  </div>
+</div>
 <style>
 .col-lg-2 {
     height : 700px;
@@ -150,12 +150,12 @@ div.row{
 
 <script>
 const updatePw = ()=>{
-	
+	open("<%=request.getContextPath()%>/updatepassword.do","_blank","width=400, height=210 ,left=500, top=200"); /* 주소에 ?email=loginMember.getEmail() 추가해야함 */
 }
 
 
-const submit= ()=>{
-	$("#submitForm").submit();
+const fn_update= ()=>{
+	$("#updateForm").submit();
 }
 
 
