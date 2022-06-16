@@ -40,10 +40,11 @@ public class EnrollMemberServlet extends HttpServlet {
 		
 		boolean flag = new MemberService().EnrollMember(m);
 		if(flag) {
-			System.out.println("성공");
+			request.setAttribute("msg", "회원가입에 성공하였습니다!");
 		}else {
-			System.out.println("실패");
+			request.setAttribute("msg", "회원가입에 실패하였습니다!ㅠㅠ");
 		}
+		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
 	}
 
 	/**

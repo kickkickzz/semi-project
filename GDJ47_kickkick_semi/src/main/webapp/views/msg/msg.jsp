@@ -9,7 +9,8 @@
 </head>
 <body>
 	<script>
-		alert("");
+		alert('<%=request.getAttribute("msg")%>');
+		location.replace('<%=request.getContextPath()%>');
 	</script>
 </body>
 </html>
