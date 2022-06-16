@@ -14,7 +14,6 @@
 	type="image/x-icon">
 
 <!-- api : bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
@@ -29,7 +28,7 @@
 				<!-- 공지작성은 관리자만-->
 				<div class="board_button_box">
 					<div></div>
-					<button type="button" class="btn btn-primary" id="insertBtn" onclick="">등록하기</button>
+					<button type="button" class="btn btn-primary" id="insertBtn" onclick="location.href='writeBoardForm.do'">등록하기</button>
 				</div>
 				<!-- 테이블 형식으로 구성되어있다. -->
 				<div class="board_table_container">
@@ -102,5 +101,4 @@
 <script>
 	
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

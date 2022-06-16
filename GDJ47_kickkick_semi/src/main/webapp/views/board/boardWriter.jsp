@@ -1,21 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="com.member.model.vo.*, com.board.model.vo.Board,java.util.List"%>
-	
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>공지게시판 글작성하기</title>
-
 <link
 	href="https://fonts.googleapis.com/css2?family=Alata&family=Do+Hyeon&display=swap"
 	rel="stylesheet">
-
-<!-- jquery api-->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- 정적파일 css, js-->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/boardWriter.css">
@@ -30,7 +18,7 @@
 					<h1 class="board_title">공지사항 등록하기</h1>
 					<hr>
 				</div>
-				<form action="<%=request.getContextPath()%>/insertBoard.bo" id="write_board_form" method="post" encType="multipart/form-data">
+				<form action="<%=request.getContextPath()%>/writeBoard.do" id="write_board_form" method="post" encType="multipart/form-data">
 					<!-- 타이틀 영역박스-->
 					<div class="title-container">
 						<input id="board-write-title" type="text" name="title"
@@ -89,7 +77,3 @@
 	</div>
 	<!--footer삽입 -->
 	<%@include file="/views/common/footer.jsp"%>
-
-</body>
-
-</html>
