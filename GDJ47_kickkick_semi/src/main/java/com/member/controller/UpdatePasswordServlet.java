@@ -1,4 +1,4 @@
-package com.reservation.controller;
+package com.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,36 +7,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.reservation.model.service.ReservationService;
-import com.reservation.model.vo.Stadium;
-
 /**
- * Servlet implementation class StadiumInfoServlet
+ * Servlet implementation class UpdatePasswordServlet
  */
-@WebServlet("/reservation.do")
-public class ReservationServlet extends HttpServlet {
+@WebServlet("/updatepassword.do")
+public class UpdatePasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ReservationServlet() {
+   
+    public UpdatePasswordServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		int stanum=Integer.parseInt(request.getParameter("stanum"));
-		Stadium s = new ReservationService().searchstadiumnum(stanum);
-		System.out.println(s);
-		request.setAttribute("stadium", s);
-		
-		request.getRequestDispatcher("/views/reservation/reservation.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/updatepassword.jsp").forward(request, response);
 	}
 
 	/**

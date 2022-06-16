@@ -58,8 +58,9 @@
 				<td><%=s.getBranch_address() %></td>
 				<td><%=s.getBranch_num() %></td>
 				<td><%=s.getStadium_name() %></td>
-				<td><%=s.getStadium_reservation_start_time()%> : 00 ~ <%=s.getStadium_reservation_end_time()%> : 00</td>
 				<td><%=s.getStadium_match_member() %></td>
+				<td><%=s.getStadium_reservation_start_time()%> : 00 ~ <%=s.getStadium_reservation_end_time()%> : 00</td>
+				
 				<td><%=s.getBranch_phone()%></td>
 				
 			</tr>

@@ -34,13 +34,22 @@ public class MemberService {
 	
 	
 	//회원정보수정하기
-	public int updateMember(Date birth,String phone,String address,String gender) {
+	public int updateMember(String email, Date birth,String phone,String address,String gender) {
 		Connection conn = getConnection();
-		int result = dao.updateMember(conn,birth,phone,address,gender);
+		int result = dao.updateMember(conn,email,birth,phone,address,gender);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;
-		
+	}
+	
+	//비밀번호 변경 하기
+	public int updatePassword(String email, String newPw) {
+		Connection conn = getConnection();
+		int result = dao.updatePassword(conn,email,newPw);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 }

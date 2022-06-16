@@ -1,8 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="com.reservation.model.vo.Stadium" %>
+<% Stadium s = (Stadium)request.getAttribute("stadium"); %>
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/reservation.css">
+<!-- calendar css/js -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/calendar.css">
+<!-- swiper api -->
+<link type="text/css" rel="stylesheet"
+	href="https://unpkg.com/swiper/swiper-bundle.css">
+<link type="text/css" rel="stylesheet"
+	href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<!-- time-slider.css -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/time_slider.css">
+
+
 
 
 
@@ -17,24 +33,24 @@
 				<div class="info-box-2" id="branch-name-info-box">
 					<!-- 구장의 지점 번호 : STADIUM_BRANCH_NUM-->
 					<input type="hidden" id="STADIUM_BRANCH_NUM"
-						name="STADIUM_BRANCH_NUM" value="">
+						name="STADIUM_BRANCH_NUM" value="<%=s.getBranch_num()%>>">
 
 					<!-- 구장 번호: STADIUM_NUM -->
 					<input type="hidden" id="STADIUM_NUM" name="STADIUM_NUM"
-						value="">
+						value="<%=s.getStadium_num()%>">
 
 					<!-- 구장 이름박스 -->
 					<div id="stadium-name-box">
 						<!-- 구장 이름 : STADIUM_NAME-->
-						<h1 class="section-title" id="STADIUM_NAME"></h1>
+						<h1 class="section-title" id="STADIUM_NAME"><%=s.getStadium_name() %></h1>
 
 						<!--  branch_branchInfo -->
 						<%
-							
+							if(s.getBranch_branchInfo()!=null){
 						%>
-						<h3 id="BRANCH_BRANCHINFO"></h3>
+						<h3 id="BRANCH_BRANCHINFO"><%=s.getBranch_branchInfo() %></h3>
 						<%
-							
+							}
 						%>
 					</div>
 				</div>
@@ -62,93 +78,106 @@
 
 						<div class="branch-options-group3">
 							<%
-								
+								if(s.getBranch_option_shower().equals("Y")){
 							%>
 							<div class="branch_option" id="BRANCH_OPTION_SHOWER">
 								<img
-									src=""
+									src="<%=request.getContextPath()%>/images/option/shower.png"
 									alt="shower">
 								<p>샤워</p>
 							</div>
 							<%
-								
-							%>
-
+								}
+							 %>
 
 							<%
-								
+								if(s.getBranch_option_park().equals("Y")){
 							%>
 							<div class="branch_option" id="BRANCH_OPTION_PARK">
 								<img
-									src=""
+									src="<%=request.getContextPath()%>/images/option/parking.png"
 									alt="parking">
 								<p>주차장 유무</p>
 							</div>
 							<%
-								
+								}	
 							%>
 
 							<%
-								
+								if(s.getBranch_option_uniform().equals("Y")){
 							%>
 							<div class="branch_option" id="BRANCH_OPTION_UNIFORM">
 								<img
-									src=""
+									src="<%=request.getContextPath()%>/images/option/uniform.png"
 									alt="uniform">
 								<p>유니폼 대여 가능 여부</p>
 							</div>
 							<%
 								
-							%>
+							} %>
+
+						
 						</div>
 
 
 						<div class="branch-options-group3">
 							<%
-								
+								if(s.getBranch_option_shoes().equals("Y")){
 							%>
 							<div class="branch_option" id="BRANCH_OPTION_SHOES">
 								<img
-									src="<%=request.getContextPath()%>/resources/common/images/img_option/shoes.png"
+									src="<%=request.getContextPath()%>/images/option/shoes.png"
 									alt="shoes">
 								<p>풋살화 대여 가능 여부</p>
 							</div>
 							<%
-								
-							%>
+								}%>
+
+							
 
 							<%
-								
+								if(s.getBranch_option_ball().equals("Y")){
 							%>
 							<div class="branch_option" id="BRANCH_OPTION_BALL">
 								<img
-									src=""
+									src="<%=request.getContextPath() %>/images/option/ball.png"
 									alt="ball">
 								<p>볼 대여 가능 여부</p>
 							</div>
 							<%
-								
-							%>
+								} %>
+
+							
 
 
 							<%
-								
+								if(s.getBranch_option_inout().equals("I")){
 							%>
 							<div class="branch_option" id="BRANCH_OPTION_INOUT">
 								<img
-									src=""
+									src="<%=request.getContextPath() %>/images/option/stadium.png"
 									alt="실내실외">
 								<p>
-									실내/실외 <br>(여기는 데이터 불러와야될듯)
+									실내
 								</p>
 							</div>
 							<%
+								}else{
 							%>
+							<div class="branch_option" id="BRANCH_OPTION_INOUT">
+								<img
+									src="<%=request.getContextPath() %>/images/option/out.jpg"
+									alt="실내실외">
+								<p>
+									실외
+								</p>
+							</div>
+							<%} %>
 						</div>
 						<script>
                         $(function(){
                         	let branch_info=$('.branch-options-group3').text();
-                        	
+                        	console.log(branch_info.trim());
                        		if(branch_info.trim()==''){
                        			console.log(branch_info.trim()=='');
                        			$('#branch-options').css('display','none');
@@ -170,7 +199,7 @@
 							<div class="stadium-detail-info-label-box">
 								<label class="stadium-detail-info-label">구장 이름</label>
 							</div>
-							<span></span>
+							<span><%=s.getStadium_name() %></span>
 						</div>
 
 
@@ -179,7 +208,13 @@
 							<div class="stadium-detail-info-label-box">
 								<label class="stadium-detail-info-label">인원 수</label>
 							</div>
-							<span> 
+							<span>
+							<%int matchperson=s.getStadium_match_member().charAt(0)-'0';
+							
+						
+								System.out.println(matchperson);
+								%> 
+							<%=s.getStadium_match_member()%> <b>(<%=matchperson*2 %>명)</b>
 							</span>
 						</div>
 
@@ -199,7 +234,7 @@
 							<div class="stadium-detail-info-label-box">
 								<label class="stadium-detail-info-label">지점 주소</label>
 							</div>
-							<span></span>
+							<span><%=s.getBranch_address()%></span>
 						</div>
 
 						<!-- 지점 전화번호 -->
@@ -207,7 +242,7 @@
 							<div class="stadium-detail-info-label-box">
 								<label class="stadium-detail-info-label">지점 전화번호</label>
 							</div>
-							<span></span>
+							<span><%=s.getBranch_phone() %></span>
 						</div>
 
 						<!-- sns -->
@@ -216,7 +251,7 @@
 								<label class="stadium-detail-info-label">SNS</label>
 							</div>
 							<span><a id="sns-website"
-								href=""></a></span>
+								href="<%=s.getBranch_website()%>"><%=s.getBranch_website()%></a></span>
 						</div>
 
 
@@ -228,11 +263,11 @@
 
 							<!--영업시작/ 종료 시간 박스  -->
 							<div class="open-close-times">
-								<span id="STADIUM_RESERVATION_START_TIME"></span>
-								<span>~</span> <span id="STADIUM_RESERVATION_END_TIME"></span>
+								<span id="STADIUM_RESERVATION_START_TIME"><%=s.getStadium_reservation_start_time() %></span>
+								<span>~</span> <span id="STADIUM_RESERVATION_END_TIME"><%=s.getStadium_reservation_end_time() %></span>
 							</div>
 						</div>
-
+						<%if(s.getBranch_detailInfo()!=null){ %>
 						
 						<div class="stadium-detail-box">
 							<div class="stadium-detail-info-label-box">
@@ -240,11 +275,11 @@
 							</div>
 
 							<div class="stadium-describe-box">
-								
+								<%=s.getBranch_detailInfo() %>
 							</div>
 						</div>
 						<%
-							
+						}
 						%>
 
 					</div>
@@ -261,12 +296,12 @@
 
 
 				<div class="info-box-2  stadium-notices">
-					
+					<%if(s.getBranch_notes()!=null){ %>
 					<h2 class="section-sub-title">예약 주의사항</h2>
 					<ul class="stadium-notices-ul" style="color: red;">
-						<li></li>
+						<li><%=s.getBranch_notes() %></li>
 					</ul>
-					
+					<%} %>
 
 					<h2 class="section-sub-title">이용 규칙</h2>
 					<ul class="stadium-notices-ul" style="list-style: square">
@@ -392,8 +427,436 @@
 					</div>
 
 				</div>
+
+				<!-- 예약시간 -->
+				<div class="info-box2" id="reservation_time_select_box">
+					<h2 class="section-sub-title">예약 시간 선택</h2>
+					<div
+						class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-free-mode"
+						id="swiper-container2">
+
+						<ul id="swiper-list-box" class="swiper-wrapper time_list"
+							style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px); list-style: none;">
+
+						</ul>
+					</div>
+				</div>
+
+				<!-- 예약 버튼 -->
+				<div class="info-box2" id="reservation-btn-box">
+					
+					
+					
+					
+					<button type="button" class="btn btn-primary btn-lg" name="reservationRegistBtn"
+						id="reservationRegistBtn" value="예약하기">예약하기</button>
+					
+				</div>
+			</div>
+
+		</section>
 		
-		</div>
+
+<script src="<%=request.getContextPath()%>/js/calendar.js"></script>
+
+<script>
+const reservationMap= new Map();
+
+//초기화- 오늘날짜
+reservationMap.set('date', '');
+reservationMap.set('startTime', '');
+reservationMap.set('endTime', '');
+reservationMap.set('useTime', '');
+reservationMap.set('price',0);
+
+	$(()=>{
+	   
+	   //예약날짜를 클릭하면=> 예약시간 선택박스가 나오도록한다.
+       $('.day').click(e=>{
+           
+           $('#reservation_time_select_box').css('display', 'block');
+       });
+	   
+       
+       $('.cal-body').click(e=>{
+   	   	//이거 RESERVATIONLIST의  RESERVATION_STADIUM_NUM 컬럼인가요?
+	   		//var reservation_stadium_num = '1';
+	   		 
+	   		//달력에 선택한 날짜에 대한 정보를 갖고온다. 
+	   		//var reservation_usage_start_date = $(this).val();
+	   		const activeDate= init.activeDate;
+	   		const activeYear= activeDate.getFullYear(); //년도
+	   		const activeMonth= activeDate.getMonth()+1; //월
+	   		const activeDay= activeDate.getDate(); //일
+	   		
+	   		var reservation_usage_start_date= activeYear+'-'+activeMonth+'-'+activeDay;
+	   		reservationMap.set('date', reservation_usage_start_date);
+	   		//console.log(reservation_usage_start_date);
+	   		
+			
+	   		//직접 동적으로 html로 나타내기
+	   		const openTime=<%=s.getStadium_reservation_start_time()%>;
+	   		const closeTime=<%=s.getStadium_reservation_end_time()%>;
+	   		
+
+	   		
+	   		$.ajax({
+	   			 url: '<%=request.getContextPath()%>/reservationinfo.do',
+	   			 data: {stanum:<%=s.getStadium_num()%>, 
+	   				u_s_date:reservation_usage_start_date},
+	   			 success: data=> {
+	   				 // 응답데이터가 존재하는지 확인
+	   				console.log(data);
+	   				 
+	   				let swiperCode='';
+	   				let values=data['reservation'];
+	   				console.log(values);
+	   				//예약이 존재하지 않다면
+	   				if(values==null){
+		   				for(var h=0; h<24; h++){
+	  						 if(h>=openTime && h<closeTime){
+	  							 //운영시간동안은 able
+	  							 swiperCode+='<li class="swiper-slide"><a class="time_box"><span class="time">'+h+'</span><span class="price able">10000</spann></a></li>';
+	  						 }else{
+	  							 //disable
+	  							swiperCode+='<li class="swiper-slide"><a class="time_box"><span class="time">'+h+'</span><span class="price disable">&nbsp;</spann></a></li>';
+	  						 }
+	  					 }
+	   				}else{
+	   					
+	   					//console.log("예약이 존재합니다.");
+	   					// 0으로 모두 초기화. (0: 예약가능/ 1: 예약불가능)
+	   					let checkUnableTime=Array.from({length:24}, ()=>0);
+	   					
+	   					//open시간과 close시간 사이에만 체크
+	   					for(var h=0; h<24; h++){
+	   						
+	   						if(h>=openTime && h<closeTime){
+	   							checkUnableTime[h]=0;
+	   						}else{
+	   							checkUnableTime[h]=1;
+	   						}
+	   					}
+	   					
+	   					
+	   					//예약시간을 체크 - i: 예약 개수를 인덱스로 나타냄.
+	   					for(var i=0; i<values.length; i++){
+	   						let reservationStartTime=values[i].reservation_usage_start_time;
+	   						let reservationEndTime= values[i].reservation_usage_end_time;
+	   						
+	   						// h범위에 해당하는 시각들은 예약 불가능한 상태로 바꾼다.
+	   						for(var h=reservationStartTime; h<reservationEndTime; h++){
+	   							checkUnableTime[h]=1;
+	   						}
+	   					}
+	   					//console.log(checkUnableTime);
+	   					for(var h=0; h<24; h++){
+	   						//예약가능한시간인가?
+	   						if(checkUnableTime[h]==0){
+	  							 //운영시간동안은 able
+	  							 swiperCode+='<li class="swiper-slide"><a class="time_box"><span class="time">'+h+'</span><span class="price able">10000</spann></a></li>';
+	  						 }else{
+	  							 //disable
+	  							swiperCode+='<li class="swiper-slide"><a class="time_box"><span class="time">'+h+'</span><span class="price disable">&nbsp;</spann></a></li>';
+	  						 }
+	   					}
+	   				}
+	   				
+	   				
+	   				$('#swiper-list-box').html(swiperCode);
+	   				
+	   				
+	   				//여기서 jquery를 이용하여 예약시간을 선택하여 예약을 해보자.
+	   				// 기본값: 0 (0은 클릭이 안된상태= clicked라는 클래스가 적용되어있지 않다.)
+	   				//클릭된 swiper들을 모은다....
+	   				let isClickedSwipers=Array.from({length:24}, ()=>0);
+	   				
+	   				//2개 이상 클릭됐을 때 호출하는 함수.
+  					function clickedMore2(clickedSwipers, idx, startTime, endTime){
+	   					console.log('2개이상 클릭됨');
+  						let realStartTime=0;
+  						let realEndTime=24;
+  						
+  						if(idx< startTime){
+  							realStartTime=idx;
+  							realEndTime=endTime;
+  						}else if(idx>= startTime && idx<=endTime){
+  							realStartTime=startTime;
+  							realEndTime=endTime;
+  						}else{
+  							realStartTime=startTime;
+  							realEndTime=idx+1;
+  						}
+  						
+  						//idx는 아직 클릭이 적용안되어있음
+  						for(var i=realStartTime; i<=realEndTime; i++ ){
+  							//idx(선택된 시간)가 아닌 이미 clicked가 적용된 다른시간
+  							let now=$('li.swiper-slide:nth-child('+(i+1)+') .price');
+  							let isClicked= now.hasClass('clicked');
+  							if( i==idx && !isClicked && now.hasClass('able')){
+  								//idx이고, 클릭이 안된상태이고, diable이 아니라면..
+  								now.removeClass('able');
+  								now.addClass('clicked');
+  							}else if(i!=idx && isClicked && !now.hasClass('disable')){
+  								//idx가 아니고 이미 클릭이 된상태라면
+  								now.removeClass('clicked');
+  								now.addClass('able');
+  							}
+  						}
+  					}
+  					
+  					//중간에 disable이 있는지 확인 시키는 함수
+  					function checkDisable(idx, clickedOnlyOne){
+  						let realStartTime=(idx<clickedOnlyOne)? idx : clickedOnlyOne;
+  						let realEndTime=(idx>clickedOnlyOne)? idx : clickedOnlyOne;
+  						for(var i=realStartTime; i<realEndTime; i++){
+  							let now = $('li.swiper-slide:nth-child('+(i+1)+') .price');
+  							if(now.hasClass('disable')){
+  								alert('이미 예약된 시간과 중복됩니다!');
+  								return i; //disable이 발생하기 시작한 인덱스번호.
+  							}
+  						}
+  						return -1; //disable이 없음.
+  						
+  					}
+  					
+  					//disable이 발견되면 다시 원상복구 시키는 함수
+  					//clicked된것들 모두 reverse로 바꿈.
+  					function resetAble(idx, clickedOnlyOne){
+  						let realStartTime=(idx<clickedOnlyOne)? idx : clickedOnlyOne;
+  						let realEndTime=(idx>clickedOnlyOne)? idx : clickedOnlyOne;
+  						for(var i=realStartTime; i<=realEndTime; i++){
+  							let now=$('li.swiper-slide:nth-child('+(i+1)+') .price');
+  							if(now.hasClass('disable')){
+  								//disable이 있으면 넘어간다.
+  								continue;
+  							}else if(now.hasClass('clicked')){
+  								//clicked가 있으면
+  								now.removeClass('clicked');
+  								now.addClass('able');
+  							}
+  						}
+  						
+  					}
+	   				
+	   				
+	   				
+	   				
+	   				// swiper(예약 가능 시간 박스 able) 한개를 클릭할 때 발생하는 이벤트
+	   				$('li.swiper-slide .able').click(function(){
+	   					//현재선택한 시간 인덱스를 구한다.
+	   					let idx= $('li.swiper-slide .price').index($(this));
+	   					console.log('현재 클릭 => '+idx);
+	   					
+	   					//현재선택한 시간을 제외한, 클릭되어있는 swiper을 구한다.
+	   					let clickedSwipers= $('li.swiper-slide .clicked');
+	   					let clickedSwipersLength= clickedSwipers.length;
+	   					
+	   					if(clickedSwipersLength==0){
+	   						//이미클릭된 swiper이 존재하지 않음.
+	   						//현재 선택한 swiper 1개가 적용됨
+	   						let isClicked=$(this).hasClass('clicked');
+	   						if(!isClicked){
+		   						//클릭 해제=> 클릭적용 / able적용 => able해제
+		   						$(this).removeClass('able');
+		   						$(this).addClass('clicked');
+		   						
+		   						//예약시간 갱신
+		   						reservationMap.set('startTime',idx);
+		   						reservationMap.set('endTime',idx+1);
+		   					}
+	   					}else if(clickedSwipersLength==1){
+	   						//1개 이미 클릭되어있는 상태
+	   						//이미클릭된 한개를 구한다.
+	   						let clickedOnlyOne= $('li.swiper-slide .price').index(clickedSwipers[0]);
+	   						console.log('1개 클릭=> '+ clickedOnlyOne)
+	   						
+	   						//이미클릭된거 똑같은거를 클릭한경우: 클릭해제/ able적용
+	   						if(clickedOnlyOne==idx){
+	   							$(this).removeClass('clicked');
+	   							$(this).addClass('able');
+	   						}else{
+	   							//idx와 clickedOnlyOne이 서로 다를때
+	   							//disable이 시작되는 인덱스를나타낸다.
+	   							let disableStart= checkDisable(idx, clickedOnlyOne );
+	   							
+	   							//중간에 disable이 있는경우
+	   							if(disableStart>-1){
+	   								// disable을 제외한 모든 클릭처리된것들을 다시 able로 되돌린다.
+	   								resetAble(idx, clickedOnlyOne);
+	   								
+	   								// reservationMap초기화.
+	   								reservationMap.set('startTime', '');
+	   								reservationMap.set('endTime', '')
+	   								reservationMap.set('useTime','');
+	   								reservationMap.set('price', 0);
+	   							}else{	   							
+		   							//중간에 disable이 없는 경우
+		   							let realStartTime=(idx< clickedOnlyOne)? idx: clickedOnlyOne;
+		   							let realEndTime=(idx> clickedOnlyOne)? idx: clickedOnlyOne;
+		   							
+		   							for(var i=realStartTime; i<=realEndTime; i++){
+		   								let now= $('li.swiper-slide:nth-child('+(i+1)+') .price');
+		   								//아직 클릭 안된상태라면
+		   								if(!now.hasClass('clicked') && now.hasClass('able')){
+		   									now.removeClass('able');
+		   									now.addClass('clicked');
+		   								}
+		   							}
+		   							
+		   							reservationMap.set('startTime', realStartTime);
+		   							reservationMap.set('endTime', realEndTime+1);
+	   							}
+	   							
+	   						}
+	   					}else{
+	   						//2개이상 클릭되어있는 상태
+	   						clickedMore2(clickedSwipers, idx, reservationMap.get('startTime'), reservationMap.get('endTime'));
+	   						reservationMap.set('startTime',idx);
+	   						reservationMap.set('endTime', idx+1);
+	   					}
+	   					
+	   					if(reservationMap.get('startTime')!='' && reservationMap.get('endTime')!=''){
+		   					// clicked 클래스가 적용된  swiper의 개수를 구한다.
+			   				var clickedCount=$('li.swiper-slide .clicked').length;
+		   					
+		   					reservationMap.set('price', 10000 * clickedCount);
+			   				reservationMap.set('useTime', Math.abs(reservationMap.get('endTime')-reservationMap.get('startTime')));	
+		   					console.log(reservationMap);
+		   				}	
+	   				});
+	   				
+	   				
+	   				
+			}	
+		});
+	});
+});
+	
+
+</script>
+<script type="text/javascript">
+	
+	$('#date').change(function(){
+		
+		
+		var reservation_stadium_num = '1';
+		var reservation_usage_start_date = $(this).val();
+		
+		console.log(reservation_usage_start_date);
+		$.ajax({
+			 url: "<%=request.getContextPath()%>/reservationinfo.do",
+			 data: {stanum:<%=s.getStadium_num()%>, 
+				 u_s_date:reservation_usage_start_date}, //reservation_usage_start_date: 날짜.
+			 success: data=> {
+				 
+				 //console.log(data);
+				 $.each(data, function(key, value) {
+					 if(key == "reservation"){
+						 for (var i = 0; i < value.length; i++) {
+							 console.log(i+'번째 reservation추출 => '+value[i].reservation);
+							 //예약되어있다고 표시. 
+							 // 해당날짜. 2020년 9월 18일 
+							 
+							 //운영시간: 9~22
+							 //(disable) -> 이미 예약 15~17, 20~22
+							  
+							 //(able, disable 표시.)
+							 // for문 돌려서 반복문으로 갖고와야한다.
+							 //예약 시간 상태 표시
+							 	
+							 var startTime=parseInt(value[i].reservation_usage_start_time);
+							 var endTime=parseInt(value[i].reservation_usage_end_time);
+							 console.log('예약 시작시각: '+ startTime);
+							 console.log('예약 종료시각: '+ endTime);
+							 
+							 for(var t=startTime; t<endTime; t++){
+								 // startTime, startTime+1, ...., endTime-1 까지는 이미 예약됨.
+								 $('.swiper-slide:nth-child('+t+')').addClass('disable');
+							 } 
+							 testEval += '<p>'+ value[i].reservation_usage_start_time +'</p>';			 
+							 testEval += '<p>'+ value[i].reservation_usage_end_time +'</p>'; 			 
+							 
+						 }
+					 }
+						 
+				 });
+				 $('#wrap').html(testEval); 
+			 }
+		 });
+	});
+	
+	
+<%-- $('#reservationRegistBtn').click(function(){
+		
+		var userId = '<%=/* userId */%>';
+			if(userId != 'null') {
+				var reservation_branch_num = '<%=s.getBranch_num()%>';
+				var reservation_stadium_num = '<%=s.getStadium_num()%>';
+				
+				// 예약 가격 reservationMap['price']
+				//var reservation_price = $('#reservation_price').val();
+				var reservation_price = reservationMap.get('price');
+				
+				// 예약 시작 시간: reservationMap['startTime']
+				//var reservation_usage_start_time = $('#reservation_usage_start_time').val();
+				var reservation_usage_start_time =reservationMap.get('startTime');
+				
+				// 예약 사용 시간: reservationMap['useTime']
+				//var reservation_usage_time = $('#reservation_usage_time').val();
+				var reservation_usage_time = reservationMap.get('useTime');
+				
+				// 예약 끝 시간: reservationMap['endTime']
+				//var reservation_usage_end_time = $('#reservation_usage_end_time').val();
+				var reservation_usage_end_time = reservationMap.get('endTime');
+				
+				//예약 날짜 : reservationMap['date']
+				//var reservation_usage_start_date = $('#date').val();
+				var reservation_usage_start_date = reservationMap.get('date');
+				console.log(reservation_usage_end_time);
+				console.log(reservation_usage_start_date);
+				console.log(reservationMap);
+		
+				if(reservation_usage_start_date ==""){
+					alert('예약날짜를 선택해주세요!');
+				}else if(reservation_usage_start_time == "" && reservation_usage_end_time == "") {
+					alert('예약시간 선택해주세요');
+					 //$("#reservation_usage_start_time").focus();
+				}else {
+					if (confirm("예약하시겠습니까?") == true){
+						$.ajax({
+							 url: 'reservationRegist.me',
+							 data: {reservation_branch_num:reservation_branch_num, 
+								 reservation_stadium_num:reservation_stadium_num, 
+								 reservation_price:reservation_price,
+								 reservation_usage_start_date: reservation_usage_start_date,
+								 reservation_usage_start_time:reservation_usage_start_time,
+								 reservation_usage_time:reservation_usage_time, 
+								 reservation_usage_end_time:reservation_usage_end_time},
+							 success: function(data) {
+								 console.log(data);
+								 
+								 if(data == 1) {
+									 alert('예약완료');
+									 
+									 //reload
+									 location.reload();
+								 }
+							 }
+						 });
+					}else{
+					     return false;
+					}
+				}
+			}else {
+				alert('로그인후이용가능');
+			}
+		
+	});
+ --%>
+	</script>
+
 
 </body>
+
 </html>
