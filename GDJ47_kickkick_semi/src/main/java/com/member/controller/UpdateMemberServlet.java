@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.member.model.service.MemberService;
+import com.member.model.vo.Member;
 
 /**
  * Servlet implementation class UpdateMemberEndServlet
@@ -28,6 +29,7 @@ public class UpdateMemberServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		System.out.println("실행됐다");
 		String email = request.getParameter("email");
 		String birthday = request.getParameter("birthday");
@@ -74,7 +76,6 @@ public class UpdateMemberServlet extends HttpServlet {
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/view/msg/msg.jsp").forward(request, response); 
-		
 	}
 
 	/**

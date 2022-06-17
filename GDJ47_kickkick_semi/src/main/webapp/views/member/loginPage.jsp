@@ -13,7 +13,7 @@
 		</a>	
 	</div>
 	<div id="login-right">
-		<img id="bg-img" src="<%=request.getContextPath() %>/images/login-bg.jpg">
+		<img id="bg-img" src="<%=request.getContextPath()%>/images/login-bg.jpg">
 		<div class="container">
   			<div class="move">
     			<div class="p-button normal signin animated pulse">로그인하기</div>

@@ -2,14 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
 <!-- 여기가 마이페이지 초기화면 -->
- <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
+<link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
 
-    
+<!-- Bootstrap core CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <!-- Favicons -->
+<!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
 <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
@@ -42,16 +40,18 @@
 
     
     
-</head>
-<body>
-    
 
+    
+<section>
 <div class="container-fluid">
   <div class="row">
    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
     <div class="position-sticky pt-3">
      <ul class="nav flex-column">
       <li class="nav-item">
+      <li>
+       <p></p>
+      </li>
       <li>
        <p></p>
       </li>
@@ -87,7 +87,8 @@
     </div>
    </nav>
    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-    <h2>회원 정보 수정</h2><br><br>
+    <br><br>
+    <h2>회원 정보</h2>
     <form></form>
     <form id="updateForm" action="<%=request.getContextPath()%>/updatemember.do" method="post">
      <div>
@@ -129,23 +130,36 @@
      </div><br><br>
       <input type="button" onclick="fn_update();" value="수정"/>
       <input type="reset" value="취소">
+      <input type="button" onclick="updatePw()" value="비밀번호 변경">
     </form>
-      <input type="button" onclick="updatePw()" value="비밀번호 변경"> 
+
    </main>
   </div>
 </div>
+</section>
+</body>
 <style>
 .col-lg-2 {
-    height : 700px;
+    height : 800px;
 }
 div.row{
-	padding : 9% 8% 2%;
+	padding :0% 0% 0% 280px;
 }
 .col-md-9{
 
 }
-.pp{
+section{
+	padding-top : 0px;
+	
 }
+header{
+    height : 136px;
+}
+
+.bg-light {
+
+}
+
 </style>
 
 <script>
