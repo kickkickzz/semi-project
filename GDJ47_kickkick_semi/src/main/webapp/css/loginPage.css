@@ -40,7 +40,6 @@ div#login-right{
 
 
 
-
 /*실험쥐*/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap');
 
@@ -180,7 +179,7 @@ p{
 }
 
 .container{
-  height:450px;
+  height:600px;
   width:900px;
   position:absolute;
   top:50%;
@@ -285,4 +284,6 @@ div.login-error-msg{
 }
 #up{
 	display:none;
+	vertical-align: middle;
+    align-items: center;
 }
