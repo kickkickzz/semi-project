@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -170,7 +169,7 @@ public class ReservationDao {
 				ReservationInfo r = ReservationInfo.builder().reservation_code(rs.getString(1)).reservation_email(rs.getString(2))
 						.reservation_branch_num(rs.getString(3)).reservation_stadium_num(rs.getInt(4)).reservation_num(rs.getInt(5))
 						.reservation_price(rs.getInt(6)).reservation_usage_start_time(rs.getInt(7))
-						.reservation_usage_time(rs.getInt(8)).reservation_usage_end_time(rs.getInt(9)).reservation_usage_start_date(rs.getDate(10))
+						.reservation_usage_time(rs.getInt(8)).reservation_usage_end_time(rs.getInt(9)).reservation_usage_start_date(rs.getString(10))
 						.reservation_status(rs.getString(11)).build();
 				result.add(r);
 				
@@ -179,6 +178,49 @@ public class ReservationDao {
 			e.printStackTrace();
 		}finally {
 			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	public int codeCheck(Connection conn,String reservation_code) {
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		int result = 0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("codeCheck"));
+			pstmt.setString(1, reservation_code);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	public int reservationinsert(Connection conn,ReservationInfo reservation) {
+		PreparedStatement pstmt = null;
+		int result =0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("reservationinsert"));
+			
+			pstmt.setString(1, reservation.getReservation_code());
+			pstmt.setString(2, reservation.getReservation_email());
+			pstmt.setString(3, reservation.getReservation_branch_num());
+			pstmt.setInt(4, reservation.getReservation_stadium_num());
+			pstmt.setInt(5, reservation.getReservation_price());
+			pstmt.setInt(6, reservation.getReservation_usage_start_time());
+			pstmt.setInt(7, reservation.getReservation_usage_time());
+			pstmt.setInt(8, reservation.getReservation_usage_end_time());
+			pstmt.setString(9, reservation.getReservation_usage_start_date());
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
 			close(pstmt);
 		}
 		return result;
