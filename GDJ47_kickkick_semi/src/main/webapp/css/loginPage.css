@@ -283,3 +283,6 @@ div.login-error-msg{
 	font-size: 10px;
 	color: red;
 }
+#up{
+	display:none;
+}
