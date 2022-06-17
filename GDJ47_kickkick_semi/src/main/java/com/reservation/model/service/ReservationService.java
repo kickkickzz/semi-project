@@ -1,11 +1,9 @@
 package com.reservation.model.service;
 
-import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.*;
 import static common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
-
-import java.sql.Date;
 import java.util.List;
 
 import com.reservation.model.dao.ReservationDao;
@@ -49,6 +47,19 @@ public class ReservationService {
 		Connection conn= getConnection();
 		List<ReservationInfo> result = dao.selectReservationDateList(conn,stanum,dat);
 		close(conn);
+		return result;
+	}
+	public int codeCheck(String reservation_code) {
+		Connection conn = getConnection();
+		int result = dao.codeCheck(conn,reservation_code);
+		close(conn);
+		return result;
+	}
+	public int reservationInsert(ReservationInfo r) {
+		Connection conn = getConnection();
+		int result = dao.reservationinsert(conn,r);
+		if(result>0)commit(conn);
+		else rollback(conn);
 		return result;
 	}
 

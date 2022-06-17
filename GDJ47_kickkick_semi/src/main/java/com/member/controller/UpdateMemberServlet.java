@@ -10,8 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.member.model.service.MemberService;
+import com.member.model.vo.Member;
 
 /**
  * Servlet implementation class UpdateMemberEndServlet
@@ -33,7 +35,14 @@ public class UpdateMemberServlet extends HttpServlet {
 		String birthday = request.getParameter("birthday");
 		String phone = request.getParameter("phone");
 		String gender = request.getParameter("gender");
+		String name = request.getParameter("name");
 
+		Member m = Member.builder()
+				.email(email)
+				.name(name)
+				.phone(phone)
+				.build();
+		
 		Date birth = null;
 		if(birthday!=null) {
 			String[] birthArr = birthday.split("-");
@@ -67,14 +76,15 @@ public class UpdateMemberServlet extends HttpServlet {
 		if(result>0) {
 			msg+="회원정보 수정이 완료되었습니다.";
 			loc+="";
+			HttpSession session = request.getSession();
+			session.setAttribute("loginMember", m);
 		}else {
 			msg+="회원정보 수정에 실패하였습니다.";
-			loc+="";
+			loc+="/memberview.do";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/view/msg/msg.jsp").forward(request, response); 
-		
+		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response); 
 	}
 
 	/**

@@ -24,6 +24,9 @@ $(()=>{
 			form.attr("action","http://localhost:9090/GDJ47_kickkick_semi/loginMember.do");
 			form.submit();
 		}
+		
+		
+		
 	});
 	
 
@@ -41,19 +44,18 @@ $(()=>{
 	    
 	    $(".hello").show();
 	    $(".welcome").hide();
-	    
-	    
+	    $(".login-error-msg").hide();
 	    $(".move").css("background-position", "right");
 	    
 	    setTimeout(function(){
-	      $(".title").text("로그인");
-	      $(".light").text("소셜아이디로 로그인하세요!");
-	      $(".icons").hide();
-	      $(".name").hide();
-	      $(".phone").hide();
-	      $(".p-button").text("회원가입하기");
-	      $(".b-button").attr("value","로그인하기");
-	      $(".forgot").show();
+	      $(".title").text("회원가입");
+	      $(".icons").show();
+	      $(".name").show();
+	      $(".phone").show();
+	      $("#in").hide();
+	      $(".p-button").text("로그인하기");
+	      $(".b-button").attr("value","회원가입하기");
+	      $(".forgot").hide();
 	      $(".form").css("border-radius","10px 0px 0px 10px");
 	      $(".move").css("border-radius","0px 10px 10px 0px");
 	    }, 200);
@@ -73,13 +75,13 @@ $(()=>{
 	    $(".move").css("background-position", "left");
 	    
 	    setTimeout(function(){
-	      $(".title").text("회원가입");
-	      $(".light").text("소셜아이디로 회원가입하세요!");
-	      $(".name").show();
-	      $(".phone").show();
-	      $(".p-button").text("로그인하기");
-	      $(".b-button").attr("value","회원가입하기");
-	      $(".forgot").hide();
+	      $(".title").text("로그인");
+	      $(".name").hide();
+	      $(".phone").hide();
+	      $("#up").hide();
+	      $(".p-button").text("회원가입하기");
+	      $(".b-button").attr("value","로그인하기");
+	      $(".forgot").show();
 	      $(".form").css("border-radius","0px 10px 10px 0px");
 	      $(".move").css("border-radius","10px 0px 0px 10px");
 	    }, 200);

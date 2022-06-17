@@ -14,7 +14,7 @@ import com.member.model.vo.Member;
 /**
  * Servlet implementation class EnrollMemberServlet
  */
-@WebServlet("/enrollMember.do")
+@WebServlet(name="enrollMemberServlet", urlPatterns={"/enrollMember.do"})
 public class EnrollMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,14 +37,14 @@ public class EnrollMemberServlet extends HttpServlet {
 				.phone(request.getParameter("phone"))
 				.build();
 		
-		
+	
 		boolean flag = new MemberService().EnrollMember(m);
 		if(flag) {
 			request.setAttribute("msg", "회원가입에 성공하였습니다!");
 			request.setAttribute("loc","");
 		}else {
 			request.setAttribute("msg", "회원가입에 실패하였습니다!ㅠㅠ");
-			request.setAttribute("loc","");
+			request.setAttribute("loc","/loginPage.do");
 		}
 		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
 	}

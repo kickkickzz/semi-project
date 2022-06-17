@@ -13,6 +13,7 @@
 		비밀번호 확인 &nbsp&nbsp&nbsp<input type="password" name="newPwCk"><br>
 		<input type="submit" value="변경">
 		<input type="reset" value="취소">
+		<input type="hidden" name="email" value="<%=request.getParameter("email")%>"/>
 	</form>
 <style>
 	.pw{

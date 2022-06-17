@@ -139,8 +139,12 @@
 	
 
 <!-- 공지사항 목록 -->
+<section class="notice-container">
 	<div class="main-sc9-notice">
-			<div class="main-sc9-tit">알려드립니다.</div>
+			<div class="main-sc9-tit">
+				<img id="megaphone" src="https://cdn-icons-png.flaticon.com/512/214/214347.png">
+				알려드립니다!
+			</div>
 			<div class="main-notice-list">
 					<div class="notice-list-item">
 						<a href="/customer/noticeView?bbsDetailSeq=181">
@@ -192,6 +196,63 @@
 					</div>
 			</div>
 		</div>
+		<div class="main-sc9-review">
+			<div class="main-sc9-tit">
+				<img id="megaphone" src="https://cdn-icons-png.flaticon.com/512/1240/1240417.png">
+				이용자 리뷰!
+			</div>
+			<div class="main-notice-list">
+					<div class="notice-list-item">
+						<a href="/customer/noticeView?bbsDetailSeq=181">
+							<dl>
+								<dt>
+									[브랜드 론칭 이벤트] 신규 브랜드 '킥킥' 초성퀴즈 이벤트 당첨자 발표
+								</dt>
+								<dd>
+									2022-05-30
+								</dd>
+							</dl>
+						</a>
+					</div>
+					<div class="notice-list-item">
+						<a href="/customer/noticeView?bbsDetailSeq=68">
+							<dl>
+								<dt>
+									브랜드 명 변경 안내(22/05/29)
+								</dt>
+								<dd>
+									2022-05-24
+								</dd>
+							</dl>
+						</a>
+					</div>
+					<div class="notice-list-item">
+						<a href="/customer/noticeView?bbsDetailSeq=10">
+							<dl>
+								<dt>
+									이용후기 / 만족도조사 이벤트 변경 안내
+								</dt>
+								<dd>
+									2022-05-11
+								</dd>
+							</dl>
+						</a>
+					</div>
+					<div class="notice-list-item">
+						<a href="/customer/noticeView?bbsDetailSeq=11">
+							<dl>
+								<dt>
+									이용상품권 사용안내
+								</dt>
+								<dd>
+									2022-05-11
+								</dd>
+							</dl>
+						</a>
+					</div>
+			</div>
+		</div>
+</section>
 <!-- 공지사항 목록 끝 -->
 
 </section>

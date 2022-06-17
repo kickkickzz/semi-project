@@ -42,13 +42,18 @@
   </head>
   <body>
     
-
+<section>
 <div class="container-fluid">
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
-          <li><p></p></li>
+          <li>
+          	<p></p>
+          </li>
+          <li>
+       		<p></p>
+      	  </li>          
           <li class="nav-item">
             <a class="nav-link active" href="<%=request.getContextPath()%>/memberview.do" style="color: black">
               <i class="fa-solid fa-user"></i>
@@ -84,7 +89,8 @@
     </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <h2>예약 현황</h2><br>
+    <br><br>
+      <h2>예약 현황</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
@@ -99,31 +105,44 @@
           <tbody>
           <!-- 이메일로 검색해서 구장을 리스트로 갖고온다음 여기서 리스트 for문써서 활용 -->
              <tr>
-             	<td>1</td>
+             	<td></td>
              	<td>1</td>
              	<td>1</td>
              	<td>1</td>
              	<td>1</td>
              </tr>
-              <tr>
+             <tr>
+             	<td >2</td>
              	<td>2</td>
-             	<td>2</td>
-             	<td>2</td>
-             	<td>2</td>
-             	<td>2</td>
+             	<td>2022-03-15</td>
+             	<td>16:00~18:00</td>
+             	<td></td>
              </tr>
         </table>
       </div>
     </main>
   </div>
 </div>
-
+</section>
+</body>
 <style>
 .col-lg-2 {
-    height : 700px;
+    height : 800px;
 }
 div.row{
-	padding : 9% 8% 2%;
+	padding :0% 0% 0% 280px;
+}
+.col-md-9{
+
+}
+section{
+	padding-top : 0px;
+}
+header{
+    height : 136px;
+}
+.table{
+	width : 65%;
 }
 </style>
 

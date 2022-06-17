@@ -51,24 +51,36 @@ p>span{
 }
 
 /*  */
+.main-sc9-review{
+	width:60%;
+	margin-left:170px;
+}
+.help-item1, .help-item2{
+	padding-left:21px;
+}
+
 
 /* 공지사항 박스 */
 .main-sc9-notice{
-	padding: 13% 13%;
 	width:60%;
 }
 .main-sc9-tit{
 	font-size:50px;
+	padding-left:21px;
 }
 .notice-list-item{
 	border-bottom: 1px solid rgb(229, 229, 229);
 }
 .notice-list-item dl{
-	padding: 21px 0px;
+	padding: 21px 21px;
 	display: flex;
 	justify-content: space-between;
 	color:black;
 	margin-top:16px;
+}
+dl:hover{
+	background-color:  rgb(229, 229, 229);
+	border-radius: 10px;
 }
 dt{
 	width:70%;
@@ -83,10 +95,19 @@ dt{
 	font-family: "Noto Sans KR";
 	margin-bottom:10px;
 }
+.notice-container{
+	display:flex;
+	justify-content: space-between;
+	padding-left: 13%;
+	padding-bottom:10%;
+	border-top:1px solid gray;
+}
+
 
 /* 경기장 리스트 */
 div.row, .row-cols-1, .row-cols-md-3, .g-4{
-	padding:13% 13% 0px 13%;
+	padding:13% 13% 13% 13%;
+	
 }
 div.card{
 	border-bottom:2px solid lightgray;
@@ -118,3 +139,10 @@ li>b{
 }
 
 /* 실험쥐 */
+#megaphone{
+	width:80px;
+	
+}
+#star{
+	width:80px;
+}

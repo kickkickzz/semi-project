@@ -40,7 +40,6 @@ div#login-right{
 
 
 
-
 /*실험쥐*/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap');
 
@@ -180,7 +179,7 @@ p{
 }
 
 .container{
-  height:450px;
+  height:600px;
   width:900px;
   position:absolute;
   top:50%;
@@ -228,7 +227,6 @@ p{
 }
 
 .forgot{
-  display:none;
   font-size:14px;
   color:#c8c8c8;
 }
@@ -272,4 +270,20 @@ input{
 
 .kakao-icon{
 	width:31px;
+}
+
+.name{
+	display:none;
+}
+.phone{
+	display:none;
+}
+div.login-error-msg{
+	font-size: 10px;
+	color: red;
+}
+#up{
+	display:none;
+	vertical-align: middle;
+    align-items: center;
 }

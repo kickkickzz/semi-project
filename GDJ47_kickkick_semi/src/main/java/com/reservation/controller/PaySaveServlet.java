@@ -1,4 +1,4 @@
-package com.member.controller;
+package com.reservation.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,23 +7,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-@WebServlet("/memberview.do")
-public class MemberViewServlet extends HttpServlet {
+/**
+ * Servlet implementation class PaySaveServlet
+ */
+@WebServlet("/pay.do")
+public class PaySaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
-    public MemberViewServlet() {
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public PaySaveServlet() {
         super();
-       
+        // TODO Auto-generated constructor stub
     }
 
-	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
-		request.getRequestDispatcher("/views/member/memberview.jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		String imp_uid= request.getParameter("imp_uid");
+		String merchant_uid= request.getParameter("merchant_uid");
+		System.out.println(imp_uid);
+		System.out.println(merchant_uid);
 	}
 
 	/**
