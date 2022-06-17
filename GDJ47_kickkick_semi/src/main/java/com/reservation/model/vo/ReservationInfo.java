@@ -1,6 +1,6 @@
 package com.reservation.model.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +16,7 @@ public class ReservationInfo {
 	private int reservation_usage_start_time; 
 	private int reservation_usage_time;
 	private int reservation_usage_end_time; 
-	private Date reservation_usage_start_date; 
+	private String reservation_usage_start_date; 
 	private String reservation_status; 
 	private int stadium_num; 
 	private String stadium_branch_num; 
