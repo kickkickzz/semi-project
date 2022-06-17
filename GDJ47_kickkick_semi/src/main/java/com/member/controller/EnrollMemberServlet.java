@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.AESEncrypt;
 import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
 
@@ -37,6 +38,11 @@ public class EnrollMemberServlet extends HttpServlet {
 				.phone(request.getParameter("phone"))
 				.build();
 		
+		try {
+			m.setPassword(AESEncrypt.encrypt(m.getPassword()));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		boolean flag = new MemberService().EnrollMember(m);
 		if(flag) {
@@ -44,7 +50,7 @@ public class EnrollMemberServlet extends HttpServlet {
 			request.setAttribute("loc","");
 		}else {
 			request.setAttribute("msg", "회원가입에 실패하였습니다!ㅠㅠ");
-			request.setAttribute("loc","");
+			request.setAttribute("loc","/loginPage.do");
 		}
 		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
 	}

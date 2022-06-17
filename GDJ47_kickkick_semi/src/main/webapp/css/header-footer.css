@@ -70,6 +70,12 @@ i#searchicon{
 	margin-left:-2.3%;
 	font-size:20px;
 }
+div#wellcome-user{
+	position:absolute;
+	margin-top:-20px;
+	margin-left:15px;
+	font-size:12px;
+}
 
 /* header-bottom */
 div#header-bottom{
