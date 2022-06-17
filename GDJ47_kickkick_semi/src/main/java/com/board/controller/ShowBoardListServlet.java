@@ -1,7 +1,7 @@
 package com.board.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,6 +36,7 @@ public class ShowBoardListServlet extends HttpServlet {
 		
 		currentPage=1;
 		if(request.getParameter("currentPage")!=null) {
+			//현재페이지가 null이 아니라면..
 			currentPage= Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
@@ -53,19 +54,22 @@ public class ShowBoardListServlet extends HttpServlet {
 		}
 		
 		PageInfo pi=new PageInfo(currentPage, listCount, pageLimit, boardLimit, maxPage, startPage, endPage);
-//		List<Board>boardList= bs.selectBoardList(pi);
-//		페이징 처리 재확인 필요
-//		String page=null;
-//		if(boardList!=null) {
-//			page="/views/board/boardList.jsp";
-//			request.setAttribute("boardLists", boardList);
-//			request.setAttribute("pi", pi);
-//		}else {
-//			page="/views/common/errorPage.jsp";
-//			request.setAttribute("msg", "공지사항 게시판 조회에 실패하였습니다.");
-//		}
-//		
-//		request.getRequestDispatcher(page).forward(request, response);
+		ArrayList<Board>boardList= bs.selectBoardList(pi);
+		
+		
+//		ArrayList<Board> boardList= bService.selectBoardList();
+		String page=null;
+		if(boardList!=null) {
+			page="/views/board/boardList.jsp";
+			request.setAttribute("boardLists", boardList);
+			request.setAttribute("pi", pi);
+		}else {
+			page="/views/common/errorPage.jsp";
+			request.setAttribute("msg", "공지사항 게시판 조회에 실패하였습니다.");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

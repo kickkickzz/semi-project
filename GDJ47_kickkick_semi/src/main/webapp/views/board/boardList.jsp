@@ -5,9 +5,9 @@
 	//작성 권한은 관리자만
 	List<Board> list=(List<Board>)request.getAttribute("list");
 	
+	
 %>
 <link href="<%=request.getContextPath()%>/css/boardList.css" type="text/css" rel="stylesheet">
-<%-- header을 호출 --%>
 <%@include file="/views/common/header.jsp"%>
 <body>
 	<div class="main-container" id="main-container">
@@ -24,7 +24,7 @@
 					<button type="button" class="btn btn-primary" id="insertBtn" onclick="location.assign('<%=request.getContextPath() %>/writeBoardForm.do')">등록하기</button>
 				</div>
 				<%//} %>
-				<!-- 테이블 형식으로 구성되어있다. -->
+				<!-- 테이블 형식으로 구성 -->
 				<div class="board_table_container">
 					<table class="table table-hover" id="listArea">
 						<thead class="thead-dark">
@@ -66,37 +66,51 @@
 				<div class="board_pagenation">
 					<nav>
 						<ul class="pagination">
-							<%-- 맨처음버튼: 현재페이지를 1로 한다. --%>
+
+							<%-- 가장처음버튼: 현재페이지를 1로 한다. --%>
 							<li class="page-item"><button id="initial_previous"
 								class="page-link" 
-								onclick="">
+								onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage=1'"> &lt;&lt;
 							</button></li>
+
 							<%-- 이전버튼 --%>
 							<li class="page-item">
-								<button id="previous" class="page-link" onclick=""></button>
-							</li>
+								<button id="previous" class="page-link"
+									onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage'"> &lt;</button>
+									</li>
+							
 							<%--현재페이지에서 10개를 불러온다. --%>
-							<li class="page-item active">
-								<button class="page-link" disabled="disabled"></button>
-							</li>
-							<li class="page-item">
-								<button class="page-link" onclick=""></button>
-							</li>
+								<%//for(int p=startPage; p<=endPage; p++){ 
+									//if(p==currentPage)
+									//p가 현재페이지(currentPage)와 같다면
+									//현재 페이지는 선택 못하도록%>
+									<li class="page-item active">
+										<button class="page-link" disabled="disabled">!</button>
+									</li>
+								<%//}else{ %>
+									<li class="page-item">
+										<button class="page-link" onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage='">?</button>
+									</li>
+								<%//	} %>
+								<%//} %>
+	
 							<%-- 다음버튼 --%>
 							<li class="page-item">
-								<button id="next" class="page-link"	onclick=""></button>
+								<button id="next" class="page-link"	onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage='">&gt; </button>
 							</li>
+							
+
 							<%-- 가장마지막 버튼 --%>
 							<li class="page-item">
-								<button id="last_next" class="page-link" onclick=""></button>
+								<button id="last_next" class="page-link"	onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage='">&gt;&gt; </button>
 							</li>
+							
 						</ul>
 					</nav>
 				</div>
 			</div>
 		</div>
 	</div>
-	<%-- footer을 호출 --%>
 <%@include file="/views/common/footer.jsp"%>
 <script>
 	
