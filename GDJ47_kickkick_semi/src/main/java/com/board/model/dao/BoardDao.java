@@ -228,7 +228,7 @@ public class BoardDao {
 		ResultSet rs=null;
 		ArrayList<Board> list=null;
 		
-		String query = prop.getProperty("showMainTop5");
+		String query = prop.getProperty("MainTop5");
 		
 		try {
 			stmt=conn.createStatement();
