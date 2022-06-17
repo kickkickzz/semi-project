@@ -17,4 +17,6 @@ public class Member {
 	private String address;
 	private String type;
 	private String deleteStatus;
+	
+	
 }

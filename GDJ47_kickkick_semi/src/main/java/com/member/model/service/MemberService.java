@@ -43,6 +43,13 @@ public class MemberService {
 		return result;
 	}
 	
+	//비밀번호 변경을 위한 회원정보 불러오기
+	public Member loginCheck(String email, String oriPw) {
+		Connection conn = getConnection();
+		Member m = dao.loginCheck(conn,email,oriPw);
+		close(conn);
+		return m;
+	}
 	//비밀번호 변경 하기
 	public int updatePassword(String email, String newPw) {
 		Connection conn = getConnection();

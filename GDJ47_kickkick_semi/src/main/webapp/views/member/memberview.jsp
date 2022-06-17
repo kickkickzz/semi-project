@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
+
 <!-- 여기가 마이페이지 초기화면 -->
 <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
 
@@ -93,11 +94,11 @@
     <form id="updateForm" action="<%=request.getContextPath()%>/updatemember.do" method="post">
      <div>
       <p style="margin-bottom : 3px;" class="pp">이메일</p>
-      <input type="text" name="email" value="" style="margin-bottom : 7px;" size="63" readonly>
+      <input type="text" name="email" value="<%=loginMember.getEmail()%>" style="margin-bottom : 7px;" size="63" readonly>
      </div>  
      <div>
       <p style="margin-bottom : 3px;" class="pp">이름</p>
-      <input type="text" name="name" value="" readonly style="margin-bottom : 10px;" size="63">
+      <input type="text" name="name" value="<%=loginMember.getName()%>" readonly style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">비밀번호</p>
@@ -105,11 +106,11 @@
      </div>  
      <div>
       <p style="margin-bottom : 3px;">생년월일</p>
-      <input type="Date" name="birthday"  value="" placeholder="yyyyMMdd" style="margin-bottom : 10px;" size="63">
+      <input type="Date" name="birthday"  value="2022-06-15" placeholder="yyyyMMdd" style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">연락처</p>
-      <input type="text" name="phone" value="" placeholder="-없이 입력" maxlength="11" style="margin-bottom : 10px;" size="63">
+      <input type="text" name="phone" value="<%=loginMember.getPhone()%>" placeholder="-없이 입력" maxlength="11" style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">주소</p>
@@ -164,7 +165,7 @@ header{
 
 <script>
 const updatePw = ()=>{
-	open("<%=request.getContextPath()%>/updatepassword.do","_blank","width=400, height=210 ,left=500, top=200"); /* 주소에 ?email=loginMember.getEmail() 추가해야함 */
+	open("<%=request.getContextPath()%>/member/updatePassword.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=210 ,left=500, top=200"); /* 주소에 ?email=loginMember.getEmail() 추가해야함 */
 }
 
 

@@ -39,7 +39,7 @@ public class MemberDao {
 		try {
 			m = Member.builder()
 					.email(rs.getString("email"))
-					.password(rs.getString("pwd"))
+					.password(rs.getString("password"))
 					.name(rs.getString("name"))
 					.phone(rs.getString("phone"))
 					.address(rs.getString("address"))
@@ -103,11 +103,11 @@ public class MemberDao {
 		int result=0;
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("updateMember"));
-			pstmt.setDate(1, birth);
-			pstmt.setString(2, phone);
-			pstmt.setString(3, address);
-			pstmt.setString(4, gender);
-			pstmt.setString(5, email); //where절 에 있는 ? 에 값넣기
+			//pstmt.setDate(1, birth);
+			pstmt.setString(1, phone);
+			//pstmt.setString(2, address);
+			//pstmt.setString(4, gender);
+			pstmt.setString(2, email); //where절 에 있는 ? 에 값넣기
 			result = pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -117,6 +117,34 @@ public class MemberDao {
 		return result;
 	}
 	
+	//비밀번호 변경을 위한 회원정보 불러오기
+	public Member loginCheck(Connection conn, String email, String oriPw) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member m = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("loginCheck"));
+			pstmt.setString(1, email);
+			pstmt.setString(2, oriPw);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				m = Member.builder()
+						.email(rs.getString("email"))
+						.password(rs.getString("password"))
+						.build();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				close(rs);
+				close(pstmt);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return m;
+	}
 	//비밀번호 변경
 	public int updatePassword(Connection conn, String email, String newPw) {
 		PreparedStatement pstmt = null;
