@@ -35,7 +35,7 @@
 			</div>
 			<div id="icons">
 				<%if(loginMember!=null){ %>
-					<div id="wellcome-user">loginMember.getName()님 환영합니다!</div>
+					<div id="wellcome-user"><%=loginMember.getName()%>님 환영합니다!</div>
 				<%}%>
 				<%if(loginMember!=null){ %>
 					<i id="home" class="fa-solid fa-user" onclick="location.assign('<%=request.getContextPath()%>/member/memberView.do')"></i>

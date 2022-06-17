@@ -39,9 +39,8 @@ public class MemberDao {
 		try {
 			m = Member.builder()
 					.email(rs.getString("email"))
-					.password(rs.getString("password"))
+					.password(rs.getString("pwd"))
 					.name(rs.getString("name"))
-					.birthday(rs.getDate("birthday"))
 					.phone(rs.getString("phone"))
 					.address(rs.getString("address"))
 					.gender(rs.getString("gender"))
