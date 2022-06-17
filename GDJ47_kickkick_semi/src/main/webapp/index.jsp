@@ -139,6 +139,7 @@
 	
 
 <!-- 공지사항 목록 -->
+<section class="notice-container">
 	<div class="main-sc9-notice">
 			<div class="main-sc9-tit">알려드립니다.</div>
 			<div class="main-notice-list">
@@ -192,6 +193,32 @@
 					</div>
 			</div>
 		</div>
+		<div class="main-sc9-review">
+			<div class="main-sc9-tit">도와드릴까요?</div>
+			<div class="help-cont">
+				<div class="help-item1">
+					<div class="tit">해외패키지 대표번호</div>
+					<div class="phone">1588.0040</div>
+					<div class="txt">
+						부산지사 대표번호 051.469.9415 <br> 평일 09시~18시 (토/일요일 및 공휴일 휴무)
+					</div>
+					<div class="lnk">
+						<a href="#" data-toggle="modal" data-target="#tel_01">문의별 번호 안내</a>
+					</div>
+				</div>
+				<div class="help-item2">
+					<div class="tit">항공권 대표번호</div>
+					<div class="phone">02.2124.5581</div>
+					<div class="txt">
+						재발행 16시까지 <br> 평일 09시~18시 (토/일요일 및 공휴일 휴무)
+					</div>
+					<div class="lnk">
+						<a href="/mypage/cstmrSport/inqryDtls/inqryDtlsWrite">1:1문의하기</a>
+					</div>
+				</div>
+			</div>
+		</div>
+</section>
 <!-- 공지사항 목록 끝 -->
 
 </section>

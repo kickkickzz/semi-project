@@ -51,14 +51,22 @@ p>span{
 }
 
 /*  */
+.main-sc9-review{
+	width:60%;
+	margin-left:170px;
+}
+.help-item1, .help-item2{
+	padding-left:21px;
+}
+
 
 /* 공지사항 박스 */
 .main-sc9-notice{
-	padding: 13% 13%;
 	width:60%;
 }
 .main-sc9-tit{
 	font-size:50px;
+	padding-left:21px;
 }
 .notice-list-item{
 	border-bottom: 1px solid rgb(229, 229, 229);
@@ -87,6 +95,12 @@ dt{
 	font-family: "Noto Sans KR";
 	margin-bottom:10px;
 }
+.notice-container{
+	display:flex;
+	justify-content: space-between;
+	padding-left: 13%;
+}
+
 
 /* 경기장 리스트 */
 div.row, .row-cols-1, .row-cols-md-3, .g-4{

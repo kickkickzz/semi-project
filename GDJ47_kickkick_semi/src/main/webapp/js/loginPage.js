@@ -24,6 +24,9 @@ $(()=>{
 			form.attr("action","http://localhost:9090/GDJ47_kickkick_semi/loginMember.do");
 			form.submit();
 		}
+		
+		
+		
 	});
 	
 
@@ -46,10 +49,10 @@ $(()=>{
 	    
 	    setTimeout(function(){
 	      $(".title").text("회원가입");
-	      $(".light").text("소셜아이디로 회원가입하세요!");
 	      $(".icons").show();
 	      $(".name").show();
 	      $(".phone").show();
+	      $("#in").hide();
 	      $(".p-button").text("로그인하기");
 	      $(".b-button").attr("value","회원가입하기");
 	      $(".forgot").hide();
@@ -73,9 +76,9 @@ $(()=>{
 	    
 	    setTimeout(function(){
 	      $(".title").text("로그인");
-	      $(".light").text("소셜아이디로 로그인하세요!");
 	      $(".name").hide();
 	      $(".phone").hide();
+	      $("#up").hide();
 	      $(".p-button").text("회원가입하기");
 	      $(".b-button").attr("value","로그인하기");
 	      $(".forgot").show();

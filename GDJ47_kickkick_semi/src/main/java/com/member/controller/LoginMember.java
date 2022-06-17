@@ -13,10 +13,11 @@ import javax.servlet.http.HttpSession;
 import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
 
+
 /**
  * Servlet implementation class LoginMember
  */
-@WebServlet("/loginMember.do")
+@WebServlet(name="loginServlet",urlPatterns = {"/loginMember.do"})
 public class LoginMember extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,10 +36,8 @@ public class LoginMember extends HttpServlet {
 		String email = request.getParameter("email");
 		String pwd = request.getParameter("password");
 		
+		
 		Member m = new MemberService().LoginMember(email,pwd);
-		
-		
-		
 		//session생성
 		if(m!=null) {
 			HttpSession session = request.getSession();

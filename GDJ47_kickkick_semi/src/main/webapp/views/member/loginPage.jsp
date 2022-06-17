@@ -31,7 +31,11 @@
   			</div>
   			<div class="form">
     				<h4 class="bold title">로그인</h4>
-	    			<div class="icons">
+	    			<div id="in" class="icons">
+	      				<div class="icon"><img class="kakao-icon" src="<%=request.getContextPath()%>/images/kakao-talk.png"></div>
+	      				카카오로 간편하게 로그인하세요!!
+	    			</div>
+	    			<div id="up" class="icons">
 	      				<div class="icon"><img class="kakao-icon" src="<%=request.getContextPath()%>/images/kakao-talk.png"></div>
 	      				카카오로 간편하게 가입하세요!!
 	    			</div>
