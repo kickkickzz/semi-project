@@ -64,11 +64,15 @@ p>span{
 	border-bottom: 1px solid rgb(229, 229, 229);
 }
 .notice-list-item dl{
-	padding: 21px 0px;
+	padding: 21px 21px;
 	display: flex;
 	justify-content: space-between;
 	color:black;
 	margin-top:16px;
+}
+dl:hover{
+	background-color:  rgb(229, 229, 229);
+	border-radius: 10px;
 }
 dt{
 	width:70%;

@@ -228,7 +228,6 @@ p{
 }
 
 .forgot{
-  display:none;
   font-size:14px;
   color:#c8c8c8;
 }
@@ -272,4 +271,15 @@ input{
 
 .kakao-icon{
 	width:31px;
+}
+
+.name{
+	display:none;
+}
+.phone{
+	display:none;
+}
+div.login-error-msg{
+	font-size: 10px;
+	color: red;
 }

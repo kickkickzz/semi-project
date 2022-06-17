@@ -42,9 +42,10 @@ public class LoginMember extends HttpServlet {
 		if(m!=null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", m);
-			request.getRequestDispatcher(request.getContextPath()).forward(request, response);
+			response.sendRedirect(request.getContextPath());
 		}else {
-			request.getRequestDispatcher(request.getContextPath()+"").forward(request, response);			
+			request.setAttribute("msg", "이메일/비밀번호를 확인해주세요!");
+			request.getRequestDispatcher("/loginPage.do").forward(request, response);
 		}
 		
 	}
