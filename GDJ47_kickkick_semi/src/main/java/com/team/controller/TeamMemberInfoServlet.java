@@ -1,8 +1,10 @@
 package com.team.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,13 +49,33 @@ public class TeamMemberInfoServlet extends HttpServlet {
 		
 		int numPerpage=5;
 		
-		Team t=new TeamService().selectTeam(team_code);
-		request.setAttribute("t", t);
+		Team teamInfo=new TeamService().selectTeam(team_code);
+		request.setAttribute("teamInfo", teamInfo);
 		
 		ArrayList<TeamMemberInfo> teamMemberArr = new TeamService().selectTeamMemberList(team_code,cPage,numPerpage);
 		
 		
-		int totalData=new TeamService().selectTeamMemberCount();
+		System.out.println(teamInfo);
+		
+		System.out.println(teamMemberArr);
+		
+		
+		
+		Calendar current = Calendar.getInstance();
+		int year = current.get(Calendar.YEAR);
+		for (int i = 0; i < teamMemberArr.size(); i++) {
+		
+			Date from = teamMemberArr.get(i).getBirthday();
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy");
+			String to = transFormat.format(from);
+			int birth = Integer.parseInt(to);
+			teamMemberArr.get(i).setAge((year-birth)+1);
+
+		}
+		
+		
+		
+		int totalData=new TeamService().selectTeamMemberCount(team_code);
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		
 		int pageBarSize=5;
@@ -86,7 +108,8 @@ public class TeamMemberInfoServlet extends HttpServlet {
 			pageBar+="<a href='"+request.getContextPath()
 			+"/team.do?cPage="+pageNo+"'>[다음]</a>";
 		}
-		
+
+		request.setAttribute("teamMemberArr", teamMemberArr);
 		request.setAttribute("pageBar", pageBar);
 
 		

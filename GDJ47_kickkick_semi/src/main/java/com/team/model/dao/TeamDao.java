@@ -163,13 +163,13 @@ public class TeamDao {
 		
 	}
 	
-	public int selectTeamMemberCount(Connection conn) {
+	public int selectTeamMemberCount(Connection conn, String team_code) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectTeamMemberCount"));
-			
+			pstmt.setString(1, team_code);
 			rs=pstmt.executeQuery();
 			if(rs.next()) result=rs.getInt(1);
 		}catch(SQLException e) {

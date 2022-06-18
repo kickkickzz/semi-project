@@ -81,9 +81,9 @@ public class TeamService {
 		return result;
 	}
 	
-	public int selectTeamMemberCount() {
+	public int selectTeamMemberCount(String team_code) {
 		Connection conn=getConnection();
-		int result=dao.selectTeamMemberCount(conn);
+		int result=dao.selectTeamMemberCount(conn,team_code);
 		close(conn);
 		return result;
 	}
