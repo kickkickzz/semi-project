@@ -8,6 +8,8 @@
 <script src="https://kit.fontawesome.com/7bb5347123.js" crossorigin="anonymous"></script>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/loginPage.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 
 <div id="login-container">
 	<div id="login-left">
@@ -41,9 +43,30 @@
 	    			</div>
 		    		<input type="text" placeholder="이메일" class="normal email"><br>
 			    	<input type="password" placeholder="비밀번호" class="normal password"><br>
+			    	<input type="text" placeholder="이름" class="normal name"><br>
+		    		
+			    	<input type="text" placeholder="전화번호" class="normal phone"><br>
+			    	<input type="date" placeholder="생년월일" class="normal birthday"><br>
+			    	
+			    	<input type="text" id="sample6_postcode" placeholder="우편번호" style="margin-bottom : 3px;">
+	 				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" >
+	  				<input type="text" id="sample6_address" name="address2" placeholder="주소" size="29" style="margin-bottom : 3px;">
+	  				<input type="text" id="sample6_extraAddress" name="address3" placeholder="참고항목"><br>
+	  				<input type="text" id="sample6_detailAddress" name="address4" placeholder="상세주소" size="29" style="margin-bottom : 13px;">
+			    	
+			    	<div style="display: flex; justify-content: center;">
+			    	<input type="radio" placeholder="gender" class="normal gender" value="M" id="gender0" name="gender" style="width:30px;">
+			    	<label for="gender0">남</label>
+			    	<input type="radio" placeholder="gender" class="normal gender" value="F" id="gender1" name="gender" style="width:30px;"> 
+			    	<label for="gender1">여</label>
+			    	</div>
+			    	<div style="display: flex; justify-content: center;">
+			    	<input type="radio" placeholder="type" class="normal gender" value="m" id="type0" name="type" style="width:30px;">
+			    	<label for="type0">매니저</label>
+			    	<input type="radio" placeholder="type" class="normal gender" value="g" id="type1" name="type" style="width:30px;"> 
+			    	<label for="type1">일반회원</label>
+			    	</div>
 		    		<div class="login-error-msg"><%=msg!=null?msg:"" %></div>
-		    		<input type="text" placeholder="이름" class="normal name"><br>
-		    		<input type="text" placeholder="전화번호" class="normal phone">
 		    		<br/>
 			    	<p class="normal forgot">비밀번호를 잊어버리셨습니까?</p>
 			    	<input type="submit" id="bb" class="b-button normal" value="로그인하기">
@@ -59,5 +82,4 @@
 		</div>	
 	</div>
 </div>
-
 <%-- <%@ include file="/views/common/footer.jsp" %> --%>

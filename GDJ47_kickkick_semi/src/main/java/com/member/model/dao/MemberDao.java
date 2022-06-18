@@ -73,6 +73,7 @@ public class MemberDao {
 		return m;
 	}
 	
+	
 	//회원가입하기
 	public boolean EnrollMember(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
@@ -83,9 +84,11 @@ public class MemberDao {
 			pstmt.setString(1, m.getEmail());
 			pstmt.setString(2, m.getPassword());
 			pstmt.setString(3, m.getName());
-//			pstmt.setString(4, m.getGender());
 			pstmt.setString(4, m.getPhone());
-			pstmt.setString(5, m.getAddress());
+			pstmt.setDate(5, m.getBirthday());
+			pstmt.setString(6, m.getGender());
+			pstmt.setString(7, m.getAddress());
+			pstmt.setString(8, m.getType());
 			result = pstmt.executeUpdate();
 			if(result>0) flag = true;
 		}catch(SQLException e) {
