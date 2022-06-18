@@ -179,7 +179,7 @@ p{
 }
 
 .container{
-  height:600px;
+  height:500px;
   width:900px;
   position:absolute;
   top:50%;
@@ -286,4 +286,10 @@ div.login-error-msg{
 	display:none;
 	vertical-align: middle;
     align-items: center;
+}
+.address{
+	display:none;
+}
+.birthday{
+	display:none;
 }
