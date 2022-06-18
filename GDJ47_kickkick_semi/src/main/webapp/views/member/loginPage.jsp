@@ -41,20 +41,21 @@
                      <div class="icon"><img class="kakao-icon" src="<%=request.getContextPath()%>/images/kakao-talk.png"></div>
                      카카오로 간편하게 가입하세요!!
                 </div>
-                <input type="text" placeholder="이메일" class="normal email"><br>
+                <input type="email" placeholder="이메일" class="normal email"><br>
+                <div id="msg"></div>
                 <input type="password" placeholder="비밀번호" class="normal password"><br>
+                <div class="login-error-msg"><%=msg!=null?msg:"" %></div>
                 <input type="text" placeholder="이름" class="normal name"><br>
                 
-                <input type="text" placeholder="전화번호" class="normal phone"><br>
+                <input type="tel" placeholder="전화번호" class="normal phone"><br>
                 <input type="date" placeholder="생년월일" class="normal birthday"><br>
                 
-                <input type="text" id="sample6_postcode" placeholder="우편번호" class="address" style="margin-bottom : 3px;"class="address">
+                <input type="text" id="sample6_postcode" placeholder="우편번호" class="address" style="margin-bottom : 3px;">
                 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="address">
-                <input type="text" id="sample6_address" placeholder="주소" size="29" style="margin-bottom : 3px;" class="address">
-                <input type="text" id="sample6_extraAddress" placeholder="참고항목" class="address"><br>
-                <input type="text" id="sample6_detailAddress" placeholder="상세주소" size="29" style="margin-bottom : 13px;" class="address">
+                <input type="text" id="sample6_address" name="address2" placeholder="주소" size="29" style="margin-bottom : 13px;" class="address">
+                <input type="text" id="sample6_extraAddress" name="address3" placeholder="참고항목" class="address"><br>
+                <input type="text" id="sample6_detailAddress" name="address4" placeholder="상세주소" size="29" style="margin-bottom : 13px;" class="address">
                 
-                <div class="login-error-msg"><%=msg!=null?msg:"" %></div>
                 <br/>
                 <p class="normal forgot">비밀번호를 잊어버리셨습니까?</p>
                 <input type="submit" id="bb" class="b-button normal" value="로그인하기">
@@ -65,9 +66,11 @@
                <input id="password" type="text" name="password" value="">
                <input id="name" type="text" name="name" value="">
                <input id="phone" type="text" name="phone" value="">
-               <input id="address" type="text" name="phone" value="">
-               <input id="date" type="text" name="phone" value="">
-               <input id="" type="text" name="phone" value="">
+               <input id="date" type="text" name="birthday" value="">
+               <input id="address2" type="text" name="address2" value="">
+               <input id="address3" type="text" name="address3" value="">
+               <input id="address4" type="text" name="address4" value="">
+               <input id="gender" type="radio" name="gender" value="">
             </form>
          </div>
       </div>   
