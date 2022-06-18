@@ -117,16 +117,14 @@
       <input type="text" id="sample6_postcode" placeholder="우편번호" style="margin-bottom : 3px;">
 	  <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" ><br>
 	  <input type="text" id="sample6_address" name="address2" placeholder="주소" size="29" style="margin-bottom : 3px;">
-	  <input type="text" id="sample6_extraAddress" name="address2" placeholder="참고항목"><br>
-	  <input type="text" id="sample6_detailAddress"  name="address2" placeholder="상세주소" size="29" style="margin-bottom : 13px;">
+	  <input type="text" id="sample6_extraAddress" name="address3" placeholder="참고항목"><br>
+	  <input type="text" id="sample6_detailAddress"  name="address4" placeholder="상세주소" size="29" style="margin-bottom : 13px;">
      </div>
      <div class="update">
       <p style="margin-bottom : 3px;">성별</p>
-      <input type="radio" name="gender" id="gender0" value="M" style="margin-bottom : 10px;" size="20"
-       >
+      <input type="radio" name="gender" id="gender0" value="M" style="margin-bottom : 10px;" size="20">
        <label for="gender0">남</label>
-      <input type="radio" name="gender" id="gender1" value="F"
-       >
+      <input type="radio" name="gender" id="gender1" value="F">
        <label for="gender1">여</label>
      </div><br><br>
       <input type="button" onclick="fn_update();" value="수정"/>

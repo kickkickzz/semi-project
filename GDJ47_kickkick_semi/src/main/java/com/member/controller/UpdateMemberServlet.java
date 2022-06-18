@@ -31,11 +31,26 @@ public class UpdateMemberServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("실행됐다");
+		String address = null;
 		String email = request.getParameter("email");
-		String birthday = request.getParameter("birthday");
-		String phone = request.getParameter("phone");
-		String gender = request.getParameter("gender");
 		String name = request.getParameter("name");
+		String birthday = request.getParameter("birthday"); //생년월일
+		String phone = request.getParameter("phone"); //전화번호
+		String address2 = request.getParameter("address2"); //주소
+		String address3 = request.getParameter("address3");//참고항목
+		String address4 = request.getParameter("address4");//상세주소
+		ArrayList<String> addArr = new ArrayList();
+		addArr.add(address2);
+		addArr.add(address3);
+		addArr.add(address4); //주소 참고항목 상세주소가 각각 addArr 배열에 들어감
+		for(int i=0; i<addArr.size(); i++) {
+			if(i==2) {
+				address  += addArr.get(i);
+			}else {
+				address += addArr.get(i)+" ";
+			}
+		}
+		String gender = request.getParameter("gender");
 
 		Member m = Member.builder()
 				.email(email)
@@ -54,21 +69,8 @@ public class UpdateMemberServlet extends HttpServlet {
 			birth = new Date(new GregorianCalendar().getTimeInMillis());
 		}
 		
-		String address = null;
-		String address2 = request.getParameter("address2"); //주소
-		String address3 = request.getParameter("address3");//참고항목
-		String address4 = request.getParameter("address4");//상세주소
-		ArrayList<String> addArr = new ArrayList();
-		addArr.add(address2);
-		addArr.add(address3);
-		addArr.add(address4); // addARR = 경기도 광명시 광명4동18-255
-		for(int i=0; i<addArr.size(); i++) {
-			if(i==2) {
-				address  += addArr.get(i);
-			}else {
-				address += addArr.get(i)+" ";
-			}
-		}
+		System.out.println(birth);
+		System.out.println(address);
 		
 		int result = new MemberService().updateMember(email,birth,phone,address,gender);
 		

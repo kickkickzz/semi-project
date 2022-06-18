@@ -15,6 +15,6 @@ public class Member {
 	private Date birthday;
 	private String address; //
 	private String gender;
-	private String type; //
-	private String deleteStatus; //
+	private String type; //매니저 일반회원
+	private String deleteStatus; //default는 'N'
 }
