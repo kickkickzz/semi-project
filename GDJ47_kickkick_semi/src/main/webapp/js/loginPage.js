@@ -9,10 +9,21 @@ $(()=>{
 			const password = $(".password").val();
 			const name = $(".name").val();
 			const phone = $(".phone").val();
+			const birthday = $(".birthday").val();
+			const address2 = $("input[name=address2]").val();
+			const address3 = $("input[name=address3]").val();
+			const address4 = $("input[name=address4]").val();
+			const gender = $(".gender").val();
 			$("#email").val(email);
 			$("#password").val(password);
 			$("#name").val(name);
 			$("#phone").val(phone);
+			$("#date").val(birthday);
+			$("#address2").val(address2);
+			$("#address3").val(address3);
+			$("#address4").val(address4);
+			$("#gender").val(gender);
+			form.attr("onsubmit","return enroll();")
 			form.attr("action","http://localhost:9090/GDJ47_kickkick_semi/enrollMember.do");
 			form.submit();
 		}else{
@@ -30,7 +41,7 @@ $(()=>{
 	
 	
 
-	
+	//회원가입으로 변경 눌렀을 때
 	$(".signin").on("click", function(){
 	  if(flag == 0){
 	    $(".move").addClass("moving");
@@ -38,18 +49,20 @@ $(()=>{
 	    
 	    $(".form").addClass("movingForm");
 	    $(".form").removeClass("startForm");
-	    
 	    $(".hello").show();
 	    $(".welcome").hide();
 	    $(".login-error-msg").hide();
 	    $(".move").css("background-position", "right");
-	    
+	    $(".container").css("height","700px");
 	    setTimeout(function(){
 	      $(".title").text("회원가입");
 	      $(".icons").show();
 	      $(".name").show();
 	      $(".phone").show();
 	      $("#in").hide();
+	      $("#up").hide();
+	      $(".address").show();
+	      $(".birthday").show();
 	      $(".p-button").text("로그인하기");
 	      $(".b-button").attr("value","회원가입하기");
 	      $(".forgot").hide();
@@ -59,6 +72,7 @@ $(()=>{
 	    
 	    flag=1;
 	  }else{
+		//로그인창으로 변경 눌렀을때
 	    $(".move").removeClass("moving");
 	    $(".move").addClass("start");
 	    
@@ -70,12 +84,14 @@ $(()=>{
 	    $(".welcome").show();
 	    
 	    $(".move").css("background-position", "left");
-	    
+	    $(".container").css("height","500px");
 	    setTimeout(function(){
 	      $(".title").text("로그인");
 	      $(".name").hide();
 	      $(".phone").hide();
 	      $("#up").hide();
+	      $(".address").hide();
+	      $(".birthday").hide();
 	      $(".p-button").text("회원가입하기");
 	      $(".b-button").attr("value","로그인하기");
 	      $(".forgot").show();
@@ -86,11 +102,8 @@ $(()=>{
 	    flag=0;
 	  }
 	});
+	
 });
-
-
-
-
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -137,4 +150,14 @@ function sample6_execDaumPostcode() {
             document.getElementById("sample6_detailAddress").focus();
         }
     }).open();
+}
+
+//회원가입시 최소 길이 확인
+function enroll(){
+		if(($(".email").val()).length<2 || !($(".email").val().match("@"))){
+			$("#msg").text("이메일을 똑바로 입력하거라 임마!").css({"color":"red","font-size":"10px"});
+			return false;
+		}else{
+			return true;
+		}
 }
