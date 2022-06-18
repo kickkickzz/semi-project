@@ -73,6 +73,7 @@ public class MemberDao {
 		return m;
 	}
 	
+	
 	//회원가입하기
 	public boolean EnrollMember(Connection conn, Member m) {
 		PreparedStatement pstmt = null;

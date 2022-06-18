@@ -1,7 +1,10 @@
 package com.team.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,22 +13,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.reservation.model.service.ReservationService;
-import com.reservation.model.vo.Stadium;
 import com.team.model.service.TeamService;
 import com.team.model.vo.Team;
+import com.team.model.vo.TeamMemberInfo;
 
 /**
- * Servlet implementation class TeamMainServelet
+ * Servlet implementation class TeamMemberInfo
  */
-@WebServlet("/team.do")
-public class TeamMainServelet extends HttpServlet {
+@WebServlet("/team/teamMemberInfo.do")
+public class TeamMemberInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TeamMainServelet() {
+    public TeamMemberInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,19 +38,44 @@ public class TeamMainServelet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		String team_code=request.getParameter("team_code");
 		int cPage;
 		try{
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
+		
+		
 		int numPerpage=5;
 		
-		List<Team> list=new TeamService().selectTeamList(cPage, numPerpage);
-		request.setAttribute("list", list);
+		Team teamInfo=new TeamService().selectTeam(team_code);
+		request.setAttribute("teamInfo", teamInfo);
+		
+		ArrayList<TeamMemberInfo> teamMemberArr = new TeamService().selectTeamMemberList(team_code,cPage,numPerpage);
 		
 		
-		int totalData=new TeamService().selectTeamCount();
+		System.out.println(teamInfo);
+		
+		System.out.println(teamMemberArr);
+		
+		
+		
+		Calendar current = Calendar.getInstance();
+		int year = current.get(Calendar.YEAR);
+		for (int i = 0; i < teamMemberArr.size(); i++) {
+		
+			Date from = teamMemberArr.get(i).getBirthday();
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy");
+			String to = transFormat.format(from);
+			int birth = Integer.parseInt(to);
+			teamMemberArr.get(i).setAge((year-birth)+1);
+
+		}
+		
+		
+		
+		int totalData=new TeamService().selectTeamMemberCount(team_code);
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		
 		int pageBarSize=5;
@@ -81,11 +108,12 @@ public class TeamMainServelet extends HttpServlet {
 			pageBar+="<a href='"+request.getContextPath()
 			+"/team.do?cPage="+pageNo+"'>[다음]</a>";
 		}
-		
+
+		request.setAttribute("teamMemberArr", teamMemberArr);
 		request.setAttribute("pageBar", pageBar);
 
 		
-		RequestDispatcher view = request.getRequestDispatcher("/views/team/team_main.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/views/team/team_info.jsp");
 		view.forward(request, response);
 	}
 
