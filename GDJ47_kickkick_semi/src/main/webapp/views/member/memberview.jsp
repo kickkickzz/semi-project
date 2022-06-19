@@ -84,6 +84,13 @@
        로그아웃
        </a>
       </li>
+      <li class="nav-item">
+       <a class="nav-link" href="" style="color: black">
+       <i class="fa-solid fa-arrow-right-from-bracket"></i>
+       <span data-feather="users"></span>
+       회원탈퇴
+       </a>
+      </li>
      </ul>  
     </div>
    </nav>

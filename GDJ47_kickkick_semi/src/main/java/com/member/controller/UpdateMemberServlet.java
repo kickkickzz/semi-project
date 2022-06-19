@@ -52,6 +52,7 @@ public class UpdateMemberServlet extends HttpServlet {
 		}
 		String gender = request.getParameter("gender");
 
+		//회원수정은 전화번호 생년월일 주소 만 수정가능
 		Member m = Member.builder()
 				.email(email)
 				.name(name)
@@ -72,7 +73,7 @@ public class UpdateMemberServlet extends HttpServlet {
 		System.out.println(birth);
 		System.out.println(address);
 		
-		int result = new MemberService().updateMember(email,birth,phone,address,gender);
+		int result = new MemberService().updateMember(email,birth,phone,address);
 		
 		String msg="", loc="";
 		if(result>0) {

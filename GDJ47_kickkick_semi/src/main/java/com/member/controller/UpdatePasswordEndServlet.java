@@ -41,12 +41,12 @@ public class UpdatePasswordEndServlet extends HttpServlet {
 				loc +="/memberview.do";
 			}else {
 				msg +="비밀번호 변경에 실패하였습니다.";
-				loc +="/member/updatePassword.do";
+				loc +="/member/updatePassword.do";// ?email=추가해야함
 			}
 		}else {
 			//현재비밀번호가 틀림
 			msg+="현재비밀번호가 틀립니다.";
-			loc+="/member/updatePassword.do";
+			loc+="/member/updatePassword.do"; // ?email=추가해야함
 		}
 		
 		request.setAttribute("msg", msg);
