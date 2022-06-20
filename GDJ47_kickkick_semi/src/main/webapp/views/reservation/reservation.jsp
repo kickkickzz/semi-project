@@ -876,7 +876,8 @@ reservationMap.set('price',0);
 					 	    buyer_name : '구매자이름',
 					 	    buyer_tel : '010-1234-5678',
 					 	    buyer_addr : '서울특별시 강남구 삼성동',
-					 	    buyer_postcode : '123-456'
+					 	    buyer_postcode : '123-456',
+					 	    buyer_method : '카카오페이'
 					 	}, function(rsp) {
 					 	    if ( rsp.success ) {
 					 	        var msg = '결제가 완료되었습니다.';
@@ -892,7 +893,10 @@ reservationMap.set('price',0);
 										 reservation_usage_start_date: reservation_usage_start_date,
 										 reservation_usage_start_time:reservation_usage_start_time,
 										 reservation_usage_time:reservation_usage_time, 
-										 reservation_usage_end_time:reservation_usage_end_time},
+										 reservation_usage_end_time:reservation_usage_end_time,
+										 paycode:rsp.merchant_uid,
+										
+										 },
 									 success:data=> {
 										 console.log(data);
 										 

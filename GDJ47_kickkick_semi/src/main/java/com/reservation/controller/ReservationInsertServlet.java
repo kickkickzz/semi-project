@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.reservation.model.service.ReservationService;
+import com.reservation.model.vo.PayHistory;
 import com.reservation.model.vo.ReservationInfo;
 
 /**
@@ -68,6 +69,10 @@ public class ReservationInsertServlet extends HttpServlet {
 		int month= Integer.parseInt(start[1])-1;
 		int day=Integer.parseInt(start[2]);
 		Date dat= new Date(new GregorianCalendar(year,month,day).getTimeInMillis());
+		String paycode = request.getParameter("paycode");
+		String paymethod= request.getParameter("paymethod");
+		System.out.println(paycode);
+		System.out.println(paymethod);
 		
 		
 		System.out.println(dat);
@@ -75,6 +80,10 @@ public class ReservationInsertServlet extends HttpServlet {
 		ReservationInfo reservation = ReservationInfo.builder().reservation_code(reservation_code).reservation_email("manu789@naver.com").reservation_branch_num(reservation_branch_num)
 				.reservation_stadium_num(reservation_stadium_num).reservation_price(reservation_price).reservation_usage_start_time(reservation_usage_start_time)
 				.reservation_usage_time(reservation_usage_time).reservation_usage_end_time(reservation_usage_end_time).reservation_usage_start_date(reservation_usage_start_date).build();
+		
+		PayHistory p = PayHistory.builder().email("manu789@naver.com").paycode(paycode).reservation_code(reservation_code).paymethod("카카오페이").stadium_branch_num(reservation_branch_num).
+				build();
+		int ph = new ReservationService().insertpayhistory(p);
 		
 		System.out.println("지점번호: "+reservation_branch_num);
 		System.out.println("구장번호: : "+reservation_stadium_num);
