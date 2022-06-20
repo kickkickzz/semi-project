@@ -3,20 +3,13 @@
 <%
    String msg = (String)request.getAttribute("msg");
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>ㅋ킥킥ㅋ</title>
-</head>
-<body>
 <%-- <%@ include file="/views/common/header.jsp" %> --%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/loginPage.css">
 <script src="https://kit.fontawesome.com/7bb5347123.js" crossorigin="anonymous"></script>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/loginPage.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+<title>ㅋ킥킥ㅋ</title>
 
 <div id="login-container">
    <div id="login-left">
@@ -95,6 +88,4 @@ function fn_emailDuplicate(){
     emailDuplicate.submit();
 }
 </script>
-</body>
-</html>
 <%-- <%@ include file="/views/common/footer.jsp" %> --%>
