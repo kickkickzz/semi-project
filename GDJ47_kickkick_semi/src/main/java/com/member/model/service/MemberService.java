@@ -99,6 +99,14 @@ public class MemberService {
 		return result;
 	}
 	
-
 	
+	
+	
+	//이메일 찾기
+	public Member selectEmail(String name, String phone) {
+		Connection conn = getConnection();
+		Member result = dao.selectEmail(conn,name,phone);
+		close(conn);
+		return result;
+	}
 }
