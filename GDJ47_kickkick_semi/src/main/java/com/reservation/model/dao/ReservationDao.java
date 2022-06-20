@@ -236,6 +236,8 @@ public class ReservationDao {
 			pstmt.setString(3, p.getReservation_code());
 			pstmt.setString(4, p.getPaymethod());
 			pstmt.setString(5, p.getStadium_branch_num());
+			pstmt.setInt(6, p.getStarttime());
+			pstmt.setInt(7, p.getEndtime());
 			result = pstmt.executeUpdate();
 			
 		}catch(SQLException e) {

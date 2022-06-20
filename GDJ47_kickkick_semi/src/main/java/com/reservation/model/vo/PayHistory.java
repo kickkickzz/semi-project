@@ -13,4 +13,8 @@ public class PayHistory {
 	private String stadium_branch_num;
 	private String paymethod;
 	private Date paydate;
+	private int starttime;
+	private int endtime;
+	private String name;
+	
 }

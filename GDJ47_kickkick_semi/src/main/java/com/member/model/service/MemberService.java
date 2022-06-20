@@ -8,9 +8,11 @@ import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.util.List;
 
 import com.member.model.dao.MemberDao;
 import com.member.model.vo.Member;
+import com.reservation.model.vo.PayHistory;
 
 public class MemberService {
 	MemberDao dao = MemberDao.getMemberDao();
@@ -77,5 +79,12 @@ public class MemberService {
 		Member m = dao.selectMemberByEmail(conn, email);
 		close(conn);
 		return m;
+	}
+	//예약내역
+	public List<PayHistory> selectpayhistory(String email){
+		Connection conn = getConnection();
+		List<PayHistory> result = dao.selectpayhistory(conn,email);
+		close(conn);
+		return result;
 	}
 }

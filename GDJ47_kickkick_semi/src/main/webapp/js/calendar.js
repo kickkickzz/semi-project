@@ -126,6 +126,6 @@ $calBody.addEventListener('click', (e) => {
     e.target.classList.add('day-active');
     init.activeDTag = e.target;
     init.activeDate.setDate(day);
-    reloadTodo();
+   
   }
 });

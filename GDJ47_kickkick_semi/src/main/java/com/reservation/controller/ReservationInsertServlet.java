@@ -56,6 +56,8 @@ public class ReservationInsertServlet extends HttpServlet {
 		}while(ckCode == 1);
 		System.out.println(reservation_code);
 
+		String userId=request.getParameter("userId");
+		String name=request.getParameter("name");
 		
 		String reservation_branch_num = request.getParameter("reservation_branch_num");
 		int reservation_stadium_num = (Integer.parseInt(request.getParameter("reservation_stadium_num")));
@@ -70,18 +72,20 @@ public class ReservationInsertServlet extends HttpServlet {
 		int day=Integer.parseInt(start[2]);
 		Date dat= new Date(new GregorianCalendar(year,month,day).getTimeInMillis());
 		String paycode = request.getParameter("paycode");
-		String paymethod= request.getParameter("paymethod");
+		String paymethod= request.getParameter("buyer_method");
 		System.out.println(paycode);
 		System.out.println(paymethod);
 		
 		
+		
 		System.out.println(dat);
 		
-		ReservationInfo reservation = ReservationInfo.builder().reservation_code(reservation_code).reservation_email("manu789@naver.com").reservation_branch_num(reservation_branch_num)
+		ReservationInfo reservation = ReservationInfo.builder().reservation_code(reservation_code).reservation_email(userId).reservation_branch_num(reservation_branch_num)
 				.reservation_stadium_num(reservation_stadium_num).reservation_price(reservation_price).reservation_usage_start_time(reservation_usage_start_time)
 				.reservation_usage_time(reservation_usage_time).reservation_usage_end_time(reservation_usage_end_time).reservation_usage_start_date(reservation_usage_start_date).build();
 		
-		PayHistory p = PayHistory.builder().email("manu789@naver.com").paycode(paycode).reservation_code(reservation_code).paymethod("카카오페이").stadium_branch_num(reservation_branch_num).
+		PayHistory p = PayHistory.builder().email(userId).paycode(paycode).reservation_code(reservation_code).paymethod("카카오페이").stadium_branch_num(reservation_branch_num).
+				starttime(reservation_usage_start_time).endtime(reservation_usage_end_time).
 				build();
 		int ph = new ReservationService().insertpayhistory(p);
 		
