@@ -33,15 +33,8 @@
            </div>
            <div class="form">
                 <h4 class="bold title">로그인</h4>
-                <div id="in" class="icons">
-                     <div class="icon"><img class="kakao-icon" src="<%=request.getContextPath()%>/images/kakao-talk.png"></div>
-                     카카오로 간편하게 로그인하세요!!
-                </div>
-                <div id="up" class="icons">
-                     <div class="icon"><img class="kakao-icon" src="<%=request.getContextPath()%>/images/kakao-talk.png"></div>
-                     카카오로 간편하게 가입하세요!!
-                </div>
-                <input type="email" placeholder="이메일" class="normal email"><br>
+                
+                <input type="email" placeholder="이메일" class="normal email" id="ema" value=""><input type="button" id="idcheck" value="중복확인" onclick="fn_emailDuplicate();"><br>
                 <div id="msg"></div>
                 <input type="password" placeholder="비밀번호" class="normal password"><br>
                 <div class="login-error-msg"><%=msg!=null?msg:"" %></div>
@@ -61,7 +54,7 @@
                 <input type="submit" id="bb" class="b-button normal" value="로그인하기">
          </div>
          <div id="hidden-form">
-            <form id="h-form" action="" method="post">
+            <form id="h-form" action="" method="post" class="h-form">
                <input id="email" type="text" name="email" value="">
                <input id="password" type="text" name="password" value="">
                <input id="name" type="text" name="name" value="">
@@ -73,7 +66,25 @@
                <input id="gender" type="radio" name="gender" value="">
             </form>
          </div>
+         <form name="emailDuplicate">
+         	<input type="hidden" name="email">
+         </form>
       </div>   
    </div>
 </div>
+<script>
+function fn_emailDuplicate(){
+	const email = $('.email').val();
+	console.log(email);
+	const url = "<%=request.getContextPath()%>/emailDuplicate.do";
+    const title="emailDuplicate";
+    open("",title,"width=300,height=200");
+    console.log(emailDuplicate)
+    emailDuplicate.email.value=email;
+    emailDuplicate.method="post";
+    emailDuplicate.action=url;
+    emailDuplicate.target=title;
+    emailDuplicate.submit();
+}
+</script>
 <%-- <%@ include file="/views/common/footer.jsp" %> --%>

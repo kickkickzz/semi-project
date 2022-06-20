@@ -14,6 +14,7 @@ import com.board.model.vo.Board;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+
 @WebServlet("/boardlist.do")
 public class BoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,6 +31,7 @@ public class BoardListServlet extends HttpServlet {
 		gson.toJson(list, response.getWriter());
 //		request.setAttribute("list",list);
 //		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
+
 
 	}
 
