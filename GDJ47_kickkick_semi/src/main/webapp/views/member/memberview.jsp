@@ -106,7 +106,7 @@
      </div>
      <div>
       <p style="margin-bottom : 3px;">비밀번호</p>
-      <input type="text" value="비밀번호 변경을 원하시면 하단 비밀번호 변경 버튼을 누르세요" readonly style="margin-bottom : 10px;" size="63">
+      <input type="button" onclick="updatePw()" value="비밀번호 변경" style="margin-bottom : 10px;">
      </div>  
      <div>
       <p style="margin-bottom : 3px;">생년월일</p>
@@ -118,11 +118,7 @@
      </div>
      <div>
       <p style="margin-bottom : 3px;">주소</p>
-      <input type="text" id="sample6_postcode" placeholder="우편번호" style="margin-bottom : 3px;">
-	  <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" ><br>
-	  <input type="text" id="sample6_address" name="address2" placeholder="주소" size="29" style="margin-bottom : 3px;">
-	  <input type="text" id="sample6_extraAddress" name="address3" placeholder="참고항목"><br>
-	  <input type="text" id="sample6_detailAddress"  name="address4" placeholder="상세주소" size="29" style="margin-bottom : 13px;">
+      <input type="button" onclick="updateAddress()" value="주소 변경" style="margin-bottom : 10px;">
      </div>
      <div class="update">
       <p style="margin-bottom : 3px;">성별</p>
@@ -133,7 +129,6 @@
      </div><br><br>
       <input type="button" onclick="fn_update();" value="수정"/>
       <input type="reset" value="취소">
-      <input type="button" onclick="updatePw()" value="비밀번호 변경">
     </form>
 
    </main>
@@ -178,7 +173,9 @@ const fn_update= ()=>{
 	$("#updateForm").submit();
 }
 
-
+const updateAddress = ()=>{
+	open("<%=request.getContextPath()%>/updateAddress.do?email=<%=loginMember.getEmail()%>","_blank","width=500, height=400 ,left=500, top=200");
+}
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {

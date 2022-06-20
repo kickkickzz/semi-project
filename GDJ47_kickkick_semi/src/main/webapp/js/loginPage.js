@@ -55,6 +55,7 @@ $(()=>{
 	    $(".login-error-msg").hide();
 	    $(".move").css("background-position", "right");
 	    $(".container").css("height","700px");
+	    $("#idcheck").show();
 	    setTimeout(function(){
 	      $(".title").text("회원가입");
 	      $(".icons").show();
@@ -80,10 +81,11 @@ $(()=>{
 	    $(".form").removeClass("movingForm");
 	    $(".form").addClass("startForm");
 	    $(".icons").show();
-	    
+	    $(".email").val("");
+	    $(".password").val("");
 	    $(".hello").hide();
 	    $(".welcome").show();
-	    
+	    $("#idcheck").hide();
 	    $(".move").css("background-position", "left");
 	    $(".container").css("height","500px");
 	    setTimeout(function(){
@@ -188,3 +190,4 @@ function enroll(){
 			return true;
 		}
 }
+

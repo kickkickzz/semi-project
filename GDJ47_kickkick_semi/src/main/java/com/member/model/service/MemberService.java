@@ -35,9 +35,9 @@ public class MemberService {
 	
 	
 	//회원정보수정하기
-	public int updateMember(String email, Date birth,String phone,String address) {
+	public int updateMember(String email, Date birth,String phone) {
 		Connection conn = getConnection();
-		int result = dao.updateMember(conn,email,birth,phone,address);
+		int result = dao.updateMember(conn,email,birth,phone);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
@@ -77,5 +77,15 @@ public class MemberService {
 		Member m = dao.selectMemberByEmail(conn, email);
 		close(conn);
 		return m;
+	}
+	
+	//주소 변경하기
+	public int updateAddress(String email, String address) {
+		Connection conn = getConnection();
+		int result = dao.updateAddress(conn,email,address);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 }

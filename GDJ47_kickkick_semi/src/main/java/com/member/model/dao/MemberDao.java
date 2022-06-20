@@ -101,16 +101,16 @@ public class MemberDao {
 	
 	
 	//회원정보 수정
-	public int updateMember(Connection conn , String email, Date birth , String phone, String address) {
+	public int updateMember(Connection conn , String email, Date birth , String phone) {
 		PreparedStatement pstmt = null;
 		int result=0;
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("updateMember"));
 			pstmt.setString(1, phone);
 			pstmt.setDate(2, birth);
-			pstmt.setString(3, address);
+			//pstmt.setString(3, address);
 			//pstmt.setString(4, gender);
-			pstmt.setString(4, email); //where절 에 있는 ? 에 값넣기
+			pstmt.setString(3, email); //where절 에 있는 ? 에 값넣기
 			result = pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -194,5 +194,22 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return m;
+	}
+	
+	//주소 변경하기
+	public int updateAddress(Connection conn, String email, String address) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("updateAddress"));
+			pstmt.setString(1, address);
+			pstmt.setString(2, email); //where절에 넣는값
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }

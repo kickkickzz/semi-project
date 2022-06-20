@@ -1,6 +1,8 @@
 package com.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,19 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.member.model.service.MemberService;
-import com.member.model.vo.Member;
 
 /**
- * Servlet implementation class DeleteMemberEndServlet
+ * Servlet implementation class updateAddressEndServlet
  */
-@WebServlet(name="deleteMemberEndServlet", urlPatterns={"/deletememberend.do"})
-public class DeleteMemberEndServlet extends HttpServlet {
+@WebServlet("/updateaddressend.do")
+public class updateAddressEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteMemberEndServlet() {
+    public updateAddressEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,33 +31,38 @@ public class DeleteMemberEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
-		String pwd= request.getParameter("oriPw");
-		System.out.println(email);
-		System.out.println(pwd);
-		Member m = new MemberService().LoginMember(email, pwd);
-		
-		String msg="", loc="";
-		if(m!=null) {
-			//현재비밀번호가 맞음
-			int result = new MemberService().deleteMember(email);
-			if(result>0) {
-				msg +="회원탈퇴가 완료되었습니다.";
-				loc +="/logoutMember.do";
-				String script="opener.location.replace('"+request.getContextPath()+"/logoutMember.do');close();";
-				request.setAttribute("script",script);
+		String address = "";
+		String address2 = request.getParameter("address2"); //주소
+		String address3 = request.getParameter("address3");//참고항목
+		String address4 = request.getParameter("address4");//상세주소
+		ArrayList<String> addArr = new ArrayList();
+		addArr.add(address2);
+		addArr.add(address3);
+		addArr.add(address4); //주소 참고항목 상세주소가 각각 addArr 배열에 들어감
+		for(int i=0; i<addArr.size(); i++) {
+			if(i==2) {
+				address += addArr.get(i);
 			}else {
-				msg +="회원탈퇴에 실패하였습니다.";
-				loc +="/deletemember.do?email="+email;// ?email=추가해야함
+				address += addArr.get(i)+" ";
 			}
+		}
+		System.out.println(address);
+		
+		int result = new MemberService().updateAddress(email,address);
+		String msg="", loc="";
+		if(result>0) {
+			msg +="주소 변경이 완료되었습니다.";
+			String script="close();";
+			request.setAttribute("script", script);
 		}else {
-			//현재비밀번호가 틀림
-			msg+="현재비밀번호가 틀립니다.";
-			loc+="/deletemember.do?email="+email; // ?email=추가해야함
+			msg +="주소 변경이 실패했습니다.";
+			loc +="/updateAddress.do?email="+email;
 		}
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
+		
 	}
 
 	/**
