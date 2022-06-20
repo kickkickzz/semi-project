@@ -38,7 +38,7 @@
 					<div id="wellcome-user"><%=loginMember.getName()%>님 환영합니다!</div>
 				<%}%>
 				<%if(loginMember!=null){ %>
-					<i id="home" class="fa-solid fa-user" onclick="location.assign('<%=request.getContextPath()%>/memberview.do')"></i>
+					<i id="home" class="fa-solid fa-user" onclick="location.assign('<%=request.getContextPath()%>/memberview.do?email=<%=loginMember.getEmail()%>')"></i>
 				<%}else{%>
 					<i id="home" class="fa-solid fa-user" onclick="location.assign('<%=request.getContextPath()%>/loginPage.do')"></i>
 				<%} %>

@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+
 import com.member.model.vo.Member;
 
 public class MemberDao {
@@ -73,7 +74,6 @@ public class MemberDao {
 		return m;
 	}
 	
-	
 	//회원가입하기
 	public boolean EnrollMember(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
@@ -86,8 +86,8 @@ public class MemberDao {
 			pstmt.setString(3, m.getName());
 			pstmt.setString(4, m.getPhone());
 			pstmt.setDate(5, m.getBirthday());
-			pstmt.setString(6, m.getGender());
-			pstmt.setString(7, m.getAddress());
+			//pstmt.setString(6, m.getGender());
+			pstmt.setString(6, m.getAddress());
 			result = pstmt.executeUpdate();
 			if(result>0) flag = true;
 		}catch(SQLException e) {
@@ -130,10 +130,7 @@ public class MemberDao {
 			pstmt.setString(2, oriPw);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				m = Member.builder()
-						.email(rs.getString("email"))
-						.password(rs.getString("password"))
-						.build();
+				m = getMember(rs);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -164,13 +161,12 @@ public class MemberDao {
 		return result;
 	}
 	//회원탈퇴
-	public int deleteMember(Connection conn, String email, String newPw) {
+	public int deleteMember(Connection conn, String email) {
 		PreparedStatement pstmt = null;
 		int result=0;
 		try {
-			pstmt = conn.prepareStatement(prop.getProperty("updatePassword"));
-			pstmt.setString(1, newPw);
-			pstmt.setString(2, email); //where절에 넣는값
+			pstmt = conn.prepareStatement(prop.getProperty("deleteMember"));
+			pstmt.setString(1, email);
 			result = pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -180,4 +176,22 @@ public class MemberDao {
 		return result;
 	}
 	
+	//아이디에 해당하는 멤버 불러오기
+	public Member selectMemberByEmail(Connection conn, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member m = null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMemberByEmail"));
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) m =getMember(rs);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
 }
