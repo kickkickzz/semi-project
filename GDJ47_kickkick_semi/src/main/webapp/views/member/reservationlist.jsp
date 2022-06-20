@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+<%@page import = "com.reservation.model.vo.PayHistory,java.util.List" %>
+ 
+ <% List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist"); %>
 <%@ include file="/views/common/header.jsp" %>
 
  <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
@@ -100,31 +103,48 @@
         <table class="table table-striped table-sm">
           <thead>
             <tr>
+           		
+            <th scope="col">결제코드</th>
+            <th scope="col">예약코드</th>	 
               <th scope="col">구장이름</th>
               <th scope="col">예약자명</th>
               <th scope="col">예약날짜</th>
               <th scope="col">이용시간</th>
-              <th scope="col">입금/환불상태</th>
+              <th scope="col">결제수단</th>
+              
+             
+              
             </tr>
           </thead>
           <tbody>
           <!-- 이메일로 검색해서 구장을 리스트로 갖고온다음 여기서 리스트 for문써서 활용 -->
-             <tr>
-             	<td></td>
-             	<td>1</td>
-             	<td>1</td>
-             	<td>1</td>
-             	<td>1</td>
+          <%if(list!=null){
+        	  for(PayHistory p:list){%>
+				          
+          <tr>
+          
+          		<td><%=p.getPaycode() %></td>
+          		<td><%=p.getReservation_code() %></td>
+             	<td><%=p.getStadium_branch_num() %></td>
+             	<td><%=p.getName() %></td>
+             	<td><%=p.getPaydate() %></td>
+             	<td><%=p.getStarttime()%> : 00 ~ <%=p.getEndtime()%> : 00 </td>
+             	<td><%=p.getPaymethod() %></td>
              </tr>
+             <%} %>
+             	</tbody>
+              </table>
+      </div>
+          <%}else{ %>
+             
              <tr>
-             	<td >2</td>
-             	<td>2</td>
-             	<td>2022-03-15</td>
-             	<td>16:00~18:00</td>
-             	<td></td>
+             	<td=colspan="7">조회된 결과가 없습니다.</td>
+            
              </tr>
+            
         </table>
       </div>
+       <%} %>
     </main>
   </div>
 </div>

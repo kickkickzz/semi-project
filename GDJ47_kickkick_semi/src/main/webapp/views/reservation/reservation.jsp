@@ -1,7 +1,11 @@
+<%@page import="com.member.controller.LoginMember"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.reservation.model.vo.Stadium" %>
-<% Stadium s = (Stadium)request.getAttribute("stadium"); %>
+<% Stadium s = (Stadium)request.getAttribute("stadium"); 
+
+%>    
+
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/reservation.css">
 <!-- iamport.payment.js -->
@@ -29,6 +33,12 @@
 
 
 <%@ include file="/views/common/header.jsp" %>
+<% String userId = null;
+String name1 = null;
+if (loginMember != null) {
+name1 = (loginMember.getName());
+userId = (loginMember.getEmail());
+	} %>
 <section class="section" id="branch-info-section">
 	<div id="main-container-content">
 	
@@ -461,40 +471,7 @@
 			</div>
 
 		</section>
-		<button onclick="requestPay()">결제하기</button>
-		 <script>
-		const IMP = window.IMP; // 생략 가능
-		  IMP.init('imp65252593'); 
-		  
-		  
-    function requestPay() {
-    	IMP.request_pay({
-    	    pg : 'html5_inicis',
-    	    pay_method : 'kakaopay',
-    	    merchant_uid : 'merchant_' + new Date().getTime(),
-    	    name : '주문명:결제테스트',
-    	    amount : 14000,
-    	    buyer_email : 'iamport@siot.do',
-    	    buyer_name : '구매자이름',
-    	    buyer_tel : '010-1234-5678',
-    	    buyer_addr : '서울특별시 강남구 삼성동',
-    	    buyer_postcode : '123-456'
-    	}, function(rsp) {
-    	    if ( rsp.success ) {
-    	        var msg = '결제가 완료되었습니다.';
-    	        msg += '고유ID : ' + rsp.imp_uid;
-    	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-    	        msg += '결제 금액 : ' + rsp.paid_amount;
-    	        msg += '카드 승인번호 : ' + rsp.apply_num;
-    	    } else {
-    	        var msg = '결제에 실패하였습니다.';
-    	        msg += '에러내용 : ' + rsp.error_msg;
-    	    }
-
-    	    alert(msg);
-    	});
-    }
-  </script>
+	
 		
 
 <script src="<%=request.getContextPath()%>/js/calendar.js"></script>
@@ -547,7 +524,7 @@ reservationMap.set('price',0);
 	   			 success: data=> {
 	   				 // 응답데이터가 존재하는지 확인
 	   				console.log(data);
-	   				 
+	   				
 	   				let swiperCode='';
 	   				let values=data['reservation'];
 	   				console.log(values);
@@ -829,94 +806,111 @@ reservationMap.set('price',0);
 	
  $('#reservationRegistBtn').click(function(){
 	 
-				
+	 
+	 
+	 
+	 
+			 		const IMP = window.IMP; // 생략 가능
+	 	 			IMP.init('imp65252593'); 
 					
-		
-				
-				var reservation_branch_num = '<%=s.getBranch_num()%>';
-				var reservation_stadium_num = '<%=s.getStadium_num()%>';
-				
-				// 예약 가격 reservationMap['price']
-				//var reservation_price = $('#reservation_price').val();
-				var reservation_price = reservationMap.get('price');
-				
-				// 예약 시작 시간: reservationMap['startTime']
-				//var reservation_usage_start_time = $('#reservation_usage_start_time').val();
-				var reservation_usage_start_time =reservationMap.get('startTime');
-				
-				// 예약 사용 시간: reservationMap['useTime']
-				//var reservation_usage_time = $('#reservation_usage_time').val();
-				var reservation_usage_time = reservationMap.get('useTime');
-				
-				// 예약 끝 시간: reservationMap['endTime']
-				//var reservation_usage_end_time = $('#reservation_usage_end_time').val();
-				var reservation_usage_end_time = reservationMap.get('endTime');
-				
-				//예약 날짜 : reservationMap['date']
-				//var reservation_usage_start_date = $('#date').val();
-				var reservation_usage_start_date = reservationMap.get('date');
-				console.log(reservation_usage_end_time);
-				console.log(reservation_usage_start_date);
-				console.log(reservationMap);
-		
-				if(reservation_usage_start_date ==""){
-					alert('예약날짜를 선택해주세요!');
-				}else if(reservation_usage_start_time == "" && reservation_usage_end_time == "") {
-					alert('예약시간 선택해주세요');
-					 
-				}else {
-					if (confirm("예약하시겠습니까?") == true){
-						IMP.request_pay({
-					 	    pg : 'html5_inicis',
-					 	    pay_method : 'kakaopay',
-					 	    merchant_uid : 'merchant_' + new Date().getTime(),
-					 	    name : '주문명:결제테스트',
-					 	    amount : 14000,
-					 	    buyer_email : 'iamport@siot.do',
-					 	    buyer_name : '구매자이름',
-					 	    buyer_tel : '010-1234-5678',
-					 	    buyer_addr : '서울특별시 강남구 삼성동',
-					 	    buyer_postcode : '123-456'
-					 	}, function(rsp) {
-					 	    if ( rsp.success ) {
-					 	        var msg = '결제가 완료되었습니다.';
-					 	        msg += '고유ID : ' + rsp.imp_uid;
-					 	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-					 	        msg += '결제 금액 : ' + rsp.paid_amount;
-					 	        msg += '카드 승인번호 : ' + rsp.apply_num;
-					 	       $.ajax({
-									 url: '<%=request.getContextPath()%>/reservationinsert.do',
-									 data: {reservation_branch_num:reservation_branch_num, 
-										 reservation_stadium_num:reservation_stadium_num, 
-										 reservation_price:reservation_price,
-										 reservation_usage_start_date: reservation_usage_start_date,
-										 reservation_usage_start_time:reservation_usage_start_time,
-										 reservation_usage_time:reservation_usage_time, 
-										 reservation_usage_end_time:reservation_usage_end_time},
-									 success:data=> {
-										 console.log(data);
-										 
-										 if(data == 1) {
-											 
-											 alert('예약완료');
-											 
-											 //reload(새로고침)
-											 location.reload();
-										 }
-									 }
-								 }); 
-					 	    } else {
-					 	        var msg = '결제에 실패하였습니다.';
-					 	        msg += '에러내용 : ' + rsp.error_msg;
-					 	    }
-
-					 	    alert(msg);
-					 	});
+					var userId='<%=userId%>';
+					
+					
+					if(userId!='null'){
+						var reservation_branch_num = '<%=s.getBranch_num()%>';
+						var reservation_stadium_num = '<%=s.getStadium_num()%>';
 						
+						// 예약 가격 reservationMap['price']
+						//var reservation_price = $('#reservation_price').val();
+						var reservation_price = reservationMap.get('price');
+						
+						// 예약 시작 시간: reservationMap['startTime']
+						//var reservation_usage_start_time = $('#reservation_usage_start_time').val();
+						var reservation_usage_start_time =reservationMap.get('startTime');
+						
+						// 예약 사용 시간: reservationMap['useTime']
+						//var reservation_usage_time = $('#reservation_usage_time').val();
+						var reservation_usage_time = reservationMap.get('useTime');
+						
+						// 예약 끝 시간: reservationMap['endTime']
+						//var reservation_usage_end_time = $('#reservation_usage_end_time').val();
+						var reservation_usage_end_time = reservationMap.get('endTime');
+						
+						//예약 날짜 : reservationMap['date']
+						//var reservation_usage_start_date = $('#date').val();
+						var reservation_usage_start_date = reservationMap.get('date');
+						console.log(reservation_usage_end_time);
+						console.log(reservation_usage_start_date);
+						console.log(reservationMap);
+				
+						if(reservation_usage_start_date ==""){
+							alert('예약날짜를 선택해주세요!');
+						}else if(reservation_usage_start_time == "" && reservation_usage_end_time == "") {
+							alert('예약시간 선택해주세요');
+							 
+						}else {
+							if (confirm("예약하시겠습니까?") == true){
+								IMP.request_pay({
+							 	    pg : 'html5_inicis',
+							 	    pay_method : 'kakaopay',
+							 	    merchant_uid : 'KK_' + new Date().getTime(),
+							 	    name : '[킥킥구장예약]',
+							 	    amount : reservation_usage_time*10000,
+							 	    buyer_email : '<%=userId%>',
+							 	    buyer_postcode : '123-456',
+							 	    buyer_method : '카카오페이'
+							 	}, function(rsp) {
+							 	    if ( rsp.success ) {
+							 	        var msg = '결제가 완료되었습니다.';
+							 	        msg += '고유ID : ' + rsp.imp_uid;
+							 	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+							 	        msg += '결제 금액 : ' + rsp.paid_amount;
+							 	        
+							 	       $.ajax({
+											 url: '<%=request.getContextPath()%>/reservationinsert.do',
+											 data: {reservation_branch_num:reservation_branch_num, 
+												 reservation_stadium_num:reservation_stadium_num, 
+												 reservation_price:reservation_price,
+												 reservation_usage_start_date: reservation_usage_start_date,
+												 reservation_usage_start_time:reservation_usage_start_time,
+												 reservation_usage_time:reservation_usage_time, 
+												 reservation_usage_end_time:reservation_usage_end_time,
+												 paycode:rsp.merchant_uid,
+												 userId:rsp.buyer_email,
+												 
+												 amount:rsp.paid_amount,
+												 method:rsp.buyer_method
+												
+												 },
+											 success:data=> {
+												 console.log(data);
+												 
+												 if(data == 1) {
+													 
+													 alert('예약완료');
+													 
+													 //reload(새로고침)
+													 location.reload();
+												 }
+											 }
+										 }); 
+							 	    } else {
+							 	        var msg = '결제에 실패하였습니다.';
+							 	        msg += '에러내용 : ' + rsp.error_msg;
+							 	    }
+
+							 	    alert(msg);
+							 	});
+								
+							}else{
+							     return false;
+							}
+						}
 					}else{
-					     return false;
+						alert("로그인후 이용하세요");
 					}
-				}
+				
+				
 			
 				
 					

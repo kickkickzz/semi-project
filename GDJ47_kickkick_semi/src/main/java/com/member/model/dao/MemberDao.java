@@ -9,10 +9,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
-
 import com.member.model.vo.Member;
+import com.reservation.model.vo.PayHistory;
 
 public class MemberDao {
 	private static MemberDao dao;
@@ -195,6 +197,30 @@ public class MemberDao {
 		}
 		return m;
 	}
+
+	public List<PayHistory> selectpayhistory(Connection conn,String email){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<PayHistory> result = new ArrayList<PayHistory>();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectpayhistory"));
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				PayHistory p = PayHistory.builder().paycode(rs.getString("pay_code")).email(rs.getString("email")).reservation_code(rs.getString("reservation_code"))
+						.paymethod(rs.getString("pay_method")).paydate(rs.getDate("pay_date")).stadium_branch_num(rs.getString("stadium_branch_num")).starttime(rs.getInt("starttime")).
+						endtime(rs.getInt("endtime")).name(rs.getString("name")).build();
+				
+				result.add(p);
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+		}return result;
+}
+
 	
 	//주소 변경하기
 	public int updateAddress(Connection conn, String email, String address) {
@@ -208,6 +234,7 @@ public class MemberDao {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
+
 			close(pstmt);
 		}
 		return result;
