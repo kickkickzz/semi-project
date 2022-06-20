@@ -31,7 +31,7 @@ public class UpdateMemberServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("실행됐다");
-		String address = null;
+		String address = "";
 		String email = request.getParameter("email");
 		String name = request.getParameter("name");
 		String birthday = request.getParameter("birthday"); //생년월일
@@ -39,13 +39,16 @@ public class UpdateMemberServlet extends HttpServlet {
 		String address2 = request.getParameter("address2"); //주소
 		String address3 = request.getParameter("address3");//참고항목
 		String address4 = request.getParameter("address4");//상세주소
+		System.out.println(address2);
+		System.out.println(address3);
+		System.out.println(address4);
 		ArrayList<String> addArr = new ArrayList();
 		addArr.add(address2);
 		addArr.add(address3);
 		addArr.add(address4); //주소 참고항목 상세주소가 각각 addArr 배열에 들어감
 		for(int i=0; i<addArr.size(); i++) {
 			if(i==2) {
-				address  += addArr.get(i);
+				address += addArr.get(i);
 			}else {
 				address += addArr.get(i)+" ";
 			}
@@ -53,11 +56,6 @@ public class UpdateMemberServlet extends HttpServlet {
 		String gender = request.getParameter("gender");
 
 		//회원수정은 전화번호 생년월일 주소 만 수정가능
-		Member m = Member.builder()
-				.email(email)
-				.name(name)
-				.phone(phone)
-				.build();
 		
 		Date birth = null;
 		if(birthday!=null) {
@@ -69,6 +67,13 @@ public class UpdateMemberServlet extends HttpServlet {
 		}else {
 			birth = new Date(new GregorianCalendar().getTimeInMillis());
 		}
+		
+		Member m = Member.builder()
+				.email(email)
+				.name(name)
+				.phone(phone)
+				.birthday(birth)
+				.build();
 		
 		System.out.println(birth);
 		System.out.println(address);

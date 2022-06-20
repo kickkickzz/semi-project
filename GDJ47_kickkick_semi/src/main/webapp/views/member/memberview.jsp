@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-
+<%
+	Member m=(Member)request.getAttribute("member");
+%>
 <!-- 여기가 마이페이지 초기화면 -->
 <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
 
@@ -78,14 +80,14 @@
         </a>
       </li>
       <li class="nav-item">
-       <a class="nav-link" href="" style="color: black">
+       <a class="nav-link" href="<%=request.getContextPath()%>/logoutMember.do" style="color: black">
        <i class="fa-solid fa-arrow-right-from-bracket"></i>
        <span data-feather="users"></span>
        로그아웃
        </a>
       </li>
       <li class="nav-item">
-       <a class="nav-link" href="" style="color: black">
+       <a class="nav-link" href="" onclick="fn_delete();" style="color: black"> <!-- request.getContextPath()%>/deleteMember.do?email=loginMember.getEmail()%> -->
        <i class="fa-solid fa-arrow-right-from-bracket"></i>
        <span data-feather="users"></span>
        회원탈퇴
@@ -101,11 +103,11 @@
     <form id="updateForm" action="<%=request.getContextPath()%>/updatemember.do" method="post">
      <div>
       <p style="margin-bottom : 3px;" class="pp">이메일</p>
-      <input type="text" name="email" value="<%=loginMember.getEmail()%>" style="margin-bottom : 7px;" size="63" readonly>
+      <input type="text" name="email" value="<%=m.getEmail()%>" style="margin-bottom : 7px;" size="63" readonly>
      </div>  
      <div>
       <p style="margin-bottom : 3px;" class="pp">이름</p>
-      <input type="text" name="name" value="<%=loginMember.getName()%>" readonly style="margin-bottom : 10px;" size="63">
+      <input type="text" name="name" value="<%=m.getName()%>" readonly style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">비밀번호</p>
@@ -113,11 +115,11 @@
      </div>  
      <div>
       <p style="margin-bottom : 3px;">생년월일</p>
-      <input type="Date" name="birthday"  value="2022-06-15" placeholder="yyyyMMdd" style="margin-bottom : 10px;" size="63">
+      <input type="Date" name="birthday"  value="<%=m.getBirthday()%>" placeholder="yyyyMMdd" style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">연락처</p>
-      <input type="text" name="phone" value="<%=loginMember.getPhone()%>" placeholder="-없이 입력" maxlength="11" style="margin-bottom : 10px;" size="63">
+      <input type="text" name="phone" value="<%=m.getPhone()%>" placeholder="-없이 입력" maxlength="11" style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">주소</p>
@@ -173,6 +175,9 @@ const updatePw = ()=>{
 	open("<%=request.getContextPath()%>/member/updatePassword.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=210 ,left=500, top=200"); /* 주소에 ?email=loginMember.getEmail() 추가해야함 */
 }
 
+const fn_delete = ()=>{
+	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=210 ,left=500, top=200");
+}
 
 const fn_update= ()=>{
 	$("#updateForm").submit();
