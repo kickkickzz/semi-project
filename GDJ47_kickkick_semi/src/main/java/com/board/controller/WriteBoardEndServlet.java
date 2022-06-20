@@ -1,7 +1,11 @@
 package com.board.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +16,13 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
+import com.board.model.vo.BoardAttachment;
+import com.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-@WebServlet("/writeBoard.do")
+import common.BoardImgFileRenamePolicy;
+//clear
+@WebServlet("/insertBoard.do")
 public class WriteBoardEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -24,40 +31,96 @@ public class WriteBoardEndServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//°øÁö»çÇ× µ¥ÀÌÅÍ ÀúÀå, ÆÄÀÏ ¾÷·Îµå
-		if(!ServletFileUpload.isMultipartContent(request)) {
-			request.setAttribute("msg", "°øÁö»çÇ× µî·Ï¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
-			request.setAttribute("loc", "/writeBoard.do");
-			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
-		}else {
-			String saveBoardPath=request.getServletContext().getRealPath("/resources/storage/board_img/"); //°øÁö»çÇ× °Ô½ÃÆÇ ÆÄÀÏ ÀúÀå¼Ò
+		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize=1024*1024*10; //10MB;
-			String encoding="UTF-8";
-			DefaultFileRenamePolicy dfp=new DefaultFileRenamePolicy();
+			String root= request.getSession().getServletContext().getRealPath("/");
+			String saveBoardPath= root+"/resources/storage/board_img/"; //ê³µì§€ì‚¬í•­ ê²Œì‹œíŒ íŒŒì¼ ì €ì¥ì†Œ
 			
-			// BoardImgFileRenamePolicy() => °øÁö»çÇ×°Ô½ÃÆÇ ÀÌ¹ÌÁö ÀÌ¸§ º¯°æ ¹æ¹ı.
-			MultipartRequest mr= new MultipartRequest(request, saveBoardPath, maxSize,"UTF-8",dfp);
-			Board n=Board.builder().boardTitle(mr.getParameter("title"))
-					.boardWriter(mr.getParameter("writer"))
-					.boardContent(mr.getParameter("content"))
-					.boardImgPath(mr.getFilesystemName("upfile"))
-					.build();
-			System.out.println(n);
+			// BoardImgFileRenamePolicy() => ê³µì§€ì‚¬í•­ê²Œì‹œíŒ ì´ë¯¸ì§€ ì´ë¦„ ë³€ê²½ ë°©ë²•
+			MultipartRequest multiRequest=new MultipartRequest(request,saveBoardPath,maxSize,"UTF-8",new BoardImgFileRenamePolicy());
+			File file=new File(saveBoardPath);
 			
-			//DB¿¡ µ¥ÀÌÅÍ ÀúÀå
-			int result=new BoardService().insertBoard(n);
-			String msg="";
-			String loc="";
-			if(result>0) {
-				msg="°øÁö»çÇ× µî·Ï ¿Ï·á!";
-				loc="/writeBoard.do";
-			}else {
-				msg="°øÁö»çÇ× µî·Ï ½ÇÆĞ!";
-				loc="/writeBoard.do";
+			// saveBoardPathì— í•´ë‹¹í•˜ëŠ” ë””ë ‰í† ë¦¬ê°€ ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´
+			if(!file.exists()) {
+				file.mkdirs();
 			}
-			request.setAttribute("msg", msg);
-			request.setAttribute("loc", loc);
 			
+			//ë°”ë€ íŒŒì¼ì´ë¦„ì„ ì €ì¥í•˜ëŠ” ArrayList
+			ArrayList<String> saveFiles = new ArrayList<String>();
+			
+			//ì›ë³¸íŒŒì¼ì´ë¦„ì„ ì €ì¥í•˜ëŠ” ArrayList
+			ArrayList<String> originFiles= new ArrayList<String>();
+			
+			//getFileName():í¼ì—ì„œ ì „ì†¡ëœ Fileì˜ ì´ë¦„ì„ ìœ„ì˜ ê·œì •ëŒ€ë¡œ ë³€í™˜
+			Enumeration<String> files= multiRequest.getFileNames();
+			while(files.hasMoreElements()) {
+				String name= files.nextElement();
+				if(multiRequest.getFilesystemName(name)!=null) {
+					saveFiles.add(multiRequest.getFilesystemName(name));
+					originFiles.add(multiRequest.getOriginalFileName(name));
+				}
+			}
+			
+			// ì…ë ¥í•œ ë°ì´í„°ë¥¼ String í˜•íƒœë¡œ ë³€í™˜
+			String title=multiRequest.getParameter("title"); //BOARD_TITLE
+			String content=multiRequest.getParameter("content"); //BOARD_CONTENT
+			String email=((Member)request.getSession().getAttribute("loginUser")).getEmail();
+			String name=((Member)request.getSession().getAttribute("loginUser")).getName(); //BOARD_WRITER
+			
+			Board board=new Board();
+			board.setBoardTitle(title);
+			board.setBoardWriter(name);
+			board.setBoardContent(content);
+			board.setBoardWriterEmail(email);
+			
+			ArrayList<BoardAttachment> fileList=new ArrayList<BoardAttachment>();
+			for(int i=originFiles.size()-1;i>=0;i--){
+				BoardAttachment bat= new BoardAttachment();
+				bat.setFilePath(saveBoardPath);
+				bat.setOriginName(originFiles.get(i));
+				bat.setChangeName(saveFiles.get(i));
+				
+				//ì´ë¯¸ì§€ì´ë¦„
+				board.setBoardImgPath(originFiles.get(i));
+				
+				fileList.add(bat);
+			}
+			
+			System.out.println("/insertBoard.do=> "+board);
+			int result= new BoardService().insertBoard(board, fileList);
+			if(result>0){
+				response.sendRedirect("showBoardList.do");
+			}else{
+				for(int i=0;i<saveFiles.size();i++) {
+					File failedFile=new File(saveBoardPath+saveFiles.get(i));
+					failedFile.delete();
+				}
+				request.setAttribute("msg","ê³µì§€ì‚¬í•­ë“±ë¡ ì‹¤íŒ¨");
+				request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
+			}
+			
+		}else {
+			request.setCharacterEncoding("UTF-8");
+			String title=request.getParameter("title");
+			String email=((Member)request.getSession().getAttribute("loginUser")).getEmail();
+			String content= request.getParameter("content");
+			String name=((Member)request.getSession().getAttribute("loginUser")).getName();
+			
+			Board board= new Board();
+			board.setBoardContent(content);
+			board.setBoardTitle(title);
+			board.setBoardWriter(name);
+			board.setBoardWriterEmail(email);
+			
+			int result=new BoardService().insertBoard(board,null);
+			if(result>0) {
+				response.sendRedirect("showBoardList.do");
+				
+			}else {
+				request.setAttribute("msg","ê³µì§€ì‚¬í•­ë“±ë¡ ì‹¤íŒ¨");
+				RequestDispatcher view=request.getRequestDispatcher("/views/common/errorPage.jsp");
+				view.forward(request,response);
+			}
 		}
 	}
 

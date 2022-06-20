@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.reservation.model.vo.PayHistory;
 import com.reservation.model.vo.ReservationInfo;
 import com.reservation.model.vo.Stadium;
 
@@ -222,6 +223,28 @@ public class ReservationDao {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
+		}
+		return result;
+	}
+	public int insertpayhistory(Connection conn,PayHistory p) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("payhistoryinsert"));
+			pstmt.setString(1, p.getPaycode());
+			pstmt.setString(2, p.getEmail());
+			pstmt.setString(3, p.getReservation_code());
+			pstmt.setString(4, p.getPaymethod());
+			pstmt.setString(5, p.getStadium_branch_num());
+			pstmt.setInt(6, p.getStarttime());
+			pstmt.setInt(7, p.getEndtime());
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		
 		}
 		return result;
 	}

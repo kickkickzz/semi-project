@@ -11,7 +11,6 @@ public class PageInfo {
 	private int endPage;  //¸¶Áö¸·
 	
 	public PageInfo() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public PageInfo(int currentPage, int listCount, int pageLimit, int boardLimit, int maxPage, int startPage,

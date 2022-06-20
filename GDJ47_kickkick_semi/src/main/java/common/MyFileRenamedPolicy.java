@@ -6,7 +6,8 @@ import java.text.SimpleDateFormat;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
 public class MyFileRenamedPolicy implements FileRenamePolicy {
-	 @Override
+	   
+	   @Override
 	   public File rename(File originFile) {
 	      
 	      long currentTime = System.currentTimeMillis();

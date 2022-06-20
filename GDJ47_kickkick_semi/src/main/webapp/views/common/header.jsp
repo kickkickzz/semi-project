@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.member.model.vo.Member" %>    
-<% 
-	Member loginMember = (Member)session.getAttribute("loginMember");
+
+<% Member loginMember = (Member)session.getAttribute("loginMember");
 %>
-  
-    
+
 <!DOCTYPE html>
 <html>
 <head>

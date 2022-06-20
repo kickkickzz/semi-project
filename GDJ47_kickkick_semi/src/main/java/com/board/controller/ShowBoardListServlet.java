@@ -1,7 +1,7 @@
 package com.board.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
 import com.board.model.vo.PageInfo;
-
+//clear
 @WebServlet("/showBoardList.do")
 public class ShowBoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,28 +24,28 @@ public class ShowBoardListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardService bs= new BoardService();
 		
-		int listCount; 		//ÃÑ °Ô½Ã±Û °³¼ö
-		int currentPage; 	//ÇöÀç ÆäÀÌÁö¹øÈ£
-		int pageLimit; 		//ÇÑÆäÀÌÁö¿¡ Ç¥½ÃµÉ ÆäÀÌÁö¼ö
-		int boardLimit; 	//ÇÑÆäÀÌÁö¿¡ º¸¿©ÁÙ °Ô½Ã¹° °³¼ö
-		int maxPage;		//ÇöÀç ¼ÓÇÑ ÆäÀÌÁö¹üÀ§¿¡¼­ °¡Àå ¸¶Áö¸· ÆäÀÌÁö¹øÈ£
-		int startPage;		//ÇöÀç¼ÓÇÑ ÆäÀÌÁö¹üÀ§¿¡¼­ ¸ÇÃ³À½ ÆäÀÌÁö¹øÈ£
-		int endPage;		//°¡Àå ¸¶Áö¸· ÆäÀÌÁö¹øÈ£
+		int listCount;
+		int currentPage;
+		int pageLimit;	//í•œ í˜ì´ì§€ì— í‘œì‹œë˜ëŠ” í˜ì´ì§€ ìˆ˜
+		int boardLimit;	//í•œ í˜ì´ì§€ë‹¹ ê²Œì‹œë¬¼ ìˆ˜
+		int maxPage;
+		int startPage;
+		int endPage;
 		
-		listCount= bs.getBoardListCount(); //°Ô½Ã¹°ÀÇ °³¼ö¸¦ ºÒ·¯¿Â´Ù.
+		listCount= bs.getBoardListCount(); //ê²Œì‹œë¬¼ ìˆ˜
 		
 		currentPage=1;
 		if(request.getParameter("currentPage")!=null) {
 			currentPage= Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		pageLimit=10; //ÇÑÆäÀÌÁö¿¡ º¸¿©ÁÙ¼öÀÖ´Â ÆäÀÌÁö¹üÀ§ 10
-		boardLimit=10;// ÇÑÆäÀÌÁö¿¡ º¸¿©ÁÙ¼ö ÀÖ´Â °Ô½Ã¹°°³¼ö 10°³
+		pageLimit=10;
+		boardLimit=10;
 		
-		//¸¶Áö¸· ÆäÀÌÁö
+		//ë§ˆì§€ë§‰ í˜ì´ì§€
 		maxPage=(int)Math.ceil((double)listCount/boardLimit);
 		
-		//½ÃÀÛÆäÀÌÁö
+		//ì‹œì‘ í˜ì´ì§€
 		startPage=((currentPage-1)/pageLimit)*pageLimit+1;
 		endPage= (startPage+pageLimit)-1;
 		if(maxPage<endPage) {
@@ -53,19 +53,20 @@ public class ShowBoardListServlet extends HttpServlet {
 		}
 		
 		PageInfo pi=new PageInfo(currentPage, listCount, pageLimit, boardLimit, maxPage, startPage, endPage);
-//		List<Board>boardList= bs.selectBoardList(pi);
-//		ÆäÀÌÂ¡ Ã³¸® ÀçÈ®ÀÎ ÇÊ¿ä
-//		String page=null;
-//		if(boardList!=null) {
-//			page="/views/board/boardList.jsp";
-//			request.setAttribute("boardLists", boardList);
-//			request.setAttribute("pi", pi);
-//		}else {
-//			page="/views/common/errorPage.jsp";
-//			request.setAttribute("msg", "°øÁö»çÇ× °Ô½ÃÆÇ Á¶È¸¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
-//		}
-//		
-//		request.getRequestDispatcher(page).forward(request, response);
+		ArrayList<Board>boardList= bs.selectBoardList(pi);
+		
+		String page=null;
+		if(boardList!=null) {
+			page="/views/board/boardList.jsp";
+			request.setAttribute("boardLists", boardList);
+			request.setAttribute("pi", pi);
+		}else {
+			page="/views/common/errorPage.jsp";
+			request.setAttribute("msg", "ê³µì§€ì‚¬í•­ ì¡°íšŒì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

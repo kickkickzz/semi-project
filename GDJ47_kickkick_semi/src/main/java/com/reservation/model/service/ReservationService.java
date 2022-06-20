@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.reservation.model.dao.ReservationDao;
+import com.reservation.model.vo.PayHistory;
 import com.reservation.model.vo.ReservationInfo;
 import com.reservation.model.vo.Stadium;
 public class ReservationService {
@@ -58,6 +59,13 @@ public class ReservationService {
 	public int reservationInsert(ReservationInfo r) {
 		Connection conn = getConnection();
 		int result = dao.reservationinsert(conn,r);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	public int insertpayhistory(PayHistory p) {
+		Connection conn = getConnection();
+		int result = dao.insertpayhistory(conn,p);
 		if(result>0)commit(conn);
 		else rollback(conn);
 		return result;
