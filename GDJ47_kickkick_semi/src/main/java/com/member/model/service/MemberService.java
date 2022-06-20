@@ -34,15 +34,22 @@ public class MemberService {
 	
 	
 	//회원정보수정하기
-	public int updateMember(String email, Date birth,String phone,String address,String gender) {
+	public int updateMember(String email, Date birth,String phone,String address) {
 		Connection conn = getConnection();
-		int result = dao.updateMember(conn,email,birth,phone,address,gender);
+		int result = dao.updateMember(conn,email,birth,phone,address);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;
 	}
 	
+	//비밀번호 변경을 위한 회원정보 불러오기
+	public Member loginCheck(String email, String oriPw) {
+		Connection conn = getConnection();
+		Member m = dao.loginCheck(conn,email,oriPw);
+		close(conn);
+		return m;
+	}
 	//비밀번호 변경 하기
 	public int updatePassword(String email, String newPw) {
 		Connection conn = getConnection();
@@ -52,4 +59,6 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
+	//회원탈퇴
 }

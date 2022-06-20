@@ -11,10 +11,11 @@ public class Member {
 	private String email;
 	private String password;
 	private String name;
-	private Date birthday;
 	private String phone;
-	private String address;
-	private String memberWithdrawalStatus;
+	private Date birthday;
 	private String gender;
-	private String type;
+	private String type; //매니저 일반회원
+	private String deleteStatus; //default는 'N'
+	private String address;
+
 }

@@ -4,6 +4,7 @@
 <%@ include file="/views/common/header.jsp" %>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+<script src="<%=request.getContextPath()%>/js/main.js"></script>
 
 <section>
 <!-- 이미지 슬라이더 시작 -->
@@ -141,7 +142,10 @@
 <!-- 공지사항 목록 -->
 <section class="notice-container">
 	<div class="main-sc9-notice">
-			<div class="main-sc9-tit">알려드립니다.</div>
+			<div class="main-sc9-tit">
+				<img id="megaphone" src="https://cdn-icons-png.flaticon.com/512/214/214347.png">
+				알려드립니다!
+			</div>
 			<div class="main-notice-list">
 					<div class="notice-list-item">
 						<a href="/customer/noticeView?bbsDetailSeq=181">
@@ -194,28 +198,59 @@
 			</div>
 		</div>
 		<div class="main-sc9-review">
-			<div class="main-sc9-tit">도와드릴까요?</div>
-			<div class="help-cont">
-				<div class="help-item1">
-					<div class="tit">해외패키지 대표번호</div>
-					<div class="phone">1588.0040</div>
-					<div class="txt">
-						부산지사 대표번호 051.469.9415 <br> 평일 09시~18시 (토/일요일 및 공휴일 휴무)
+			<div class="main-sc9-tit">
+				<img id="megaphone" src="https://cdn-icons-png.flaticon.com/512/1240/1240417.png">
+				이용자 리뷰!
+			</div>
+			<div class="main-notice-list">
+					<div class="notice-list-item">
+						<a href="/customer/noticeView?bbsDetailSeq=181">
+							<dl>
+								<dt>
+									[브랜드 론칭 이벤트] 신규 브랜드 '킥킥' 초성퀴즈 이벤트 당첨자 발표
+								</dt>
+								<dd>
+									2022-05-30
+								</dd>
+							</dl>
+						</a>
 					</div>
-					<div class="lnk">
-						<a href="#" data-toggle="modal" data-target="#tel_01">문의별 번호 안내</a>
+					<div class="notice-list-item">
+						<a href="/customer/noticeView?bbsDetailSeq=68">
+							<dl>
+								<dt>
+									브랜드 명 변경 안내(22/05/29)
+								</dt>
+								<dd>
+									2022-05-24
+								</dd>
+							</dl>
+						</a>
 					</div>
-				</div>
-				<div class="help-item2">
-					<div class="tit">항공권 대표번호</div>
-					<div class="phone">02.2124.5581</div>
-					<div class="txt">
-						재발행 16시까지 <br> 평일 09시~18시 (토/일요일 및 공휴일 휴무)
+					<div class="notice-list-item">
+						<a href="/customer/noticeView?bbsDetailSeq=10">
+							<dl>
+								<dt>
+									이용후기 / 만족도조사 이벤트 변경 안내
+								</dt>
+								<dd>
+									2022-05-11
+								</dd>
+							</dl>
+						</a>
 					</div>
-					<div class="lnk">
-						<a href="/mypage/cstmrSport/inqryDtls/inqryDtlsWrite">1:1문의하기</a>
+					<div class="notice-list-item">
+						<a href="/customer/noticeView?bbsDetailSeq=11">
+							<dl>
+								<dt>
+									이용상품권 사용안내
+								</dt>
+								<dd>
+									2022-05-11
+								</dd>
+							</dl>
+						</a>
 					</div>
-				</div>
 			</div>
 		</div>
 </section>
@@ -223,24 +258,7 @@
 
 </section>
 
-<script>
-var lastScrollTop = 0, delta = 15;
 
-$(window).scroll(function(){
-    var scrollTop = $(this).scrollTop() /* 스크롤바 수직 위치를 가져옵니다, 괄호 안에 값(value)이 있을 경우 스크롤바의 수직 위치를 정합니다. */
-    // Math.abs: 주어진 숫자의 절대값을 반환(return)합니다.
-    if(Math.abs(lastScrollTop - scrollTop) <= delta) // 스크롤 값을 받아서 ~
-    return; // ~ 리턴
-
-    if ((scrollTop > lastScrollTop) && (lastScrollTop>0)) {
-    	/* 화면에 나오지 않을 때, top값은 요소가 보이지 않을 정도로 사용해야함 */
-        $("#header-bottom").css("top","-100px");
-    } else {
-        $("#header-bottom").css("top","76.5px");
-    }
-    lastScrollTop = scrollTop;
-});
-</script>
 
 <%@ include file="/views/common/footer.jsp" %>
 

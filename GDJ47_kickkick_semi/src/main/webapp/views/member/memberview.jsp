@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
+
 <!-- 여기가 마이페이지 초기화면 -->
- <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
+<link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
 
-    
+<!-- Bootstrap core CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <!-- Favicons -->
+<!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
 <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
@@ -42,16 +41,18 @@
 
     
     
-</head>
-<body>
-    
 
+    
+<section>
 <div class="container-fluid">
   <div class="row">
    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
     <div class="position-sticky pt-3">
      <ul class="nav flex-column">
       <li class="nav-item">
+      <li>
+       <p></p>
+      </li>
       <li>
        <p></p>
       </li>
@@ -83,20 +84,28 @@
        로그아웃
        </a>
       </li>
+      <li class="nav-item">
+       <a class="nav-link" href="" style="color: black">
+       <i class="fa-solid fa-arrow-right-from-bracket"></i>
+       <span data-feather="users"></span>
+       회원탈퇴
+       </a>
+      </li>
      </ul>  
     </div>
    </nav>
    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-    <h2>회원 정보 수정</h2><br><br>
+    <br><br>
+    <h2>회원 정보</h2>
     <form></form>
     <form id="updateForm" action="<%=request.getContextPath()%>/updatemember.do" method="post">
      <div>
       <p style="margin-bottom : 3px;" class="pp">이메일</p>
-      <input type="text" name="email" value="" style="margin-bottom : 7px;" size="63" readonly>
+      <input type="text" name="email" value="<%=loginMember.getEmail()%>" style="margin-bottom : 7px;" size="63" readonly>
      </div>  
      <div>
       <p style="margin-bottom : 3px;" class="pp">이름</p>
-      <input type="text" name="name" value="" readonly style="margin-bottom : 10px;" size="63">
+      <input type="text" name="name" value="<%=loginMember.getName()%>" readonly style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">비밀번호</p>
@@ -104,53 +113,64 @@
      </div>  
      <div>
       <p style="margin-bottom : 3px;">생년월일</p>
-      <input type="Date" name="birthday"  value="" placeholder="yyyyMMdd" style="margin-bottom : 10px;" size="63">
+      <input type="Date" name="birthday"  value="2022-06-15" placeholder="yyyyMMdd" style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">연락처</p>
-      <input type="text" name="phone" value="" placeholder="-없이 입력" maxlength="11" style="margin-bottom : 10px;" size="63">
+      <input type="text" name="phone" value="<%=loginMember.getPhone()%>" placeholder="-없이 입력" maxlength="11" style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">주소</p>
       <input type="text" id="sample6_postcode" placeholder="우편번호" style="margin-bottom : 3px;">
 	  <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" ><br>
-	  <input type="text" id="sample6_address" placeholder="주소" size="29" style="margin-bottom : 3px;">
-	  <input type="text" id="sample6_extraAddress" placeholder="참고항목"><br>
-	  <input type="text" id="sample6_detailAddress" placeholder="상세주소" size="29" style="margin-bottom : 13px;">
+	  <input type="text" id="sample6_address" name="address2" placeholder="주소" size="29" style="margin-bottom : 3px;">
+	  <input type="text" id="sample6_extraAddress" name="address3" placeholder="참고항목"><br>
+	  <input type="text" id="sample6_detailAddress"  name="address4" placeholder="상세주소" size="29" style="margin-bottom : 13px;">
      </div>
      <div class="update">
       <p style="margin-bottom : 3px;">성별</p>
-      <input type="radio" name="gender" id="gender0" value="M" style="margin-bottom : 10px;" size="20"
-       >
+      <input type="radio" name="gender" id="gender0" value="M" style="margin-bottom : 10px;" size="20">
        <label for="gender0">남</label>
-      <input type="radio" name="gender" id="gender1" value="F"
-       >
+      <input type="radio" name="gender" id="gender1" value="F">
        <label for="gender1">여</label>
      </div><br><br>
       <input type="button" onclick="fn_update();" value="수정"/>
       <input type="reset" value="취소">
+      <input type="button" onclick="updatePw()" value="비밀번호 변경">
     </form>
-      <input type="button" onclick="updatePw()" value="비밀번호 변경"> 
+
    </main>
   </div>
 </div>
+</section>
+</body>
 <style>
 .col-lg-2 {
-    height : 700px;
+    height : 800px;
 }
 div.row{
-	padding : 9% 8% 2%;
+	padding :0% 0% 0% 280px;
 }
 .col-md-9{
 
 }
-.pp{
+section{
+	padding-top : 0px;
+	
 }
+header{
+    height : 136px;
+}
+
+.bg-light {
+
+}
+
 </style>
 
 <script>
 const updatePw = ()=>{
-	open("<%=request.getContextPath()%>/updatepassword.do","_blank","width=400, height=210 ,left=500, top=200"); /* 주소에 ?email=loginMember.getEmail() 추가해야함 */
+	open("<%=request.getContextPath()%>/member/updatePassword.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=210 ,left=500, top=200"); /* 주소에 ?email=loginMember.getEmail() 추가해야함 */
 }
 
 

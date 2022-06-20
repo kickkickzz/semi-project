@@ -42,13 +42,18 @@
 </head>
 <body>
     
-
+<section>
 <div class="container-fluid">
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
-          <li><p></p></li>
+          <li>
+          	<p></p>
+          </li>
+          <li>
+       		<p></p>
+      	  </li>
           <li class="nav-item">
             <a class="nav-link active" href="<%=request.getContextPath()%>/memberview.do" style="color: black">
               <i class="fa-solid fa-user"></i>
@@ -81,7 +86,8 @@
       </div>
     </nav>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <h2>나의 팀 정보</h2><br>
+    <br><br>
+      <h2>나의 팀 정보</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
@@ -95,16 +101,16 @@
           </thead>
           <tbody>
              <tr>
-             	<td >1</td>
-             	<td>1</td>
-             	<td>1</td>
-             	<td>1</td>
-             	<td>1</td>
+             	<td>13</td>
+             	<td>1111</td>
+             	<td>김동훈</td>
+             	<td>안녕하세요 안녕하세요 안녕하세요</td>
+             	<td>탈퇴</td>
              </tr>
               <tr>
-             	<td>2</td>
-             	<td>2</td>
-             	<td>2</td>
+             	<td></td>
+             	<td></td>
+             	<td></td>
              	<td>2</td>
              	<td>2</td>
              </tr>
@@ -113,15 +119,27 @@
     </main>
   </div>
 </div>
+</section>
+</body>
+
 <style>
 .col-lg-2 {
-    height : 700px;
+    height : 800px;
 }
 div.row{
-	padding : 9% 8% 2%;
+	padding :0% 0% 0% 280px;
 }
-.two{
+.col-md-9{
 
+}
+section{
+	padding-top : 0px;
+}
+header{
+    height : 136px;
+}
+.table{
+	width : 65%;
 }
 </style>
 <%@ include file="/views/common/footer.jsp" %>

@@ -27,11 +27,11 @@ public class UpdatePasswordEndServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String oriPw = request.getParameter("oriPw");
 		String newPw = request.getParameter("newPw");
-		System.out.println(oriPw);
-		System.out.println(newPw);
-		
-		Member m = new MemberService().LoginMember(email, oriPw);
-		
+		//System.out.println(oriPw);
+		//System.out.println(newPw);
+		System.out.println(email);
+		Member m = new MemberService().loginCheck(email, oriPw);
+		System.out.println(m);
 		String msg="", loc="";
 		if(m!=null) {
 			//현재비밀번호가 맞음
@@ -41,12 +41,12 @@ public class UpdatePasswordEndServlet extends HttpServlet {
 				loc +="/memberview.do";
 			}else {
 				msg +="비밀번호 변경에 실패하였습니다.";
-				loc +="/updatepassword.do";
+				loc +="/member/updatePassword.do";// ?email=추가해야함
 			}
 		}else {
 			//현재비밀번호가 틀림
 			msg+="현재비밀번호가 틀립니다.";
-			loc+="/updatepassword.do";
+			loc+="/member/updatePassword.do"; // ?email=추가해야함
 		}
 		
 		request.setAttribute("msg", msg);
