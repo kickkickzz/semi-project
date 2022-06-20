@@ -356,7 +356,10 @@ public class BoardDao {
 		List<Board> list = new ArrayList();
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("mainNotice"));
+			pstmt.setInt(1, 1);
+			pstmt.setInt(2, 4);
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
 				Board b=new Board(					
 						rs.getInt("BOARD_NUM"),

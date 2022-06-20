@@ -24,7 +24,6 @@ public class MainNoticeServlet extends HttpServlet {
      */
     public MainNoticeServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -32,9 +31,7 @@ public class MainNoticeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Board> list = new BoardService().mainNotice();
-		if(list.size()!=0) {
-			request.setAttribute("top-4-list", list);
-		}
+		request.setAttribute("top-4-list", list);
 		request.getRequestDispatcher("/").forward(request, response);
 	}
 
