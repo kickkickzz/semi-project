@@ -11,16 +11,16 @@ import java.util.List;
 
 import com.board.model.dao.BoardDao;
 import com.board.model.vo.Board;
+import com.board.model.vo.BoardAttachment;
 import com.board.model.vo.PageInfo;
-import com.member.model.vo.BoardAttachment;
 
 public class BoardService {
 	public ArrayList<Board> selectBoardList(PageInfo pi) {
 		Connection conn= getConnection();
-		ArrayList<Board> boardList= new BoardDao().selectBoardList(conn, pi);
-		if(boardList!=null) {
+		ArrayList<Board> boardList=new BoardDao().selectBoardList(conn, pi);
+		if(boardList!=null){
 			commit(conn);
-		}else {
+		}else{
 			rollback(conn);
 		}
 		close(conn);
@@ -32,15 +32,12 @@ public class BoardService {
 	public int getBoardListCount() {
 		Connection conn=getConnection();
 		int result=new BoardDao().getBoardListCount(conn);
-		
 		close(conn);
 		return result;
 	}
 	
-	public Board selectBoard(int bId) {
-		// bId¿¡ ÇØ´çÇÏ´Â °øÁö»çÇ× °Ô½Ã±ÛÁ¤º¸¸¦ °®°í¿Â´Ù.
+	public Board selectBoard(int bId){
 		Connection conn=getConnection();
-		
 		Board board=null;
 		board=new BoardDao().selectBoard(conn, bId);
 		close(conn);
@@ -49,10 +46,9 @@ public class BoardService {
 	
 
 	public BoardAttachment selectBoardAttachment(int bId) {
-		// bId¿¡ ÇØ´çÇÏ´Â °øÁö»çÇ× °Ô½Ã±Û ÀÌ¹ÌÁö Á¤º¸¸¦ °®°í¿Â´Ù.
+		//ê³µì§€ì‚¬í•­ ì´ë¯¸ì§€ ì •ë³´ ë“±
 		Connection conn=getConnection();
 		BoardAttachment boardImgAttach=null;
-		
 		boardImgAttach=new BoardDao().selectBoardAttachment(conn, bId);
 		close(conn);
 		return boardImgAttach; 
@@ -71,31 +67,27 @@ public class BoardService {
 	public int insertBoard(Board board, ArrayList<BoardAttachment> fileList) {
 		Connection conn =getConnection();
 		BoardDao dao= new BoardDao();
-		
-		// ±Û¸¸µî·ÏÇÏ±â.
+		//ê¸€ë§Œ ë“±ë¡
 		int result1=dao.insertBoard(conn, board);
 		int result2=0;
-		
-		if(board.getBoardImgPath()==null) {
+		if(board.getBoardImgPath()==null){
 			System.out.println("BoardService(x) => "+ board);
-			//ÀÌ¹ÌÁö µî·Ï¾ÈÇÑ »óÅÂ
 			if(result1>0) {
 				commit(conn);
-			}else {
+			}else{
 				rollback(conn);
 			}
-			
 			close(conn);
 			return result1;
 			
 		}else{
-			//ÀÌ¹ÌÁö µî·Ï»óÅÂ- board.getBoardImgPath()!=null
+			//ì´ë¯¸ì§€ ë“±ë¡
 			System.out.println("BoardService(o) => "+ board);
 			System.out.println("fileList=> "+ fileList);
 			result2=dao.insertBoardAttachment(conn, fileList);
-			if(result1>0 && result2>0) {
+			if(result1>0 && result2>0){
 				commit(conn);
-			}else {
+			}else{
 				rollback(conn);
 			}
 			close(conn);
@@ -104,43 +96,33 @@ public class BoardService {
 	}
 	
 
-	public int updateBoard( Board board, int bId, int fId, BoardAttachment bat) {
-		//board, bat: º¯°æÇÑ °Ô½Ã¹°, °Ô½ÃÆÇÀÌ¹ÌÁö
+	public int updateBoard(Board board, int bId, int fId, BoardAttachment bat) {
 		
 		Connection conn=getConnection();
-		BoardDao bDao = new BoardDao();
-		
-		//°Ô½ÃÆÇ ¼öÁ¤	
+		BoardDao bDao=new BoardDao();
+		//ê²Œì‹œíŒ ìˆ˜ì •	
 		int result=bDao.updateBoard(conn, board, bId);
 	
-		//º¯°æÀü¿¡ ÀÌ¹ÌÁö¸¦ °¡Áö°íÀÖ´Â°¡?
-		if(fId>0) {
-			//º¯°æÀü¿¡ ÀÌ¹ÌÁö¸¦ °¡Á³´Ù.
-			
-			//º¯°æÈÄ¿¡´Â ÀÌ¹ÌÁö¸¦ °¡Á³´Â°¡?
-			if(board.getBoardImgPath()!=null) {
-				//º¯°æÈÄ¿¡ ÀÌ¹ÌÁö¸¦ °¡Á³´Ù. => ±×³É º¯°æ
-				//ÀÌ¹ÌÁö º¯°æ
+		//ë³€ê²½ ì „ ì´ë¯¸ì§€
+		if(fId>0){
+			//ë³€ê²½ í›„ ì´ë¯¸ì§€
+			if(board.getBoardImgPath()!=null){
+				//ì´ë¯¸ì§€ ë³€ê²½
 				result+=bDao.updateBoardAttachment(conn, bat, bId);
-			}else {
-				//º¯°æÈÄ¿¡´Â ÀÌ¹ÌÁö¸¦ °®Áö ¾Ê¾Ò´Ù 
-				//=> bId¿¡ ÇØ´çÇÏ´Â ÀÌ¹ÌÁö´Â yÀ¸·Î ¹Ù²Û´Ù.
-				//=> ÀÌ¹ÌÁö¸¦ »èÁ¦.
+			}else{
+				//ì´ë¯¸ì§€ ì‚­ì œ
 				result+=bDao.deleteBoardAttachmentFid(conn, bId);
 			}
 
 		}else if(fId<=0 && board.getBoardImgPath()!=null){
-			//fId=0 : º¯°æÀü¿¡´Â ÀÌ¹ÌÁö¸¦ °®Áö ¾Ê¾Ò´Ù.
-			//º¯°æÈÄ¿¡´Â ÀÌ¹ÌÁö°¡ Á¸Àç
+			//ë³€ê²½í›„ì—ëŠ” ì´ë¯¸ì§€ê°€ ì¡´ì¬
 			result+=bDao.insertBoardAttachmentBid(conn, bat, bId);
 		}
-		
-		if(result>0) {
+		if(result>0){
 			commit(conn);
-		}else {
+		}else{
 			rollback(conn);
 		}
-		
 		return result;
 	}
 
@@ -148,17 +130,15 @@ public class BoardService {
 	public int deleteBoard(int fId, int bId) {
 		int result=0;
 		Connection conn=getConnection();
-		BoardDao bDao= new BoardDao();
-		//°Ô½ÃÆÇ¸¸ Áö¿ì´Â°Í.
-		result=bDao.deleteBoard(conn, bId);
-		
-		if(fId>0) {
-			result+=bDao.deleteBoardAttachmentFid(conn, bId);
+		BoardDao bDao=new BoardDao();
+		//ê²Œì‹œíŒì—ì„œ ì§€ìš°ê¸°
+		result=bDao.deleteBoard(conn,bId);
+		if(fId>0){
+			result+=bDao.deleteBoardAttachmentFid(conn,bId);
 		}
-		
-		if(result>0) {
+		if(result>0){
 			commit(conn);
-		}else {
+		}else{
 			rollback(conn);
 		}
 		return result;

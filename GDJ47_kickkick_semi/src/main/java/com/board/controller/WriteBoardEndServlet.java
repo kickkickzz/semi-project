@@ -16,7 +16,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
-import com.member.model.vo.BoardAttachment;
+import com.board.model.vo.BoardAttachment;
 import com.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -34,24 +34,24 @@ public class WriteBoardEndServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize=1024*1024*10; //10MB;
 			String root= request.getSession().getServletContext().getRealPath("/"); // \WebContent\
-			String saveBoardPath= root+"/resources/storage/board_img/"; //°øÁö»çÇ× °Ô½ÃÆÇ ÆÄÀÏ ÀúÀå¼Ò
+			String saveBoardPath= root+"/resources/storage/board_img/"; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 			
-			// BoardImgFileRenamePolicy() => °øÁö»çÇ×°Ô½ÃÆÇ ÀÌ¹ÌÁö ÀÌ¸§ º¯°æ ¹æ¹ý.
+			// BoardImgFileRenamePolicy() => ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×°Ô½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
 			MultipartRequest multiRequest= new MultipartRequest(request, saveBoardPath, maxSize,"UTF-8", new BoardImgFileRenamePolicy() );
 			File file=new File(saveBoardPath);
 			
-			// saveBoadPath¿¡ ÇØ´çÇÏ´Â µð·ºÅä¸®°¡ Á¸ÀçÇÏÁö ¾Ê´Â´Ù¸é
+			// saveBoadPathï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´Ù¸ï¿½
 			if(!file.exists()) {
 				file.mkdirs();
 			}
 			
-			//¹Ù²ï ÆÄÀÏÀÌ¸§À» ÀúÀåÇÏ´Â ArrayList
+			//ï¿½Ù²ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ArrayList
 			ArrayList<String> saveFiles = new ArrayList<String>();
 			
-			//¿øº»ÆÄÀÏÀÌ¸§À» ÀúÀåÇÏ´Â ArrayList
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ArrayList
 			ArrayList<String> originFiles= new ArrayList<String>();
 			
-			//getFileName(): Æû¿¡¼­ Àü¼ÛµÈ FileÀÇ ÀÌ¸§À» À§ÀÇ ±ÔÁ¤´ë·Î º¯È¯
+			//getFileName(): ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ûµï¿½ Fileï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
 			Enumeration<String> files= multiRequest.getFileNames();
 			while(files.hasMoreElements()) {
 				String name= files.nextElement();
@@ -62,11 +62,11 @@ public class WriteBoardEndServlet extends HttpServlet {
 				}
 			}
 			
-			// ÀÔ·ÂÇÑ µ¥ÀÌÅÍ¸¦ String ÇüÅÂ·Î º¯È¯
-			String title= multiRequest.getParameter("title"); //Á¦¸ñ-title - BOARD_TITLE
-			String content= multiRequest.getParameter("content"); //³»¿ë-content - BOARD_CONTENT
+			// ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ String ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯
+			String title= multiRequest.getParameter("title"); //ï¿½ï¿½ï¿½ï¿½-title - BOARD_TITLE
+			String content= multiRequest.getParameter("content"); //ï¿½ï¿½ï¿½ï¿½-content - BOARD_CONTENT
 			String email=((Member) request.getSession().getAttribute("loginUser")).getEmail();
-			String name=((Member)request.getSession().getAttribute("loginUser")).getName(); //ÀÌ¸§- BOARD_WRITER
+			String name=((Member)request.getSession().getAttribute("loginUser")).getName(); //ï¿½Ì¸ï¿½- BOARD_WRITER
 			
 			Board board= new Board();
 			board.setBoardTitle(title);
@@ -81,13 +81,13 @@ public class WriteBoardEndServlet extends HttpServlet {
 				bat.setOriginName(originFiles.get(i));
 				bat.setChangeName(saveFiles.get(i));
 				
-				//ÀÌ¹ÌÁöÀÌ¸§
+				//ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
 				board.setBoardImgPath(originFiles.get(i));
 				
 				fileList.add(bat);
 			}
 			
-			System.out.println("/insertBoard.bo=> "+board); //boardÃâ·Â
+			System.out.println("/insertBoard.bo=> "+board); //boardï¿½ï¿½ï¿½
 			
 			int result= new BoardService().insertBoard(board, fileList);
 			if(result>0) {
@@ -98,7 +98,7 @@ public class WriteBoardEndServlet extends HttpServlet {
 					failedFile.delete();
 				}
 				
-				request.setAttribute("msg", "°øÁö °Ô½ÃÆÇ °Ô½Ã±Û µî·Ï¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.");
+				request.setAttribute("msg", "ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 				request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
 			}
 			
@@ -120,7 +120,7 @@ public class WriteBoardEndServlet extends HttpServlet {
 				response.sendRedirect("showBoardList.bo");
 				
 			}else {
-				request.setAttribute("msg", "°øÁö»çÇ× µî·Ï¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.");
+				request.setAttribute("msg", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 				RequestDispatcher view = request.getRequestDispatcher("/views/common/errorPage.jsp");
 				view.forward(request, response);
 			}

@@ -1,10 +1,10 @@
-package com.member.model.vo;
+package com.board.model.vo;
 
 import java.sql.Date;
-
+///clear
 public class BoardAttachment {
-	private int fileId; //파일번호
-	private int boardId;//게시판 번호
+	private int fileId;
+	private int boardId;
 	private String originName;
 	private String changeName;
 	private String filePath;
