@@ -41,10 +41,7 @@
       }
 </style>
 
-    
-    
 
-    
 <section>
 <div class="container-fluid">
   <div class="row">
@@ -59,7 +56,7 @@
        <p></p>
       </li>
       <li>
-        <a class="nav-link active" href="" style="color: black">
+        <a class="nav-link active" href="<%=request.getContextPath()%>/updatemember.do" style="color: black">
          <i class="fa-solid fa-user"></i>
          <span data-feather="home"></span>
          회원 정보
@@ -103,11 +100,11 @@
     <form id="updateForm" action="<%=request.getContextPath()%>/updatemember.do" method="post">
      <div>
       <p style="margin-bottom : 3px;" class="pp">이메일</p>
-      <input type="text" name="email" value="<%=m.getEmail()%>" style="margin-bottom : 7px;" size="63" readonly>
+      <input type="text" name="email" value="<%=loginMember.getEmail()%>" style="margin-bottom : 7px;" size="63" readonly>
      </div>  
      <div>
       <p style="margin-bottom : 3px;" class="pp">이름</p>
-      <input type="text" name="name" value="<%=m.getName()%>" readonly style="margin-bottom : 10px;" size="63">
+      <input type="text" name="name" value="<%=loginMember.getName()%>" readonly style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">비밀번호</p>
@@ -115,11 +112,11 @@
      </div>  
      <div>
       <p style="margin-bottom : 3px;">생년월일</p>
-      <input type="Date" name="birthday"  value="<%=m.getBirthday()%>" placeholder="yyyyMMdd" style="margin-bottom : 10px;" size="63">
+      <input type="Date" name="birthday"  value="<%=loginMember.getBirthday()%>" placeholder="yyyyMMdd" style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">연락처</p>
-      <input type="text" name="phone" value="<%=m.getPhone()%>" placeholder="-없이 입력" maxlength="11" style="margin-bottom : 10px;" size="63">
+      <input type="text" name="phone" value="<%=loginMember.getPhone()%>" placeholder="-없이 입력" maxlength="11" style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">주소</p>
@@ -233,5 +230,4 @@ function sample6_execDaumPostcode() {
 }
 
 </script>
-
 <%@ include file="/views/common/footer.jsp" %>
