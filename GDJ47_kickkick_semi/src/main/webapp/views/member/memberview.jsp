@@ -56,7 +56,7 @@
        <p></p>
       </li>
       <li>
-        <a class="nav-link active" href="<%=request.getContextPath()%>/updatemember.do" style="color: black">
+        <a class="nav-link active" href="" style="color: black">
          <i class="fa-solid fa-user"></i>
          <span data-feather="home"></span>
          회원 정보
@@ -108,7 +108,7 @@
      </div>
      <div>
       <p style="margin-bottom : 3px;">비밀번호</p>
-      <input type="text" value="비밀번호 변경을 원하시면 하단 비밀번호 변경 버튼을 누르세요" readonly style="margin-bottom : 10px;" size="63">
+      <input type="button" onclick="updatePw()" value="비밀번호 변경">
      </div>  
      <div>
       <p style="margin-bottom : 3px;">생년월일</p>
@@ -135,7 +135,6 @@
      </div><br><br>
       <input type="button" onclick="fn_update();" value="수정"/>
       <input type="reset" value="취소">
-      <input type="button" onclick="updatePw()" value="비밀번호 변경">
     </form>
 
    </main>

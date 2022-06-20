@@ -41,7 +41,9 @@ public class DeleteMemberEndServlet extends HttpServlet {
 			int result = new MemberService().deleteMember(email);
 			if(result>0) {
 				msg +="회원탈퇴가 완료되었습니다.";
-				loc +="";
+				loc +="/logoutMember.do";
+				String script="opener.location.replace('"+request.getContextPath()+"/logoutMember.do');close();";
+				request.setAttribute("script",script);
 			}else {
 				msg +="회원탈퇴에 실패하였습니다.";
 				loc +="/deletemember.do?email="+email;// ?email=추가해야함
