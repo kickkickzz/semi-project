@@ -161,3 +161,18 @@ function enroll(){
 			return true;
 		}
 }
+
+//이메일 중복확인
+function fn_emailDuplicate(){
+	const email = $('#email').val();
+	
+	const url = "<%=request.getContextPath()%>/emailDuplicate.do";
+    const title="emailDuplicate";
+    open("",title,"width=300,height=200");
+    console.log(emailDuplicate)
+    emailDuplicate.email.value=email;
+    emailDuplicate.method="post";
+    emailDuplicate.action=url;
+    emailDuplicate.target=title;
+    emailDuplicate.submit();
+}
