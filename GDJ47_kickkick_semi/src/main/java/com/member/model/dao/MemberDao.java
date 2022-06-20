@@ -212,4 +212,25 @@ public class MemberDao {
 		}
 		return result;
 	}
+	
+	
+	//이메일 찾기
+	public Member selectEmail(Connection conn, String name, String phone) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member m = null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectEmail"));
+			pstmt.setString(1, name);
+			pstmt.setString(2, phone);
+			rs=pstmt.executeQuery();
+			if(rs.next()) m =getMember(rs);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
 }

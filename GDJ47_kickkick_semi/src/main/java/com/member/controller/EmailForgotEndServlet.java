@@ -1,7 +1,6 @@
 package com.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,45 +8,46 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
-import com.team.model.service.TeamService;
-import com.team.model.vo.Team;
 
 /**
- * Servlet implementation class MyTeamServlet
+ * Servlet implementation class EmailForgotEndServlet
  */
-@WebServlet("/member/myteam.do")
-public class MyTeamServlet extends HttpServlet {
+@WebServlet("/emailForgotEnd.do")
+public class EmailForgotEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyTeamServlet() {
+    public EmailForgotEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//where email=? (팀리더이메일) 즉 팀 유저 한명당 팀을 하나밖에 만들지 못함 그 유저한명이 만들면 팀리더가 됨
-		//팀 가입은 3개까지 가능
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
 		
+		Member m = new MemberService().selectEmail(name,phone);
 		
-		Member m = (Member)request.getSession().getAttribute("loginMember");
-		System.out.println(m);
 		String email = m.getEmail();
+		System.out.println(email);
+		String msg="", script="";
+		if(m!=null) {
+			msg += "찾으실 이메일 : "+email;
+			script += "close()";
+		}else{
+			msg += "조회된 이메일이 없습니다.";
+			script += "close()";
+		}
 		
-		//Team team = new TeamService().getTeamLeader(email);
-		
-		//ArrayList<Team> teamArr = new TeamService().getTeam(userId);
-		
-		//request.setAttribute("team", team);
-		//request.setAttribute("teamArr", teamArr);
 
-		request.getRequestDispatcher("/views/member/myteam.jsp").forward(request, response);
+		request.setAttribute("msg", msg);
+		request.setAttribute("script", script);
+		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
 	}
 
 	/**
