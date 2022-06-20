@@ -1,3 +1,4 @@
+
 let flag = 0;
 $(()=>{	
 	
@@ -32,6 +33,7 @@ $(()=>{
 			const password = $(".password").val();
 			$("#email").val(email);
 			$("#password").val(password);
+			form.attr("onsubmit","return logincheck();");
 			form.attr("action","http://localhost:9090/GDJ47_kickkick_semi/loginMember.do");
 			form.submit();
 		}
@@ -151,11 +153,37 @@ function sample6_execDaumPostcode() {
         }
     }).open();
 }
+//로그인시 조건 확인
+function logincheck(){
+	//패스워드 입력 했는지 
+	if($(".email").val().length<1 | !($(".email").val().match("@"))){
+		$("#msg").text("이메일형식에 맞춰 입력하세요.").css({"color":"red","font-size":"10px"});
+		return false;
+	}else if($(".password").val().length<1){
+		$(".login-error-msg").text("비밀번호를 입력하세요.").css({"color":"red","font-size":"10px"});
+		$("#msg").text("").css({"color":"red","font-size":"10px"});
+		return false;
+	}else{
+		return true;
+	}
+}
 
-//회원가입시 최소 길이 확인
+//회원가입시 조건 확인
 function enroll(){
-		if(($(".email").val()).length<2 || !($(".email").val().match("@"))){
-			$("#msg").text("이메일을 똑바로 입력하거라 임마!").css({"color":"red","font-size":"10px"});
+		//이메일 최소 길이 / @포함 여부
+		if(($(".email").val().trim()).length<2 || !($(".email").val().match("@"))){
+			$("#msg").text("이메일을 형식에 맞춰 입력하세요").css({"color":"red","font-size":"10px"});
+			return false;
+		}else if(($(".password").val().trim()).length<2){
+			//비밀번호 조건 / 길이
+			$("#msg").text("");
+			$("#pwmsg").text("비밀번호를 입력하세요").css({"color":"red","font-size":"10px"});
+			return false;
+		}else if($(".name").val().trim().length<1){
+			//이름 조건 / 길이
+			$("#msg").text("");
+			$("#pwmsg").text("");
+			$("#namemsg").text("이름를 입력하세요").css({"color":"red","font-size":"10px"});
 			return false;
 		}else{
 			return true;
