@@ -22,7 +22,7 @@ import com.oreilly.servlet.MultipartRequest;
 
 import common.BoardImgFileRenamePolicy;
 
-@WebServlet("/writeBoard.do")
+@WebServlet("/insertBoard.do")
 public class WriteBoardEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,72 +33,69 @@ public class WriteBoardEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize=1024*1024*10; //10MB;
-			String root= request.getSession().getServletContext().getRealPath("/"); // \WebContent\
-			String saveBoardPath= root+"/resources/storage/board_img/"; //�������� �Խ��� ���� �����
+			String root= request.getSession().getServletContext().getRealPath("/");
+			String saveBoardPath= root+"/resources/storage/board_img/"; //공지사항 게시판 파일 저장소
 			
-			// BoardImgFileRenamePolicy() => �������װԽ��� �̹��� �̸� ���� ���.
-			MultipartRequest multiRequest= new MultipartRequest(request, saveBoardPath, maxSize,"UTF-8", new BoardImgFileRenamePolicy() );
+			// BoardImgFileRenamePolicy() => 공지사항게시판 이미지 이름 변경 방법
+			MultipartRequest multiRequest=new MultipartRequest(request, saveBoardPath, maxSize,"UTF-8", new BoardImgFileRenamePolicy() );
 			File file=new File(saveBoardPath);
 			
-			// saveBoadPath�� �ش��ϴ� ���丮�� �������� �ʴ´ٸ�
+			// saveBoadPath에 해당하는 디렉토리가 존재하지 않는다면
 			if(!file.exists()) {
 				file.mkdirs();
 			}
 			
-			//�ٲ� �����̸��� �����ϴ� ArrayList
+			//바뀐 파일이름을 저장하는 ArrayList
 			ArrayList<String> saveFiles = new ArrayList<String>();
 			
-			//���������̸��� �����ϴ� ArrayList
+			//원본파일이름을 저장하는 ArrayList
 			ArrayList<String> originFiles= new ArrayList<String>();
 			
-			//getFileName(): ������ ���۵� File�� �̸��� ���� ������� ��ȯ
+			//getFileName():폼에서 전송된 File의 이름을 위의 규정대로 변환
 			Enumeration<String> files= multiRequest.getFileNames();
 			while(files.hasMoreElements()) {
 				String name= files.nextElement();
-				
 				if(multiRequest.getFilesystemName(name)!=null) {
 					saveFiles.add(multiRequest.getFilesystemName(name));
 					originFiles.add(multiRequest.getOriginalFileName(name));
 				}
 			}
 			
-			// �Է��� �����͸� String ���·� ��ȯ
-			String title= multiRequest.getParameter("title"); //����-title - BOARD_TITLE
-			String content= multiRequest.getParameter("content"); //����-content - BOARD_CONTENT
+			// 입력한 데이터를 String 형태로 변환
+			String title=multiRequest.getParameter("title"); //BOARD_TITLE
+			String content=multiRequest.getParameter("content"); //BOARD_CONTENT
 			String email=((Member) request.getSession().getAttribute("loginUser")).getEmail();
-			String name=((Member)request.getSession().getAttribute("loginUser")).getName(); //�̸�- BOARD_WRITER
+			String name=((Member)request.getSession().getAttribute("loginUser")).getName(); //BOARD_WRITER
 			
-			Board board= new Board();
+			Board board=new Board();
 			board.setBoardTitle(title);
 			board.setBoardWriter(name);
 			board.setBoardContent(content);
 			board.setBoardWriterEmail(email);
 			
-			ArrayList<BoardAttachment> fileList= new ArrayList<BoardAttachment>();
-			for(int i=originFiles.size()-1; i>=0; i--) {
+			ArrayList<BoardAttachment> fileList=new ArrayList<BoardAttachment>();
+			for(int i=originFiles.size()-1;i>=0;i--){
 				BoardAttachment bat= new BoardAttachment();
 				bat.setFilePath(saveBoardPath);
 				bat.setOriginName(originFiles.get(i));
 				bat.setChangeName(saveFiles.get(i));
 				
-				//�̹����̸�
+				//이미지이름
 				board.setBoardImgPath(originFiles.get(i));
 				
 				fileList.add(bat);
 			}
 			
-			System.out.println("/insertBoard.bo=> "+board); //board���
-			
+			System.out.println("/insertBoard.do=> "+board);
 			int result= new BoardService().insertBoard(board, fileList);
-			if(result>0) {
-				response.sendRedirect("showBoardList.bo");
-			}else {
-				for(int i=0; i<saveFiles.size(); i++) {
+			if(result>0){
+				response.sendRedirect("showBoardList.do");
+			}else{
+				for(int i=0;i<saveFiles.size();i++) {
 					File failedFile=new File(saveBoardPath+saveFiles.get(i));
 					failedFile.delete();
 				}
-				
-				request.setAttribute("msg", "���� �Խ��� �Խñ� ��Ͽ� �����Ͽ����ϴ�.");
+				request.setAttribute("msg","공지사항등록 실패");
 				request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
 			}
 			
@@ -117,12 +114,12 @@ public class WriteBoardEndServlet extends HttpServlet {
 			
 			int result=new BoardService().insertBoard(board, null);
 			if(result>0) {
-				response.sendRedirect("showBoardList.bo");
+				response.sendRedirect("showBoardList.do");
 				
 			}else {
-				request.setAttribute("msg", "�������� ��Ͽ� �����Ͽ����ϴ�.");
+				request.setAttribute("msg","공지사항등록 실패");
 				RequestDispatcher view = request.getRequestDispatcher("/views/common/errorPage.jsp");
-				view.forward(request, response);
+				view.forward(request,response);
 			}
 		}
 	}

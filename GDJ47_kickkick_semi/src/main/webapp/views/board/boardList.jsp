@@ -17,7 +17,7 @@
 					<h1 class="board-title">공지사항</h1>
 					<hr>
 				</div>
-				<!-- 공지작성은 관리자만-->
+				<!-- 공지작성은 관리자만 회원 유형 적용해서 권한부여 가능-->
 				<%//if(loginMember!=null&&loginMember.getEmail().equals("admin")){ %>
 				<div class="board_button_box">
 					<div></div>
@@ -28,7 +28,7 @@
 				<div class="board_table_container">
 					<table class="table table-hover" id="listArea">
 						<thead class="thead-dark">
-							<!-- table attributes -->
+							<!-- table 요소-->
 							<tr>
 								<th scope="col">No</th>
 								<th scope="col">작성날짜</th>

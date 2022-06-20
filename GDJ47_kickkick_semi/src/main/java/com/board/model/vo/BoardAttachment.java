@@ -1,6 +1,7 @@
 package com.board.model.vo;
 
 import java.sql.Date;
+
 ///clear
 public class BoardAttachment {
 	private int fileId;
