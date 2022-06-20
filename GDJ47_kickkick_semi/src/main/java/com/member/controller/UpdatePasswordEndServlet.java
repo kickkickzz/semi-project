@@ -12,7 +12,7 @@ import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
 
 
-@WebServlet("/updatepasswordend.do")
+@WebServlet(name="updatePasswordEndServlet" , urlPatterns={"/updatepasswordend.do"})
 public class UpdatePasswordEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,9 +27,10 @@ public class UpdatePasswordEndServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String oriPw = request.getParameter("oriPw");
 		String newPw = request.getParameter("newPw");
+		//System.out.println(oriPw);
+		//System.out.println(newPw);
+		System.out.println(email);
 		System.out.println(oriPw);
-		System.out.println(newPw);
-		
 		Member m = new MemberService().LoginMember(email, oriPw);
 		
 		String msg="", loc="";
@@ -38,15 +39,16 @@ public class UpdatePasswordEndServlet extends HttpServlet {
 			int result = new MemberService().updatePassword(email, newPw);
 			if(result>0) {
 				msg +="비밀번호를 변경하였습니다.";
-				loc +="/memberview.do";
+				String script="close();";
+				request.setAttribute("script", script);
 			}else {
 				msg +="비밀번호 변경에 실패하였습니다.";
-				loc +="/updatepassword.do";
+				loc +="/member/updatePassword.do?email="+email;// ?email=추가해야함
 			}
 		}else {
 			//현재비밀번호가 틀림
 			msg+="현재비밀번호가 틀립니다.";
-			loc+="/updatepassword.do";
+			loc+="/member/updatePassword.do?email="+email; // ?email=추가해야함
 		}
 		
 		request.setAttribute("msg", msg);

@@ -1,26 +1,23 @@
 package com.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.team.model.vo.Team;
-
 /**
- * Servlet implementation class MyTeamServlet
+ * Servlet implementation class DeleteMemberServlet
  */
-@WebServlet("/member/myteam.do")
-public class MyTeamServlet extends HttpServlet {
+@WebServlet("/deletemember.do")
+public class DeleteMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyTeamServlet() {
+    public DeleteMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +26,7 @@ public class MyTeamServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/member/myteam.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/deletemember.jsp").forward(request, response);
 	}
 
 	/**
