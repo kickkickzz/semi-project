@@ -55,7 +55,7 @@
        		<p></p>
       	  </li>          
           <li class="nav-item">
-            <a class="nav-link active" href="<%=request.getContextPath()%>/memberview.do" style="color: black">
+            <a class="nav-link active" href="<%=request.getContextPath()%>/memberview.do?email=<%=loginMember.getEmail()%> %>" style="color: black">
               <i class="fa-solid fa-user"></i>
               <span data-feather="home"></span>
               회원 정보
