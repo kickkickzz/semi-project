@@ -9,7 +9,7 @@
 	Board board=(Board)request.getAttribute("board");
 	BoardAttachment img=(BoardAttachment)request.getAttribute("img");
 	
-	System.out.println("공지사항- 게시판 상세보기");
+	System.out.println("공지사항-상세보기");
  	
 	System.out.println(board);
 	System.out.println(img); 
@@ -19,11 +19,11 @@
 		fId=img.getFileId();
 	}
 %>    
-<%--정적 파일 불러오기 css/js --%>
+<!-- 정적 파일 불러오기 css/js -->
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/css/boardDetail.css">
 <script src="<%=request.getContextPath()%>/js/boardDetail.js"></script>
 <body>
-	<%--본내용 --%>
+	<!-- 본내용 -->
     <div class="main-content-container" id="main-container">
         <div class="board-detail-main-container">
                 <!-- 타이틀-->
@@ -38,9 +38,9 @@
                     <!-- 이미지 -->
                     <div class="board-img-box">
                     	<%if(img!=null){ 
-                    		//등록한 이미지가 존재한다면..
+                    		//등록한 이미지가 존재 시
                     	%>
-                        	<img id="image" src="<%=request.getContextPath() %>/resources/storage/board_img/<%=img.getChangeName() %>" alt="게시판 이미지">
+                        	<img id="image" src="<%=request.getContextPath() %>/upload/storage/board_img/<%=img.getChangeName() %>" alt="게시판 이미지">
                         <%} %>
                     </div>
 
@@ -50,10 +50,7 @@
                     </div>
                 </div>
 
-                <!-- 버튼박스 
-                	목록: 모든회원 다가능한데
-                	수정/삭제: 관리자(R)만 가능하다.
-                -->
+                <!-- 버튼박스 목록: 모든회원 가능//// 수정/삭제: 관리자만 가능 -->
                 <div class="board-btn-box">
                     	
                     <%//if(loginUser!=null && loginUser.getMember_type().equals("R")) {

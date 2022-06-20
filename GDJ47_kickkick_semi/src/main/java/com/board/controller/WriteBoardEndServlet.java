@@ -34,7 +34,7 @@ public class WriteBoardEndServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize=1024*1024*10; //10MB;
 			String root= request.getSession().getServletContext().getRealPath("/");
-			String saveBoardPath= root+"/resources/storage/board_img/"; //공지사항 게시판 파일 저장소
+			String saveBoardPath= root+"/webapp/upload/board_img/"; //공지사항 게시판 파일 저장소
 			
 			// BoardImgFileRenamePolicy() => 공지사항게시판 이미지 이름 변경 방법
 			MultipartRequest multiRequest=new MultipartRequest(request,saveBoardPath,maxSize,"UTF-8",new BoardImgFileRenamePolicy());
