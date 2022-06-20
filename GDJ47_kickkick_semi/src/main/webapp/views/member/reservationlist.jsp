@@ -29,7 +29,6 @@
         -moz-user-select: none;
         user-select: none;
       }
-
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -56,7 +55,7 @@
        		<p></p>
       	  </li>          
           <li class="nav-item">
-            <a class="nav-link active" href="<%=request.getContextPath()%>/memberview.do?email=<%=loginMember.getEmail()%> %>" style="color: black">
+            <a class="nav-link active" href="<%=request.getContextPath()%>/memberview.do" style="color: black">
               <i class="fa-solid fa-user"></i>
               <span data-feather="home"></span>
               회원 정보
@@ -139,7 +138,6 @@ div.row{
 	padding :0% 0% 0% 280px;
 }
 .col-md-9{
-
 }
 section{
 	padding-top : 0px;

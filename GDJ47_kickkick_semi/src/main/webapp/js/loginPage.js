@@ -33,7 +33,6 @@ $(()=>{
 			const password = $(".password").val();
 			$("#email").val(email);
 			$("#password").val(password);
-			form.attr("onsubmit","return logincheck();");
 			form.attr("action","http://localhost:9090/GDJ47_kickkick_semi/loginMember.do");
 			form.submit();
 		}

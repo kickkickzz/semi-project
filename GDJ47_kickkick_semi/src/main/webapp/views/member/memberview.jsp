@@ -54,7 +54,7 @@
        <p></p>
       </li>
       <li>
-        <a class="nav-link active" href="<%=request.getContextPath()%>/updatemember.do" style="color: black">
+        <a class="nav-link active" href="" style="color: black">
          <i class="fa-solid fa-user"></i>
          <span data-feather="home"></span>
          회원 정보
