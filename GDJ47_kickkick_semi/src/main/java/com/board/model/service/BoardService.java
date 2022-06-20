@@ -144,4 +144,10 @@ public class BoardService {
 		return result;
 	}
 	
+	/*
+	 * //게시판 상위 4개 가져오기 public List<Board> fourBoard(){
+	 * 
+	 * }
+	 */
+	
 }
