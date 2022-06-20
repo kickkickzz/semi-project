@@ -3,6 +3,13 @@
 <%
    String msg = (String)request.getAttribute("msg");
 %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ㅋ킥킥ㅋ</title>
+</head>
+<body>
 <%-- <%@ include file="/views/common/header.jsp" %> --%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/loginPage.css">
 <script src="https://kit.fontawesome.com/7bb5347123.js" crossorigin="anonymous"></script>
@@ -88,4 +95,6 @@ function fn_emailDuplicate(){
     emailDuplicate.submit();
 }
 </script>
+</body>
+</html>
 <%-- <%@ include file="/views/common/footer.jsp" %> --%>
