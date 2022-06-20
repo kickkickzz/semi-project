@@ -36,10 +36,10 @@ public class EmailForgotEndServlet extends HttpServlet {
 		String email = m.getEmail();
 		System.out.println(email);
 		String msg="", script="";
-		if(m!=null) {
+		if(email!=null) {
 			msg += "찾으실 이메일 : "+email;
 			script += "close()";
-		}else{
+		}else if(email==null){
 			msg += "조회된 이메일이 없습니다.";
 			script += "close()";
 		}
