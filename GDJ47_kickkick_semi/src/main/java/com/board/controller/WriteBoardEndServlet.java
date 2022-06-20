@@ -21,7 +21,7 @@ import com.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
 import common.BoardImgFileRenamePolicy;
-
+//clear
 @WebServlet("/insertBoard.do")
 public class WriteBoardEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -37,10 +37,10 @@ public class WriteBoardEndServlet extends HttpServlet {
 			String saveBoardPath= root+"/resources/storage/board_img/"; //공지사항 게시판 파일 저장소
 			
 			// BoardImgFileRenamePolicy() => 공지사항게시판 이미지 이름 변경 방법
-			MultipartRequest multiRequest=new MultipartRequest(request, saveBoardPath, maxSize,"UTF-8", new BoardImgFileRenamePolicy() );
+			MultipartRequest multiRequest=new MultipartRequest(request,saveBoardPath,maxSize,"UTF-8",new BoardImgFileRenamePolicy());
 			File file=new File(saveBoardPath);
 			
-			// saveBoadPath에 해당하는 디렉토리가 존재하지 않는다면
+			// saveBoardPath에 해당하는 디렉토리가 존재하지 않으면
 			if(!file.exists()) {
 				file.mkdirs();
 			}
@@ -64,7 +64,7 @@ public class WriteBoardEndServlet extends HttpServlet {
 			// 입력한 데이터를 String 형태로 변환
 			String title=multiRequest.getParameter("title"); //BOARD_TITLE
 			String content=multiRequest.getParameter("content"); //BOARD_CONTENT
-			String email=((Member) request.getSession().getAttribute("loginUser")).getEmail();
+			String email=((Member)request.getSession().getAttribute("loginUser")).getEmail();
 			String name=((Member)request.getSession().getAttribute("loginUser")).getName(); //BOARD_WRITER
 			
 			Board board=new Board();
@@ -112,13 +112,13 @@ public class WriteBoardEndServlet extends HttpServlet {
 			board.setBoardWriter(name);
 			board.setBoardWriterEmail(email);
 			
-			int result=new BoardService().insertBoard(board, null);
+			int result=new BoardService().insertBoard(board,null);
 			if(result>0) {
 				response.sendRedirect("showBoardList.do");
 				
 			}else {
 				request.setAttribute("msg","공지사항등록 실패");
-				RequestDispatcher view = request.getRequestDispatcher("/views/common/errorPage.jsp");
+				RequestDispatcher view=request.getRequestDispatcher("/views/common/errorPage.jsp");
 				view.forward(request,response);
 			}
 		}

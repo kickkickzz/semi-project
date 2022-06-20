@@ -1,7 +1,7 @@
 package com.board.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,10 +23,13 @@ public class BoardListServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Board> list = new BoardService().selectList();
+		ArrayList<Board> list = new BoardService().selectList();
 
-		request.setAttribute("list",list);
-		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
+		response.setContentType("application/json; charset=UTF-8");
+		Gson gson=new GsonBuilder().setDateFormat("yyyy년  MM월 dd일").create();
+		gson.toJson(list, response.getWriter());
+//		request.setAttribute("list",list);
+//		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
 
 	}
 
