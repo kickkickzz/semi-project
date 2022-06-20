@@ -10,15 +10,13 @@
 <br><br><br><br><br><br><br><br>
 
  <h2>팀 정보 입력</h2>
-        <form name="enrollMemberFrm" action="<%=request.getContextPath() %>/team/teamRegist.do" method="post" 
-        onsubmit="return fn_enrollmemberValidate();" >
+        <form name="teamEnroll" action="<%=request.getContextPath() %>/team/teamRegist.do" method="post" 
+        onsubmit="return fn_enrollteamValidate();" >
         <table>
 			<tr>
 				<th>팀 이름</th>
 				<td>
-					<input type="text" placeholder="5글자이하" name="userId" id="userId_" >
-					<input type="button" value="중복확인"
-					onclick="fn_idDuplicate();">
+					<input type="text" placeholder="5글자이하" id="teamna" value=""><input type="button" id="namecheck" value="중복확인" onclick="fn_nameDuplicate();">
 				</td>
 			</tr>
 			
@@ -28,6 +26,7 @@
 					<input type="text" placeholder="" name="address" id="address"><br>
 				</td>
 			</tr>
+			<tr>
 				<th>성별 </th>
 				<td>
 					<select id="team_gender" name="team_gender">
@@ -38,6 +37,7 @@
 					</select>
 				</td>
 			</tr>
+			
 			<tr>
 				<th>평균나이 </th>
 				<td>
@@ -54,36 +54,43 @@
 		<input type="submit" value="생성" >
 		<input type="reset" value="취소">
         </form>
-        <form name="idDuplicateFrm">
-        	<input type="hidden" name="userId">
+        <form name="nameDuplicate">
+        	<input type="hidden" name="team_name">
         </form>
     </section>
     <script>
-    	const fn_idDuplicate=()=>{
-    		const userId=$("#userId_").val().trim();
-    		if(userId.length<4){
-    			alert("아이디는 5글자 이하이어야 합니다.");
-    			$("#userId_").focus();
+    	function fn_nameDuplicate(){
+    		const team_name=$("#teamna").val();
+    		console.log(team_name);
+    		if(team_name.length>5){
+    			
+    			alert("팀 명은 5글자 이하이어야 합니다.");
+    			
     		}else{
     			const url="<%=request.getContextPath()%>/team/idDuplicate.do";
-    			const title="idDuplicateFrm";
+    			
+    			const title="nameDuplicate";
+    			
 	    		open("",title,"width=300,height=200");
-	    		idDuplicateFrm.userId.value=userId;
-	    		idDuplicateFrm.method="post";
-	    		idDuplicateFrm.action=url;
-	    		idDuplicateFrm.target=title;
-	    		idDuplicateFrm.submit();
+	    		console.log(nameDuplicate);
+	    		
+	    		nameDuplicate.team_name.value=team_name;
+	    		nameDuplicate.method="post";
+	    		nameDuplicate.action=url;
+	    		nameDuplicate.target=title;
+	    		nameDuplicate.submit();
     		}
     		
     		
     		
+    		
     	}
-    	const fn_enrollmemberValidate=()=>{
+    	const fn_enrollteamValidate=()=>{
     		//아이디의 길이 4이상
-    		const userId=$("#userId_").val();
-    		if(userId.trim().length<4){
+    		const team=$("#teamna").val();
+    		console.log(team);
+    		if(team.length>5){
     			alert("팀 명은 5글자 이하로 작성하세요");
-    			$("#userId_").focus();
     			return false;
     		}
     		return true;

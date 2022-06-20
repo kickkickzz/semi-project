@@ -5,8 +5,6 @@
 <%
 	ArrayList<TeamMemberInfo> teamMemberArr=(ArrayList<TeamMemberInfo>)request.getAttribute("teamMemberArr");
 	Team teamInfo = (Team)request.getAttribute("teamInfo");
-	String searchType=request.getParameter("searchType");
-	String keyword=request.getParameter("searchKeyword");
 	
 %>
 
@@ -49,7 +47,6 @@
          		<th scope="col">이름</th>
 				<th scope="col">성별</th>
 				<th scope="col">연락처</th>
-				<th scope="col">나이</th>
 				<th scope="col">포지션</th>
                
             </tr>
@@ -66,14 +63,11 @@
 									<td><%= t.getName() %></td>
 									<td><%= t.getGender() %></td>
 									<td><%= t.getPhone() %></td>
-									<td><%= t.getAge()%></td>
+									
 									<td><%= t.getPosition() %></td>
 								</tr>
 								<%		}%>
 								<%}%>
         </table> 
-         <div id="pageBar">
-        	<%=request.getAttribute("pageBar") %>
-        </div>
 
 <%@ include file="/views/common/footer.jsp" %>

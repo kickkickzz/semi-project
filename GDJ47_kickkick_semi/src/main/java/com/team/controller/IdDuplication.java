@@ -31,16 +31,15 @@ public class IdDuplication extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String teamName=request.getParameter("team_name");
+		String team_name=request.getParameter("team_name");
+		System.out.println(request.getParameter("team_name"));
 		
-		Team t=new TeamService().selectTeamByName(teamName);
-		
+		Team t=new TeamService().selectTeamByName(team_name);
 		System.out.println(t);
 		
-		request.setAttribute("result",(t==null?true:false));
+		request.setAttribute("result",t==null?true:false);
 		
 	
-//		response.sendRedirect(request.getContextPath()+"/views/")
 		request.getRequestDispatcher("/views/team/idduplicate.jsp")
 		.forward(request, response);
 	}
