@@ -33,13 +33,13 @@ public class EmailForgotEndServlet extends HttpServlet {
 		
 		Member m = new MemberService().selectEmail(name,phone);
 		
-		String email = m.getEmail();
-		System.out.println(email);
 		String msg="", script="";
-		if(email!=null) {
+		if(m!=null) {
+			String email = m.getEmail();
+			System.out.println(email);
 			msg += "찾으실 이메일 : "+email;
 			script += "close()";
-		}else if(email==null){
+		}else if(m==null){
 			msg += "조회된 이메일이 없습니다.";
 			script += "close()";
 		}
