@@ -13,7 +13,7 @@ import com.member.model.vo.Member;
 /**
  * Servlet implementation class DeleteMemberEndServlet
  */
-@WebServlet("/deletememberend.do")
+@WebServlet(name="deleteMemberEndServlet", urlPatterns={"/deletememberend.do"})
 public class DeleteMemberEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,7 +34,7 @@ public class DeleteMemberEndServlet extends HttpServlet {
 		System.out.println(email);
 		System.out.println(pwd);
 		Member m = new MemberService().LoginMember(email, pwd);
-		System.out.println(m);
+		
 		String msg="", loc="";
 		if(m!=null) {
 			//현재비밀번호가 맞음

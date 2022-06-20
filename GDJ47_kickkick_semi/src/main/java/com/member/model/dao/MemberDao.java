@@ -43,6 +43,7 @@ public class MemberDao {
 					.password(rs.getString("password"))
 					.name(rs.getString("name"))
 					.phone(rs.getString("phone"))
+					.birthday(rs.getDate("birthday"))
 					.address(rs.getString("address"))
 					.gender(rs.getString("gender"))
 					.build();

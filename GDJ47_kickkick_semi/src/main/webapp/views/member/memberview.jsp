@@ -115,7 +115,7 @@
      </div>  
      <div>
       <p style="margin-bottom : 3px;">생년월일</p>
-      <input type="Date" name="birthday"  value="<%=m.getBirthday() %>" placeholder="yyyyMMdd" style="margin-bottom : 10px;" size="63">
+      <input type="Date" name="birthday"  value="<%=m.getBirthday()%>" placeholder="yyyyMMdd" style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">연락처</p>
