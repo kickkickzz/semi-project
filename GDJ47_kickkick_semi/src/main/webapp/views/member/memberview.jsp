@@ -39,10 +39,7 @@
       }
 </style>
 
-    
-    
 
-    
 <section>
 <div class="container-fluid">
   <div class="row">
@@ -57,7 +54,7 @@
        <p></p>
       </li>
       <li>
-        <a class="nav-link active" href="" style="color: black">
+        <a class="nav-link active" href="<%=request.getContextPath()%>/updatemember.do" style="color: black">
          <i class="fa-solid fa-user"></i>
          <span data-feather="home"></span>
          회원 정보
@@ -231,5 +228,4 @@ function sample6_execDaumPostcode() {
 }
 
 </script>
-
 <%@ include file="/views/common/footer.jsp" %>
