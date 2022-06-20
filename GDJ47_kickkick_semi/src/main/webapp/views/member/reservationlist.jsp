@@ -4,12 +4,13 @@
  
  <% List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist"); %>
 <%@ include file="/views/common/header.jsp" %>
+
  <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
 
     
 
     <!-- Bootstrap core CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -31,7 +32,6 @@
         -moz-user-select: none;
         user-select: none;
       }
-
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -79,15 +79,20 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="" style="color: black">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-              <span data-feather="users"></span>
-              로그아웃
+      		<a class="nav-link" href="<%=request.getContextPath()%>/logoutMember.do" style="color: black">
+       		  <i class="fa-solid fa-arrow-right-from-bracket"></i>
+       		  <span data-feather="users"></span>
+       		  로그아웃
+       		</a>
+      	   </li>
+      	  <li class="nav-item">
+            <a class="nav-link" href="" onclick="fn_delete();" style="color: black"> <!-- request.getContextPath()%>/deleteMember.do?email=loginMember.getEmail()%> -->
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span data-feather="users"></span>
+            회원탈퇴
             </a>
-          </li>
-
+          </li>		   
         </ul>
-        
       </div>
     </nav>
 
@@ -153,7 +158,6 @@ div.row{
 	padding :0% 0% 0% 280px;
 }
 .col-md-9{
-
 }
 section{
 	padding-top : 0px;
@@ -165,7 +169,11 @@ header{
 	width : 65%;
 }
 </style>
-
+<script>
+const fn_delete = ()=>{
+	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=210 ,left=500, top=200");
+}
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
 

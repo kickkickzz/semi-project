@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-<%
-	Member m=(Member)request.getAttribute("member");
-%>
+
 <!-- 여기가 마이페이지 초기화면 -->
 <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
 
@@ -41,10 +39,7 @@
       }
 </style>
 
-    
-    
 
-    
 <section>
 <div class="container-fluid">
   <div class="row">
@@ -103,31 +98,27 @@
     <form id="updateForm" action="<%=request.getContextPath()%>/updatemember.do" method="post">
      <div>
       <p style="margin-bottom : 3px;" class="pp">이메일</p>
-      <input type="text" name="email" value="<%=m.getEmail()%>" style="margin-bottom : 7px;" size="63" readonly>
+      <input type="text" name="email" value="<%=loginMember.getEmail()%>" style="margin-bottom : 7px;" size="63" readonly>
      </div>  
      <div>
       <p style="margin-bottom : 3px;" class="pp">이름</p>
-      <input type="text" name="name" value="<%=m.getName()%>" readonly style="margin-bottom : 10px;" size="63">
+      <input type="text" name="name" value="<%=loginMember.getName()%>" readonly style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">비밀번호</p>
-      <input type="text" value="비밀번호 변경을 원하시면 하단 비밀번호 변경 버튼을 누르세요" readonly style="margin-bottom : 10px;" size="63">
+      <input type="button" onclick="updatePw()" value="비밀번호 변경" style="margin-bottom : 10px;">
      </div>  
      <div>
       <p style="margin-bottom : 3px;">생년월일</p>
-      <input type="Date" name="birthday"  value="<%=m.getBirthday()%>" placeholder="yyyyMMdd" style="margin-bottom : 10px;" size="63">
+      <input type="Date" name="birthday"  value="<%=loginMember.getBirthday()%>" placeholder="yyyyMMdd" style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">연락처</p>
-      <input type="text" name="phone" value="<%=m.getPhone()%>" placeholder="-없이 입력" maxlength="11" style="margin-bottom : 10px;" size="63">
+      <input type="text" name="phone" value="<%=loginMember.getPhone()%>" placeholder="-없이 입력" maxlength="11" style="margin-bottom : 10px;" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">주소</p>
-      <input type="text" id="sample6_postcode" placeholder="우편번호" style="margin-bottom : 3px;">
-	  <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" ><br>
-	  <input type="text" id="sample6_address" name="address2" placeholder="주소" size="29" style="margin-bottom : 3px;">
-	  <input type="text" id="sample6_extraAddress" name="address3" placeholder="참고항목"><br>
-	  <input type="text" id="sample6_detailAddress"  name="address4" placeholder="상세주소" size="29" style="margin-bottom : 13px;">
+      <input type="button" onclick="updateAddress()" value="주소 변경" style="margin-bottom : 10px;">
      </div>
      <div class="update">
       <p style="margin-bottom : 3px;">성별</p>
@@ -138,7 +129,6 @@
      </div><br><br>
       <input type="button" onclick="fn_update();" value="수정"/>
       <input type="reset" value="취소">
-      <input type="button" onclick="updatePw()" value="비밀번호 변경">
     </form>
 
    </main>
@@ -183,7 +173,9 @@ const fn_update= ()=>{
 	$("#updateForm").submit();
 }
 
-
+const updateAddress = ()=>{
+	open("<%=request.getContextPath()%>/updateAddress.do?email=<%=loginMember.getEmail()%>","_blank","width=500, height=400 ,left=500, top=200");
+}
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -233,5 +225,4 @@ function sample6_execDaumPostcode() {
 }
 
 </script>
-
 <%@ include file="/views/common/footer.jsp" %>

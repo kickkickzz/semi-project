@@ -4,7 +4,7 @@
 <%@ include file="/views/common/header.jsp" %>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
-<script src="<%=request.getContextPath()%>/js/main.js"></script>
+
 
 <section>
 <!-- 이미지 슬라이더 시작 -->

@@ -293,3 +293,6 @@ div.login-error-msg{
 .birthday{
 	display:none;
 }
+#idcheck{
+	display: none;
+}

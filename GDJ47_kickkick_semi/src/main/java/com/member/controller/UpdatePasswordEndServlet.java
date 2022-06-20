@@ -39,7 +39,7 @@ public class UpdatePasswordEndServlet extends HttpServlet {
 			int result = new MemberService().updatePassword(email, newPw);
 			if(result>0) {
 				msg +="비밀번호를 변경하였습니다.";
-				String script="close();";
+				String script="opener.location.replace('"+request.getContextPath()+"/logoutMember.do');close();";
 				request.setAttribute("script", script);
 			}else {
 				msg +="비밀번호 변경에 실패하였습니다.";
