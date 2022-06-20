@@ -118,7 +118,7 @@
           </thead>
           <tbody>
           <!-- 이메일로 검색해서 구장을 리스트로 갖고온다음 여기서 리스트 for문써서 활용 -->
-          <%if(list!=null){
+          <%if(list.size()!=0){
         	  for(PayHistory p:list){%>
 				          
           <tr>

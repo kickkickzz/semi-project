@@ -50,6 +50,7 @@
                 <input type="text" id="sample6_detailAddress" name="address4" placeholder="상세주소" size="29" style="margin-bottom : 13px;" class="address">
                 
                 <br/>
+                <p class="normal forgot">아이디를 잊어버리셨습니까?</p>
                 <p class="normal forgot">비밀번호를 잊어버리셨습니까?</p>
                 <input type="submit" id="bb" class="b-button normal" value="로그인하기">
          </div>
