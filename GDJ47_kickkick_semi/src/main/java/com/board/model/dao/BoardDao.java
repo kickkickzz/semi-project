@@ -347,5 +347,33 @@ public class BoardDao {
 		}
 		return result;
 	}
-
+	
+	
+	//메인 공지사항에 뿌릴 공지사항 상위 4개 리스트
+	public List<Board> mainNotice(Connection conn){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Board> list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("mainNotice"));
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Board b=new Board(					
+						rs.getInt("BOARD_NUM"),
+						rs.getString("BOARD_WRITER"),
+						rs.getString("WRITER_EMAIL"),
+						rs.getString("BOARD_TITLE"),
+						rs.getString("BOARD_CONTENT"),
+						rs.getString("BOARD_IMG"),
+						rs.getDate("BOARD_DATE"),
+						rs.getString("BOARD_DELETE_STATUS")		
+						);
+				list.add(b);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+		
+	}
 }

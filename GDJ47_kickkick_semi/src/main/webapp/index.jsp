@@ -2,6 +2,15 @@
 	pageEncoding="UTF-8"%>
     
 <%@ include file="/views/common/header.jsp" %>
+<%@ page import="java.util.List, com.board.model.vo.Board" %>
+<%-- <%
+	List<Board> list = (List<Board>)request.getAttribute("top-4-list");
+	Board[] bArr = null;
+	for(Board b : list){
+		
+	}
+	
+%> --%>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 
