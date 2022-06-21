@@ -115,8 +115,8 @@ public class MatchDao {
 		int result = 0;
 		try {
 			pstmt= conn.prepareStatement(prop.getProperty("check"));
-			pstmt.setString(1, userId);
-			pstmt.setString(2, reservationcode);
+			pstmt.setString(1, reservationcode);
+			pstmt.setString(2, userId);
 			rs= pstmt.executeQuery();
 			if(rs.next()) result = rs.getInt(1);
 			

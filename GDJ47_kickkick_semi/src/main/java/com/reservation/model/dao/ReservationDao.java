@@ -238,6 +238,8 @@ public class ReservationDao {
 			pstmt.setString(5, p.getStadium_branch_num());
 			pstmt.setInt(6, p.getStarttime());
 			pstmt.setInt(7, p.getEndtime());
+			pstmt.setInt(8, p.getStadium_num());
+			
 			result = pstmt.executeUpdate();
 			
 		}catch(SQLException e) {
