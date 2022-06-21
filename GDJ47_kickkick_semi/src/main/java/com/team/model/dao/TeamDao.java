@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import com.member.model.vo.Member;
 import com.team.model.vo.Team;
+import com.team.model.vo.TeamMember;
 import com.team.model.vo.TeamMemberInfo;
 
 public class TeamDao {
@@ -264,12 +265,190 @@ public class TeamDao {
 		return result;
 	}
 	
-	
-	
-	
-	
-	
+	public int teamMemberRegistCheckNum(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
 
+		String query = prop.getProperty("teamMemberRegistCheckNum");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return result;
+
+	}
+	
+	public int getTeamMemberRegistCheck(Connection conn, String userId, String team_code) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+
+		String query = prop.getProperty("teamMemberRegistCheck");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, team_code);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return result;
+
+	}
+
+	
+	public TeamMember getTeamMemberApplicationInfo(Connection conn, String userId, String team_code) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		TeamMember teamMember = null;
+
+		String query = prop.getProperty("teamMemberApplicationInfo");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, team_code);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				teamMember = teamMember.builder()
+						.supporter_email(rs.getString("supporter_email"))
+						.support_team(rs.getString("support_team"))
+						.position(rs.getString("position"))
+						.application_status(rs.getString("application_status"))
+						.delete_status(rs.getString("delete_status"))
+						.build();
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+
+		return teamMember;
+	}
+	
+	public int teamMemberReApplication(Connection conn, String userId, String team_code) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("teamMemberReApplication");
+		System.out.println(userId);
+		System.out.println(team_code);
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, team_code);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int teamMemberApplication(Connection conn, String userId, String team_code, String position) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String query = prop.getProperty("teamMemberApplication");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, team_code);
+			pstmt.setString(3, position);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
+	public int teamRegistNameCheck(Connection conn, String team_name) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+
+		String query = prop.getProperty("teamRegistNameCheck");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, team_name);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return result;
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	public static TeamMember getTeamMember(ResultSet rs) {
+		TeamMember t=null;
+		try {
+			t=TeamMember.builder()
+						.supporter_email(rs.getString("supporter_email"))
+						.support_team(rs.getString("support_team"))
+						.position(rs.getString("position"))
+						.application_status(rs.getString("application_status"))
+						.delete_status(rs.getString("delete_status"))
+						.build();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return t;
+	}
+
+	
 	
 	public static Team getTeam(ResultSet rs) {
 		Team t=null;
