@@ -54,7 +54,8 @@
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 			 <div class="col">
 			 	<div class="card">
-			    	<img src="./images/<%=sArr[0].getBranch_img()%>" class="card-img-top" alt="...">
+			    <%-- <img src="./images/<%=sArr[0].getBranch_img()%>" class="card-img-top" alt="..."> --%>
+			    	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
 			        	<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[0].getStadium_num()%>"><%=sArr[0].getStadium_name() %></a></h5>
 			        	<ul class="card-body-list">
@@ -68,7 +69,8 @@
 			  </div>
 			  <div class="col">
 			  	<div class="card">
-			      	<img src="./images/<%=sArr[1].getBranch_img()%>" class="card-img-top" alt="...">
+			      	<%-- <img src="./images/<%=sArr[1].getBranch_img()%>" class="card-img-top" alt="..."> --%>
+			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
 			        	<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[1].getStadium_num()%>"><%=sArr[1].getStadium_name() %></a></h5>
 			        	<ul class="card-body-list">
@@ -82,7 +84,8 @@
 			  </div>
 			  <div class="col">
 			    <div class="card">
-			      	<img src="./images/<%=sArr[2].getBranch_img()%>" class="card-img-top" alt="...">
+			      	<%-- <img src="./images/<%=sArr[2].getBranch_img()%>" class="card-img-top" alt="..."> --%>
+			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
 			        	<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[2].getStadium_num()%>"><%=sArr[2].getStadium_name() %></a></h5>
 			        	<ul class="card-body-list">
@@ -96,7 +99,8 @@
 			  </div>
 			  <div class="col">
 			    <div class="card">
-			      	<img src="./images/<%=sArr[3].getBranch_img()%>" class="card-img-top" alt="...">
+			      	<%-- <img src="./images/<%=sArr[3].getBranch_img()%>" class="card-img-top" alt="..."> --%>
+			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
 			       		<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[3].getStadium_num()%>"><%=sArr[3].getStadium_name() %></a></h5>
 			        	<ul class="card-body-list">
@@ -110,7 +114,8 @@
 			  </div>
 			  <div class="col">
 			    <div class="card">
-			      	<img src="./images/<%=sArr[4].getBranch_img()%>" class="card-img-top" alt="...">
+			      	<%-- <img src="./images/<%=sArr[4].getBranch_img()%>" class="card-img-top" alt="..."> --%>
+			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
 			       		<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[4].getStadium_num()%>"><%=sArr[4].getStadium_name() %></a></h5>
 			        	<ul class="card-body-list">
@@ -124,7 +129,8 @@
 			  </div>
 			  <div class="col">
 			    <div class="card">
-			      	<img src="./images/<%=sArr[5].getBranch_img()%>" class="card-img-top" alt="...">
+			      	<%-- <img src="./images/<%=sArr[5].getBranch_img()%>" class="card-img-top" alt="..."> --%>
+			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
 			       		<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[5].getStadium_num()%>"><%=sArr[5].getStadium_name() %></a></h5>
 			        	<ul class="card-body-list">
