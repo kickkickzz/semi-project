@@ -42,7 +42,6 @@ public class MemberDao {
 		try {
 			m = Member.builder()
 					.email(rs.getString("email"))
-					.password(rs.getString("password"))
 					.name(rs.getString("name"))
 					.phone(rs.getString("phone"))
 					.birthday(rs.getDate("birthday"))
@@ -261,6 +260,7 @@ public class MemberDao {
 		return m;
 	}
 	
+
 	//임시비밀번호 발급을 위한 메소드
 	public Member passwordForgot(Connection conn, String email, String phone, String name) {
 		PreparedStatement pstmt = null;

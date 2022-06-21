@@ -110,6 +110,7 @@ public class MemberService {
 		return result;
 	}
 	
+
 	//비밀번호 찾기
 	public Member passwordForgot(String email, String phone, String name) {
 		Connection conn = getConnection();
