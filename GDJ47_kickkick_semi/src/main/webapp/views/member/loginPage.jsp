@@ -34,7 +34,6 @@
            </div>
            <div class="form">
                 <h4 class="bold title">로그인</h4>
-                
                 <input type="email" placeholder="이메일" class="normal email" id="ema" value=""><input type="button" id="idcheck" value="중복확인" onclick="fn_emailDuplicate();"><br>
                 <div id="msg"></div>
                 <input type="password" placeholder="비밀번호" class="normal password"><br>
@@ -42,7 +41,6 @@
                 <input type="text" placeholder="이름" class="normal name"><br>
                 
                 <input type="tel" placeholder="전화번호" class="normal phone"><br>
-                <input type="date" placeholder="생년월일" class="normal birthday"><br>
                 
                 <input type="text" id="sample6_postcode" placeholder="우편번호" class="address" style="margin-bottom : 3px;">
                 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="address">

@@ -75,7 +75,7 @@
         </a>
       </li>
       <li class="nav-item">
-       <a class="nav-link" href="<%=request.getContextPath()%>/logoutMember.do" style="color: black">
+       <a class="nav-link" href="<%=request.getContextPath()%>/logoutMember.do" onsubmit="return naver();" style="color: black">
        <i class="fa-solid fa-arrow-right-from-bracket"></i>
        <span data-feather="users"></span>
        로그아웃
