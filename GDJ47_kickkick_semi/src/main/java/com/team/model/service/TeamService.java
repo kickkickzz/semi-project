@@ -11,6 +11,7 @@ import static common.JDBCTemplate.rollback;
 
 import com.team.model.dao.TeamDao;
 import com.team.model.vo.Team;
+import com.team.model.vo.TeamMember;
 import com.team.model.vo.TeamMemberInfo;
 
 public class TeamService {
@@ -86,21 +87,86 @@ public class TeamService {
 	
 	public int teamRegistCheck(String userId) {
 		Connection conn = getConnection();
-		int result = new TeamDao().getTeamRegistCheck(conn, userId);
+		int result = dao.getTeamRegistCheck(conn, userId);
 		close(conn);
 		return result;
 	}
 	
 	public int teamCodeCheck(String team_code) {
 		Connection conn = getConnection();
-		int result = new TeamDao().getTeamCodeCheck(conn, team_code);
+		int result = dao.getTeamCodeCheck(conn, team_code);
 		close(conn);
 		return result;
 	}
 		
+	public int teamMemberRegistCheckNum(String userId) {
+		Connection conn = getConnection();
 
-	
-	
+		int result = dao.teamMemberRegistCheckNum(conn, userId);
 
+		close(conn);
+
+		return result;
+	}
+	
+	public int teamMemberRegistCheck(String userId, String team_code) {
+		Connection conn = getConnection();
+
+		int result = new TeamDao().getTeamMemberRegistCheck(conn, userId, team_code);
+
+		close(conn);
+
+		return result;
+	}
+	public TeamMember teamMemberApplicationInfo(String userId, String team_code) {
+		Connection conn = getConnection();
+
+		TeamMember teamMember = new TeamDao().getTeamMemberApplicationInfo(conn, userId, team_code);
+
+		close(conn);
+
+		return teamMember;
+	}
+
+	public void teamMemberReApplication(String userId, String team_code) {
+		Connection conn = getConnection();
+
+		int result = new TeamDao().teamMemberReApplication(conn, userId, team_code);
+
+		if (result > 0) {
+			commit(conn);
+		}
+
+		close(conn);
+
+	}
+
+	public int teamMemberApplication(String userId, String team_code, String position) {
+		Connection conn = getConnection();
+
+		int result = new TeamDao().teamMemberApplication(conn, userId, team_code, position);
+
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+
+		close(conn);
+
+		return result;
+
+	}
+	
+	public int teamRegistNameCheck(String team_name) {
+		Connection conn = getConnection();
+
+		int result = new TeamDao().teamRegistNameCheck(conn, team_name);
+
+		close(conn);
+
+		return result;
+
+	}
 
 }

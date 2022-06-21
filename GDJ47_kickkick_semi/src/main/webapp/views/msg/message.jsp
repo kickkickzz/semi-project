@@ -3,7 +3,6 @@
 <% String msg = (String)request.getAttribute("msg"); %>
 <% String loc = (String)request.getAttribute("loc"); %>
 <% String script=(String)request.getAttribute("script"); %>
-<%  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +10,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<script>
-		alert("<%=msg%>");
-		/* close(); */
-		<%=script!=null?script:""%>
-		location.replace("<%=request.getContextPath()%><%=loc%>");
-	</script>
+	<form action="<%=request.getContextPath()%>/passwordForgotUpdate.do>" method="post">
+		인증키 <input type="text" name="AuthenticationUser">
+	</form>
 </body>
 </html>

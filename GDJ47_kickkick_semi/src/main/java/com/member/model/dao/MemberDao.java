@@ -42,7 +42,6 @@ public class MemberDao {
 		try {
 			m = Member.builder()
 					.email(rs.getString("email"))
-					.password(rs.getString("password"))
 					.name(rs.getString("name"))
 					.phone(rs.getString("phone"))
 					.birthday(rs.getDate("birthday"))
@@ -203,13 +202,13 @@ public class MemberDao {
 		ResultSet rs = null;
 		List<PayHistory> result = new ArrayList<PayHistory>();
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("selectpayhistory"));
+			pstmt=conn.prepareStatement(prop.getProperty("selectpayhistoryinsert"));
 			pstmt.setString(1, email);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				PayHistory p = PayHistory.builder().paycode(rs.getString("pay_code")).email(rs.getString("email")).reservation_code(rs.getString("reservation_code"))
 						.paymethod(rs.getString("pay_method")).paydate(rs.getDate("pay_date")).stadium_branch_num(rs.getString("stadium_branch_num")).starttime(rs.getInt("starttime")).
-						endtime(rs.getInt("endtime")).name(rs.getString("name")).build();
+						endtime(rs.getInt("endtime")).stadium_num(rs.getInt("stanum")).build();
 				
 				result.add(p);
 				
@@ -259,5 +258,50 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return m;
+	}
+	
+
+	//임시비밀번호 발급을 위한 메소드
+	public Member passwordForgot(Connection conn, String email, String phone, String name) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member m = null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("passwordForgot"));
+			pstmt.setString(1, email);
+			pstmt.setString(2, phone);
+			pstmt.setString(3, name);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m =getMember(rs);
+				System.out.println(m.getEmail());
+				System.out.println(m.getName());
+				System.out.println(m.getPhone());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	//임시비밀번호 업데이트
+	public int randomPassword(Connection conn, String email, String ranPassword) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("randomPassword"));
+			pstmt.setString(1, ranPassword);
+			pstmt.setString(2, email);
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+
+			close(pstmt);
+		}
+		return result;
 	}
 }

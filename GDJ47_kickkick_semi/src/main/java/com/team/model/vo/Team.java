@@ -18,5 +18,5 @@ public class Team {
 	private String team_region;
 	private Date team_active_lastday;
 	private String team_delete_status;
-
+	
 }

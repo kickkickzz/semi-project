@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.member.model.vo.Member" %> 
+<%@ page import="com.member.model.vo.Member, com.reservation.model.vo.Stadium, com.reservation.model.service.ReservationService" %> 
 <%@ page import="java.util.List, com.board.model.vo.Board, com.board.model.service.BoardService" %>
 
 <% 
@@ -11,9 +11,14 @@
 	for(int i=0; i< bArr.length; i++){
 		if(!(boardList.isEmpty())){
 			bArr[i]=boardList.get(i);
-			System.out.println("데이터 있음");
-		}else{
-			System.out.println("아무것도 없음");
+		}
+	}
+	
+	List<Stadium> stadiumList = (List<Stadium>)new ReservationService().sixStadium();
+	Stadium[] sArr = new Stadium[6];
+	for(int i=0; i<sArr.length; i++){
+		if(!(stadiumList.isEmpty())){
+			sArr[i]=stadiumList.get(i);
 		}
 	}
 	
@@ -60,8 +65,9 @@
 				<%}else{%>
 					<i id="home" class="fa-solid fa-user" onclick="location.assign('<%=request.getContextPath()%>/loginPage.do')"></i>
 				<%} %>
-				<i id="alert" class="fa-solid fa-bell"></i>
-				<i id="like" class="fa-solid fa-heart"></i>
+				<%if(loginMember!=null){ %>
+					<i class="fa-solid fa-arrow-right-from-bracket" onclick="location.replace('<%=request.getContextPath()%>/logoutMember.do')"></i>
+				<%} %>
 				<i id="menu" class="fa-solid fa-bars"></i>
 			</div>
 		</div>
@@ -71,7 +77,7 @@
 				<li>구장</li>
 				<li onclick="fn_stadium();">예약</li>
 				<li onclick="fn_team();">팀 관리</li>
-				<li>매칭</li>
+				<li onclick="fn_match();">매칭</li>
 			</ul>
 		</div>
 	</nav>
@@ -87,14 +93,21 @@
 	const fn_team=()=>{
 		location.assign('<%=request.getContextPath()%>/team.do');
 	}
-
-
+	const fn_match=()=>{
+		location.assign('<%=request.getContextPath()%>/match.do');
+	}
 	const fn_searchData=e=>{
 		if($(e.target).find("input").val().length==0){
 			alert("값을 입력하고 조회하세요.");
 			return false;
 		}
 	}
+	
+	$(()=>{
+		$("#menu").click(function(){
+			$("#header-menu").toggle();
+		})
+	})
 
 </script>
 

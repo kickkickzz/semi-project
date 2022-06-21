@@ -126,7 +126,7 @@
           		<td><%=p.getPaycode() %></td>
           		<td><%=p.getReservation_code() %></td>
              	<td><%=p.getStadium_branch_num() %></td>
-             	<td><%=p.getName() %></td>
+             	<td><%=loginMember.getName()%></td>
              	<td><%=p.getPaydate() %></td>
              	<td><%=p.getStarttime()%> : 00 ~ <%=p.getEndtime()%> : 00 </td>
              	<td><%=p.getPaymethod() %></td>

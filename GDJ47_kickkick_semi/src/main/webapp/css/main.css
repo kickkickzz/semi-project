@@ -129,7 +129,7 @@ div.card-body{
 	display: flex;
 }
 .sch-rslt{
-	padding-left:16px;
+	padding-left:30px;
 }
 li>b{
 	padding-right:24px;
@@ -145,4 +145,11 @@ li>b{
 }
 #star{
 	width:80px;
+}
+#resertag{
+	text-decoration:none;
+	color: black;
+}
+#resertag:hover{
+	text-decoration:underline;
 }
