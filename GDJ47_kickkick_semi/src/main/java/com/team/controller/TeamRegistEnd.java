@@ -42,12 +42,8 @@ public class TeamRegistEnd extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 String msg="",loc="";
+		 
 		 String userId = ((Member)request.getSession().getAttribute("loginMember")).getEmail();
-		 String teamName=request.getParameter("name");
-		 
-		 System.out.println(userId);
-		 System.out.println(request.getParameter("team_name"));
-		 
 		 
 	      String root = request.getSession().getServletContext().getRealPath("/");
 	      //String savePath = root + "resources/storage/"+userId+"/team_img/";
@@ -60,7 +56,16 @@ public class TeamRegistEnd extends HttpServlet {
 
 	      int maxSize = 1024 * 1024 * 10;
 	      
-	     
+	      MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamedPolicy());
+	      System.out.println(multiRequest.getFileNames());
+	      
+	      String team_name = multiRequest.getParameter("team_name");
+	      String team_gender = multiRequest.getParameter("team_gender");
+	      String team_age = multiRequest.getParameter("team_age");
+	      String sido1 = multiRequest.getParameter("sido1");
+	      String gugun1 = multiRequest.getParameter("gugun1");
+	      String team_mark = multiRequest.getParameter("fileName");
+	      String team_region = sido1 + " " + gugun1;
 	      
 	      
 	      
@@ -73,58 +78,63 @@ public class TeamRegistEnd extends HttpServlet {
 		      
 		  }else { //팀등록;
 		         
+			  int ckName = new TeamService().teamRegistNameCheck(team_name);
+		         if(ckName > 0) {
+		            msg = "팀이름중복";
+		         }else {
 		            
-			  Random rand = new Random();
-	            String team_code = "";
-	            int ckCode = 0;
-	            do{
-	               for(int i=0; i<=5; i++) {
-	                  String ran = Integer.toString(rand.nextInt(10));
-	                  if(!team_code.contains(ran)) {
-	                     team_code += ran;
-	                  }else {
-	                     i-=1;
-	                  }
-	               }
-	               
-	               ckCode = new TeamService().teamCodeCheck(team_code);
-	            }while(ckCode == 1);
+					  Random rand = new Random();
+			            String team_code = "";
+			            int ckCode = 0;
+			            do{
+			               for(int i=0; i<=5; i++) {
+			                  String ran = Integer.toString(rand.nextInt(10));
+			                  if(!team_code.contains(ran)) {
+			                     team_code += ran;
+			                  }else {
+			                     i-=1;
+			                  }
+			               }
+			               
+			               ckCode = new TeamService().teamCodeCheck(team_code);
+			            }while(ckCode == 1);
 	            
 	            
-	            Team t =Team.builder()
-	            		.team_code(team_code)
-	            		.team_leader(userId)
-	            		.team_name(teamName)
-	            		.team_gender(request.getParameter("team_gender"))
-	            		.team_age(request.getParameter("team_age"))
-	            		.team_region(request.getParameter("team_region"))
-	            		.team_mark_img(request.getParameter("team_mark_img"))
-	            		.build();
+			            
+			            Team t =Team.builder()
+			            		.team_code(team_code)
+			            		.team_leader(userId)
+			            		.team_name(team_name)
+			            		.team_gender(team_gender)
+			            		.team_age(team_age)
+			            		.team_region(team_region)
+			            		.team_mark_img(team_mark)
+			            		.build();
 	            
+			            new TeamService().teamRegist(t);
 	            
-	            
-	            int result=new TeamService().teamRegist(t);
+			            int result=new TeamService().teamRegist(t);
 	           
 				
-				if(result>0) {
-					msg="팀이 등록되었습니다.";
-					loc="/team.do";
-				}else {
-					msg="팀 등록에 실패하였습니다.";
-					loc="/team/teamRegist.do";
-				}
-				request.setAttribute("msg", msg);
-				request.setAttribute("loc", loc);
-				request.getRequestDispatcher("/views/msg/msg.jsp")
-				.forward(request, response);
+						if(result>0) {
+							msg="팀이 등록되었습니다.";
+							loc="/team.do";
+						}else {
+							msg="팀 등록에 실패하였습니다.";
+							loc="/team.do";
+						}
+						request.setAttribute("msg", msg);
+						request.setAttribute("loc", loc);
+						request.getRequestDispatcher("/views/msg/msg.jsp")
+						.forward(request, response);
 	           
-	         }
+		         }
 	           
 	      
 		           
 		
+		  		}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
