@@ -81,7 +81,7 @@
 		location.assign('<%=request.getContextPath()%>/stadium.do');
 	}
 	const fn_board=()=>{
-		location.assign('<%=request.getContextPath() %>/boardlist.do');
+		location.assign('<%=request.getContextPath() %>/showBoardList.do');
 	}
 
 	const fn_team=()=>{
