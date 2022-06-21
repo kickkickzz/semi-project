@@ -87,7 +87,9 @@ public class ReservationInsertServlet extends HttpServlet {
 		PayHistory p = PayHistory.builder().email(userId).paycode(paycode).reservation_code(reservation_code).paymethod("카카오페이").stadium_branch_num(reservation_branch_num).
 				starttime(reservation_usage_start_time).endtime(reservation_usage_end_time).
 				build();
+
 		System.out.println(p);
+
 		int result = new ReservationService().reservationInsert(reservation);
 		int ph = new ReservationService().insertpayhistory(p);
 		
@@ -99,7 +101,7 @@ public class ReservationInsertServlet extends HttpServlet {
 		System.out.println("예약종료 시각: "+reservation_usage_end_time);
 		System.out.println("예약 이용 시간:"+ reservation_usage_time);
 		System.out.println("예약날짜: "+reservation_usage_start_date);
-		
+
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(result,response.getWriter());
 		
