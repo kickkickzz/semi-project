@@ -8,6 +8,23 @@
  <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/7bb5347123.js" crossorigin="anonymous"></script>
+<style>
+.simple {
+    display: inline-block;
+    font: inherit;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: gray;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 25px;
+    border: none;
+    border-bottom: 3px solid black;
+    border-radius: 3px;
+}
+.simple:hover {background-color: lightgray;}
+</style>
 <%@ include file="/views/common/header.jsp" %>
 
 <div class="container">
@@ -22,9 +39,16 @@
 		
 		</form> -->
 		<br>
+		<h1 style="text-align:center">매치 정보 보기</h1>
 		<br>
+		
+		
+		<br><br>
+		<button type="button" id="matchRegist" style="float: right;" class="simple" onclick="fn_enrollmatch();">매치등록</button>
+				<br><br>	
 			
-			<h1 style="text-align:center">매치 정보 보기</h1>
+			
+		<div class="container2">
 		<table class="table table-hover table-striped text-center">
 		<thead>
 			<tr>
@@ -77,11 +101,20 @@
 	
 	
 	</table>
+	</div>
 		<div class ="" id="pageBar" style="text-align:center">
 		<%=pagebar %></div>
 		
 	
 	</div>
+
+	
+	
+	<script>
+	const fn_enrollmatch=()=>{
+		window.open("<%=request.getContextPath()%>/enrollmatch.do", "enrollmatch", "width=500, height=150");
+	}
+	</script>
 
 
 <%@ include file="/views/common/footer.jsp" %>

@@ -1,5 +1,7 @@
 package com.match.model.dao;
 
+import static common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,9 +11,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import static common.JDBCTemplate.*;
 
 import com.match.model.vo.Match;
+import com.reservation.model.vo.PayHistory;
+import com.team.model.vo.Team;
 
 public class MatchDao {
 	private Properties prop = new Properties();
@@ -71,4 +74,117 @@ public class MatchDao {
 		}return result;
 	}
 	
+	public int teamregistcheck(Connection conn,String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("teamRegistCheck"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next())result =rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+		
+	}
+	public int codeCheck(Connection conn,String reservationcode) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("codeCheck"));
+			pstmt.setString(1, reservationcode);
+			rs=pstmt.executeQuery();
+			if(rs.next())result = rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int check(Connection conn,String userId,String reservationcode) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			pstmt= conn.prepareStatement(prop.getProperty("check"));
+			pstmt.setString(1, userId);
+			pstmt.setString(2, reservationcode);
+			rs= pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt(1);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+	public Team selectteamcode(Connection conn,String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Team result = null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectteamcode"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=Team.builder().team_code(rs.getString("team_code")).build();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+		
+	}
+	public PayHistory selectpayhistoryinfo(Connection conn,String reservationcode) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		PayHistory result = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("selectpayhistoryinfo"));
+			pstmt.setString(1, reservationcode);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result = PayHistory.builder().stadium_branch_num(rs.getString("stadium_branch_num")).stadium_num(rs.getInt("stanum")).build();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+	
+	public int matchRegist(Connection conn,Match m) {
+		PreparedStatement pstmt = null;
+	
+		int result =0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("matchRegist"));
+			pstmt.setString(1,m.getTeam_code());
+			pstmt.setString(2,m.getReservation_code());
+			pstmt.setString(3,m.getBranch_num());
+			pstmt.setInt(4, m.getStadium_num());
+			
+			
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+			
+		}return result;
+	}
 }

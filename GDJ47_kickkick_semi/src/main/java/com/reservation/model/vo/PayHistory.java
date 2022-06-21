@@ -16,5 +16,5 @@ public class PayHistory {
 	private int starttime;
 	private int endtime;
 	private String name;
-	
+	private int stadium_num;
 }
