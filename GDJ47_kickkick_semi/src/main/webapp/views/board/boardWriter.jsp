@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	import="com.member.model.vo.*, com.board.model.vo.Board,java.util.ArrayList"%>
 <!-- 정적파일 css, js-->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/boardWriter.css">
 
 <%@include file="/views/common/header.jsp"%>
+<script type="text/javascript" src="<%=request.getContextPath() %>/lib/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 
 <body>
 <!-- naver smartediter 적용 방안 찾는 중 -->
@@ -63,6 +63,9 @@
 			</div>
 		</div>
 	</div>
+	<br><br><br>
+	<textarea name="ir1" id="ir1" rows="10" cols="100">네이버 스마트에디터 적용-서버 적용해야함</textarea>
+	<button type="button" class="btn">작성내용 콘솔에!!</button>
 <!--footer삽입 -->
 <%@include file="/views/common/footer.jsp"%>
 <script>
@@ -109,9 +112,25 @@
 			}
 		}
 		check_length.innerText=totalByte;
-		//최대 바이트크기를 넘으면 못쓰게한다.
+		//최대 바이트크기를 넘으면 못쓰도록
 		if(totalByte>limitByte){
 			alert('1000Byte 이내로 작성해주세요!');
 		}
 	}
+	
+	
+	//smart editor 적용
+	var oEditors = [];
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef: oEditors,
+			elPlaceHolder: "ir1",
+			sSkinURI: "/lib/smarteditor/SmartEditor2Skin.html",
+			fCreator: "createSEditor2"
+		});
+		
+	$(".btn").on("click", function() {
+		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+		var value = document.getElementById("ir1").value;
+		console.log(value);
+	});
 </script>

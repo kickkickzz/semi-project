@@ -4,7 +4,7 @@
 %>
 
 <%
-	//세션으로부터 로그인한 멤버부르기
+	//세션으로 로그인한 멤버부르기
 	//Member loginUser=(Member)session.getAttribute("loginUser");
 	Board board=(Board)request.getAttribute("board");
 	BoardAttachment img=(BoardAttachment)request.getAttribute("img");
@@ -54,7 +54,7 @@
                 <div class="board-btn-box">
                     	
                     <%//if(loginUser!=null && loginUser.getMember_type().equals("R")) {
-                    	//관리자 회원인경우에만 버튼을 클릭할 수 있다.
+                    	//관리자 회원인경우에만 버튼을 클릭
                     %>
                     	<button id="goListBoardAd" type="button" class="btn btn-secondary btn-lg"
                     		onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo'">목록</button>
