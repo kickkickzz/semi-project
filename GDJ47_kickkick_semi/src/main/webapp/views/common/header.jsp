@@ -1,9 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.member.model.vo.Member" %> 
+<%@ page import="java.util.List, com.board.model.vo.Board, com.board.model.service.BoardService" %>
 
 <% 
 	Member loginMember = (Member)session.getAttribute("loginMember");
+	
+	List<Board> boardList = new BoardService().mainNotice();
+	Board[] bArr = new Board[4];
+	for(int i=0; i< bArr.length; i++){
+		if(!(boardList.isEmpty())){
+			bArr[i]=boardList.get(i);
+			System.out.println("데이터 있음");
+		}else{
+			System.out.println("아무것도 없음");
+		}
+	}
+	
+
 %>
 
 <!DOCTYPE html>

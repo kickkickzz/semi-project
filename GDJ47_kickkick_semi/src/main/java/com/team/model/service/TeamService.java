@@ -22,8 +22,10 @@ public class TeamService {
 	public Team selectTeamByName(String team_name) {
 		Connection conn=getConnection();
 		Team t=dao.selectTeamByName(conn, team_name);
+		
 		close(conn);
 		return t;
+		
 	}
 	public List<Team> selectTeamList(int cPage, int numPerpage){
 		Connection conn=getConnection();
@@ -42,15 +44,16 @@ public class TeamService {
 	}
 	
 	
-	public void teamRegist(Team team) {
+	public int teamRegist(Team t) {
 		Connection conn = getConnection();
-		int result = dao.teamEnrollment(conn, team);
+		int result = dao.teamEnrollment(conn, t);
 		if (result > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
 		close(conn);
+		return result;
 	}
 	
 
@@ -74,16 +77,23 @@ public class TeamService {
 		return t;
 	}
 	
-	public ArrayList<TeamMemberInfo> selectTeamMemberList(String team_code, int cPage,int numPerpage){
+	public ArrayList<TeamMemberInfo> selectTeamMemberList(String team_code){
 		Connection conn=getConnection();
-		ArrayList<TeamMemberInfo> result=dao.selectTeamMemberList(conn,team_code, cPage,numPerpage);
+		ArrayList<TeamMemberInfo> result=dao.selectTeamMemberList(conn,team_code);
 		close(conn);
 		return result;
 	}
 	
-	public int selectTeamMemberCount(String team_code) {
-		Connection conn=getConnection();
-		int result=dao.selectTeamMemberCount(conn,team_code);
+	public int teamRegistCheck(String userId) {
+		Connection conn = getConnection();
+		int result = new TeamDao().getTeamRegistCheck(conn, userId);
+		close(conn);
+		return result;
+	}
+	
+	public int teamCodeCheck(String team_code) {
+		Connection conn = getConnection();
+		int result = new TeamDao().getTeamCodeCheck(conn, team_code);
 		close(conn);
 		return result;
 	}

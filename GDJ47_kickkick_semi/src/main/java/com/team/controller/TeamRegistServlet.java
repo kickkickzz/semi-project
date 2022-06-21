@@ -39,59 +39,10 @@ public class TeamRegistServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		/*
-		 * String userId =
-		 * ((Member)request.getSession().getAttribute("loginUser")).getEmail(); String
-		 * root = request.getSession().getServletContext().getRealPath("/"); String
-		 * savePath = root + "resources/storage/"+userId+"/team_img/";
-		 * 
-		 * File f = new File(savePath); if(!f.exists()) { f.mkdirs(); } String savePath2
-		 * = root + "resources/storage/"+userId+"/team_img/";
-		 * 
-		 * System.out.println(savePath2);
-		 * 
-		 * 
-		 * int maxSize = 1024 * 1024 * 10; MultipartRequest multiRequest = new
-		 * MultipartRequest(request, savePath2, maxSize, "UTF-8", new
-		 * MyFileRenamedPolicy()); System.out.println(multiRequest.getFileNames());
-		 * 
-		 * String team_name = multiRequest.getParameter("team_name"); String team_gender
-		 * = multiRequest.getParameter("team_gender"); String team_age =
-		 * multiRequest.getParameter("team_age"); String sido1 =
-		 * multiRequest.getParameter("sido1"); String gugun1 =
-		 * multiRequest.getParameter("gugun1"); String team_mark =
-		 * multiRequest.getParameter("fileName"); String team_region = sido1 + " " +
-		 * gugun1;
-		 * 
-		 * System.out.println(team_name); System.out.println(team_gender);
-		 * System.out.println(team_age); System.out.println(team_region);
-		 * System.out.println(team_mark);
-		 * 
-		 * String teamMessage = null; int result = new
-		 * TeamService().teamRegistCheck(userId);
-		 * 
-		 * if(result > 0) { teamMessage = "팀1개이상등록불가";
-		 * 
-		 * }else { //팀등록;
-		 * 
-		 * int ckName = new TeamService().teamRegistNameCheck(team_name); if(ckName > 0)
-		 * { teamMessage = "팀이름중복"; }else {
-		 * 
-		 * Random rand = new Random(); String team_code = ""; int ckCode = 0; do{
-		 * for(int i=0; i<=5; i++) { String ran = Integer.toString(rand.nextInt(10));
-		 * if(!team_code.contains(ran)) { team_code += ran; }else { i-=1; } }
-		 * 
-		 * ckCode = new TeamService().teamCodeCheck(team_code); }while(ckCode == 1);
-		 * 
-		 * 
-		 * new TeamService().teamRegist(new Team(team_code, userId, team_name,
-		 * team_gender, team_age, team_region, team_mark)); teamMessage = "팀가입완료"; }
-		 * 
-		 * } System.out.println(teamMessage); HttpSession session =
-		 * request.getSession(); session.setAttribute("teamMessage", teamMessage); //
-		 * loginUser라는 name으로 넘겨줌
-		 */	      RequestDispatcher view = request.getRequestDispatcher("/views/team/team_enroll.jsp");
+		 
+	      RequestDispatcher view = request.getRequestDispatcher("/views/team/team_enroll.jsp");
 	      view.forward(request, response);
+		 	   
 	   
 	}
 

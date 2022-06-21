@@ -35,7 +35,7 @@ public class UpdateBoardServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize= 1024*1024*10; //10MB
 			String root=request.getSession().getServletContext().getRealPath("/");
-			String saveBoardPath=root+"/resources/storage/board_img/";
+			String saveBoardPath=root+"/webapp/upload/board_img/";
 			
 			MultipartRequest multiRequest=new MultipartRequest(request,saveBoardPath,maxSize,"UTF-8",new BoardImgFileRenamePolicy() );
 //			File file=new File(saveBoardPath);//물리적 경로 오류 생각해보기
@@ -104,7 +104,7 @@ public class UpdateBoardServlet extends HttpServlet {
 			}else {
 //				File failedFile=new File(saveBoardPath+saveFile);
 //				failedFile.delete();
-				request.setAttribute("msg", "공지사항 게시판 게시글 수정에 실패하였습니다.");
+				request.setAttribute("msg","공지사항 게시판 게시글 수정에 실패하였습니다.");
 				request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
 			}
 		}

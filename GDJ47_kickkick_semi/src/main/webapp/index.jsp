@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
     
 <%@ include file="/views/common/header.jsp" %>
+<%@ page import="java.util.List, com.board.model.vo.Board" %>
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 
@@ -148,49 +150,49 @@
 			</div>
 			<div class="main-notice-list">
 					<div class="notice-list-item">
-						<a href="/customer/noticeView?bbsDetailSeq=181">
+						<a href="<%=request.getContextPath()%>/detailBoard.do?bId=<%=bArr[0].getBoardNum()%>">
 							<dl>
 								<dt>
-									[브랜드 론칭 이벤트] 신규 브랜드 '킥킥' 초성퀴즈 이벤트 당첨자 발표
+									<%=bArr[0].getBoardTitle() %>
 								</dt>
 								<dd>
-									2022-05-30
+									<%=bArr[0].getBoardDate() %>
 								</dd>
 							</dl>
 						</a>
 					</div>
 					<div class="notice-list-item">
-						<a href="/customer/noticeView?bbsDetailSeq=68">
+						<a href="<%=request.getContextPath()%>/detailBoard.do?bId=<%=bArr[1].getBoardNum()%>">
 							<dl>
 								<dt>
-									브랜드 명 변경 안내(22/05/29)
+									<%=bArr[1].getBoardTitle() %>
 								</dt>
 								<dd>
-									2022-05-24
+									<%=bArr[1].getBoardDate() %>
 								</dd>
 							</dl>
 						</a>
 					</div>
 					<div class="notice-list-item">
-						<a href="/customer/noticeView?bbsDetailSeq=10">
+						<a href="<%=request.getContextPath()%>/detailBoard.do?bId=<%=bArr[2].getBoardNum()%>">
 							<dl>
 								<dt>
-									이용후기 / 만족도조사 이벤트 변경 안내
+									<%=bArr[2].getBoardTitle() %>
 								</dt>
 								<dd>
-									2022-05-11
+									<%=bArr[2].getBoardDate() %>
 								</dd>
 							</dl>
 						</a>
 					</div>
 					<div class="notice-list-item">
-						<a href="/customer/noticeView?bbsDetailSeq=11">
+						<a href="<%=request.getContextPath()%>/detailBoard.do?bId=<%=bArr[3].getBoardNum()%>">
 							<dl>
 								<dt>
-									이용상품권 사용안내
+									<%=bArr[3].getBoardTitle() %>
 								</dt>
 								<dd>
-									2022-05-11
+									<%=bArr[3].getBoardDate() %>
 								</dd>
 							</dl>
 						</a>
