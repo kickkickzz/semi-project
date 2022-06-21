@@ -345,7 +345,7 @@
 							   
 						   } else {
 							   $.ajax({
-								   url : '/teamMemberRegist.do',
+								   url : 'teamMemberRegist.do',
 								   data : {
 									   userId : userId,
 									   position : position,
