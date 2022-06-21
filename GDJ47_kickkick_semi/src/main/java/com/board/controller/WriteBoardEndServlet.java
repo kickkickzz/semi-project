@@ -33,28 +33,30 @@ public class WriteBoardEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize=1024*1024*10; //10MB;
-			String root= request.getSession().getServletContext().getRealPath("/");
-			String saveBoardPath= root+"/webapp/upload/board_img/"; //공지사항 게시판 파일 저장소
-			
-			// BoardImgFileRenamePolicy() => 공지사항게시판 이미지 이름 변경 방법
-			MultipartRequest multiRequest=new MultipartRequest(request,saveBoardPath,maxSize,"UTF-8",new BoardImgFileRenamePolicy());
+			String root= request.getSession().getServletContext().getRealPath("/upload");
+			String saveBoardPath= root+"/board_img/"; //공지사항 게시판 파일 저장소
 			File file=new File(saveBoardPath);
 			
-			// saveBoardPath에 해당하는 디렉토리가 존재하지 않으면
-			if(!file.exists()) {
-				file.mkdirs();
-			}
+			// BoardImgFileRenamePolicy() => 공지사항게시판 이미지 이름 변경 방법
+			MultipartRequest multiRequest=new MultipartRequest(request,saveBoardPath,maxSize,"UTF-8",
+					new BoardImgFileRenamePolicy());
+			
+			
+			// saveBoardPath에 해당하는 디렉토리가 없으면
+			if(!file.exists()) file.mkdirs();
+			
 			
 			//바뀐 파일이름을 저장하는 ArrayList
 			ArrayList<String> saveFiles = new ArrayList<String>();
 			
-			//원본파일이름을 저장하는 ArrayList
+			//원본 파일이름을 저장하는 ArrayList
 			ArrayList<String> originFiles= new ArrayList<String>();
 			
 			//getFileName():폼에서 전송된 File의 이름을 위의 규정대로 변환
 			Enumeration<String> files= multiRequest.getFileNames();
 			while(files.hasMoreElements()) {
 				String name= files.nextElement();
+				
 				if(multiRequest.getFilesystemName(name)!=null) {
 					saveFiles.add(multiRequest.getFilesystemName(name));
 					originFiles.add(multiRequest.getOriginalFileName(name));
@@ -74,7 +76,7 @@ public class WriteBoardEndServlet extends HttpServlet {
 			board.setBoardWriterEmail(email);
 			
 			ArrayList<BoardAttachment> fileList=new ArrayList<BoardAttachment>();
-			for(int i=originFiles.size()-1;i>=0;i--){
+			for(int i=originFiles.size()-1; i>=0; i--){
 				BoardAttachment bat= new BoardAttachment();
 				bat.setFilePath(saveBoardPath);
 				bat.setOriginName(originFiles.get(i));
