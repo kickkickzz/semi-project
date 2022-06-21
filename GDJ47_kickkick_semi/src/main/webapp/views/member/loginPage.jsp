@@ -9,7 +9,7 @@
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/loginPage.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+<title>ㅋ킥킥ㅋ</title>
 
 <div id="login-container">
    <div id="login-left">
@@ -50,7 +50,8 @@
                 <input type="text" id="sample6_detailAddress" name="address4" placeholder="상세주소" size="29" style="margin-bottom : 13px;" class="address">
                 
                 <br/>
-                <p class="normal forgot">비밀번호를 잊어버리셨습니까?</p>
+                <p class="normal forgot" onclick="fn_emailForgot();">이메일을 잊어버리셨습니까?</p>
+                <p class="normal forgot" >비밀번호를 잊어버리셨습니까?</p>
                 <input type="submit" id="bb" class="b-button normal" value="로그인하기">
          </div>
          <div id="hidden-form">
@@ -85,6 +86,10 @@ function fn_emailDuplicate(){
     emailDuplicate.action=url;
     emailDuplicate.target=title;
     emailDuplicate.submit();
+}
+
+function fn_emailForgot(){
+	open("<%=request.getContextPath()%>/emailForgot.do?","_blank","width=400, height=210 ,left=500, top=200");
 }
 </script>
 <%-- <%@ include file="/views/common/footer.jsp" %> --%>
