@@ -44,7 +44,22 @@ public class EmailForgotEndServlet extends HttpServlet {
 			script += "close()";
 		}
 		
-
+//		//3개 입력받으면
+//		Member m = new Memberservice().passwordForgot(3개입력받은값);
+//		//암호화처리
+//		if(m!=null) {
+//			임시비밀번호 생성하는 로직
+//			임시비밀번호를 업데이트 하는 로직 세우고 
+//			if(result>0) {
+//				//업데이트 완료
+//				password = 
+//			}else {
+//				msg+="업데이트 실패";
+//				loc +="비밀번호 변경하는창으로";
+//			}
+//		}else {
+//			조회된결과가 없습니다.
+//		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("script", script);
 		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
