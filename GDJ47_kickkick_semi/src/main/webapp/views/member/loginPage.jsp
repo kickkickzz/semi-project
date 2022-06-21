@@ -9,6 +9,7 @@
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/loginPage.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2-nopolyfill.js" charset="utf-8"></script>
 <title>ㅋ킥킥ㅋ</title>
 
 <div id="login-container">
@@ -51,7 +52,7 @@
                 
                 <br/>
                 <p class="normal forgot" onclick="fn_emailForgot();">이메일을 잊어버리셨습니까?</p>
-                <p class="normal forgot" >비밀번호를 잊어버리셨습니까?</p>
+                <p class="normal forgot" onclick="fn_passwordForgot();">비밀번호를 잊어버리셨습니까?</p>
                 <input type="submit" id="bb" class="b-button normal" value="로그인하기">
          </div>
          <div id="hidden-form">
@@ -89,7 +90,11 @@ function fn_emailDuplicate(){
 }
 
 function fn_emailForgot(){
-	open("<%=request.getContextPath()%>/emailForgot.do?","_blank","width=400, height=210 ,left=500, top=200");
+	open("<%=request.getContextPath()%>/emailForgot.do?","_blank","width=500, height=210 ,left=500, top=200");
+}
+
+function fn_passwordForgot(){
+	open("<%=request.getContextPath()%>/passwordForgot.do?","_blank","width=400, height=210 ,left=500, top=200");
 }
 </script>
 <%-- <%@ include file="/views/common/footer.jsp" %> --%>
