@@ -51,7 +51,7 @@
                 
                 <br/>
                 <p class="normal forgot" onclick="fn_emailForgot();">이메일을 잊어버리셨습니까?</p>
-                <p class="normal forgot" >비밀번호를 잊어버리셨습니까?</p>
+                <p class="normal forgot" onclick="fn_passwordForgot();">비밀번호를 잊어버리셨습니까?</p>
                 <input type="submit" id="bb" class="b-button normal" value="로그인하기">
          </div>
          <div id="hidden-form">
@@ -89,7 +89,11 @@ function fn_emailDuplicate(){
 }
 
 function fn_emailForgot(){
-	open("<%=request.getContextPath()%>/emailForgot.do?","_blank","width=400, height=210 ,left=500, top=200");
+	open("<%=request.getContextPath()%>/emailForgot.do?","_blank","width=500, height=210 ,left=500, top=200");
+}
+
+function fn_passwordForgot(){
+	open("<%=request.getContextPath()%>/passwordForgot.do?","_blank","width=400, height=210 ,left=500, top=200");
 }
 </script>
 <%-- <%@ include file="/views/common/footer.jsp" %> --%>
