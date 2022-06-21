@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%
 	boolean result=(boolean)request.getAttribute("result");
-	String Teamname=request.getParameter("team_name");
 %>  
 <!DOCTYPE html>
 <html>
@@ -13,15 +12,15 @@
 <body>
 <div id="checkId-container">
 		<%if(result) {%>
-			[<span><%=Teamname %></span>]는 사용가능합니다.	
+			[<span id="teamname"><%=request.getParameter("team_name")%> </span>]는 사용가능합니다.	
 			<br><br>
 			<button type="button" >닫기</button>
 		<%} else{%>
-			[<span id="duplicated"><%=Teamname %></span>]는 사용중입니다.
+			[<span id="duplicated"><%=request.getParameter("team_name") %></span>]는 사용중입니다.
 			<br><br>
 			<!-- 아이디 재입력창 구성 -->
 			<form action="<%=request.getContextPath() %>/team/idDuplicate.do" method="post">
-				<input type="text" name="userId" id="userId">
+				<input type="text" name="team" id="team">
 				<input type="submit" value="중복검사" >
 			</form>
 		<%} %>
@@ -30,10 +29,10 @@
 		const btn=document.querySelector("[type=button]");
 		console.log(btn);
 		btn.addEventListener("click",(e)=>{
-			opener.enrollMemberFrm.userId.value='<%=Teamname%>';
-			opener.enrollMemberFrm.password.focus();
+			opener.document.getElementById("team_name").value='<%=request.getParameter("team_name")%>';
 			close();
 		});
+		
 	</script>
 </body>
 </html>

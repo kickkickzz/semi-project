@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.member.model.vo.Member;
 import com.team.model.vo.Team;
 import com.team.model.vo.TeamMemberInfo;
 
@@ -26,6 +27,26 @@ public class TeamDao {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public Team selectTeamByName(Connection conn, String team_name) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Team t=null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("selectTeamByName"));
+			pstmt.setString(1, team_name);
+			rs = pstmt.executeQuery();
+			if(rs.next()) t = (TeamDao.getTeam(rs));
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return t;
 	}
 	
 
@@ -129,7 +150,7 @@ public class TeamDao {
 		return t;
 	}
 	
-	public ArrayList<TeamMemberInfo> selectTeamMemberList(Connection conn,String team_code, int cPage, int numPerpage) {
+	public ArrayList<TeamMemberInfo> selectTeamMemberList(Connection conn,String team_code) {
 		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -141,8 +162,6 @@ public class TeamDao {
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectTeamMemberList"));
 			pstmt.setString(1, team_code);
-			pstmt.setInt(2, (cPage-1)*numPerpage+1);
-			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			
 			teamMemberArr=new ArrayList<TeamMemberInfo>();
@@ -163,36 +182,7 @@ public class TeamDao {
 		
 	}
 	
-	public int selectTeamMemberCount(Connection conn, String team_code) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		int result=0;
-		try {
-			pstmt=conn.prepareStatement(prop.getProperty("selectTeamMemberCount"));
-			pstmt.setString(1, team_code);
-			rs=pstmt.executeQuery();
-			if(rs.next()) result=rs.getInt(1);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return result;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-	
 	
 	public int teamEnrollment(Connection conn, Team team) {
 		PreparedStatement pstmt = null;
@@ -221,74 +211,124 @@ public class TeamDao {
 
 	}
 	
-	public Team selectTeamByName(Connection conn, String team_name) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		Team t=null;
+	public int getTeamRegistCheck(Connection conn, String userId) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+
+		String query = prop.getProperty("teamRegistCheck");
+
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("selectTeamByName"));
-			pstmt.setString(1, team_name);
-			rs=pstmt.executeQuery();
-			if(rs.next()) t= new Team(rs.getString("team_code"), rs.getString("team_leader"), rs.getInt("team_num"),
-					rs.getString("team_name"), rs.getString("team_gender"), rs.getString("team_age"),
-					rs.getString("team_region"), rs.getInt("team_point"), rs.getString("team_mark_img"),
-					rs.getDate("team_active_lastday"), rs.getString("team_delete_status"));
-			
-		}catch(SQLException e) {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			close(rs);
+		} finally {
 			close(pstmt);
-		}return t;
+			close(rset);
+		}
+
+		return result;
 	}
+	
+	public int getTeamCodeCheck(Connection conn, String team_code) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+
+		String query = prop.getProperty("teamCodeCheck");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, team_code);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+
 	
 	public static Team getTeam(ResultSet rs) {
 		Team t=null;
 		try {
-			t=new Team();
-			t.setTeam_code(rs.getString("team_code"));
-			t.setTeam_leader(rs.getString("team_leader"));
-			t.setTeam_num(rs.getInt("team_num"));
-			t.setTeam_name(rs.getString("team_name"));
-			t.setTeam_gender(rs.getString("team_gender"));
-			t.setTeam_age(rs.getString("team_age"));
-			t.setTeam_region(rs.getString("team_region"));
-			t.setTeam_point(rs.getInt("team_point"));
-			t.setTeam_mark_img(rs.getString("team_mark_img"));
-			t.setTeam_active_lastday(rs.getDate("team_active_lastday"));
-			t.setTeam_delete_status(rs.getString("team_delete_status"));
+			t=Team.builder()
+					.team_code(rs.getString("team_code"))
+					.team_leader(rs.getString("team_leader"))
+					.team_num(rs.getInt("team_num"))
+					.team_name(rs.getString("team_name"))
+					.team_gender(rs.getString("team_gender"))
+					.team_age(rs.getString("team_age"))
+					.team_mark_img(rs.getString("team_mark_img"))
+					.team_point(rs.getInt("team_point"))
+					.team_region(rs.getString("team_region"))
+					.team_active_lastday(rs.getDate("team_active_lastday"))
+					.team_delete_status(rs.getString("team_delete_status"))
+					.build();
+
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		return t;
 	}
+	
+	
+	
+	
+	
+	
 	public static TeamMemberInfo getTeamMemberInfo(ResultSet rs) {
 		TeamMemberInfo tmi=null;
 		try {
-			tmi=new TeamMemberInfo();
-			tmi.setSupporter_email(rs.getString("supporter_email"));
-			tmi.setSupport_team(rs.getString("support_team"));
-			tmi.setPosition(rs.getString("position"));
-			tmi.setApplication_status(rs.getString("application_status"));
-			tmi.setDelete_status(rs.getString("delete_status"));
-			tmi.setEmail(rs.getString("email"));
-			tmi.setPwd(rs.getString("pwd"));
-			tmi.setName(rs.getString("name"));
-			tmi.setBirthday(rs.getDate("birthday"));
-			tmi.setGender(rs.getString("gender"));
-			tmi.setPhone(rs.getString("phone"));
-			tmi.setAddress(rs.getString("address"));
-			tmi.setMember_kakao(rs.getString("member_kakao"));
-			tmi.setMember_type(rs.getString("member_type"));
-			tmi.setMember_delete_status(rs.getString("member_delete_status"));
-			
-			
+			tmi=TeamMemberInfo.builder()
+					.supporter_email(rs.getString("supporter_email"))
+					.support_team(rs.getString("support_team"))
+					.position(rs.getString("position"))
+					.application_status(rs.getString("application_status"))
+					.delete_status(rs.getString("delete_status"))
+					.email(rs.getString("email"))
+					.password(rs.getString("password"))
+					.name(rs.getString("name"))
+					.phone(rs.getString("phone"))
+					.birthday(rs.getDate("birthday"))
+					.gender(rs.getString("gender"))
+					.type(rs.getString("type"))
+					.delete_status(rs.getString("deletestatus"))
+					.address(rs.getString("address"))
+					.build();
+
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		return tmi;
 	}
+	
+	
+	
 	
 	
 	
