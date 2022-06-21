@@ -61,7 +61,7 @@
         </a>
       </li>
       <li class="nav-item">
-       <a class="nav-link" href="<%=request.getContextPath()%>/member/reservationlist.do?email=<%=m.getEmail()%>" style="color: black">
+       <a class="nav-link" href="<%=request.getContextPath()%>/member/reservationlist.do?email=<%=loginMember.getEmail()%>" style="color: black">
        <i class="fa-solid fa-list"></i>
        <span data-feather="file"></span>
        예약현황
@@ -174,7 +174,7 @@ const fn_update= ()=>{
 }
 
 const updateAddress = ()=>{
-	open("<%=request.getContextPath()%>/updateAddress.do?email=<%=loginMember.getEmail()%>","_blank","width=500, height=400 ,left=500, top=200");
+	open("<%=request.getContextPath()%>/updateAddress.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=300 ,left=500, top=200");
 }
 function sample6_execDaumPostcode() {
     new daum.Postcode({
