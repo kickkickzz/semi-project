@@ -31,11 +31,11 @@ public class IdDuplication extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String team_name=request.getParameter("team_name");
-		System.out.println(request.getParameter("team_name"));
+		String teamname=request.getParameter("team_name");
 		
-		Team t=new TeamService().selectTeamByName(team_name);
-		System.out.println(t);
+		
+		Team t=new TeamService().selectTeamByName(teamname);
+		
 		
 		request.setAttribute("result",t==null?true:false);
 		

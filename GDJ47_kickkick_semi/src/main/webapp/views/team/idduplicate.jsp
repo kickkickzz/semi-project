@@ -29,9 +29,10 @@
 		const btn=document.querySelector("[type=button]");
 		console.log(btn);
 		btn.addEventListener("click",(e)=>{
-			opener.document.getElementById("teamna").value='<%=request.getParameter("team_name")%>';
+			opener.document.getElementById("team_name").value='<%=request.getParameter("team_name")%>';
 			close();
 		});
+		
 	</script>
 </body>
 </html>

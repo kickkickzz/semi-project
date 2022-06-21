@@ -44,15 +44,16 @@ public class TeamService {
 	}
 	
 	
-	public void teamRegist(Team team) {
+	public int teamRegist(Team t) {
 		Connection conn = getConnection();
-		int result = dao.teamEnrollment(conn, team);
+		int result = dao.teamEnrollment(conn, t);
 		if (result > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
 		close(conn);
+		return result;
 	}
 	
 
