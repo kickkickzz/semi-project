@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.member.model.vo.Member" %> 
+<%@ page import="com.member.model.vo.Member, com.reservation.model.vo.Stadium, com.reservation.model.service.ReservationService" %> 
 <%@ page import="java.util.List, com.board.model.vo.Board, com.board.model.service.BoardService" %>
 
 <% 
@@ -11,9 +11,14 @@
 	for(int i=0; i< bArr.length; i++){
 		if(!(boardList.isEmpty())){
 			bArr[i]=boardList.get(i);
-			System.out.println("데이터 있음");
-		}else{
-			System.out.println("아무것도 없음");
+		}
+	}
+	
+	List<Stadium> stadiumList = (List<Stadium>)new ReservationService().sixStadium();
+	Stadium[] sArr = new Stadium[6];
+	for(int i=0; i<sArr.length; i++){
+		if(!(stadiumList.isEmpty())){
+			sArr[i]=stadiumList.get(i);
 		}
 	}
 	
@@ -100,7 +105,7 @@
 	
 	$(()=>{
 		$("#menu").click(function(){
-			$("#header-menu").toggle('fast');
+			$("#header-menu").toggle();
 		})
 	})
 
