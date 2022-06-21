@@ -95,6 +95,12 @@
 			return false;
 		}
 	}
+	
+	$(()=>{
+		$("#menu").click(function(){
+			$("#header-menu").toggle('fast');
+		})
+	})
 
 </script>
 

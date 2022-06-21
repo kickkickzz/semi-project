@@ -41,6 +41,7 @@
                 <input type="text" placeholder="이름" class="normal name"><br>
                 
                 <input type="tel" placeholder="전화번호" class="normal phone"><br>
+                <input type="date" placeholder="생년월일" class="normal birthday"><br>
                 
                 <input type="text" id="sample6_postcode" placeholder="우편번호" class="address" style="margin-bottom : 3px;">
                 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="address">
@@ -50,7 +51,7 @@
                 
                 <br/>
                 <p class="normal forgot" onclick="fn_emailForgot();">이메일을 잊어버리셨습니까?</p>
-                <p class="normal forgot" onclick="fn_passwordForgot();">비밀번호를 잊어버리셨습니까?</p>
+                <p class="normal forgot" >비밀번호를 잊어버리셨습니까?</p>
                 <input type="submit" id="bb" class="b-button normal" value="로그인하기">
          </div>
          <div id="hidden-form">
@@ -88,11 +89,7 @@ function fn_emailDuplicate(){
 }
 
 function fn_emailForgot(){
-	open("<%=request.getContextPath()%>/emailForgot.do?","_blank","width=500, height=210 ,left=500, top=200");
-}
-
-function fn_passwordForgot(){
-	open("<%=request.getContextPath()%>/passwordForgot.do?","_blank","width=400, height=210 ,left=500, top=200");
+	open("<%=request.getContextPath()%>/emailForgot.do?","_blank","width=400, height=210 ,left=500, top=200");
 }
 </script>
 <%-- <%@ include file="/views/common/footer.jsp" %> --%>

@@ -98,11 +98,11 @@
     <form id="updateForm" action="<%=request.getContextPath()%>/updatemember.do" method="post">
      <div>
       <p style="margin-bottom : 3px;" class="pp">이메일</p>
-      <input type="text" name="email" value="<%=loginMember.getEmail()%>" style="margin-bottom : 7px;" size="63" readonly>
+      <input type="text" name="email" value="<%=loginMember.getEmail()%>" style="margin-bottom : 7px; background-color:lightgray" size="63" readonly>
      </div>  
      <div>
       <p style="margin-bottom : 3px;" class="pp">이름</p>
-      <input type="text" name="name" value="<%=loginMember.getName()%>" readonly style="margin-bottom : 10px;" size="63">
+      <input type="text" name="name" value="<%=loginMember.getName()%>" readonly style="margin-bottom : 10px; background-color:lightgray" size="63">
      </div>
      <div>
       <p style="margin-bottom : 3px;">비밀번호</p>
