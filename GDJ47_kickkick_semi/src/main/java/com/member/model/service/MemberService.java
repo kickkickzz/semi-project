@@ -109,4 +109,22 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
+
+	//비밀번호 찾기
+	public Member passwordForgot(String email, String phone, String name) {
+		Connection conn = getConnection();
+		Member result = dao.passwordForgot(conn,email,phone,name);
+		close(conn);
+		return result;
+	}
+	
+	//임시비밀번호로 업데이트
+	public int randomPassword(String email,String ranPassword) {
+		Connection conn = getConnection();
+		int result = dao.randomPassword(conn,email,ranPassword);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
 }

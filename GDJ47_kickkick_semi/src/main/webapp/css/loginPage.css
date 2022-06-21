@@ -296,3 +296,12 @@ div.login-error-msg{
 #idcheck{
 	display: none;
 }
+
+#naverlogin{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#naverlogin a{
+	padding-right: 10px;
+}

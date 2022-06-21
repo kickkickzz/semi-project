@@ -60,8 +60,9 @@
 				<%}else{%>
 					<i id="home" class="fa-solid fa-user" onclick="location.assign('<%=request.getContextPath()%>/loginPage.do')"></i>
 				<%} %>
-				<i id="alert" class="fa-solid fa-bell"></i>
-				<i id="like" class="fa-solid fa-heart"></i>
+				<%if(loginMember!=null){ %>
+					<i class="fa-solid fa-arrow-right-from-bracket" onclick="location.replace('<%=request.getContextPath()%>/logoutMember.do')"></i>
+				<%} %>
 				<i id="menu" class="fa-solid fa-bars"></i>
 			</div>
 		</div>
@@ -95,6 +96,12 @@
 			return false;
 		}
 	}
+	
+	$(()=>{
+		$("#menu").click(function(){
+			$("#header-menu").toggle('fast');
+		})
+	})
 
 </script>
 

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	import="com.member.model.vo.*, com.board.model.vo.*, java.util.List"%>
 <%
 
@@ -73,12 +72,12 @@
 <!--footer삽입 -->
 <%@include file="/views/common/footer.jsp"%>
 <script>
-function cancelUpdate(){
-	let result=confirm('수정을 취소하시겠습니까?');
-	if(result==true){
-		alert('수정을 취소합니다.');
-		//수정 취소
-		location.href='<%=request.getContextPath()%>/showBoardList.do';
+	function cancelUpdate(){
+		let result=confirm('수정을 취소하시겠습니까?');
+		if(result==true){
+			alert('수정을 취소합니다.');
+			//수정 취소
+			location.href='<%=request.getContextPath()%>/showBoardList.do';
+		}
 	}
-}
 </script>

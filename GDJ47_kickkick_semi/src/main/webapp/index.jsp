@@ -150,7 +150,7 @@
 			</div>
 			<div class="main-notice-list">
 					<div class="notice-list-item">
-						<a href="/customer/noticeView?bbsDetailSeq=181">
+						<a href="<%=request.getContextPath()%>/detailBoard.do?bId=<%=bArr[0].getBoardNum()%>">
 							<dl>
 								<dt>
 									<%=bArr[0].getBoardTitle() %>
@@ -162,7 +162,7 @@
 						</a>
 					</div>
 					<div class="notice-list-item">
-						<a href="/customer/noticeView?bbsDetailSeq=68">
+						<a href="<%=request.getContextPath()%>/detailBoard.do?bId=<%=bArr[1].getBoardNum()%>">
 							<dl>
 								<dt>
 									<%=bArr[1].getBoardTitle() %>
@@ -174,7 +174,7 @@
 						</a>
 					</div>
 					<div class="notice-list-item">
-						<a href="/customer/noticeView?bbsDetailSeq=10">
+						<a href="<%=request.getContextPath()%>/detailBoard.do?bId=<%=bArr[2].getBoardNum()%>">
 							<dl>
 								<dt>
 									<%=bArr[2].getBoardTitle() %>
@@ -186,7 +186,7 @@
 						</a>
 					</div>
 					<div class="notice-list-item">
-						<a href="/customer/noticeView?bbsDetailSeq=11">
+						<a href="<%=request.getContextPath()%>/detailBoard.do?bId=<%=bArr[3].getBoardNum()%>">
 							<dl>
 								<dt>
 									<%=bArr[3].getBoardTitle() %>
