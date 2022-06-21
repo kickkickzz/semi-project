@@ -111,8 +111,6 @@ public class TeamRegistEnd extends HttpServlet {
 			            		.team_mark_img(team_mark)
 			            		.build();
 	            
-			            new TeamService().teamRegist(t);
-	            
 			            int result=new TeamService().teamRegist(t);
 	           
 				
