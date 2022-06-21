@@ -84,7 +84,7 @@
 							<!-- 이전버튼 -->
 							<li class="page-item">
 								<button id="previous" class="page-link"
-									onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage'"> &lt;</button>
+									onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage<%=currentPage-1%>'"> &lt;</button>
 							</li>
 							
 							<!-- 현재페이지에서 10개 부르기-->
@@ -97,18 +97,18 @@
 									</li>
 									<%}else{ %>
 									<li class="page-item">
-										<button class="page-link" onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage='">?</button>
+										<button class="page-link" onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage=<%=p %>'"><%=p %></button>
 									</li>
 								<%	} %>
 								<%} %>
 	
 							<!-- 다음버튼 -->
 							<li class="page-item">
-								<button id="next" class="page-link"	onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage='">&gt; </button>
+								<button id="next" class="page-link"	onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage=<%=currentPage+1%>'">&gt; </button>
 							</li>
 							<!-- 마지막 버튼 -->
 							<li class="page-item">
-								<button id="last_next" class="page-link"	onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage='">&gt;&gt; </button>
+								<button id="last_next" class="page-link"	onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage=<%=maxPage%>'">&gt;&gt; </button>
 							</li>
 							<script>
 								//첫페이지와 끝페이지 동일시 -추후 적용 확인후 처리
