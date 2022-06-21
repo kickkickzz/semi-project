@@ -24,7 +24,7 @@
 		<br>
 		<br>
 			
-			
+			<h1 style="text-align:center">매치 정보 보기</h1>
 		<table class="table table-hover table-striped text-center">
 		<thead>
 			<tr>
