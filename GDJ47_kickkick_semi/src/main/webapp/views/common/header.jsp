@@ -71,7 +71,7 @@
 				<li>구장</li>
 				<li onclick="fn_stadium();">예약</li>
 				<li onclick="fn_team();">팀 관리</li>
-				<li>매칭</li>
+				<li onclick="fn_match();">매칭</li>
 			</ul>
 		</div>
 	</nav>
@@ -87,8 +87,9 @@
 	const fn_team=()=>{
 		location.assign('<%=request.getContextPath()%>/team.do');
 	}
-
-
+	const fn_match=()=>{
+		location.assign('<%=request.getContextPath()%>/match.do');
+	}
 	const fn_searchData=e=>{
 		if($(e.target).find("input").val().length==0){
 			alert("값을 입력하고 조회하세요.");

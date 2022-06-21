@@ -76,7 +76,6 @@
 		
 	
 	</div>
-	
 	<script>
 	
 		const fn_searchData=e=>{
