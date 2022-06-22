@@ -17,7 +17,7 @@ import common.PasswordEncrypt;
 /**
  * Servlet Filter implementation class EncryptFilter
  */
-@WebFilter(servletNames = {"enrollMemberServlet", "loginServlet", "updatePasswordEndServlet", "deleteMemberEndServlet", "passwordforgot"})
+@WebFilter(servletNames = {"enrollMemberServlet", "loginServlet", "updatePasswordEndServlet", "deleteMemberEndServlet", "extraPassword"})
 public class EncryptFilter extends HttpFilter implements Filter {
        
     /**

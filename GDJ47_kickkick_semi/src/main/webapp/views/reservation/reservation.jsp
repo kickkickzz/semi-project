@@ -1,6 +1,7 @@
 <%@page import="com.member.controller.LoginMember"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/views/common/header.jsp" %>
 <%@ page import="com.reservation.model.vo.Stadium" %>
 <% Stadium s = (Stadium)request.getAttribute("stadium"); 
 
@@ -32,7 +33,6 @@
 
 
 
-<%@ include file="/views/common/header.jsp" %>
 <% String userId = null;
 String name1 = null;
 if (loginMember != null) {

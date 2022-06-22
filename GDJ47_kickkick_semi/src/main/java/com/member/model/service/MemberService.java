@@ -112,19 +112,33 @@ public class MemberService {
 	
 
 	//비밀번호 찾기
-	public Member passwordForgot(String email, String phone, String name) {
+	public Member passwordForgot(String email, String name) {
 		Connection conn = getConnection();
-		Member result = dao.passwordForgot(conn,email,phone,name);
+		Member result = dao.passwordForgot(conn,email, name);
 		close(conn);
 		return result;
 	}
 	
 	//임시비밀번호로 업데이트
-	public int randomPassword(String email,String ranPassword) {
+//	public int randomPassword(String email,String ranPassword) {
+//		Connection conn = getConnection();
+//		int result = dao.randomPassword(conn,email,ranPassword);
+//		if(result>0) commit(conn);
+//		else rollback(conn);
+//		return result;
+//	}
+	
+	
+	
+	
+	//임시비밀번호
+	public int extraPassword(String email, String AuthenticationKey) {
 		Connection conn = getConnection();
-		int result = dao.randomPassword(conn,email,ranPassword);
+		int result = dao.extraPassword(conn,email,AuthenticationKey);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		return result;
 	}
+	
+	
 }
