@@ -3,19 +3,12 @@
 <%
 	//로그인 하지 않아도 다 열람 가능
 	//작성 권한은 관리자만
-	List<Board> list=(List<Board>)request.getAttribute("boardLists");
+	/* Member loginMember = (Member) session.getAttribute("loginMember");
+	System.out.println("현재 로그인 회원 정보 => " + loginMember); */
 	
-
 	
-	
-	//페이지 정보//
-	//이름에 대응되는 PageInfo 객체 - 
-	PageInfo pi=(PageInfo) request.getAttribute("pi");
-	int listCount=pi.getListCount(); //페이지 길이
-	int currentPage=pi.getCurrentPage();
-	int maxPage=pi.getMaxPage();
-	int startPage= pi.getStartPage();
-	int endPage= pi.getEndPage();
+	List<Board> boards=(List<Board>)request.getAttribute("boards");
+	String pageBar=(String)request.getAttribute("pageBar");
 	
 	
 %>
@@ -29,8 +22,8 @@
 					<h1 class="board-title">공지사항</h1>
 					<hr>
 				</div>
-				<!-- 공지작성은 관리자만 회원 유형 적용해서 권한부여 가능 loginMember.getType().equals("R")-->
-				<%if(loginMember!=null&& loginMember.getEmail().equals("admin@kickick.com")){ //관리자 회원적용을 자체 아이디 규약? 회원유형으로 설정?%>
+				<!-- 공지작성은 관리자만 회원 유형 적용해서 권한부여 가능 loginMember.getType().equals("M")-->
+				<%if(loginMember!=null&& loginMember.getType().equals("M")){ //회원유형으로 설정 %>
 				<div class="board_button_box">
 					<div></div>
 					<button type="button" class="btn btn-primary" id="insertBtn" onclick="location.assign('<%=request.getContextPath() %>/writeBoardForm.do')">등록하기</button>
@@ -50,16 +43,10 @@
 						</thead>
 						<tbody>
 						<!-- 데이터 삽입-->
-						<%if(list.isEmpty()){ %>
+						<%if(!boards.isEmpty()){ 
+							for(Board b : boards){%>
 							<tr>
-								<td colspan="6">공지사항이 없습니다!</td>
-							</tr>
-						<%}else{
-							int i=0;
-							while(i<list.size()) {
-								Board b= list.get(i);%>	
-							<tr>
-								<th scope="row"><%=i+1%>
+								<th scope="row">
 									<input type="hidden" value="<%=b.getBoardNum()%>"/>
 								</th>
 								<!--번호-->
@@ -70,82 +57,28 @@
 								<td colspan=3><%b.getBoardTitle(); %></td>
 								<!-- 작성자 -->
 								<td><%b.getBoardWriter(); %></td>
+								<!-- 조회수 -->
+								<%-- <td><%=b.getBoardReadCount() %></td> --%>
 							</tr>
-						<%		i++;
-							}
-						}%>	
+						<%	}
+						 }else{ %>
+							<tr>
+								<td colspan='6'>조회된 결과가 없습니다.</td>
+							</tr>
+						<%} %>
 						</tbody>
 					</table>
+					<div id="pageBar">
+						<%=pageBar %>
+					</div>
 				</div>
 				
-				<!-- 페이징처리 -->
-				<div class="board_pagenation">
-					<nav>
-						<ul class="pagination">
-							<!-- 가장처음버튼: 현재페이지 1 -->
-							<li class="page-item">
-								<button id="initial_previous" class="page-link" 
-									onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage=1'"> &lt;&lt;</button>
-							</li>
-							<!-- 이전버튼 -->
-							<li class="page-item">
-								<button id="previous" class="page-link"
-									onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage<%=currentPage-1%>'"> &lt;</button>
-							</li>
-							
-							<!-- 현재페이지에서 10개 부르기-->
-								<%for(int p=startPage; p<=endPage; p++){ 
-									if(p==currentPage){
-									//p가 현재페이지(currentPage)와 같다면
-									//현재 페이지는 선택 못하도록%>
-									<li class="page-item active">
-										<button class="page-link" disabled="disabled">현재</button>
-									</li>
-									<%}else{ %>
-									<li class="page-item">
-										<button class="page-link" onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage=<%=p %>'"><%=p %></button>
-									</li>
-								<%	} %>
-								<%} %>
-	
-							<!-- 다음버튼 -->
-							<li class="page-item">
-								<button id="next" class="page-link"	onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage=<%=currentPage+1%>'">&gt; </button>
-							</li>
-							<!-- 마지막 버튼 -->
-							<li class="page-item">
-								<button id="last_next" class="page-link"	onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage=<%=maxPage%>'">&gt;&gt; </button>
-							</li>
-							<script>
-								//첫페이지와 끝페이지 동일시 -추후 적용 확인후 처리
-								if(<%=startPage%>==1 && <%=startPage%>==<%=endPage%>){
-									$('#next').attr('disabled', 'true');
-									$('#previous').attr('disabled', 'true');
-									$('#initial_previous').attr('disabled', 'true');
-									$('#last_next').attr('disabled', 'true');;
 				
-								}
-								
-								if(<%=currentPage%> >= <%=maxPage%>){
-									let next=$('#next');
-									let lnext=$('#last_next');
-									
-									//현재페이지가 맨 마지막 페이지에있다면..
-									next.attr('disabled', 'true');
-									lnext.attr('disabled', 'true');
-								}
-							</script>
-						</ul>
-					</nav>
-				</div>
 			</div>
 		</div>
 	</div>
 <%@include file="/views/common/footer.jsp"%>
 <script>
-	//현재페이지가 1일때, 이전페이지를 클릭하지 못하게
-	if(<%=currentPage%><=1){
-		$('#previous').attr('disabled', 'true');
-	}
+	
 </script>
 

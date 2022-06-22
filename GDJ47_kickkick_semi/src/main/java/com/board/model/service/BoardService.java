@@ -6,50 +6,44 @@ import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.board.model.dao.BoardDao;
 import com.board.model.vo.Board;
-import com.board.model.vo.BoardAttachment;
-import com.board.model.vo.PageInfo;
 
 public class BoardService {
-	public List<Board> selectBoardList(PageInfo pi) {
-		Connection conn = getConnection();
-		List<Board> boardList = new BoardDao().selectBoardList(conn, pi);
-		if (boardList != null) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		close(conn);
-		return boardList;
-
-	}
-
-	public int getBoardListCount() {
-		Connection conn = getConnection();
-		int result = new BoardDao().getBoardListCount(conn);
+	
+	private BoardDao dao=new BoardDao();
+	
+	public List<Board> selectBoardList(int cPage, int numPerpage){
+		Connection conn=getConnection();
+		List<Board> result=dao.selectBoardList(conn,cPage,numPerpage);
 		close(conn);
 		return result;
 	}
-
-	public Board selectBoard(int bId) {
-		Connection conn = getConnection();
-		Board board = null;
-		board = new BoardDao().selectBoard(conn, bId);
+	
+	public int selectBoardCount() {
+		Connection conn=getConnection();
+		int result=dao.selectBoardCount(conn);
 		close(conn);
-		return board;
+		return result;
 	}
-
-	public BoardAttachment selectBoardAttachment(int bId) {
-		// 공지사항 이미지 정보 등
+	
+	public Board selectBoard(int bId, boolean isRead) {
 		Connection conn = getConnection();
-		BoardAttachment boardImgAttach = null;
-		boardImgAttach = new BoardDao().selectBoardAttachment(conn, bId);
+		Board b = dao.selectBoard(conn, bId);
+		if(b!=null&&!isRead) {
+			int result=dao.updateReadCount(conn,bId);
+			if(result>0) {
+				commit(conn);
+				b.setBoardReadCount(b.getBoardReadCount()+1);
+			}
+			else rollback(conn);
+			
+		}
+		
 		close(conn);
-		return boardImgAttach;
+		return b;
 	}
 
 	public List<Board> selectList() {
@@ -59,66 +53,15 @@ public class BoardService {
 		return list;
 	}
 
-	public int insertBoard(Board board, ArrayList<BoardAttachment> fileList) {
-		Connection conn = getConnection();
-		BoardDao dao = new BoardDao();
-		// 글만 등록
-		int result1 = dao.insertBoard(conn, board);
-		int result2 = 0;
-		if (board.getBoardImgPath() == null) {
-			System.out.println("BoardService(x) => " + board);
-			if (result1 > 0) {
-				commit(conn);
-			} else {
-				rollback(conn);
-			}
-			close(conn);
-			return result1;
-
-		} else {
-			// 이미지 등록
-			System.out.println("BoardService(o) => " + board);
-			System.out.println("fileList=> " + fileList);
-			result2 = dao.insertBoardAttachment(conn, fileList);
-			if (result1 > 0 && result2 > 0) {
-				commit(conn);
-			} else {
-				rollback(conn);
-			}
-			close(conn);
-		}
-		return result2;
-	}
-
-	public int updateBoard(Board board, int bId, int fId, BoardAttachment bat) {
-
-		Connection conn = getConnection();
-		BoardDao bDao = new BoardDao();
-		// 게시판 수정
-		int result = bDao.updateBoard(conn, board, bId);
-
-		// 변경 전 이미지
-		if (fId > 0) {
-			// 변경 후 이미지
-			if (board.getBoardImgPath() != null) {
-				// 이미지 변경
-				result += bDao.updateBoardAttachment(conn, bat, bId);
-			} else {
-				// 이미지 삭제
-				result += bDao.deleteBoardAttachmentFid(conn, bId);
-			}
-
-		} else if (fId <= 0 && board.getBoardImgPath() != null) {
-			// 변경후에는 이미지가 존재
-			result += bDao.insertBoardAttachmentBid(conn, bat, bId);
-		}
-		if (result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
+	public int insertBoard(Board b) {
+		Connection conn=getConnection();
+		int result=dao.insertBoard(conn,b);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
 		return result;
 	}
+	
 
 	public int deleteBoard(int fId, int bId) {
 		int result = 0;
@@ -145,6 +88,8 @@ public class BoardService {
 		close(conn);
 		return list;
 	}
+
+	
 	
 	 
 

@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
-import com.board.model.vo.PageInfo;
-//clear
+
 @WebServlet("/showBoardList.do")
 public class ShowBoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,50 +21,61 @@ public class ShowBoardListServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BoardService bs= new BoardService();
-		
-		int listCount;
-		int currentPage;
-		int pageLimit;	//한 페이지에 표시되는 페이지 수
-		int boardLimit;	//한 페이지당 게시물 수
-		int maxPage;
-		int startPage;
-		int endPage;
-		
-		listCount= bs.getBoardListCount(); //게시물 수
-		
-		currentPage=1;
-		if(request.getParameter("currentPage")!=null) {
-			currentPage= Integer.parseInt(request.getParameter("currentPage"));
+		//1. DB에 저장된 board데이터를 출력
+		//2. 각 페이지에 맞게 출력하기
+		int cPage;
+		int numPerpage;
+		try {
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
 		}
-		
-		pageLimit=10;
-		boardLimit=10;
-		
-		//마지막 페이지
-		maxPage=(int)Math.ceil((double)listCount/boardLimit);
-		
-		//시작 페이지
-		startPage=((currentPage-1)/pageLimit)*pageLimit+1;
-		endPage= (startPage+pageLimit)-1;
-		if(maxPage<endPage) {
-			endPage=maxPage;
+		try {
+			numPerpage=Integer.parseInt(request.getParameter("numPerPage"));
+		}catch(NumberFormatException e) {
+			numPerpage=5;
 		}
+		List<Board> boards=new BoardService().selectBoardList(cPage, numPerpage);
+		int totalBoard=new BoardService().selectBoardCount();
+		int totalPage=(int)Math.ceil((double)totalBoard/numPerpage);
 		
-		PageInfo pi=new PageInfo(currentPage, listCount, pageLimit, boardLimit, maxPage, startPage, endPage);
-		List<Board>boardList= bs.selectBoardList(pi);
+		int pageBarSize=5;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
 		
-		String page=null;
-		if(boardList!=null) {
-			page="/views/board/boardList.jsp";
-			request.setAttribute("boardLists", boardList);
-			request.setAttribute("pi", pi);
+		String pageBar="";
+		if(pageNo==1) {
+			pageBar+="<span>[이전]</span>";
 		}else {
-			page="/views/common/errorPage.jsp";
-			request.setAttribute("msg", "공지사항 조회에 실패하였습니다.");
+			pageBar+="<a href="+request.getRequestURL()
+					+"?cPage="+(pageNo-1)
+					+"&numPerpage="+numPerpage+">[이전]</a>";
 		}
 		
-		request.getRequestDispatcher(page).forward(request, response);
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(cPage==pageNo) {
+				pageBar+="<span>"+pageNo+"</span>";
+			}else {
+				pageBar+="<a href="+request.getRequestURL()
+				+"?cPage="+(pageNo)
+				+"&numPerpage="+numPerpage+">"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		
+		if(pageNo>totalPage) {
+			pageBar+="<span>[다음]</span>";
+		}else {
+			pageBar+="<a href="+request.getRequestURL()
+			+"?cPage="+(pageNo)
+			+"&numPerpage="+numPerpage+">[다음]</a>";
+		}
+		
+		request.setAttribute("pageBar", pageBar);
+		request.setAttribute("boards", boards);
+		
+		request.getRequestDispatcher("/views/board/boardList.jsp")
+		.forward(request, response);
 	
 	}
 

@@ -23,13 +23,13 @@ public class BoardListServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Board> list = new BoardService().selectList();
-		
-		response.setContentType("application/json; charset=UTF-8");
-		Gson gson=new GsonBuilder().setDateFormat("yyyy년  MM월 dd일").create();
-		gson.toJson(list, response.getWriter());
+//		List<Board> list = new BoardService().selectList();
+//		
+//		response.setContentType("application/json; charset=UTF-8");
+//		Gson gson=new GsonBuilder().setDateFormat("yyyy년  MM월 dd일").create();
+//		gson.toJson(list, response.getWriter());
 
-		
+		System.out.println("여기 확인 가능?");
 //		request.setAttribute("pi", pi);
 //		request.setAttribute("list",list);
 //		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request,response);

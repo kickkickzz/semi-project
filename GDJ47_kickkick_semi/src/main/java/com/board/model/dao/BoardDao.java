@@ -14,9 +14,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.board.model.vo.Board;
-import com.board.model.vo.BoardAttachment;
-import com.board.model.vo.PageInfo;
-//clear
+
 public class BoardDao {
 	private Properties prop=new Properties();
 	
@@ -29,31 +27,19 @@ public class BoardDao {
 		}
 		
 	}
-	public List<Board> selectBoardList(Connection conn, PageInfo pi) {
+	public List<Board> selectBoardList(Connection conn, int cPage, int numPerpage) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Board> boardList = new ArrayList();
-		String query= prop.getProperty("selectBoardList");
-		int startPage= (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;//시작
-		int endPage=startPage +pi.getBoardLimit()-1;//끝
-		System.out.println("시작페이지 : "+startPage+"/ 마지막페이지 : "+endPage);
+		
 		try{
-			pstmt=conn.prepareStatement(query);
-			pstmt.setInt(1, startPage);
-			pstmt.setInt(2, endPage);
+			pstmt=conn.prepareStatement(prop.getProperty("selectBoardList"));
+			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
-				Board board=new Board(
-					rs.getInt("BOARD_NUM"),
-					rs.getString("WRITER_EMAIL"),
-					rs.getString("BOARD_TITLE"),
-					rs.getString("BOARD_CONTENT"),
-					rs.getString("BOARD_IMG"),
-					rs.getDate("BOARD_DATE"),
-					rs.getString("BOARD_DELETE_STATUS"),
-					rs.getString("BOARD_WRITER"));
-				boardList.add(board);
+				boardList.add(getBoard(rs) );
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -62,6 +48,22 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return boardList;
+	}
+	
+	public int selectBoardCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectBoardCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
 	}
 
 	public int insertBoard(Connection conn, Board b) {
@@ -74,7 +76,7 @@ public class BoardDao {
 			pstmt.setString(1,b.getBoardWriterEmail());
 			pstmt.setString(2,b.getBoardTitle());
 			pstmt.setString(3,b.getBoardContent());
-			pstmt.setString(4,b.getBoardImgPath());
+//			pstmt.setString(4,b.getBoardImgPath());
 			pstmt.setString(5,b.getBoardWriter());
 			result=pstmt.executeUpdate();
 			
@@ -87,52 +89,6 @@ public class BoardDao {
 		return result;
 	}
 
-	public int insertBoardAttachment(Connection conn, List<BoardAttachment> fileList) {
-		int result=0;
-		PreparedStatement pstmt=null;
-		
-		String query=prop.getProperty("insertBoardAttachment");
-		try {
-			for(int i=0;i<fileList.size();i++){
-				BoardAttachment bat= fileList.get(i);
-				pstmt=conn.prepareStatement(query);
-				pstmt.setString(1,bat.getOriginName());
-				pstmt.setString(2,bat.getChangeName());
-				pstmt.setString(3,bat.getFilePath());
-				
-				result+=pstmt.executeUpdate();
-			}
-			
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally{
-			close(pstmt);
-			System.out.println("result=> "+ result);
-		}
-		return result;
-	}
-	
-	public int insertBoardAttachment(Connection conn, BoardAttachment bat) {
-		int result=0;
-		PreparedStatement pstmt=null;
-		
-		String query=prop.getProperty("insertBoardAttachment");
-		try{
-			
-			pstmt=conn.prepareStatement(query);
-			pstmt.setString(1,bat.getOriginName());
-			pstmt.setString(2,bat.getChangeName());
-			pstmt.setString(3,bat.getFilePath());
-			result+= pstmt.executeUpdate();
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally{
-			close(pstmt);
-			System.out.println("result=> "+ result);
-		}
-		return result;
-	}
 
 	
 	public int getBoardListCount(Connection conn) {
@@ -156,6 +112,8 @@ public class BoardDao {
 		return result;
 	}
 	
+	
+	
 	public Board selectBoard(Connection conn, int bId) {
 		Board board=null;
 		PreparedStatement pstmt=null;
@@ -168,15 +126,7 @@ public class BoardDao {
 			pstmt.setInt(1, bId);
 			rs=pstmt.executeQuery();
 			if(rs.next()){
-				board= new Board(
-					rs.getInt("BOARD_NUM"),
-					rs.getString("WRITER_EMAIL"),
-					rs.getString("BOARD_TITLE"),
-					rs.getString("BOARD_CONTENT"),
-					rs.getString("BOARD_IMG"),
-					rs.getDate("BOARD_DATE"),
-					rs.getString("BOARD_DELETE_STATUS"),
-					rs.getString("BOARD_WRITER"));
+				board= getBoard(rs);
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -187,37 +137,6 @@ public class BoardDao {
 		return board;
 	}
 
-
-	public BoardAttachment selectBoardAttachment(Connection conn, int bId) {
-		BoardAttachment bat=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		String query=prop.getProperty("selectBoardAttachmentBid");
-		try {
-			pstmt=conn.prepareStatement(query);
-			pstmt.setInt(1,bId);
-			rs=pstmt.executeQuery();
-			
-			if(rs.next()) {
-				bat=new BoardAttachment(
-					rs.getInt("FILE_ID"),
-					rs.getInt("BOARD_NUM"),
-					rs.getString("ORIGIN_NAME"),
-					rs.getString("CHANGE_NAME"),
-					rs.getString("FILE_PATH"),
-					rs.getDate("UPLOAD_DATE"),
-					rs.getString("FILE_DELETED_STATUS"));
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally{
-			close(pstmt);
-			close(rs);
-		}
-		
-		return bat;
-	}
 
 	public List<Board> selectList(Connection conn) {
 		Statement stmt=null;
@@ -231,15 +150,7 @@ public class BoardDao {
 			rs=stmt.executeQuery(query);
 			
 			while(rs.next()){
-				Board b=new Board(					
-					rs.getInt("BOARD_NUM"),
-					rs.getString("WRITER_EMAIL"),
-					rs.getString("BOARD_TITLE"),
-					rs.getString("BOARD_CONTENT"),
-					rs.getString("BOARD_IMG"),
-					rs.getDate("BOARD_DATE"),
-					rs.getString("BOARD_DELETE_STATUS"),
-					rs.getString("BOARD_WRITER"));
+				Board b=getBoard(rs);
 				list.add(b);
 			}
 			
@@ -260,7 +171,7 @@ public class BoardDao {
 			pstmt=conn.prepareStatement(query);
 			pstmt.setString(1,b.getBoardTitle());
 			pstmt.setString(2,b.getBoardContent());
-			pstmt.setString(3,b.getBoardImgPath());
+//			pstmt.setString(3,b.getBoardImgPath());
 			pstmt.setDate(4,b.getBoardDate());
 			pstmt.setInt(5,bId);
 			result=pstmt.executeUpdate();
@@ -272,26 +183,6 @@ public class BoardDao {
 		return result;
 	}
 
-	public int updateBoardAttachment(Connection conn, BoardAttachment bat, int bId) {
-		int result=0;
-		PreparedStatement pstmt=null;
-		String query=prop.getProperty("updateBoardAttachment");
-		try{
-			pstmt=conn.prepareStatement(query);
-			pstmt.setString(1,bat.getOriginName());
-			pstmt.setString(2,bat.getChangeName());
-			pstmt.setString(3,bat.getFilePath());
-			pstmt.setDate(4,bat.getUpdateDate());
-			pstmt.setInt(5,bId);
-			
-			result=pstmt.executeUpdate();
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally{
-			close(pstmt);
-		}
-		return result;
-	}
 
 	public int deleteBoardAttachmentFid(Connection conn, int bId) {
 		int result=0;
@@ -309,25 +200,6 @@ public class BoardDao {
 		return result;
 	}
 
-	public int insertBoardAttachmentBid(Connection conn, BoardAttachment bat, int bId) {
-		int result=0;
-		PreparedStatement pstmt=null;
-		String query=prop.getProperty("insertBoardAttachmentBid");
-		try{
-			pstmt=conn.prepareStatement(query);
-			pstmt.setInt(1,bId);
-			pstmt.setString(2,bat.getOriginName());
-			pstmt.setString(3,bat.getChangeName());
-			pstmt.setString(4,bat.getFilePath());
-			
-			result=pstmt.executeUpdate();
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally{
-			close(pstmt);
-		}
-		return result;
-	}
 
 	public int deleteBoard(Connection conn, int bId) {
 		int result=0;
@@ -344,7 +216,19 @@ public class BoardDao {
 		}
 		return result;
 	}
-	
+	public int updateReadCount(Connection conn, int bId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateReadcount"));
+			pstmt.setInt(1, bId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 	
 	//메인 공지사항에 뿌릴 공지사항 상위 4개 리스트
 	public List<Board> mainNotice(Connection conn){
@@ -358,15 +242,7 @@ public class BoardDao {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				Board b=new Board(					
-					rs.getInt("BOARD_NUM"),
-					rs.getString("WRITER_EMAIL"),
-					rs.getString("BOARD_TITLE"),
-					rs.getString("BOARD_CONTENT"),
-					rs.getString("BOARD_IMG"),
-					rs.getDate("BOARD_DATE"),
-					rs.getString("BOARD_DELETE_STATUS"),
-					rs.getString("BOARD_WRITER"));
+				Board b=getBoard(rs);
 				list.add(b);
 			}
 		}catch(SQLException e) {
@@ -375,4 +251,19 @@ public class BoardDao {
 		return list;
 		
 	}
+	
+	private Board getBoard(ResultSet rs) throws SQLException{
+		return Board.builder()
+				.boardNum(rs.getInt("board_no"))
+				.boardWriterEmail(rs.getString("writer_email"))
+				.boardTitle(rs.getString("board_title"))
+				.boardContent(rs.getString("board_content"))
+				.boardWriter(rs.getString("board_writer"))
+				.boardOriginalFilename(rs.getString("board_original_filename"))
+				.boardRenamedFilename(rs.getString("board_renamed_filename"))
+				.boardDate(rs.getDate("board_date"))
+				.boardReadCount(rs.getInt("board_readcount"))
+				.build();
+	}
+	
 }

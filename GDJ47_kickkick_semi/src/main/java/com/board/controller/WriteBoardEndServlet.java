@@ -2,10 +2,7 @@ package com.board.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,13 +13,12 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
-import com.board.model.vo.BoardAttachment;
-import com.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
-import common.BoardImgFileRenamePolicy;
+import common.MyFileRenamedPolicy;
+import common.exception.LoginCheckException;
 //clear
-@WebServlet("/writeBoard.do")
+@WebServlet("/board/writeBoardEnd.do")
 public class WriteBoardEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,98 +28,40 @@ public class WriteBoardEndServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(ServletFileUpload.isMultipartContent(request)) {
-			int maxSize=1024*1024*10; //10MB;
-			String root= request.getSession().getServletContext().getRealPath("/"); 
-			String saveBoardPath= root+"/images/board_img/"; //공지사항 게시판 파일 저장소
-			
-			// BoardImgFileRenamePolicy() => 공지사항게시판 이미지 이름 변경 방법.
-			MultipartRequest multiRequest= new MultipartRequest(request, saveBoardPath, maxSize,"UTF-8", new BoardImgFileRenamePolicy() );
-			File file=new File(saveBoardPath);
-			
-			// saveBoadPath에 해당하는 디렉토리가 존재하지 않는다면
-			if(!file.exists()) file.mkdirs();
-			
-			//바뀐 파일이름을 저장하는 ArrayList
-			ArrayList<String> saveFiles = new ArrayList<String>();
-			
-			//원본파일이름을 저장하는 ArrayList
-			ArrayList<String> originFiles= new ArrayList<String>();
-			
-			//getFileName(): 폼에서 전송된 File의 이름을 위의 규정대로 변환
-			Enumeration<String> files= multiRequest.getFileNames();
-			while(files.hasMoreElements()) {
-				String name= files.nextElement();
-				
-				if(multiRequest.getFilesystemName(name)!=null) {
-					saveFiles.add(multiRequest.getFilesystemName(name));
-					originFiles.add(multiRequest.getOriginalFileName(name));
-				}
-			}
-			
-			// 입력한 데이터를 String 형태로 변환
-			//제목 "title"
-			String title= multiRequest.getParameter("title"); //제목-title - BOARD_TITLE
-			String content= multiRequest.getParameter("content"); //내용-content - BOARD_CONTENT
-			String email=((Member) request.getSession().getAttribute("loginMember")).getEmail();
-			String name=((Member)request.getSession().getAttribute("loginMember")).getName(); //이름- BOARD_WRITER
-			
-			Board board= new Board();
-			board.setBoardTitle(title);
-			board.setBoardWriter(name);
-			board.setBoardContent(content);
-			board.setBoardWriterEmail(email);
-			
-			ArrayList<BoardAttachment> fileList= new ArrayList<BoardAttachment>();
-			for(int i=originFiles.size()-1; i>=0; i--) {
-				BoardAttachment bat= new BoardAttachment();
-				bat.setFilePath(saveBoardPath);
-				bat.setOriginName(originFiles.get(i));
-				bat.setChangeName(saveFiles.get(i));
-				
-				//이미지이름
-				board.setBoardImgPath(originFiles.get(i));
-				
-				fileList.add(bat);
-			}
-			
-			System.out.println("/writeBoard.do=> "+board); //board출력
-			
-			int result= new BoardService().insertBoard(board, fileList);
-			if(result>0) {
-				response.sendRedirect("showBoardList.do");
-			}else {
-				for(int i=0; i<saveFiles.size(); i++) {
-					File failedFile=new File(saveBoardPath+saveFiles.get(i));
-					failedFile.delete();
-				}
-				
-				request.setAttribute("msg", "공지 게시판 게시글 등록에 실패하였습니다.");
-				request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
-			}
-			
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			System.out.println("파일 업로드 안 됨");
 		}else {
-			request.setCharacterEncoding("UTF-8");
-			String title=request.getParameter("title");
-			String email=((Member)request.getSession().getAttribute("loginMember")).getEmail();
-			String content= request.getParameter("content");
-			String name=((Member)request.getSession().getAttribute("loginMember")).getName();
+			String root=getServletContext().getRealPath("/upload/");
+			String path=root+"/board";
+			File f=new File(path);
+			if(!f.exists()) f.mkdirs();
 			
-			Board board= new Board();
-			board.setBoardContent(content);
-			board.setBoardTitle(title);
-			board.setBoardWriter(name);
-			board.setBoardWriterEmail(email);
+			MultipartRequest mr=new MultipartRequest(request,path,(1024*1024*10),"UTF-8",
+					new MyFileRenamedPolicy());
+
+			Board b=Board.builder()
+					.boardTitle(mr.getParameter("boardTitle"))
+					.boardContent(mr.getParameter("boardContent"))
+					.boardWriter(mr.getParameter("boardWriter"))
+					.boardOriginalFilename(mr.getOriginalFileName("upfile"))
+					.boardRenamedFilename(mr.getFilesystemName("upfile"))
+					.build();
 			
-			int result=new BoardService().insertBoard(board, null);
+			int result=new BoardService().insertBoard(b);
+			String msg="",loc="";
+			
 			if(result>0) {
-				response.sendRedirect("showBoardList.do");
-				
+				msg="게시글이 등록되었습니다.";
+				loc="/showBoardList.do";
 			}else {
-				request.setAttribute("msg", "공지사항 등록에 실패하였습니다.");
-				RequestDispatcher view = request.getRequestDispatcher("/views/common/errorPage.jsp");
-				view.forward(request, response);
+				msg="게시글 등록실패!";
+				loc="/board/boardWrite.do";
 			}
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp")
+			.forward(request, response);
+			
 		}
 		
 	}
