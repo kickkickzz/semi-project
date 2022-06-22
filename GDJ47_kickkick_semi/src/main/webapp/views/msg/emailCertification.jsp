@@ -15,7 +15,11 @@
 	<form action="<%=request.getContextPath()%>/emailCertificationend.do" method="post">
 		인증키 <input type="text" name="AuthenticationUser">
 		<input type="submit" value="확인">
+		<input type="hidden" value="<%=email%>" name="email">
 		<input type="hidden" value="<%=AuthenticationKey%>" name="AuthenticationKey">
 	</form>
 </body>
+<script>
+console.log(<%=email%>);
+</script>
 </html>
