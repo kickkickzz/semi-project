@@ -131,10 +131,9 @@
           		<td><input type="button" value="탈퇴"></td>
           	</tr>
           	<%} %>
-          <%}
-          else{%>
+          <%}else{%>
           <tr>
-          		<td colspan="5">가입한 팀이 없습니다.</td>
+          		<td colspan="5" style="text-align:center;">가입한 팀이 없습니다.</td>
           </tr>
           <%} %>
          </tbody>
