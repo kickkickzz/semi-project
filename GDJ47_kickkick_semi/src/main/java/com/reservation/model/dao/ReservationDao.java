@@ -307,4 +307,80 @@ public class ReservationDao {
 		}
 		return result;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//구장등록
+	public int insertStadium(Connection conn, String stadiumName,String stadiumMatchMember,String branchNum,int startTime,int endTime) {
+			PreparedStatement pstmt= null;
+			ResultSet rs=null;
+			int result=0;
+			
+			String query= prop.getProperty("insertStadium");
+			try {
+				pstmt=conn.prepareStatement(query);
+				pstmt.setString(1, branchNum);
+				pstmt.setString(2, stadiumName);
+				pstmt.setString(3, stadiumMatchMember);
+				pstmt.setInt(4, startTime);
+				pstmt.setInt(5, endTime);
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+				close(rs);
+			}
+			return result;
+		}
 }
