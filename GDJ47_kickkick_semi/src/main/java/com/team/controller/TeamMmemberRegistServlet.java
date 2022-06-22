@@ -15,7 +15,7 @@ import com.team.model.vo.TeamMember;
 /**
  * Servlet implementation class TeamMmemberRegistServlet
  */
-@WebServlet("/team/teamMemberRegist.do")
+@WebServlet("/teamMemberRegist.do")
 public class TeamMmemberRegistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

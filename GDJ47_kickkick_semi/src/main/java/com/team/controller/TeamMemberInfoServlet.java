@@ -40,25 +40,20 @@ public class TeamMemberInfoServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String team_code=request.getParameter("team_code");
-		System.out.println(request.getParameter("team_code"));
 		
 		Team teamInfo=new TeamService().selectTeam(team_code);
-		System.out.println(teamInfo);
 		request.setAttribute("teamInfo", teamInfo);
+		
 		ArrayList<TeamMemberInfo> teamMemberArr = new TeamService().selectTeamMemberList(team_code);
-		
-		
-		System.out.println(teamInfo);
-		
-		System.out.println(teamMemberArr);
-		
-		
+		ArrayList<TeamMemberInfo> list = new TeamService().selectTeamApplication(team_code);
 		
 		
 		
 		request.setAttribute("teamMemberArr", teamMemberArr);
+		request.setAttribute("teamEnterMember", list);
 		
 		RequestDispatcher view = request.getRequestDispatcher("/views/team/team_info.jsp");
+		
 		view.forward(request, response);
 	}
 
