@@ -248,4 +248,28 @@ public class ReservationDao {
 		}
 		return result;
 	}
+	
+	public List<Stadium> stadiumSearch(Connection conn, String email){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Stadium> result= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("stadiumSearch"));
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Stadium s = Stadium.builder()
+						.branch_num(rs.getString("stadium_branch_num"))
+						.build();
+				result.add(s);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
 }

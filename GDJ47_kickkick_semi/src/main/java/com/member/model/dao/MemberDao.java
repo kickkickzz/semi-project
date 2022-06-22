@@ -48,6 +48,7 @@ public class MemberDao {
 					.birthday(rs.getDate("birthday"))
 					.address(rs.getString("address"))
 					.gender(rs.getString("gender"))
+					.type(rs.getString("type"))
 					.build();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -262,15 +263,14 @@ public class MemberDao {
 	}
 	
 	//임시비밀번호 발급을 위한 메소드
-	public Member passwordForgot(Connection conn, String email, String phone, String name) {
+	public Member passwordForgot(Connection conn, String email, String name) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Member m = null;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("passwordForgot"));
 			pstmt.setString(1, email);
-			pstmt.setString(2, phone);
-			pstmt.setString(3, name);
+			pstmt.setString(2, name);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				m =getMember(rs);
@@ -288,12 +288,30 @@ public class MemberDao {
 	}
 	
 	//임시비밀번호 업데이트
-	public int randomPassword(Connection conn, String email, String ranPassword) {
+//	public int randomPassword(Connection conn, String email, String ranPassword) {
+//		PreparedStatement pstmt = null;
+//		int result=0;
+//		try {
+//			pstmt = conn.prepareStatement(prop.getProperty("randomPassword"));
+//			pstmt.setString(1, ranPassword);
+//			pstmt.setString(2, email);
+//			result = pstmt.executeUpdate();
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}finally {
+//
+//			close(pstmt);
+//		}
+//		return result;
+//	}
+	
+	//임시비밀번호
+	public int extraPassword(Connection conn, String email, String AuthenticationKey) {
 		PreparedStatement pstmt = null;
 		int result=0;
 		try {
-			pstmt = conn.prepareStatement(prop.getProperty("randomPassword"));
-			pstmt.setString(1, ranPassword);
+			pstmt = conn.prepareStatement(prop.getProperty("extraPassword"));
+			pstmt.setString(1, AuthenticationKey);
 			pstmt.setString(2, email);
 			result = pstmt.executeUpdate();
 		}catch(Exception e) {

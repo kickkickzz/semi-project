@@ -70,5 +70,12 @@ public class ReservationService {
 		else rollback(conn);
 		return result;
 	}
+	
+	public List<Stadium> stadiumSearch(String email){
+		Connection conn= getConnection();
+		List<Stadium> result = dao.stadiumSearch(conn,email);
+		close(conn);
+		return result;
+	}
 
 }
