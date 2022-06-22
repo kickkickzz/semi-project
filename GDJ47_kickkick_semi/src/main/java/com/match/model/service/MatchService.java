@@ -87,6 +87,18 @@ public class MatchService {
 		close(conn);
 		return result;
 	}
-	
+	public List<Match> searchMatch(String type,String keyword,int cPage,int numPerpage){
+		Connection conn = getConnection();
+		List<Match> result = dao.searchMatch(conn,type,keyword,cPage,numPerpage);
+		close(conn);
+		return result;
+	}
+	public int searchMatchCount(String type,String keyword) {
+		Connection conn = getConnection();
+		int result = dao.searchMatchCount(conn, type, keyword);
+		close(conn);
+		return result;
+		
+	}
 	
 }
