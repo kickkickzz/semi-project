@@ -1,7 +1,6 @@
 package com.reservation.model.service;
 
 import static common.JDBCTemplate.*;
-import static common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.List;
@@ -10,6 +9,8 @@ import com.reservation.model.dao.ReservationDao;
 import com.reservation.model.vo.PayHistory;
 import com.reservation.model.vo.ReservationInfo;
 import com.reservation.model.vo.Stadium;
+
+
 public class ReservationService {
 	private ReservationDao dao = new ReservationDao();
 	
@@ -87,6 +88,27 @@ public class ReservationService {
 	public List<Stadium> stadiumSearch(String email){
 		Connection conn= getConnection();
 		List<Stadium> result = dao.stadiumSearch(conn,email);
+		close(conn);
+		return result;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//구장 등록
+	public int insertStadium(String stadiumName,String stadiumMatchMember,String branchNum,int startTime,int endTime) {
+		Connection conn=getConnection();
+		int result = dao.insertStadium(conn, stadiumName, stadiumMatchMember,branchNum,startTime,endTime);
 		close(conn);
 		return result;
 	}

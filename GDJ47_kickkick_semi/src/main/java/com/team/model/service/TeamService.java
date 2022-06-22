@@ -177,5 +177,16 @@ public class TeamService {
 		return result;
 		
 	}
-
+	
+	
+	
+	
+	//로그인한 유저가 가입한 팀 정보보기
+	public List<Team> joinTeam(String email){
+		Connection conn = getConnection();
+		List<Team> result = new TeamDao().joinTeam(conn,email);
+		close(conn);
+		return result;
+		
+	}
 }

@@ -139,8 +139,8 @@ if(loginMember!=null){
 								<span class="input-group-addon">
 									<i class="fa fa-user fa" aria-hidden="true"></i>
 								</span>
-								<select name="branch_num" id="branch_num">
-									<option value="">------</option>
+								<select name="branch_num" id="branch_num" style="margin-left:10px">
+									<option value="------">------</option>
 								</select>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<button type="button" id="branchBtn" class="simple">지점조회</button>
@@ -156,7 +156,7 @@ if(loginMember!=null){
 								</span>
 								<select name="startTime" id="startTime" style="margin-left:10px">
 									<option value="">시간선택</option>
-									<option value="9">09:00</option>
+									<option value=9>09:00</option>
 									<option value="10">10:00</option>
 									<option value="11">11:00</option>
 									<option value="12">12:00</option>
@@ -228,7 +228,7 @@ if(loginMember!=null){
 						}); //branchNum 배열에 하나씩 들어감 option 값이 그러면 이제 append로 select 에 추가
 					}else{
 						alert("조회된 지점이 없습니다.");
-						branchNum = "------";
+						branchNum += '<option value="------">'+"------"+'</option>';
 					}
 					$('#branch_num').html(branchNum);
 				}
@@ -238,17 +238,43 @@ if(loginMember!=null){
 		
 		//구장 등록하기 버튼 
 		$("#stadiumRegistBtn").click(e=>{
+			var email = '<%=userId%>'
 			const stadiumName = $("#stadium_name").val(); //구장이름
 			const stadiumMatchMember = $("#stadium_matchMember").val();//구장매치 인원
-			const branchNum = $("#branch_num").val()//지점 이름
-			const startTime = $("#startTime").val()
-			const endTime =  $("#endTime").val();
-			$ajax({
-				
-				
-				
-			})
-		}
+			const branchNum = $("#branch_num").val();//지점 이름
+			const starttime = $("#startTime").val();
+			const startTime = parseInt(starttime); 
+			const endtime =  $("#endTime").val();
+			const endTime = parseInt(endtime); 
+			if(stadiumName == ""){
+				alert("구장이름을 입력하세요");
+			}else if(stadiumMatchMember == ""){
+				alert("구장 매치 인원을 선택하세요");
+			}else if(branchNum !="------"){ //나중에 여기 != > == 로 바꿔야함!!
+				alert("지점을 선택하세요");
+			}else if(startTime>endTime){
+				alert("예약가능시간이 잘못되었습니다 다시 선택해주세요.");
+			}else{
+				$.ajax({
+					url : "<%=request.getContextPath()%>/insertStadium.do",
+					type : "post",
+					data : {
+						email:email
+						,stadiumName:stadiumName
+						,stadiumMatchMember:stadiumMatchMember
+						,branchNum:branchNum
+						,startTime:startTime
+						,endTime:endTime},
+					success :(data)=>{  //data에 result값이 넘어옴
+						if(data>0){
+							alert("구장 등록이 완료되었습니다.");
+						}else{
+							alert("구장 등록에 실패하였습니다.");
+						}
+					}
+				})
+			}
+		})
 </script>
 	
 
