@@ -79,7 +79,7 @@ function fn_emailDuplicate(){
 	console.log(email);
 	const url = "<%=request.getContextPath()%>/emailDuplicate.do";
     const title="emailDuplicate";
-    open("",title,"width=300,height=200");
+    open("",title,"width=500,height=200");
     console.log(emailDuplicate)
     emailDuplicate.email.value=email;
     emailDuplicate.method="post";
