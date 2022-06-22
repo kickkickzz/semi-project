@@ -155,6 +155,10 @@
 				알려드립니다!
 			</div>
 			<div class="main-notice-list">
+					<dl id="notice-list-name">
+						<dt>제목</dt>
+						<dt>등록날짜</dt>
+					</dl>
 					<div class="notice-list-item">
 						<a href="<%=request.getContextPath()%>/detailBoard.do?bId=<%=bArr[0].getBoardNum()%>">
 							<dl>

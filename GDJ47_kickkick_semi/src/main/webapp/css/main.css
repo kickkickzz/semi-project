@@ -78,7 +78,7 @@ p>span{
 	color:black;
 	margin-top:16px;
 }
-dl:hover:not(#team-list-name) {
+dl:hover:not(#team-list-name, #notice-list-name) {
 	background-color:  rgb(229, 229, 229);
 	border-radius: 10px;
 }
@@ -86,13 +86,6 @@ dt{
 	width:70%;
 	overflow: hidden;
 	font-family: "Nanum Gothic Coding";
-}
-#team-list-name>dd{
-	font-weight: bold;
-	font-size: 20px;
-}
-#team-list-name{
-	border-bottom:2px solid black;
 }
 
 .notice-list-item>a{
@@ -108,6 +101,14 @@ dt{
 	padding-left: 13%;
 	padding-bottom:10%;
 	border-top:1px solid gray;
+}
+#notice-list-name{
+	display:flex;
+	padding:30px 21px;
+	border-bottom:2px solid black;
+}
+#notice-list-name>dt:last-child{
+	text-align: right;
 }
 
 
@@ -135,6 +136,7 @@ div.card-body{
 }
 .card-body-list>li{
 	display: flex;
+	padding: 20px 0px;
 }
 .sch-rslt{
 	padding-left:86px;
@@ -142,12 +144,15 @@ div.card-body{
 li>b{
 	padding-right:24px;
 }
-.place-name{
-	margin-top:20px;
-	
-}
 .place{
 	position:absolute;
+}
+#team-list-name>dd{
+	font-weight: bold;
+	font-size: 20px;
+}
+#team-list-name{
+	border-bottom:2px solid black;
 }
 
 /* 실험쥐 */
