@@ -18,12 +18,12 @@ public class PasswordEncrypt extends HttpServletRequestWrapper{
 	
 	@Override 
 	public String getParameter(String name) {
-		if(name.equals("password")||name.equals("password_new")||name.equals("oriPw")||name.equals("newPw")||name.equals("ranPassword")) {
+		if(name.equals("password")||name.equals("password_new")||name.equals("oriPw")||name.equals("newPw")||name.equals("AuthenticationKey")||name.equals("AuthenticationUser")) {
 			return getSHA512(super.getParameter(name));
 		}
 		return super.getParameter(name);
 	}
-	
+
 	
 	
 	private String getSHA512(String oriData) {

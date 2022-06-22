@@ -71,6 +71,7 @@ public class ReservationService {
 		return result;
 	}
 	
+
 	//stadium 최근 6개 조회
 	public List<Stadium> sixStadium(){
 		Connection conn = getConnection();
@@ -79,4 +80,14 @@ public class ReservationService {
 		return result;
 	}
 
+
+
+
+	//구장등록할떄 지점 조회
+	public List<Stadium> stadiumSearch(String email){
+		Connection conn= getConnection();
+		List<Stadium> result = dao.stadiumSearch(conn,email);
+		close(conn);
+		return result;
+	}
 }

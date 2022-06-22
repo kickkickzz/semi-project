@@ -1,6 +1,7 @@
 <%@page import="com.member.controller.LoginMember"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/views/common/header.jsp" %>
 <%@ page import="com.reservation.model.vo.Stadium" %>
 <% Stadium s = (Stadium)request.getAttribute("stadium"); 
 
@@ -32,7 +33,6 @@
 
 
 
-<%@ include file="/views/common/header.jsp" %>
 <% String userId = null;
 String name1 = null;
 if (loginMember != null) {
@@ -908,6 +908,7 @@ reservationMap.set('price',0);
 						}
 					}else{
 						alert("로그인후 이용하세요");
+						location.assign('<%=request.getContextPath()%>/loginPage.do');
 					}
 				
 				

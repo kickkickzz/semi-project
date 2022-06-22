@@ -4,29 +4,29 @@ import java.sql.Date;
 
 public class Board {
 	private int boardNum;
-	private String boardWriter;
 	private String boardWriterEmail;
 	private String boardTitle;
 	private String boardContent;
 	private String boardImgPath;
 	private Date boardDate;
 	private String boardDeleteStatus;
+	private String boardWriter;
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Board(int boardNum, String boardWriter, String boardWriterEmail, String boardTitle, String boardContent,
-			String boardImgPath, Date boardDate, String boardDeleteStatus) {
+	public Board(int boardNum, String boardWriterEmail, String boardTitle, String boardContent, String boardImgPath,
+			Date boardDate, String boardDeleteStatus, String boardWriter) {
 		super();
 		this.boardNum = boardNum;
-		this.boardWriter = boardWriter;
 		this.boardWriterEmail = boardWriterEmail;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.boardImgPath = boardImgPath;
 		this.boardDate = boardDate;
 		this.boardDeleteStatus = boardDeleteStatus;
+		this.boardWriter = boardWriter;
 	}
 
 	public int getBoardNum() {
@@ -35,14 +35,6 @@ public class Board {
 
 	public void setBoardNum(int boardNum) {
 		this.boardNum = boardNum;
-	}
-
-	public String getBoardWriter() {
-		return boardWriter;
-	}
-
-	public void setBoardWriter(String boardWriter) {
-		this.boardWriter = boardWriter;
 	}
 
 	public String getBoardWriterEmail() {
@@ -93,12 +85,22 @@ public class Board {
 		this.boardDeleteStatus = boardDeleteStatus;
 	}
 
+	public String getBoardWriter() {
+		return boardWriter;
+	}
+
+	public void setBoardWriter(String boardWriter) {
+		this.boardWriter = boardWriter;
+	}
+
 	@Override
 	public String toString() {
-		return "Board [boardNum=" + boardNum + ", boardWriter=" + boardWriter + ", boardWriterEmail=" + boardWriterEmail
-				+ ", boardTitle=" + boardTitle + ", boardContent=" + boardContent + ", boardImgPath=" + boardImgPath
-				+ ", boardDate=" + boardDate + ", boardDeleteStatus=" + boardDeleteStatus + "]";
+		return "Board [boardNum=" + boardNum + ", boardWriterEmail=" + boardWriterEmail + ", boardTitle=" + boardTitle
+				+ ", boardContent=" + boardContent + ", boardImgPath=" + boardImgPath + ", boardDate=" + boardDate
+				+ ", boardDeleteStatus=" + boardDeleteStatus + ", boardWriter=" + boardWriter + "]";
 	}
+	
+	
 	
 	
 }

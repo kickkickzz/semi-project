@@ -15,9 +15,9 @@ import com.board.model.vo.BoardAttachment;
 import com.board.model.vo.PageInfo;
 
 public class BoardService {
-	public ArrayList<Board> selectBoardList(PageInfo pi) {
+	public List<Board> selectBoardList(PageInfo pi) {
 		Connection conn = getConnection();
-		ArrayList<Board> boardList = new BoardDao().selectBoardList(conn, pi);
+		List<Board> boardList = new BoardDao().selectBoardList(conn, pi);
 		if (boardList != null) {
 			commit(conn);
 		} else {
@@ -52,9 +52,9 @@ public class BoardService {
 		return boardImgAttach;
 	}
 
-	public ArrayList<Board> selectList() {
+	public List<Board> selectList() {
 		Connection conn = getConnection();
-		ArrayList<Board> list = new BoardDao().selectList(conn);
+		List<Board> list = new BoardDao().selectList(conn);
 		close(conn);
 		return list;
 	}

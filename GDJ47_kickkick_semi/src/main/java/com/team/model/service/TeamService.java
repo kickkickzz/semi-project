@@ -1,13 +1,13 @@
 package com.team.model.service;
 
-import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.List;
-
 import static common.JDBCTemplate.close;
 import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.team.model.dao.TeamDao;
 import com.team.model.vo.Team;
@@ -169,7 +169,14 @@ public class TeamService {
 
 	}
 	
-
+	//메인에 뿌릴 팀 정보 4개
+	public List<Team> fourTeam(){
+		Connection conn = getConnection();
+		List<Team> result = new TeamDao().fourTeam(conn);
+		close(conn);
+		return result;
+		
+	}
 	public int getTeamApplicationCount(String team_code) {
 		Connection conn=getConnection();
 		int result=dao.getTeamApplicationCount(conn,team_code);

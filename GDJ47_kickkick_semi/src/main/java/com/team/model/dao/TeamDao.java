@@ -621,6 +621,29 @@ public class TeamDao {
 	
 	
 	
+	//메인화면 팀 정보
+	public List<Team> fourTeam(Connection conn){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Team> list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("fourTeam"));
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Team t = getTeam(rs);
+				list.add(t);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return list;
+	}
+	
+	
+	
 	
 	
 	
