@@ -36,7 +36,7 @@
                 <h4 class="bold title">로그인</h4>
                 <input type="email" placeholder="이메일" class="normal email" id="ema" value=""><input type="button" id="idcheck" value="중복확인" onclick="fn_emailDuplicate();"><br>
                 <div id="msg"></div>
-                <input type="password" placeholder="비밀번호" class="normal password"><br>
+                <input type="password" placeholder="비밀번호" class="normal password" onkeyup="javascript:enterkey();"><br>
                 <div class="login-error-msg"><%=msg!=null?msg:"" %></div>
                 <input type="text" placeholder="이름" class="normal name"><br>
                 

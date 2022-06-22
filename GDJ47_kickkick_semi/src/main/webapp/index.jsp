@@ -54,84 +54,90 @@
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 			 <div class="col">
 			 	<div class="card">
+			    <%-- <img src="./images/<%=sArr[0].getBranch_img()%>" class="card-img-top" alt="..."> --%>
 			    	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
-			        	<h5 class="card-title">7월 서서울호수공원 풋살장 대여 (주말주간,야간) 6월14일 오후2시 접수</h5>
+			        	<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[0].getStadium_num()%>"><%=sArr[0].getStadium_name() %></a></h5>
 			        	<ul class="card-body-list">
-							<li class="place-name"><b class="place">장소명</b> <div class="sch-rslt txt2 card-line">서서울호수공원(양천구)</div></li>
-							<li class="li-user"><b class="user">이용대상</b> <div class="div-user txt2 card-line">제한없음</div></li>
-							<li class="li-date"><b class="date1">접수기간</b> 2022.06.14 ~ 2022.07.30</li>
-							<li class="li-date"><b class="date2">이용기간</b> 2022.07.01 ~ 2022.07.31</li>
+							<li class="place-name"><b class="place">주소</b> <div class="sch-rslt txt2 card-line"><%=sArr[0].getBranch_address() %></div></li>
+							<li class="li-user"><b class="user">매치인원</b> <div class="div-user txt2 card-line"><%=sArr[0].getStadium_match_member() %></div></li>
+							<li class="li-date"><b class="date1">전화번호</b> <%=sArr[0].getBranch_phone() %></li>
+							<li class="li-date"><b class="date2">이용시간</b> <%=sArr[0].getStadium_reservation_start_time() %>:00~<%=sArr[0].getStadium_reservation_end_time() %>:00</li>
 						</ul>
 			      	</div>
 			    </div>
 			  </div>
 			  <div class="col">
 			  	<div class="card">
-			      	<img src="./images/함송 족구장.jpeg" class="card-img-top" alt="...">
+			      	<%-- <img src="./images/<%=sArr[1].getBranch_img()%>" class="card-img-top" alt="..."> --%>
+			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
-			        	<h5 class="card-title">응애 풋살장</h5>
+			        	<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[1].getStadium_num()%>"><%=sArr[1].getStadium_name() %></a></h5>
 			        	<ul class="card-body-list">
-							<li class="place-name"><b class="place">장소명</b> <div class="sch-rslt txt2 card-line">서서울호수공원(양천구)</div></li>
-							<li class="li-user"><b class="user">이용대상</b> <div class="div-user txt2 card-line">제한없음</div></li>
-							<li class="li-date"><b class="date1">접수기간</b> 2022.06.14 ~ 2022.07.30</li>
-							<li class="li-date"><b class="date2">이용기간</b> 2022.07.01 ~ 2022.07.31</li>
+							<li class="place-name"><b class="place">주소</b> <div class="sch-rslt txt2 card-line"><%=sArr[1].getBranch_address() %></div></li>
+							<li class="li-user"><b class="user">매치인원</b> <div class="div-user txt2 card-line"><%=sArr[1].getStadium_match_member() %></div></li>
+							<li class="li-date"><b class="date1">전화번호</b> <%=sArr[1].getBranch_phone() %></li>
+							<li class="li-date"><b class="date2">이용시간</b> <%=sArr[1].getStadium_reservation_start_time() %>:00~<%=sArr[1].getStadium_reservation_end_time() %>:00</li>
 						</ul>
 			      	</div>
 			    </div>
 			  </div>
 			  <div class="col">
 			    <div class="card">
+			      	<%-- <img src="./images/<%=sArr[2].getBranch_img()%>" class="card-img-top" alt="..."> --%>
 			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
-			        	<h5 class="card-title">응애 풋살장</h5>
+			        	<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[2].getStadium_num()%>"><%=sArr[2].getStadium_name() %></a></h5>
 			        	<ul class="card-body-list">
-							<li class="place-name"><b class="place">장소명</b> <div class="sch-rslt txt2 card-line">서서울호수공원(양천구)</div></li>
-							<li class="li-user"><b class="user">이용대상</b> <div class="div-user txt2 card-line">제한없음</div></li>
-							<li class="li-date"><b class="date1">접수기간</b> 2022.06.14 ~ 2022.07.30</li>
-							<li class="li-date"><b class="date2">이용기간</b> 2022.07.01 ~ 2022.07.31</li>
+							<li class="place-name"><b class="place">주소</b> <div class="sch-rslt txt2 card-line"><%=sArr[2].getBranch_address() %></div></li>
+							<li class="li-user"><b class="user">매치인원</b> <div class="div-user txt2 card-line"><%=sArr[2].getStadium_match_member() %></div></li>
+							<li class="li-date"><b class="date1">전화번호</b> <%=sArr[2].getBranch_phone() %></li>
+							<li class="li-date"><b class="date2">이용시간</b> <%=sArr[2].getStadium_reservation_start_time() %>:00~<%=sArr[2].getStadium_reservation_end_time() %>:00</li>
 						</ul>
 			      </div>
 			    </div>
 			  </div>
 			  <div class="col">
 			    <div class="card">
-			      	<img src="./images/함송 족구장.jpeg" class="card-img-top" alt="...">
-			      	<div class="card-body">
-			       		<h5 class="card-title">응애 풋살장</h5>
-			        	<ul class="card-body-list">
-							<li class="place-name"><b class="place">장소명</b> <div class="sch-rslt txt2 card-line">서서울호수공원(양천구)</div></li>
-							<li class="li-user"><b class="user">이용대상</b> <div class="div-user txt2 card-line">제한없음</div></li>
-							<li class="li-date"><b class="date1">접수기간</b> 2022.06.14 ~ 2022.07.30</li>
-							<li class="li-date"><b class="date2">이용기간</b> 2022.07.01 ~ 2022.07.31</li>
-						</ul>
-			      	</div>
-			    </div>
-			  </div>
-			  <div class="col">
-			    <div class="card">
+			      	<%-- <img src="./images/<%=sArr[3].getBranch_img()%>" class="card-img-top" alt="..."> --%>
 			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
-			       		<h5 class="card-title">응애 풋살장</h5>
+			       		<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[3].getStadium_num()%>"><%=sArr[3].getStadium_name() %></a></h5>
 			        	<ul class="card-body-list">
-							<li class="place-name"><b class="place">장소명</b> <div class="sch-rslt txt2 card-line">서서울호수공원(양천구)</div></li>
-							<li class="li-user"><b class="user">이용대상</b> <div class="div-user txt2 card-line">제한없음</div></li>
-							<li class="li-date"><b class="date1">접수기간</b> 2022.06.14 ~ 2022.07.30</li>
-							<li class="li-date"><b class="date2">이용기간</b> 2022.07.01 ~ 2022.07.31</li>
+							<li class="place-name"><b class="place">주소</b> <div class="sch-rslt txt2 card-line"><%=sArr[3].getBranch_address() %></div></li>
+							<li class="li-user"><b class="user">매치인원</b> <div class="div-user txt2 card-line"><%=sArr[3].getStadium_match_member() %></div></li>
+							<li class="li-date"><b class="date1">전화번호</b> <%=sArr[3].getBranch_phone() %></li>
+							<li class="li-date"><b class="date2">이용시간</b> <%=sArr[3].getStadium_reservation_start_time() %>:00~<%=sArr[3].getStadium_reservation_end_time() %>:00</li>
 						</ul>
 			      	</div>
 			    </div>
 			  </div>
 			  <div class="col">
 			    <div class="card">
-			      	<img src="./images/함송 족구장.jpeg" class="card-img-top" alt="...">
+			      	<%-- <img src="./images/<%=sArr[4].getBranch_img()%>" class="card-img-top" alt="..."> --%>
+			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
-			       		<h5 class="card-title">응애 풋살장</h5>
+			       		<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[4].getStadium_num()%>"><%=sArr[4].getStadium_name() %></a></h5>
 			        	<ul class="card-body-list">
-							<li class="place-name"><b class="place">장소명</b> <div class="sch-rslt txt2 card-line">서서울호수공원(양천구)</div></li>
-							<li class="li-user"><b class="user">이용대상</b> <div class="div-user txt2 card-line">제한없음</div></li>
-							<li class="li-date"><b class="date1">접수기간</b> 2022.06.14 ~ 2022.07.30</li>
-							<li class="li-date"><b class="date2">이용기간</b> 2022.07.01 ~ 2022.07.31</li>
+							<li class="place-name"><b class="place">주소</b> <div class="sch-rslt txt2 card-line"><%=sArr[4].getBranch_address() %></div></li>
+							<li class="li-user"><b class="user">매치인원</b> <div class="div-user txt2 card-line"><%=sArr[4].getStadium_match_member() %></div></li>
+							<li class="li-date"><b class="date1">전화번호</b> <%=sArr[4].getBranch_phone() %></li>
+							<li class="li-date"><b class="date2">이용시간</b> <%=sArr[4].getStadium_reservation_start_time() %>:00~<%=sArr[4].getStadium_reservation_end_time() %>:00</li>
+						</ul>
+			      	</div>
+			    </div>
+			  </div>
+			  <div class="col">
+			    <div class="card">
+			      	<%-- <img src="./images/<%=sArr[5].getBranch_img()%>" class="card-img-top" alt="..."> --%>
+			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
+			      	<div class="card-body">
+			       		<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[5].getStadium_num()%>"><%=sArr[5].getStadium_name() %></a></h5>
+			        	<ul class="card-body-list">
+							<li class="place-name"><b class="place">주소</b> <div class="sch-rslt txt2 card-line">서서울호수공원(양천구)</div></li>
+							<li class="li-user"><b class="user">매치인원</b> <div class="div-user txt2 card-line"><%=sArr[5].getStadium_match_member() %></div></li>
+							<li class="li-date"><b class="date1">전화번호</b> <%=sArr[5].getBranch_phone() %></li>
+							<li class="li-date"><b class="date2">이용시간</b> <%=sArr[5].getStadium_reservation_start_time() %>:00~<%=sArr[5].getStadium_reservation_end_time() %>:00</li>
 						</ul>
 			      	</div>
 			    </div>

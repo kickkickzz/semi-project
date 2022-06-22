@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
+import com.board.model.vo.PageInfo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -24,15 +25,16 @@ public class BoardListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Board> list = new BoardService().selectList();
-
+//		PageInfo pi = new PageInfo();
 		// 엉뚱한 데이터가 나옴 삭제예정 or 더 알아보고 적용
-//		response.setContentType("application/json; charset=UTF-8");
-//		Gson gson=new GsonBuilder().setDateFormat("yyyy년  MM월 dd일").create();
-//		gson.toJson(list, response.getWriter());
+		response.setContentType("application/json; charset=UTF-8");
+		Gson gson=new GsonBuilder().setDateFormat("yyyy년  MM월 dd일").create();
+		gson.toJson(list, response.getWriter());
 
 		
-		request.setAttribute("list",list);
-		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request,response);
+//		request.setAttribute("pi", pi);
+//		request.setAttribute("list",list);
+//		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request,response);
 		 
 
 	}

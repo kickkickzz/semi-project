@@ -190,4 +190,15 @@ function enroll(){
 			return true;
 		}
 }
-
+	
+function enterkey(){
+		if (window.event.keyCode == 13) {
+			const form = $("#h-form");
+			const email = $(".email").val();
+			const password = $(".password").val();
+			$("#email").val(email);
+			$("#password").val(password);
+			form.attr("action","http://localhost:9090/GDJ47_kickkick_semi/loginMember.do");
+			form.submit();
+		}
+}

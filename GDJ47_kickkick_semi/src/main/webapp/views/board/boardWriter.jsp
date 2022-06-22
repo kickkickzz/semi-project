@@ -16,7 +16,7 @@
 					<h1 class="board_title">공지사항 등록하기</h1>
 					<hr>
 				</div>
-				<form action="<%=request.getContextPath()%>/insertBoard.do" id="write_board_form" method="post" encType="multipart/form-data">
+				<form action="<%=request.getContextPath()%>/writeBoard.do" id="write_board_form" method="post" encType="multipart/form-data">
 					<!-- 타이틀 영역박스-->
 					<div class="title-container">
 						<input id="board-write-title" type="text" name="title" placeholder="제목을 입력해주세요">
@@ -52,7 +52,7 @@
 					<div class="button-container">
 						<div class="cancel_write_board-box">
 							<button class="btn btn-secondary" 
-									onclick="location.href='<%=request.getContextPath()%>/boardlist.do'">취소</button>
+									onclick="location.href='<%=request.getContextPath()%>/showBoardList.do'">취소</button>
 						</div>
 						<div></div>
 						<div class="insert_write_board-box">

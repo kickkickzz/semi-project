@@ -2,13 +2,13 @@ package com.board.model.vo;
 
 public class PageInfo {
 	
-	private int currentPage; //현재페이지
-	private int listCount; //리스트에 있는 게시글
-	private int pageLimit; //한번 넘기는데 보여주는 페이지
-	private int boardLimit; //한페이지당 보이는 게시물
+	private int currentPage;
+	private int listCount;
+	private int pageLimit;
+	private int boardLimit;
 	private int maxPage;
-	private int startPage; //시작
-	private int endPage;  //마지막
+	private int startPage;
+	private int endPage;
 	
 	public PageInfo() {
 	}

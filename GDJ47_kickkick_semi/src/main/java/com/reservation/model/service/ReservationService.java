@@ -70,5 +70,13 @@ public class ReservationService {
 		else rollback(conn);
 		return result;
 	}
+	
+	//stadium 최근 6개 조회
+	public List<Stadium> sixStadium(){
+		Connection conn = getConnection();
+		List<Stadium> result = dao.sixStadium(conn);
+		close(conn);
+		return result;
+	}
 
 }
