@@ -283,7 +283,7 @@ public class ReservationDao {
 	
 	
 	
-	
+	//구장등록할떄 지점 조회
 	public List<Stadium> stadiumSearch(Connection conn, String email){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

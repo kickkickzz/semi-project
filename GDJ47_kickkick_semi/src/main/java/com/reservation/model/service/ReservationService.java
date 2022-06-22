@@ -83,7 +83,7 @@ public class ReservationService {
 
 
 
-
+	//구장등록할떄 지점 조회
 	public List<Stadium> stadiumSearch(String email){
 		Connection conn= getConnection();
 		List<Stadium> result = dao.stadiumSearch(conn,email);
