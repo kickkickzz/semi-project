@@ -160,7 +160,7 @@ function sample6_execDaumPostcode() {
 function logincheck(){
 	//패스워드 입력 했는지 
 	if($(".email").val().length<1 | !($(".email").val().match("@"))){
-		$("#msg").text("이메일형식에 맞춰 입력하세요.").css({"color":"red","font-size":"10px"});
+		$("#msg").text("이메일을 입력하세요.").css({"color":"red","font-size":"10px"});
 		return false;
 	}else if($(".password").val().length<1){
 		$(".login-error-msg").text("비밀번호를 입력하세요.").css({"color":"red","font-size":"10px"});

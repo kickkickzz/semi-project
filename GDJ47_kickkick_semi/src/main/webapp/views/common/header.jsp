@@ -60,7 +60,7 @@
 			<div id="search">
 
 				<form action="<%=request.getContextPath()%>/searchstadium.do" onsubmit="return fn_searchData(event);">
-				<input type="text" placeholder="찾으시는 지역 및 구장을 입력하세요!" name="searchstadium" onkeyup="checkData(event);" id="search-sta">
+				<input type="text" placeholder="찾으시는 구장명을 입력하세요!" name="searchstadium" onkeyup="checkData(event);" id="search-sta">
 
 				<i id="searchicon" class="fa-solid fa-magnifying-glass"></i>
 				</form>
