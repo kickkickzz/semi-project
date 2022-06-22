@@ -908,6 +908,7 @@ reservationMap.set('price',0);
 						}
 					}else{
 						alert("로그인후 이용하세요");
+						location.assign('<%=request.getContextPath()%>/loginPage.do');
 					}
 				
 				
