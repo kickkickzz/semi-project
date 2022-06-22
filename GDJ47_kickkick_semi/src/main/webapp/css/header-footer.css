@@ -95,13 +95,20 @@ ul#header-menu{
 	justify-content: space-between;
 	padding:0 13%;
 	margin-top:16px;
-	letter-spacing: 8px;
+	letter-spacing: 6px;
 }
 ul#header-menu>li{
 	font-size:18px;
 	font-family:'Gothic A1';
 	font-weight: bold;
-	
+	text-align: center;
+	justify-content: center;
+}
+#header-menu>li:hover{
+	font-size:24px;
+	transition: 0.5s;
+	border-radius: 10px;
+	cursor: pointer;
 }
 
 

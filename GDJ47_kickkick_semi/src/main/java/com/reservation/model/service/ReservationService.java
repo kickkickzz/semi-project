@@ -71,9 +71,16 @@ public class ReservationService {
 		return result;
 	}
 	
+<<<<<<< HEAD
 	public List<Stadium> stadiumSearch(String email){
 		Connection conn= getConnection();
 		List<Stadium> result = dao.stadiumSearch(conn,email);
+=======
+	//stadium 최근 6개 조회
+	public List<Stadium> sixStadium(){
+		Connection conn = getConnection();
+		List<Stadium> result = dao.sixStadium(conn);
+>>>>>>> branch 'kickkick' of https://github.com/kickkickzz/semi-project.git
 		close(conn);
 		return result;
 	}

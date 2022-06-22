@@ -110,6 +110,7 @@ public class MemberService {
 		return result;
 	}
 	
+
 	//비밀번호 찾기
 	public Member passwordForgot(String email, String name) {
 		Connection conn = getConnection();
@@ -126,6 +127,9 @@ public class MemberService {
 //		else rollback(conn);
 //		return result;
 //	}
+	
+	
+	
 	
 	//임시비밀번호
 	public int extraPassword(String email, String AuthenticationKey) {

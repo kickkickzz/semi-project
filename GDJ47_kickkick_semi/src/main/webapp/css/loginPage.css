@@ -17,7 +17,6 @@ div#login-container{
 }
 
 div#login-left{
-	background-color: sky;
 	width:20%;
 	text-align: center;
 	padding-top: 18%;
@@ -295,4 +294,13 @@ div.login-error-msg{
 }
 #idcheck{
 	display: none;
+}
+
+#naverlogin{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#naverlogin a{
+	padding-right: 10px;
 }

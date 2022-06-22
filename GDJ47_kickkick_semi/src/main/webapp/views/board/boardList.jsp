@@ -3,16 +3,16 @@
 <%
 	//로그인 하지 않아도 다 열람 가능
 	//작성 권한은 관리자만
-	ArrayList<Board> list=(ArrayList<Board>)request.getAttribute("list");
+	ArrayList<Board> list=(ArrayList<Board>)request.getAttribute("boardLists");
 
 	//페이지 정보//
 	//이름에 대응되는 PageInfo 객체 - 
-	/* PageInfo pi=(PageInfo) request.getAttribute("pi");
+	PageInfo pi=(PageInfo) request.getAttribute("pi");
 	int listCount=pi.getListCount(); //페이지 길이
 	int currentPage=pi.getCurrentPage();
 	int maxPage=pi.getMaxPage();
 	int startPage= pi.getStartPage();
-	int endPage= pi.getEndPage(); */
+	int endPage= pi.getEndPage();
 	
 	
 %>
@@ -84,35 +84,35 @@
 							<!-- 이전버튼 -->
 							<li class="page-item">
 								<button id="previous" class="page-link"
-									onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage'"> &lt;</button>
+									onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage<%=currentPage-1%>'"> &lt;</button>
 							</li>
 							
 							<!-- 현재페이지에서 10개 부르기-->
-								<%//for(int p=startPage; p<=endPage; p++){ 
-									//if(p==currentPage){
+								<%for(int p=startPage; p<=endPage; p++){ 
+									if(p==currentPage){
 									//p가 현재페이지(currentPage)와 같다면
 									//현재 페이지는 선택 못하도록%>
 									<li class="page-item active">
 										<button class="page-link" disabled="disabled">!</button>
 									</li>
-									<%//}else{ %>
+									<%}else{ %>
 									<li class="page-item">
-										<button class="page-link" onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage='">?</button>
+										<button class="page-link" onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage=<%=p %>'"><%=p %></button>
 									</li>
-								<%//	} %>
-								<%//} %>
+								<%	} %>
+								<%} %>
 	
 							<!-- 다음버튼 -->
 							<li class="page-item">
-								<button id="next" class="page-link"	onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage='">&gt; </button>
+								<button id="next" class="page-link"	onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage=<%=currentPage+1%>'">&gt; </button>
 							</li>
 							<!-- 마지막 버튼 -->
 							<li class="page-item">
-								<button id="last_next" class="page-link"	onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage='">&gt;&gt; </button>
+								<button id="last_next" class="page-link"	onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo?currentPage=<%=maxPage%>'">&gt;&gt; </button>
 							</li>
 							<script>
 								//첫페이지와 끝페이지 동일시 -추후 적용 확인후 처리
-								<%-- if(<%=startPage%>==1 && <%=startPage%>==<%=endPage%>){
+								if(<%=startPage%>==1 && <%=startPage%>==<%=endPage%>){
 									$('#next').attr('disabled', 'true');
 									$('#previous').attr('disabled', 'true');
 									$('#initial_previous').attr('disabled', 'true');
@@ -127,7 +127,7 @@
 									//현재페이지가 맨 마지막 페이지에있다면..
 									next.attr('disabled', 'true');
 									lnext.attr('disabled', 'true');
-								} --%>
+								}
 							</script>
 						</ul>
 					</nav>
@@ -138,8 +138,8 @@
 <%@include file="/views/common/footer.jsp"%>
 <script>
 	//현재페이지가 1일때, 이전페이지를 클릭하지 못하게
-	<%-- if(<%=currentPage%><=1){
+	if(<%=currentPage%><=1){
 		$('#previous').attr('disabled', 'true');
-	} --%>
+	}
 </script>
 

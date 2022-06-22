@@ -87,6 +87,7 @@ if(loginMember!=null){
 		
 	
 	</div>
+<<<<<<< HEAD
 	</section>
 	<div class="modal fade" id="myModal" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
 <div class="modal-dialog">
@@ -192,6 +193,9 @@ if(loginMember!=null){
 </div>
 
 <script>
+=======
+	<script>
+>>>>>>> branch 'kickkick' of https://github.com/kickkickzz/semi-project.git
 	
 		const fn_searchDataa=e=>{
 			if($(e.target).find("input").val().length==0){

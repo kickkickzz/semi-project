@@ -11,8 +11,10 @@
 <!-- 정적파일 css, js-->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/boardWriter.css">
 <!-- header을 호출 --!>
-<%@include file="/views/common/header.jsp"%>
+<%@include file="/views/common/header.jsp" %>
+
 <body>
+
 	<!-- 메인페이지 컨테이너-->
 	<div class="main-content-container">
 		<div class="board_writer-total-container">
@@ -20,7 +22,7 @@
 
 				<div class="board_title_box">
 					
-					<h1 class="board_title">공지사항 수정하기</h1>
+					<h1 class="board_title">공지사항 수정</h1>
 					<hr>
 				</div>
 				<form action="<%=request.getContextPath()%>/updateBoard.do"  

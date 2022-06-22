@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.member.model.vo.Member" %> 
-<%@ page import="java.util.List, com.board.model.vo.Board, com.board.model.service.BoardService" %>
+<%@ page import="com.member.model.vo.Member, com.reservation.model.vo.Stadium, com.reservation.model.service.ReservationService" %> 
+<%@ page import="java.util.List, com.board.model.vo.Board, com.board.model.service.BoardService, com.team.model.vo.Team, com.team.model.service.TeamService" %>
 
 <% 
 	Member loginMember = (Member)session.getAttribute("loginMember");
@@ -11,13 +11,27 @@
 	for(int i=0; i< bArr.length; i++){
 		if(!(boardList.isEmpty())){
 			bArr[i]=boardList.get(i);
-			System.out.println("데이터 있음");
-		}else{
-			System.out.println("아무것도 없음");
 		}
 	}
 	
-
+	List<Stadium> stadiumList = (List<Stadium>)new ReservationService().sixStadium();
+	Stadium[] sArr = new Stadium[6];
+	for(int i=0; i<sArr.length; i++){
+		if(!(stadiumList.isEmpty())){
+			sArr[i]=stadiumList.get(i);
+		}
+	}
+	
+	List<Team> teamList = (List<Team>) new TeamService().fourTeam();
+	Team[] tArr = new Team[4];
+	for(int i=0; i<tArr.length; i++){
+		if(!(teamList.isEmpty())){
+			tArr[i] = teamList.get(i);
+			System.out.println("데이터 있음");
+		}else{
+			System.out.println("데이터 없음");
+		}
+	}
 %>
 
 <!DOCTYPE html>
@@ -60,8 +74,9 @@
 				<%}else{%>
 					<i id="home" class="fa-solid fa-user" onclick="location.assign('<%=request.getContextPath()%>/loginPage.do')"></i>
 				<%} %>
-				<i id="alert" class="fa-solid fa-bell"></i>
-				<i id="like" class="fa-solid fa-heart"></i>
+				<%if(loginMember!=null){ %>
+					<i class="fa-solid fa-arrow-right-from-bracket" onclick="location.replace('<%=request.getContextPath()%>/logoutMember.do')"></i>
+				<%} %>
 				<i id="menu" class="fa-solid fa-bars"></i>
 			</div>
 		</div>
@@ -71,7 +86,7 @@
 				<li>구장</li>
 				<li onclick="fn_stadium();">예약</li>
 				<li onclick="fn_team();">팀 관리</li>
-				<li>매칭</li>
+				<li onclick="fn_match();">매칭</li>
 			</ul>
 		</div>
 	</nav>
@@ -81,20 +96,27 @@
 		location.assign('<%=request.getContextPath()%>/stadium.do');
 	}
 	const fn_board=()=>{
-		location.assign('<%=request.getContextPath() %>/boardlist.do');
+		location.assign('<%=request.getContextPath() %>/showBoardList.do');
 	}
 
 	const fn_team=()=>{
 		location.assign('<%=request.getContextPath()%>/team.do');
 	}
-
-
+	const fn_match=()=>{
+		location.assign('<%=request.getContextPath()%>/match.do');
+	}
 	const fn_searchData=e=>{
 		if($(e.target).find("input").val().length==0){
 			alert("값을 입력하고 조회하세요.");
 			return false;
 		}
 	}
+	
+	$(()=>{
+		$("#menu").click(function(){
+			$("#header-menu").toggle();
+		})
+	})
 
 </script>
 

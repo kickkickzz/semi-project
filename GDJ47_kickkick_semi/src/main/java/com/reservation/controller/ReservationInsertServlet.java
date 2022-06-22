@@ -85,7 +85,7 @@ public class ReservationInsertServlet extends HttpServlet {
 				.reservation_usage_time(reservation_usage_time).reservation_usage_end_time(reservation_usage_end_time).reservation_usage_start_date(reservation_usage_start_date).build();
 		
 		PayHistory p = PayHistory.builder().email(userId).paycode(paycode).reservation_code(reservation_code).paymethod("카카오페이").stadium_branch_num(reservation_branch_num).
-				starttime(reservation_usage_start_time).endtime(reservation_usage_end_time).
+				starttime(reservation_usage_start_time).endtime(reservation_usage_end_time).name(name).stadium_num(reservation_stadium_num).
 				build();
 
 		System.out.println(p);

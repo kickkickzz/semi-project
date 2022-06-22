@@ -42,7 +42,6 @@ public class MemberDao {
 		try {
 			m = Member.builder()
 					.email(rs.getString("email"))
-					.password(rs.getString("password"))
 					.name(rs.getString("name"))
 					.phone(rs.getString("phone"))
 					.birthday(rs.getDate("birthday"))
@@ -210,7 +209,7 @@ public class MemberDao {
 			while(rs.next()) {
 				PayHistory p = PayHistory.builder().paycode(rs.getString("pay_code")).email(rs.getString("email")).reservation_code(rs.getString("reservation_code"))
 						.paymethod(rs.getString("pay_method")).paydate(rs.getDate("pay_date")).stadium_branch_num(rs.getString("stadium_branch_num")).starttime(rs.getInt("starttime")).
-						endtime(rs.getInt("endtime")).name(rs.getString("name")).build();
+						endtime(rs.getInt("endtime")).stadium_num(rs.getInt("stanum")).build();
 				
 				result.add(p);
 				
@@ -262,6 +261,7 @@ public class MemberDao {
 		return m;
 	}
 	
+
 	//임시비밀번호 발급을 위한 메소드
 	public Member passwordForgot(Connection conn, String email, String name) {
 		PreparedStatement pstmt = null;
