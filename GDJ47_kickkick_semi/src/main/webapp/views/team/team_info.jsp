@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-<%@ page import="java.util.List, java.util.ArrayList,com.team.model.vo.*,com.member.model.vo.* " %>
+<%@ page import="com.match.model.vo.*,java.util.List, java.util.ArrayList,com.team.model.vo.*,com.member.model.vo.* " %>
 <%
 	String loginUser = ((Member)session.getAttribute("loginMember")).getEmail();
 	ArrayList<TeamMemberInfo> teamMemberArr=(ArrayList<TeamMemberInfo>)request.getAttribute("teamMemberArr");
 	Team teamInfo = (Team)request.getAttribute("teamInfo");
 	ArrayList<TeamMemberInfo> teamEnterMember=(ArrayList<TeamMemberInfo>)request.getAttribute("teamEnterMember");
-	
+	ArrayList<Match> matchlist = (ArrayList<Match>)request.getAttribute("matchlist");
 	
 
 %>
@@ -263,30 +263,29 @@
 						</tr>
 					</thead>
 					<tbody>
-			<%-- 			<% if(teamEnterMember.isEmpty()){ %>
+			 			<% if(matchlist.isEmpty()){ %>
 							<tr>
-								<td colspan="11">매칭팀이 없습니다.</td>
+								<td colspan="7">매칭팀이 없습니다.</td>
 							</tr>
 						<%} else { %>
 							
-							<%for(TeamMemberInfo t:teamEnterMember ) {%>
+							<%for(Match mt: matchlist ) {%>
 							<tr>
-								<td><%= t.getRegist_num() %></td>
-								<td><%= t.getBranch_address() %></td>
-								<td><%= t.getStadium_name() %></td>
-								<td><%= t.getStadium_match_member() %></td>
-								<td><%= t.getReservation_usage_start_time() %></td>
-								<td><%= t.getReservation_usage_end_time() %></td>
-								<td><%= t.getReservation_usage_start_date() %></td>
-								<td><%= t.getTeam_name %></td>
-								<td><%= t.getTeam_gender %></td>
-								<td><%= t.getTeam_age %></td>
-								<td><%= t.getTeam_point %></td>
+								<td><%= mt.getRegist_num() %></td>
+								<td><%= mt.getBranch_address() %></td>
+								<td><%= mt.getStadium_name() %></td>
+								<td><%= mt.getStadium_match_member() %></td>
+								<td><%= mt.getReservation_usage_start_time() %></td>
+								<td><%= mt.getReservation_usage_end_time() %></td>
+								<td><%= mt.getReservation_usage_start_date() %></td>
+								
 								
 							</tr>
 							<%}%>
-						<%}%> --%>
+						<%}%>
+						<div>
 						
+						</div>
 						
 						
 					</tbody>

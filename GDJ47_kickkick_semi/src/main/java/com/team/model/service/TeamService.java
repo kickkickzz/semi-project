@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.match.model.vo.Match;
 import com.team.model.dao.TeamDao;
 import com.team.model.vo.Team;
 import com.team.model.vo.TeamMember;
@@ -276,7 +277,12 @@ public class TeamService {
 		close(conn);
 	}
 	
-	
+	public ArrayList<Match> selectMatch(String team_code) {
+		Connection conn=getConnection();
+		ArrayList<Match> m= dao.selectMatch(conn, team_code);
+		close(conn);
+		return m;
+	}
 	
 	
 	
