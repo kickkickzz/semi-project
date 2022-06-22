@@ -175,7 +175,54 @@ public class TeamService {
 		List<Team> result = new TeamDao().fourTeam(conn);
 		close(conn);
 		return result;
-		
 	}
 
+	public int getTeamApplicationCount(String team_code) {
+		Connection conn=getConnection();
+		int result=dao.getTeamApplicationCount(conn,team_code);
+		close(conn);
+		return result;
+	}
+	
+	public ArrayList<TeamMemberInfo> selectTeamApplication(String team_code){
+		Connection conn=getConnection();
+		ArrayList<TeamMemberInfo> list=dao.selectTeamApplication(conn,team_code);
+		close(conn);
+		return list;
+	}
+	
+	
+	
+	
+	
+	public void teamExpulsion(String supporter, String team_code) {
+		Connection conn=getConnection();
+		int result=dao.teamExpulsion(conn, supporter, team_code);
+		if(result>0) commit(conn);
+		close(conn);
+	}
+	
+	
+	public void teamAccept(String supporter, String team_code) {
+		Connection conn=getConnection();
+		int result=new TeamDao().teamAccept(conn, supporter, team_code);
+		if(result>0) commit(conn);
+		close(conn);
+	}
+	public void teamCancel(String supporter, String team_code) {
+		Connection conn=getConnection();
+		int result=new TeamDao().teamCancel(conn, supporter, team_code);
+		if(result>0) commit(conn);
+		close(conn);
+	}
+	
+	
+	
+	//로그인한 유저가 가입한 팀 정보보기
+	public List<Team> joinTeam(String email){
+		Connection conn = getConnection();
+		List<Team> result = new TeamDao().joinTeam(conn,email);
+		close(conn);
+		return result;
+	}
 }

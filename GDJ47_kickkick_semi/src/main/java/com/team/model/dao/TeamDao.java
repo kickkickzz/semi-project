@@ -423,7 +423,120 @@ public class TeamDao {
 		return result;
 	}
 
+	public int getTeamApplicationCount(Connection conn, String team_code) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
 
+		String query = prop.getProperty("getTeamApplicationCount");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, team_code);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return result;
+	}
+
+	public ArrayList<TeamMemberInfo> selectTeamApplication(Connection conn, String team_code) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<TeamMemberInfo> list = null;
+		TeamMemberInfo t = null;
+
+		String query = prop.getProperty("selectTeamApplication");
+
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, team_code);
+			
+			rs = pstmt.executeQuery();
+			list=new ArrayList<TeamMemberInfo>();
+			while (rs.next()) {
+				t = (TeamDao.getTeamMemberInfo(rs));
+				
+				
+
+				list.add(t);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+
+		return list;
+	}
+	
+
+	public int teamExpulsion(Connection conn, String supporter, String team_code){
+		PreparedStatement pstmt=null;
+		int result=0;
+		String query=prop.getProperty("teamExpulsion");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, supporter);
+			pstmt.setString(2, team_code);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	public int teamAccept(Connection conn, String supporter, String team_code) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String query=prop.getProperty("teamAccept");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, supporter);
+			pstmt.setString(2, team_code);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int teamCancel(Connection conn, String supporter, String team_code) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String query=prop.getProperty("teamCancel");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, supporter);
+			pstmt.setString(2, team_code);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	
@@ -530,7 +643,27 @@ public class TeamDao {
 	}
 	
 	
-	
+	//로그인한 유저가 가입한 팀 정보 보기
+	public List<Team> joinTeam(Connection conn, String email){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Team> list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("joinTeam"));
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Team t = getTeam(rs);
+				list.add(t);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return list;
+	}
 	
 	
 	

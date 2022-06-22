@@ -32,6 +32,7 @@
 			System.out.println("데이터 없음");
 		}
 	}
+	
 %>
 
 <!DOCTYPE html>

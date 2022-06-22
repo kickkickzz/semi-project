@@ -99,7 +99,7 @@ public class emailCertificationServlet extends HttpServlet {
         }catch (Exception e) {
             e.printStackTrace();// TODO: handle exception
         }
-        
+        request.setAttribute("email", email);
         request.setAttribute("AuthenticationKey", AuthenticationKey);
         request.getRequestDispatcher("/views/msg/emailCertification.jsp").forward(request, response);
 		

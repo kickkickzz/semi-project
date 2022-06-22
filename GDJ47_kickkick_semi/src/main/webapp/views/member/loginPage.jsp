@@ -34,7 +34,7 @@
            </div>
            <div class="form">
                 <h4 class="bold title">로그인</h4>
-                <input type="email" placeholder="이메일" class="normal email" id="ema" value=""><input type="button" id="idcheck" value="중복확인" onclick="fn_emailDuplicate();"><br>
+                <input type="email" placeholder="이메일" class="normal email" id="ema" value=""><input type="button" id="idcheck" value="이메일인증" onclick="fn_emailDuplicate();"><br>
                 <div id="msg"></div>
                 <input type="password" placeholder="비밀번호" class="normal password" onkeyup="javascript:enterkey();"><br>
                 <div class="login-error-msg"><%=msg!=null?msg:"" %></div>
@@ -53,6 +53,7 @@
                 <p class="normal forgot" onclick="fn_emailForgot();">이메일을 잊어버리셨습니까?</p>
                 <p class="normal forgot" onclick="fn_passwordForgot();">비밀번호를 잊어버리셨습니까?</p>
                 <input type="submit" id="bb" class="b-button normal" value="로그인하기">
+                <input id="ducheck" type="hidden">
          </div>
          <div id="hidden-form">
             <form id="h-form" action="" method="post" class="h-form">
@@ -68,7 +69,7 @@
             </form>
          </div>
          <form name="emailDuplicate">
-         	<input type="hidden" name="email">
+         	<input id="ducheck" type="hidden" name="email">
          </form>
       </div>   
    </div>
@@ -77,17 +78,16 @@
 function fn_emailDuplicate(){
 	const email = $('.email').val();
 	console.log(email);
-	const url = "<%=request.getContextPath()%>/emailDuplicate.do";
+	const url = "<%=request.getContextPath()%>/views/member/emailDup.jsp";
     const title="emailDuplicate";
     open("",title,"width=500,height=200");
-    console.log(emailDuplicate)
+    console.log(emailDuplicate);
     emailDuplicate.email.value=email;
     emailDuplicate.method="post";
     emailDuplicate.action=url;
     emailDuplicate.target=title;
     emailDuplicate.submit();
 }
-
 function fn_passwordForgot(){
 	   open("<%=request.getContextPath()%>/passwordForgot.do?","_blank","width=400, height=210 ,left=500, top=200");
 	}
