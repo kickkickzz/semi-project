@@ -3,7 +3,7 @@
 <% String msg = (String)request.getAttribute("msg"); %>
 <% String loc = (String)request.getAttribute("loc"); %>
 <% String script=(String)request.getAttribute("script"); %>
-<%  %>
+<% String email = (String)request.getAttribute("email"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +14,11 @@
 	<script>
 		alert("<%=msg%>");
 		/* close(); */
-		<%=script!=null?script:""%>
+		<%if(script!=null){%>
+			opener.document.getElementById("ema").value='<%=email%>';
+			<%=script%>
+		<%}%>
+		<%-- <%=script!=null?script:""%> --%>
 		location.replace("<%=request.getContextPath()%><%=loc%>");
 	</script>
 </body>

@@ -47,7 +47,8 @@ $(()=>{
 	  if(flag == 0){
 	    $(".move").addClass("moving");
 	    $(".move").removeClass("start");
-	    
+	    $(".email").attr("readonly",'true');
+	    $(".email").val("");
 	    $(".form").addClass("movingForm");
 	    $(".form").removeClass("startForm");
 	    $(".hello").show();
@@ -56,6 +57,7 @@ $(()=>{
 	    $(".move").css("background-position", "right");
 	    $(".container").css("height","700px");
 	    $("#idcheck").show();
+	    $(".password").val("");
 	    setTimeout(function(){
 	      $(".title").text("회원가입");
 	      $(".icons").show();
@@ -77,7 +79,7 @@ $(()=>{
 		//로그인창으로 변경 눌렀을때
 	    $(".move").removeClass("moving");
 	    $(".move").addClass("start");
-	    
+	    $(".email").attr("readonly",false);
 	    $(".form").removeClass("movingForm");
 	    $(".form").addClass("startForm");
 	    $(".icons").show();
