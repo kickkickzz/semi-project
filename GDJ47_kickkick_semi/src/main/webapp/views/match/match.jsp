@@ -85,9 +85,10 @@ if(loginMember!=null){
 		
 		
 		<br><br>
+		<%if(userId!=null){ %>
 		<button type="button" id="matchRegist" style="float: right;" class="simple" onclick="fn_enrollmatch();">매치등록</button>
 				<br><br>	
-			
+		<%} %>	
 			
 		<div class="container2">
 		<table class="table table-hover table-striped text-center">

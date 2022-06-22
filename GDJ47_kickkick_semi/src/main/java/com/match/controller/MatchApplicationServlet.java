@@ -40,6 +40,7 @@ public class MatchApplicationServlet extends HttpServlet {
 		int result = new MatchService().teamregistcheck(userId);//현재 이용자의 팀이 있는지 없는지를 체크
 		if(result>0) {//팀이 있다면
 			Team t = new MatchService().selectteamcode(userId);//신청자의 팀정보를 불러온다 
+			
 			int appCheck = new MatchService().matchApplicationCheck(regist_num,t.getTeam_code()); //매치등록 리스트에서 신청자의 팀코드로 등록유무 결정
 			//1일시 자기팀에 신청할수 있기 때문에 신청불가 그 외 신청할수있음
 			if(appCheck>0) {
