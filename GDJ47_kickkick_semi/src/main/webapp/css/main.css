@@ -78,7 +78,7 @@ p>span{
 	color:black;
 	margin-top:16px;
 }
-dl:hover{
+dl:hover:not(#team-list-name) {
 	background-color:  rgb(229, 229, 229);
 	border-radius: 10px;
 }
@@ -86,6 +86,13 @@ dt{
 	width:70%;
 	overflow: hidden;
 	font-family: "Nanum Gothic Coding";
+}
+#team-list-name>dd{
+	font-weight: bold;
+	font-size: 20px;
+}
+#team-list-name{
+	border-bottom:2px solid black;
 }
 
 .notice-list-item>a{
@@ -121,6 +128,7 @@ div.card-body{
 	font-weight:bold;
 	margin-bottom: 0;
 	height:60px;
+	text-align:center;
 }
 .card-body-list{
 	padding-left:0;
@@ -129,13 +137,17 @@ div.card-body{
 	display: flex;
 }
 .sch-rslt{
-	padding-left:30px;
+	padding-left:86px;
 }
 li>b{
 	padding-right:24px;
 }
 .place-name{
 	margin-top:20px;
+	
+}
+.place{
+	position:absolute;
 }
 
 /* 실험쥐 */
