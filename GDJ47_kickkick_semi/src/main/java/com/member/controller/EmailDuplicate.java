@@ -36,6 +36,8 @@ public class EmailDuplicate extends HttpServlet {
 		
 		request.setAttribute("result", m==null?true:false);
 		request.getRequestDispatcher("/views/member/emailDuplicate.jsp").forward(request, response);
+		
+		
 	}
 
 	/**

@@ -134,7 +134,7 @@
 			      	<div class="card-body">
 			       		<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[5].getStadium_num()%>"><%=sArr[5].getStadium_name() %></a></h5>
 			        	<ul class="card-body-list">
-							<li class="place-name"><b class="place">주소</b> <div class="sch-rslt txt2 card-line">서서울호수공원(양천구)</div></li>
+							<li class="place-name"><b class="place">주소</b> <div class="sch-rslt txt2 card-line"><%=sArr[5].getBranch_address() %></div></li>
 							<li class="li-user"><b class="user">매치인원</b> <div class="div-user txt2 card-line"><%=sArr[5].getStadium_match_member() %></div></li>
 							<li class="li-date"><b class="date1">전화번호</b> <%=sArr[5].getBranch_phone() %></li>
 							<li class="li-date"><b class="date2">이용시간</b> <%=sArr[5].getStadium_reservation_start_time() %>:00~<%=sArr[5].getStadium_reservation_end_time() %>:00</li>
@@ -155,6 +155,10 @@
 				알려드립니다!
 			</div>
 			<div class="main-notice-list">
+					<dl id="notice-list-name">
+						<dt>제목</dt>
+						<dt>등록날짜</dt>
+					</dl>
 					<div class="notice-list-item">
 						<a href="<%=request.getContextPath()%>/detailBoard.do?bId=<%=bArr[0].getBoardNum()%>">
 							<dl>
@@ -207,54 +211,113 @@
 		</div>
 		<div class="main-sc9-review">
 			<div class="main-sc9-tit">
-				<img id="megaphone" src="https://cdn-icons-png.flaticon.com/512/1240/1240417.png">
-				이용자 리뷰!
+				<img id="megaphone" src="https://cdn-icons-png.flaticon.com/512/921/921347.png">
+				팀 정보!
 			</div>
 			<div class="main-notice-list">
 					<div class="notice-list-item">
-						<a href="/customer/noticeView?bbsDetailSeq=181">
+							<dl id="team-list-name">
+								<dd>팀마크</dd>
+								<dd>팀이름</dd>
+								<dd>팀연령</dd>
+								<dd>활동지역</dd>
+								<dd>팀성별</dd>
+							</dl>
+						<a href="<%=request.getContextPath()%>/team/teamMemberInfo.do?team_code=<%=tArr[0].getTeam_code()%>">
 							<dl>
-								<dt>
-									[브랜드 론칭 이벤트] 신규 브랜드 '킥킥' 초성퀴즈 이벤트 당첨자 발표
-								</dt>
 								<dd>
-									2022-05-30
+									<%if(tArr[0].getTeam_mark_img()!=null){ %>
+										<img src="./images/<%=tArr[0].getTeam_mark_img() %>">
+									<%}else{ %>
+										<img src="./images/세미로고.png">
+									<%} %>
+								</dd>
+								<dd>
+									<%=tArr[0].getTeam_name() %>
+								</dd>
+								<dd>
+									<%=tArr[0].getTeam_age()%>
+								</dd>
+								<dd>
+									<%=tArr[0].getTeam_region() %>
+								</dd>
+								<dd>
+									<%=tArr[0].getTeam_gender() %>
 								</dd>
 							</dl>
 						</a>
 					</div>
 					<div class="notice-list-item">
-						<a href="/customer/noticeView?bbsDetailSeq=68">
+						<a href="<%=request.getContextPath()%>/team/teamMemberInfo.do?team_code=<%=tArr[1].getTeam_code()%>">
 							<dl>
-								<dt>
-									브랜드 명 변경 안내(22/05/29)
-								</dt>
 								<dd>
-									2022-05-24
+									<%if(tArr[1].getTeam_mark_img()!=null){ %>
+										<img src="./images/<%=tArr[1].getTeam_mark_img() %>">
+									<%}else{ %>
+										<img src="./images/세미로고.png">
+									<%} %>
+								</dd>
+								<dd>
+									<%=tArr[1].getTeam_name() %>
+								</dd>
+								<dd>
+									<%=tArr[1].getTeam_age()%>
+								</dd>
+								<dd>
+									<%=tArr[1].getTeam_region() %>
+								</dd>
+								<dd>
+									<%=tArr[1].getTeam_gender() %>
 								</dd>
 							</dl>
 						</a>
 					</div>
 					<div class="notice-list-item">
-						<a href="/customer/noticeView?bbsDetailSeq=10">
+					<a href="<%=request.getContextPath()%>/team/teamMemberInfo.do?team_code=<%=tArr[2].getTeam_code()%>">
 							<dl>
-								<dt>
-									이용후기 / 만족도조사 이벤트 변경 안내
-								</dt>
 								<dd>
-									2022-05-11
+									<%if(tArr[2].getTeam_mark_img()!=null){ %>
+										<img src="./images/<%=tArr[2].getTeam_mark_img() %>">
+									<%}else{ %>
+										<img src="./images/세미로고.png">
+									<%} %>
+								</dd>
+								<dd>
+									<%=tArr[2].getTeam_name() %>
+								</dd>
+								<dd>
+									<%=tArr[2].getTeam_age()%>
+								</dd>
+								<dd>
+									<%=tArr[2].getTeam_region() %>
+								</dd>
+								<dd>
+									<%=tArr[2].getTeam_gender() %>
 								</dd>
 							</dl>
 						</a>
 					</div>
 					<div class="notice-list-item">
-						<a href="/customer/noticeView?bbsDetailSeq=11">
+						<a href="<%=request.getContextPath()%>/team/teamMemberInfo.do?team_code=<%=tArr[3].getTeam_code()%>">
 							<dl>
-								<dt>
-									이용상품권 사용안내
-								</dt>
 								<dd>
-									2022-05-11
+									<%if(tArr[3].getTeam_mark_img()!=null){ %>
+										<img src="./images/<%=tArr[3].getTeam_mark_img() %>">
+									<%}else{ %>
+										<img src="./images/세미로고.png">
+									<%} %>
+								</dd>
+								<dd>
+									<%=tArr[3].getTeam_name() %>
+								</dd>
+								<dd>
+									<%=tArr[3].getTeam_age()%>
+								</dd>
+								<dd>
+									<%=tArr[3].getTeam_region() %>
+								</dd>
+								<dd>
+									<%=tArr[3].getTeam_gender() %>
 								</dd>
 							</dl>
 						</a>

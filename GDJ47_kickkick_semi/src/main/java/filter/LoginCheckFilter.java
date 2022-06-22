@@ -17,7 +17,7 @@ import com.member.model.vo.Member;
 /**
  * Servlet Filter implementation class LoginCheckFilter
  */
-@WebFilter(urlPatterns= {})
+@WebFilter(urlPatterns= {"/team.do","/match.do","/team/*"})
 public class LoginCheckFilter extends HttpFilter implements Filter {
        
     /**
@@ -43,17 +43,18 @@ public class LoginCheckFilter extends HttpFilter implements Filter {
 		// place your code here
 		HttpSession session=((HttpServletRequest)request).getSession(false);
 		Member loginMember=(Member)session.getAttribute("loginMember");
-		if(loginMember!=null&&session!=null){
+		if(loginMember==null&&session!=null){
 			// pass the request along the filter chain
-					chain.doFilter(request, response);
-			}else {
-				request.setAttribute("msg", "로그인 후 이용 가능합니다.");
-				request.setAttribute("loc", "/");
-				request.getRequestDispatcher("/views/common/msg.jsp")
-				.forward(request, response);
-			}
+			request.setAttribute("msg", "로그인 후 이용 가능합니다.");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/msg/msg.jsp")
+			.forward(request, response);
+		}else {
+				chain.doFilter(request, response);
+				
+		}
 		// pass the request along the filter chain
-		chain.doFilter(request, response);
+		
 	}
 
 	/**
