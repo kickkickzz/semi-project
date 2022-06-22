@@ -15,6 +15,19 @@ if(loginMember!=null){
 	type=loginMember.getType();
 }
 %>
+<style>
+.Search{
+	width:300px; 
+  	height:50px;
+	border:3px solid #ccc;
+}
+.Search::placeholder{
+	color: gray;
+	font-size: large;
+	font-weight:200;
+}
+
+</style>
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/7bb5347123.js" crossorigin="anonymous"></script>
@@ -31,7 +44,7 @@ if(loginMember!=null){
 		<br>
 		<br>
 		<form action="<%=request.getContextPath()%>/searchstadium.do" onsubmit="return fn_searchDataa(event);">
-		<input type="text" name="searchstadium" placeholder="검색할 구장명을 입력하세요" size="25" onkeyup="submit"> 
+		<input type="text" name="searchstadium" placeholder="검색할 구장명을 입력하세요" size="25" onkeyup="submit" class="Search"> 
 		</form>
 		
 		
