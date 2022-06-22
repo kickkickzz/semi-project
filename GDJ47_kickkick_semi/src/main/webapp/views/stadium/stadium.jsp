@@ -87,7 +87,6 @@ if(loginMember!=null){
 		
 	
 	</div>
-<<<<<<< HEAD
 	</section>
 	<div class="modal fade" id="myModal" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
 <div class="modal-dialog">
@@ -101,8 +100,7 @@ if(loginMember!=null){
 <div class="modal-body">
 	<form>
 						<div class="form-group">
-							<label for="recipient-name" class="control-label"
-								style="font-size: 25px;">구장이름 : </label>
+							<label for="recipient-name" class="control-label" style="font-size: 25px;">구장이름 : </label>
 							<div class="input-group input-group-lg">
 								<input type="text" class="form-control input-sm" id="stadium_name"
 									placeholder="구장이름입력">
@@ -185,7 +183,7 @@ if(loginMember!=null){
 					</form>
 </div>
 <div class="modal-footer">
-<button type="button" class="btn btn-default" data-dismiss="">구장등록하기</button>
+<button type="button" id="stadiumRegistBtn" class="btn btn-default" data-dismiss="">구장등록하기</button>
 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 </div>
@@ -193,10 +191,6 @@ if(loginMember!=null){
 </div>
 
 <script>
-=======
-	<script>
->>>>>>> branch 'kickkick' of https://github.com/kickkickzz/semi-project.git
-	
 		const fn_searchDataa=e=>{
 			if($(e.target).find("input").val().length==0){
 				alert("값을 입력하고 조회하세요.");
@@ -210,6 +204,7 @@ if(loginMember!=null){
 		}
 		
 		
+		//지점 등록 버튼
 		$("#branchBtn").click(e=>{
 			var branchNum = "";
 			var email = '<%=loginMember.getEmail()%>';
@@ -218,7 +213,7 @@ if(loginMember!=null){
 				type :"post",
 				data : {email:email},
 				success :(data)=>{ //json을 이용해서 배열로 data를 받아올려고 하는데 그러면
-					if(data.length>0){
+					if(data){
 						alert("지점이 조회되었습니다.");
 						$('#branch_num').empty(); //받아온 데이터를 for문 돌릴려고 하는데
 						$.each(data , function(index,value){ //value가 서블릿에서 받아온 data를 value에 하나씩 넣어줌
@@ -226,11 +221,27 @@ if(loginMember!=null){
 						}); //branchNum 배열에 하나씩 들어감 option 값이 그러면 이제 append로 select 에 추가
 					}else{
 						alert("조회된 지점이 없습니다.");
+						branchNum = "------";
 					}
 					$('#branch_num').html(branchNum);
 				}
 			});
 		});
+		
+		
+		//구장 등록하기 버튼 
+		$("#stadiumRegistBtn").click(e=>{
+			const stadiumName = $("#stadium_name").val(); //구장이름
+			const stadiumMatchMember = $("#stadium_matchMember").val();//구장매치 인원
+			const branchNum = $("#branch_num").val()//지점 이름
+			const startTime = $("#startTime").val()
+			const endTime =  $("#endTime").val();
+			$ajax({
+				
+				
+				
+			})
+		}
 </script>
 	
 

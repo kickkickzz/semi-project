@@ -39,7 +39,6 @@ public class MyTeamServlet extends HttpServlet {
 		Member m = (Member)request.getSession().getAttribute("loginMember");
 		System.out.println(m);
 		String email = m.getEmail();
-		
 		//Team team = new TeamService().getTeamLeader(email);
 		
 		//ArrayList<Team> teamArr = new TeamService().getTeam(userId);
