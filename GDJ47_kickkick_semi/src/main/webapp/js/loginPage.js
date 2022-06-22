@@ -47,7 +47,8 @@ $(()=>{
 	  if(flag == 0){
 	    $(".move").addClass("moving");
 	    $(".move").removeClass("start");
-	    
+	    $(".email").attr("readonly",'true');
+	    $(".email").val("");
 	    $(".form").addClass("movingForm");
 	    $(".form").removeClass("startForm");
 	    $(".hello").show();
@@ -56,6 +57,7 @@ $(()=>{
 	    $(".move").css("background-position", "right");
 	    $(".container").css("height","700px");
 	    $("#idcheck").show();
+	    $(".password").val("");
 	    setTimeout(function(){
 	      $(".title").text("회원가입");
 	      $(".icons").show();
@@ -77,7 +79,7 @@ $(()=>{
 		//로그인창으로 변경 눌렀을때
 	    $(".move").removeClass("moving");
 	    $(".move").addClass("start");
-	    
+	    $(".email").attr("readonly",false);
 	    $(".form").removeClass("movingForm");
 	    $(".form").addClass("startForm");
 	    $(".icons").show();
@@ -158,7 +160,7 @@ function sample6_execDaumPostcode() {
 function logincheck(){
 	//패스워드 입력 했는지 
 	if($(".email").val().length<1 | !($(".email").val().match("@"))){
-		$("#msg").text("이메일형식에 맞춰 입력하세요.").css({"color":"red","font-size":"10px"});
+		$("#msg").text("이메일을 입력하세요.").css({"color":"red","font-size":"10px"});
 		return false;
 	}else if($(".password").val().length<1){
 		$(".login-error-msg").text("비밀번호를 입력하세요.").css({"color":"red","font-size":"10px"});

@@ -15,6 +15,19 @@ if(loginMember!=null){
 	type=loginMember.getType();
 }
 %>
+<style>
+.Search{
+	width:300px; 
+  	height:50px;
+	border:3px solid #ccc;
+}
+.Search::placeholder{
+	color: gray;
+	font-size: large;
+	font-weight:200;
+}
+
+</style>
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/7bb5347123.js" crossorigin="anonymous"></script>
@@ -31,7 +44,7 @@ if(loginMember!=null){
 		<br>
 		<br>
 		<form action="<%=request.getContextPath()%>/searchstadium.do" onsubmit="return fn_searchDataa(event);">
-		<input type="text" name="searchstadium" placeholder="검색할 구장명을 입력하세요" size="25" onkeyup="submit"> 
+		<input type="text" name="searchstadium" placeholder="검색할 구장명을 입력하세요" size="25" onkeyup="submit" class="Search"> 
 		</form>
 		
 		
@@ -89,6 +102,9 @@ if(loginMember!=null){
 		<%=pagebar %></div>
 		
 	
+
+	</div>
+
 	</div>
 
 	</section>
@@ -104,8 +120,7 @@ if(loginMember!=null){
 <div class="modal-body">
 	<form>
 						<div class="form-group">
-							<label for="recipient-name" class="control-label"
-								style="font-size: 25px;">구장이름 : </label>
+							<label for="recipient-name" class="control-label" style="font-size: 25px;">구장이름 : </label>
 							<div class="input-group input-group-lg">
 								<input type="text" class="form-control input-sm" id="stadium_name"
 									placeholder="구장이름입력">
@@ -137,8 +152,8 @@ if(loginMember!=null){
 								<span class="input-group-addon">
 									<i class="fa fa-user fa" aria-hidden="true"></i>
 								</span>
-								<select name="branch_num" id="branch_num">
-									<option value="">------</option>
+								<select name="branch_num" id="branch_num" style="margin-left:10px">
+									<option value="------">------</option>
 								</select>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<button type="button" id="branchBtn" class="simple">지점조회</button>
@@ -154,7 +169,7 @@ if(loginMember!=null){
 								</span>
 								<select name="startTime" id="startTime" style="margin-left:10px">
 									<option value="">시간선택</option>
-									<option value="9">09:00</option>
+									<option value=9>09:00</option>
 									<option value="10">10:00</option>
 									<option value="11">11:00</option>
 									<option value="12">12:00</option>
@@ -188,7 +203,7 @@ if(loginMember!=null){
 					</form>
 </div>
 <div class="modal-footer">
-<button type="button" class="btn btn-default" data-dismiss="">구장등록하기</button>
+<button type="button" id="stadiumRegistBtn" class="btn btn-default" data-dismiss="">구장등록하기</button>
 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 </div>
@@ -196,10 +211,6 @@ if(loginMember!=null){
 </div>
 
 <script>
-=======
-	<script>
->>>>>>> branch 'kickkick' of https://github.com/kickkickzz/semi-project.git
-	
 		const fn_searchDataa=e=>{
 			if($(e.target).find("input").val().length==0){
 				alert("값을 입력하고 조회하세요.");
@@ -213,6 +224,7 @@ if(loginMember!=null){
 		}
 		
 		
+		//지점 등록 버튼
 		$("#branchBtn").click(e=>{
 			var branchNum = "";
 			var email = '<%=userId%>';
@@ -221,7 +233,7 @@ if(loginMember!=null){
 				type :"post",
 				data : {email:email},
 				success :(data)=>{ //json을 이용해서 배열로 data를 받아올려고 하는데 그러면
-					if(data.length>0){
+					if(data){
 						alert("지점이 조회되었습니다.");
 						$('#branch_num').empty(); //받아온 데이터를 for문 돌릴려고 하는데
 						$.each(data , function(index,value){ //value가 서블릿에서 받아온 data를 value에 하나씩 넣어줌
@@ -229,11 +241,53 @@ if(loginMember!=null){
 						}); //branchNum 배열에 하나씩 들어감 option 값이 그러면 이제 append로 select 에 추가
 					}else{
 						alert("조회된 지점이 없습니다.");
+						branchNum += '<option value="------">'+"------"+'</option>';
 					}
 					$('#branch_num').html(branchNum);
 				}
 			});
 		});
+		
+		
+		//구장 등록하기 버튼 
+		$("#stadiumRegistBtn").click(e=>{
+			var email = '<%=userId%>'
+			const stadiumName = $("#stadium_name").val(); //구장이름
+			const stadiumMatchMember = $("#stadium_matchMember").val();//구장매치 인원
+			const branchNum = $("#branch_num").val();//지점 이름
+			const starttime = $("#startTime").val();
+			const startTime = parseInt(starttime); 
+			const endtime =  $("#endTime").val();
+			const endTime = parseInt(endtime); 
+			if(stadiumName == ""){
+				alert("구장이름을 입력하세요");
+			}else if(stadiumMatchMember == ""){
+				alert("구장 매치 인원을 선택하세요");
+			}else if(branchNum !="------"){ //나중에 여기 != > == 로 바꿔야함!!
+				alert("지점을 선택하세요");
+			}else if(startTime>endTime){
+				alert("예약가능시간이 잘못되었습니다 다시 선택해주세요.");
+			}else{
+				$.ajax({
+					url : "<%=request.getContextPath()%>/insertStadium.do",
+					type : "post",
+					data : {
+						email:email
+						,stadiumName:stadiumName
+						,stadiumMatchMember:stadiumMatchMember
+						,branchNum:branchNum
+						,startTime:startTime
+						,endTime:endTime},
+					success :(data)=>{  //data에 result값이 넘어옴
+						if(data>0){
+							alert("구장 등록이 완료되었습니다.");
+						}else{
+							alert("구장 등록에 실패하였습니다.");
+						}
+					}
+				})
+			}
+		})
 </script>
 	
 

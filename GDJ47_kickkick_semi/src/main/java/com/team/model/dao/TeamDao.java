@@ -750,7 +750,27 @@ public class TeamDao {
 	}
 	
 	
-	
+	//로그인한 유저가 가입한 팀 정보 보기
+	public List<Team> joinTeam(Connection conn, String email){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Team> list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("joinTeam"));
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Team t = getTeam(rs);
+				list.add(t);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return list;
+	}
 	
 	
 	
