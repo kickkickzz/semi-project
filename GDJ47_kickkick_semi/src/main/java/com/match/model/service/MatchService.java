@@ -67,6 +67,26 @@ public class MatchService {
 		close(conn);
 		return result;
 	}
+	public int matchApplicationCheck(String regist_num,String teamcode) {
+		Connection conn = getConnection();
+		int result = dao.matchApplicationCheck(conn,regist_num,teamcode);
+		close(conn);
+		return result;
+		
+	}
+	public int matchReApplicationCheck(String regist_num,String teamcode) {
+		Connection conn = getConnection();
+		int result = dao.matchReApplicationCheck(conn,regist_num,teamcode);
+		close(conn);
+		return result;
+		
+	}
+	public int matchApplication(String regist_num,String teamcode,String branch_num,String stadium_num,String reservation_code) {
+		Connection conn = getConnection();
+		int result = dao.matchApplication(conn,regist_num,teamcode,branch_num,stadium_num,reservation_code);
+		close(conn);
+		return result;
+	}
 	
 	
 }

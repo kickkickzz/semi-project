@@ -29,11 +29,10 @@ public class BoardDao {
 		}
 		
 	}
-	public ArrayList<Board> selectBoardList(Connection conn, PageInfo pi) {
+	public List<Board> selectBoardList(Connection conn, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<Board> boardList = null;
-		
+		List<Board> boardList = new ArrayList();
 		String query= prop.getProperty("selectBoardList");
 		int startPage= (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;//시작
 		int endPage=startPage +pi.getBoardLimit()-1;//끝
@@ -44,17 +43,16 @@ public class BoardDao {
 			pstmt.setInt(2, endPage);
 			rs=pstmt.executeQuery();
 			
-			boardList= new ArrayList<Board>();
 			while(rs.next()){
 				Board board=new Board(
 					rs.getInt("BOARD_NUM"),
 					rs.getString("WRITER_EMAIL"),
-					rs.getString("BOARD_WRITER"),
 					rs.getString("BOARD_TITLE"),
 					rs.getString("BOARD_CONTENT"),
 					rs.getString("BOARD_IMG"),
 					rs.getDate("BOARD_DATE"),
-					rs.getString("BOARD_DELETE_STATUS"));
+					rs.getString("BOARD_DELETE_STATUS"),
+					rs.getString("BOARD_WRITER"));
 				boardList.add(board);
 			}
 		}catch(SQLException e) {
@@ -172,13 +170,13 @@ public class BoardDao {
 			if(rs.next()){
 				board= new Board(
 					rs.getInt("BOARD_NUM"),
-					rs.getString("BOARD_WRITER"),
 					rs.getString("WRITER_EMAIL"),
 					rs.getString("BOARD_TITLE"),
 					rs.getString("BOARD_CONTENT"),
 					rs.getString("BOARD_IMG"),
 					rs.getDate("BOARD_DATE"),
-					rs.getString("BOARD_DELETE_STATUS"));
+					rs.getString("BOARD_DELETE_STATUS"),
+					rs.getString("BOARD_WRITER"));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -221,28 +219,27 @@ public class BoardDao {
 		return bat;
 	}
 
-	public ArrayList<Board> selectList(Connection conn) {
+	public List<Board> selectList(Connection conn) {
 		Statement stmt=null;
 		ResultSet rs=null;
-		ArrayList<Board> list=null;
+		List<Board> list=new ArrayList();
 		
 		String query=prop.getProperty("showMainTop5");
 		
 		try{
 			stmt=conn.createStatement();
 			rs=stmt.executeQuery(query);
-			list=new ArrayList<Board>();
 			
 			while(rs.next()){
 				Board b=new Board(					
 					rs.getInt("BOARD_NUM"),
-					rs.getString("BOARD_WRITER"),
 					rs.getString("WRITER_EMAIL"),
 					rs.getString("BOARD_TITLE"),
 					rs.getString("BOARD_CONTENT"),
 					rs.getString("BOARD_IMG"),
 					rs.getDate("BOARD_DATE"),
-					rs.getString("BOARD_DELETE_STATUS"));
+					rs.getString("BOARD_DELETE_STATUS"),
+					rs.getString("BOARD_WRITER"));
 				list.add(b);
 			}
 			
@@ -362,15 +359,14 @@ public class BoardDao {
 			
 			while(rs.next()) {
 				Board b=new Board(					
-						rs.getInt("BOARD_NUM"),
-						rs.getString("BOARD_WRITER"),
-						rs.getString("WRITER_EMAIL"),
-						rs.getString("BOARD_TITLE"),
-						rs.getString("BOARD_CONTENT"),
-						rs.getString("BOARD_IMG"),
-						rs.getDate("BOARD_DATE"),
-						rs.getString("BOARD_DELETE_STATUS")		
-						);
+					rs.getInt("BOARD_NUM"),
+					rs.getString("WRITER_EMAIL"),
+					rs.getString("BOARD_TITLE"),
+					rs.getString("BOARD_CONTENT"),
+					rs.getString("BOARD_IMG"),
+					rs.getDate("BOARD_DATE"),
+					rs.getString("BOARD_DELETE_STATUS"),
+					rs.getString("BOARD_WRITER"));
 				list.add(b);
 			}
 		}catch(SQLException e) {

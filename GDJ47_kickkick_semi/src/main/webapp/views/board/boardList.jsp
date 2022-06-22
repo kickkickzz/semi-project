@@ -3,8 +3,11 @@
 <%
 	//로그인 하지 않아도 다 열람 가능
 	//작성 권한은 관리자만
-	ArrayList<Board> list=(ArrayList<Board>)request.getAttribute("boardLists");
+	List<Board> list=(List<Board>)request.getAttribute("boardLists");
+	
 
+	
+	
 	//페이지 정보//
 	//이름에 대응되는 PageInfo 객체 - 
 	PageInfo pi=(PageInfo) request.getAttribute("pi");
@@ -26,13 +29,13 @@
 					<h1 class="board-title">공지사항</h1>
 					<hr>
 				</div>
-				<!-- 공지작성은 관리자만 회원 유형 적용해서 권한부여 가능-->
-				<%//if(loginMember!=null&&loginMember.getEmail().equals("admin")){ //관리자 회원적용을 자체 아이디 규약? 회원유형으로 설정?%>
+				<!-- 공지작성은 관리자만 회원 유형 적용해서 권한부여 가능 loginMember.getType().equals("R")-->
+				<%if(loginMember!=null&& loginMember.getEmail().equals("admin@kickick.com")){ //관리자 회원적용을 자체 아이디 규약? 회원유형으로 설정?%>
 				<div class="board_button_box">
 					<div></div>
 					<button type="button" class="btn btn-primary" id="insertBtn" onclick="location.assign('<%=request.getContextPath() %>/writeBoardForm.do')">등록하기</button>
 				</div>
-				<%//} %>
+				<%} %>
 				
 				<!-- 테이블 형식으로 구성 -->
 				<div class="board_table_container">
@@ -52,9 +55,11 @@
 								<td colspan="6">공지사항이 없습니다!</td>
 							</tr>
 						<%}else{
-							for(Board b:list){%>	
+							int i=0;
+							while(i<list.size()) {
+								Board b= list.get(i);%>	
 							<tr>
-								<th scope="row">
+								<th scope="row"><%=i+1%>
 									<input type="hidden" value="<%=b.getBoardNum()%>"/>
 								</th>
 								<!--번호-->
@@ -66,7 +71,8 @@
 								<!-- 작성자 -->
 								<td><%b.getBoardWriter(); %></td>
 							</tr>
-						<% }
+						<%		i++;
+							}
 						}%>	
 						</tbody>
 					</table>
@@ -93,7 +99,7 @@
 									//p가 현재페이지(currentPage)와 같다면
 									//현재 페이지는 선택 못하도록%>
 									<li class="page-item active">
-										<button class="page-link" disabled="disabled">!</button>
+										<button class="page-link" disabled="disabled">현재</button>
 									</li>
 									<%}else{ %>
 									<li class="page-item">

@@ -22,6 +22,7 @@
 <!-- 정적 파일 불러오기 css/js -->
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/css/boardDetail.css">
 <script src="<%=request.getContextPath()%>/js/boardDetail.js"></script>
+<%@include file="/views/common/header.jsp"%>
 <body>
 	<!-- 본내용 -->
     <div class="main-content-container" id="main-container">
@@ -38,7 +39,7 @@
                     <!-- 이미지 -->
                     <div class="board-img-box">
                     	<%if(img!=null){ 
-                    		//등록한 이미지가 존재 시
+                    		//등록한 이미지 존재 시
                     	%>
                         	<img id="image" src="<%=request.getContextPath() %>/upload/storage/board_img/<%=img.getChangeName() %>" alt="게시판 이미지">
                         <%} %>
@@ -53,21 +54,21 @@
                 <!-- 버튼박스 목록: 모든회원 가능//// 수정/삭제: 관리자만 가능 -->
                 <div class="board-btn-box">
                     	
-                    <%//if(loginUser!=null && loginUser.getMember_type().equals("R")) {
+                    <%if( loginMember!=null&& loginMember.getEmail().equals("admin@kickick.com") ) {
                     	//관리자 회원인경우에만 버튼을 클릭
                     %>
                     	<button id="goListBoardAd" type="button" class="btn btn-secondary btn-lg"
-                    		onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo'">목록</button>
+                    		onclick="location.href='<%=request.getContextPath()%>/showBoardList.do'">목록</button>
 	                    
 	                    <button id="editBoard" type="button" class="btn btn-primary btn-lg"
 	                    	onclick="updateBoard();">수정</button>
 	                    
 	                    <button id="removeBoard" type="button" class="btn btn-danger btn-lg" 
 	                    	onclick="deleteBoard();">삭제</button>
-                    <%//}else{ %>
+                    <% }else{ %>
                     	<button id="goListBoard" type="button" class="btn btn-secondary btn-lg"
-                    		onclick="location.href='<%=request.getContextPath()%>/showBoardList.bo'">목록</button>
-                    <%//} %>
+                    		onclick="location.href='<%=request.getContextPath()%>/showBoardList.do'">목록</button>
+                    <% } %>
                 	
                 </div>  
         </div>
@@ -77,7 +78,7 @@
 <script>
 	function updateBoard(){
 		let bId=<%=board.getBoardNum()%>;
-		location.href='<%=request.getContextPath() %>/updateBoardForm.bo?bId='+bId;
+		location.href='<%=request.getContextPath() %>/updateBoardForm.do?bId='+bId;
 		return true;
 	}
 
@@ -100,7 +101,7 @@
 						//삭제 성공
 						alert('성공적으로 삭제하였습니다.');
 					}
-					return location.href='<%=request.getContextPath() %>/showBoardList.bo';
+					return location.href='<%=request.getContextPath() %>/showBoardList.do';
 				}
 				
 			});

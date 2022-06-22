@@ -35,7 +35,7 @@ public class UpdateBoardServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize= 1024*1024*10; //10MB
 			String root=request.getSession().getServletContext().getRealPath("/");
-			String saveBoardPath=root+"/webapp/upload/board_img/";
+			String saveBoardPath=root+"/images/board_img/";
 			
 			MultipartRequest multiRequest=new MultipartRequest(request,saveBoardPath,maxSize,"UTF-8",new BoardImgFileRenamePolicy() );
 //			File file=new File(saveBoardPath);//물리적 경로 오류 생각해보기
@@ -57,14 +57,12 @@ public class UpdateBoardServlet extends HttpServlet {
 			
 			
 			//폼에서 입력받은 값들을 모두 갖고온다.
-			//게시글번호: bId
-			//파일번호: fId
-			int bId= Integer.parseInt(multiRequest.getParameter("bId"));
-			int fId= Integer.parseInt(multiRequest.getParameter("fId"));
+			int bId= Integer.parseInt(multiRequest.getParameter("bId")); //게시글번호: bId
+			int fId= Integer.parseInt(multiRequest.getParameter("fId")); //파일번호: fId
 			
 			//작성자 이메일, 이름.
-			String email=((Member) request.getSession().getAttribute("loginUser")).getEmail();
-			String name=((Member) request.getSession().getAttribute("loginUser")).getName();
+			String email=((Member) request.getSession().getAttribute("loginMember")).getEmail();
+			String name=((Member) request.getSession().getAttribute("loginMember")).getName();
 			
 			//제목:title
 			String title=multiRequest.getParameter("title");

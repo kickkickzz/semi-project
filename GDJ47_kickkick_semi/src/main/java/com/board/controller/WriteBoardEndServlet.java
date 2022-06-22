@@ -65,8 +65,8 @@ public class WriteBoardEndServlet extends HttpServlet {
 			//제목 "title"
 			String title= multiRequest.getParameter("title"); //제목-title - BOARD_TITLE
 			String content= multiRequest.getParameter("content"); //내용-content - BOARD_CONTENT
-			String email=((Member) request.getSession().getAttribute("loginUser")).getEmail();
-			String name=((Member)request.getSession().getAttribute("loginUser")).getName(); //이름- BOARD_WRITER
+			String email=((Member) request.getSession().getAttribute("loginMember")).getEmail();
+			String name=((Member)request.getSession().getAttribute("loginMember")).getName(); //이름- BOARD_WRITER
 			
 			Board board= new Board();
 			board.setBoardTitle(title);
@@ -105,9 +105,9 @@ public class WriteBoardEndServlet extends HttpServlet {
 		}else {
 			request.setCharacterEncoding("UTF-8");
 			String title=request.getParameter("title");
-			String email=((Member)request.getSession().getAttribute("loginUser")).getEmail();
+			String email=((Member)request.getSession().getAttribute("loginMember")).getEmail();
 			String content= request.getParameter("content");
-			String name=((Member)request.getSession().getAttribute("loginUser")).getName();
+			String name=((Member)request.getSession().getAttribute("loginMember")).getName();
 			
 			Board board= new Board();
 			board.setBoardContent(content);
