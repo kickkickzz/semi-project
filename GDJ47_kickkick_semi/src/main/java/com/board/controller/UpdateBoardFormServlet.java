@@ -12,11 +12,11 @@ import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
 import com.board.model.vo.BoardAttachment;
 
-@WebServlet("/updateBoardEnd.do")
-public class UpdateBoardEndServlet extends HttpServlet {
+@WebServlet("/updateBoardForm.do")
+public class UpdateBoardFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public UpdateBoardEndServlet() {
+    public UpdateBoardFormServlet() {
         super();
     }
 
@@ -27,6 +27,7 @@ public class UpdateBoardEndServlet extends HttpServlet {
 		Board board=bDao.selectBoard(bId);
 		BoardAttachment img=null;
 		String page=null;
+		
 		if(board!=null) {
 			// bId에 해당하는 게시판이 존재
 			page="/views/board/boardUpdateForm.jsp";
@@ -35,6 +36,7 @@ public class UpdateBoardEndServlet extends HttpServlet {
 			img=bDao.selectBoardAttachment(bId);
 			request.setAttribute("board",board);
 			request.setAttribute("img",img);
+			
 		}else{
 			page="/views/common/errorPage.jsp";
 			request.setAttribute("msg","공지사항 수정에 실패하였습니다.");

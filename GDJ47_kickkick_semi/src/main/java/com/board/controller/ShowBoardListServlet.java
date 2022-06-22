@@ -1,7 +1,7 @@
 package com.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,7 +53,7 @@ public class ShowBoardListServlet extends HttpServlet {
 		}
 		
 		PageInfo pi=new PageInfo(currentPage, listCount, pageLimit, boardLimit, maxPage, startPage, endPage);
-		ArrayList<Board>boardList= bs.selectBoardList(pi);
+		List<Board>boardList= bs.selectBoardList(pi);
 		
 		String page=null;
 		if(boardList!=null) {
