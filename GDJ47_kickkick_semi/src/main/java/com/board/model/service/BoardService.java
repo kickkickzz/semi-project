@@ -46,12 +46,6 @@ public class BoardService {
 		return b;
 	}
 
-	public List<Board> selectList() {
-		Connection conn = getConnection();
-		List<Board> list = new BoardDao().selectList(conn);
-		close(conn);
-		return list;
-	}
 
 	public int insertBoard(Board b) {
 		Connection conn=getConnection();
@@ -70,7 +64,7 @@ public class BoardService {
 		// 게시판에서 지우기
 		result = bDao.deleteBoard(conn, bId);
 		if (fId > 0) {
-			result += bDao.deleteBoardAttachmentFid(conn, bId);
+			System.out.println("파일 있을때 삭제");
 		}
 		if (result > 0) {
 			commit(conn);

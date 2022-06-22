@@ -69,15 +69,15 @@ public class BoardDao {
 	public int insertBoard(Connection conn, Board b) {
 		PreparedStatement pstmt=null;
 		int result=0;
-		String query=prop.getProperty("insertBoard");
 		
 		try{
-			pstmt=conn.prepareStatement(query);
+			pstmt=conn.prepareStatement(prop.getProperty("insertBoard"));
 			pstmt.setString(1,b.getBoardWriterEmail());
 			pstmt.setString(2,b.getBoardTitle());
 			pstmt.setString(3,b.getBoardContent());
-//			pstmt.setString(4,b.getBoardImgPath());
-			pstmt.setString(5,b.getBoardWriter());
+			pstmt.setString(4, b.getBoardOriginalFilename());
+			pstmt.setString(5, b.getBoardRenamedFilename());
+//			pstmt.setString(6,b.getBoardWriter());
 			result=pstmt.executeUpdate();
 			
 		}catch(SQLException e) {
@@ -137,32 +137,6 @@ public class BoardDao {
 		return board;
 	}
 
-
-	public List<Board> selectList(Connection conn) {
-		Statement stmt=null;
-		ResultSet rs=null;
-		List<Board> list=new ArrayList();
-		
-		String query=prop.getProperty("showMainTop5");
-		
-		try{
-			stmt=conn.createStatement();
-			rs=stmt.executeQuery(query);
-			
-			while(rs.next()){
-				Board b=getBoard(rs);
-				list.add(b);
-			}
-			
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally{
-			close(rs);
-			close(stmt);
-		}
-		return list;
-	}
-
 	public int updateBoard(Connection conn, Board b, int bId) {
 		int result=0;
 		PreparedStatement pstmt=null;
@@ -174,23 +148,6 @@ public class BoardDao {
 //			pstmt.setString(3,b.getBoardImgPath());
 			pstmt.setDate(4,b.getBoardDate());
 			pstmt.setInt(5,bId);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally{
-			close(pstmt);
-		}
-		return result;
-	}
-
-
-	public int deleteBoardAttachmentFid(Connection conn, int bId) {
-		int result=0;
-		PreparedStatement pstmt=null;
-		String query=prop.getProperty("deleteBoardAttachment");
-		try {
-			pstmt=conn.prepareStatement(query);
-			pstmt.setInt(1, bId);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -216,11 +173,12 @@ public class BoardDao {
 		}
 		return result;
 	}
+	
 	public int updateReadCount(Connection conn, int bId) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("updateReadcount"));
+			pstmt=conn.prepareStatement(prop.getProperty("updateReadcount")); //쿼리 입력 필요
 			pstmt.setInt(1, bId);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {

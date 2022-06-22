@@ -19,8 +19,6 @@ import com.board.model.vo.Board;
 import com.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
-import common.BoardImgFileRenamePolicy;
-
 @WebServlet("/updateBoard.do")
 public class UpdateBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -17,8 +17,8 @@ import com.oreilly.servlet.MultipartRequest;
 
 import common.MyFileRenamedPolicy;
 import common.exception.LoginCheckException;
-//clear
-@WebServlet("/board/writeBoardEnd.do")
+
+@WebServlet("/writeBoard.do")
 public class WriteBoardEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,10 +29,10 @@ public class WriteBoardEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(!ServletFileUpload.isMultipartContent(request)) {
-			System.out.println("파일 업로드 안 됨");
+			throw new LoginCheckException("enctype에러");
 		}else {
 			String root=getServletContext().getRealPath("/upload/");
-			String path=root+"/board";
+			String path=root+"/board"; //경로확인 할것
 			File f=new File(path);
 			if(!f.exists()) f.mkdirs();
 			
@@ -55,7 +55,7 @@ public class WriteBoardEndServlet extends HttpServlet {
 				loc="/showBoardList.do";
 			}else {
 				msg="게시글 등록실패!";
-				loc="/board/boardWrite.do";
+				loc="/writeBoard.do";
 			}
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
