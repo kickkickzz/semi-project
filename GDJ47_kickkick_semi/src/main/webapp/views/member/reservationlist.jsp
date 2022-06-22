@@ -132,9 +132,7 @@
              	<td><%=p.getPaymethod() %></td>
              </tr>
              <%} %>
-             	</tbody>
-              </table>
-      </div>
+        
           <%}else{ %>
              
              <tr>
@@ -142,9 +140,11 @@
             
              </tr>
             
-        </table>
-      </div>
+       
        <%} %>
+            	</tbody>
+              </table>
+      </div>
     </main>
   </div>
 </div>

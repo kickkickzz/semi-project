@@ -5,12 +5,15 @@
 <%@ include file="/views/common/header.jsp" %>
 <% List<Stadium> result = (List<Stadium>)request.getAttribute("staArr");
 	String pagebar = (String)request.getAttribute("pageBar");
+String userId=null;
+if(loginMember!=null){
+	userId=loginMember.getEmail();
+}
 	
-	
-/* String type =null;
+ String type ="default";
 if(loginMember!=null){
 	type=loginMember.getType();
-} */
+}
 %>
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -32,7 +35,7 @@ if(loginMember!=null){
 		</form>
 		
 		
-		<%if(loginMember.getType().equals("M")) {%> 
+		<%if(type.equals("M")) {%> 
 			<button type="button" style="float: right;" data-toggle="modal" data-target="#myModal">구장 등록</button>
 		<%} %>
 		<br>
@@ -87,7 +90,7 @@ if(loginMember!=null){
 		
 	
 	</div>
-<<<<<<< HEAD
+
 	</section>
 	<div class="modal fade" id="myModal" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
 <div class="modal-dialog">
@@ -212,7 +215,7 @@ if(loginMember!=null){
 		
 		$("#branchBtn").click(e=>{
 			var branchNum = "";
-			var email = '<%=loginMember.getEmail()%>';
+			var email = '<%=userId%>';
 			$.ajax({
 				url: "<%=request.getContextPath()%>/stadiumSearch.do",
 				type :"post",

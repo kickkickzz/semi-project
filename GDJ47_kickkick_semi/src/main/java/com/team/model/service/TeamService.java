@@ -177,5 +177,42 @@ public class TeamService {
 		return result;
 		
 	}
-
+	public int getTeamApplicationCount(String team_code) {
+		Connection conn=getConnection();
+		int result=dao.getTeamApplicationCount(conn,team_code);
+		close(conn);
+		return result;
+	}
+	
+	public ArrayList<TeamMemberInfo> selectTeamApplication(String team_code){
+		Connection conn=getConnection();
+		ArrayList<TeamMemberInfo> list=dao.selectTeamApplication(conn,team_code);
+		close(conn);
+		return list;
+	}
+	
+	
+	
+	
+	
+	public void teamExpulsion(String supporter, String team_code) {
+		Connection conn=getConnection();
+		int result=dao.teamExpulsion(conn, supporter, team_code);
+		if(result>0) commit(conn);
+		close(conn);
+	}
+	
+	
+	public void teamAccept(String supporter, String team_code) {
+		Connection conn=getConnection();
+		int result=new TeamDao().teamAccept(conn, supporter, team_code);
+		if(result>0) commit(conn);
+		close(conn);
+	}
+	public void teamCancel(String supporter, String team_code) {
+		Connection conn=getConnection();
+		int result=new TeamDao().teamCancel(conn, supporter, team_code);
+		if(result>0) commit(conn);
+		close(conn);
+	}
 }

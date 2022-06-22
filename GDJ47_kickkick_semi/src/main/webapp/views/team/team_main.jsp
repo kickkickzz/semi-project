@@ -93,6 +93,9 @@
 				</div>
 			</div>
 		</div>
+		<div id="pageBar">
+        	<%=request.getAttribute("pageBar") %>
+        </div>
 	</section>
 	<%-- <%@include file="../common/footer.jsp"%> --%>	
 	

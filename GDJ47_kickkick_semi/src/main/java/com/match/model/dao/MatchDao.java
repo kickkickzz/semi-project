@@ -44,8 +44,8 @@ public class MatchDao {
 						.reservation_usage_start_time(rs.getInt("reservation_usage_start_time")).reservation_usage_end_time(rs.getInt("reservation_usage_end_time"))
 						.reservation_usage_start_date(rs.getDate("reservation_usage_start_date"))
 						.branch_manager_email(rs.getString("branch_manager_email")).branch_img(rs.getString("branch_img"))
-						.branch_num(rs.getString("branch_num")).branch_address(rs.getString("branch_address"))
-						.regist_status(rs.getString("regist_status"))
+						.regist_branch_num(rs.getString("regist_branch_num")).regist_stadium_num(rs.getInt("regist_stadium_num")).branch_address(rs.getString("branch_address"))
+						.regist_status(rs.getString("regist_status")).regist_reservation_code(rs.getString("regist_reservation_code"))
 						.build();
 				result.add(m);
 			}
@@ -186,5 +186,63 @@ public class MatchDao {
 			close(pstmt);
 			
 		}return result;
+	}
+	public int matchApplicationCheck(Connection conn,String regist_num,String teamcode) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result =0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("matchCheck"));
+			pstmt.setString(1, regist_num);
+			pstmt.setString(2, teamcode);
+			rs=pstmt.executeQuery();
+			if(rs.next())result = rs.getInt(1);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		return result;
+		
+	}
+	public int matchReApplicationCheck(Connection conn,String regist_num,String teamcode) {
+		PreparedStatement pstmt =null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("matchReCheck"));
+			pstmt.setString(1, regist_num);
+			pstmt.setString(2, teamcode);
+			rs=pstmt.executeQuery();
+			if(rs.next())result = rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	public int matchApplication(Connection conn,String regist_num,String teamcode,String branch_num,String stadium_num,String reservationcode) {
+		PreparedStatement pstmt = null;
+		int result =0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("matchApplication"));
+			pstmt.setString(1, regist_num);
+			pstmt.setString(2, teamcode);
+			pstmt.setString(3, branch_num);
+			pstmt.setString(4, stadium_num);
+			pstmt.setString(5, reservationcode);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			
+		}
+		return result;
 	}
 }
