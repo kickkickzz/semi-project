@@ -539,6 +539,113 @@ public class TeamDao {
 	}
 	
 	
+	public int teamMatchStatusCheck(Connection conn, String match_regist_num) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String query = prop.getProperty("teamMatchStatusCheck");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, match_regist_num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return result;
+	}
+	
+	
+	public int teamMatchAcStatus(Connection conn, String match_regist_num, String team_code) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("teamMatchAcStatus");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, match_regist_num);
+			pstmt.setString(2, team_code);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
+
+
+	public int teamMatchAccept(Connection conn, String match_regist_num, String team_code, String winlose) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("teamMatchAccept");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, winlose);
+			pstmt.setString(2, match_regist_num);
+			pstmt.setString(3, team_code);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+
+	public int teamMatchCaStatus(Connection conn, String match_regist_num, String team_code) {
+		PreparedStatement pstmt = null;
+
+		int result = 0;
+
+		String query = prop.getProperty("teamMatchCaStatus");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, match_regist_num);
+			pstmt.setString(2, team_code);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int teamMatchCancel(Connection conn, String match_regist_num, String team_code) {
+		PreparedStatement pstmt = null;
+
+		int result = 0;
+
+		String query = prop.getProperty("teamMatchCancel");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, match_regist_num);
+			pstmt.setString(2, team_code);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
 	
 	
 	

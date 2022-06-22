@@ -215,4 +215,67 @@ public class TeamService {
 		if(result>0) commit(conn);
 		close(conn);
 	}
+	
+	public int teamMatchStatusCheck(String match_regist_num) {
+		Connection conn = getConnection();
+
+		int result = dao.teamMatchStatusCheck(conn, match_regist_num);
+
+		close(conn);
+
+		return result;
+	}
+
+	public void teamMatchAcStatus(String match_regist_num, String team_code) {
+		Connection conn = getConnection();
+
+		int result = dao.teamMatchAcStatus(conn, match_regist_num, team_code);
+
+		if (result > 0) {
+			commit(conn);
+		}
+
+		close(conn);
+
+		
+	}
+
+	public void teamMatchAccept(String match_regist_num, String team_code, String winlose) {
+		Connection conn = getConnection();
+
+		int result =dao.teamMatchAccept(conn, match_regist_num, team_code, winlose);
+
+		if (result > 0) {
+			commit(conn);
+		}
+
+		close(conn);
+
+	}
+	public void teamMatchCaStatus(String match_regist_num, String team_code) {
+		Connection conn = getConnection();
+
+		int result =dao.teamMatchCaStatus(conn, match_regist_num, team_code);
+
+		if (result > 0) {
+			commit(conn);
+		}
+
+		close(conn);
+	}
+
+	public void teamMatchCancel(String match_regist_num, String team_code) {
+		Connection conn = getConnection();
+
+		int result = dao.teamMatchCancel(conn, match_regist_num, team_code);
+
+		if (result > 0) {
+			commit(conn);
+		}
+
+		close(conn);
+	}
+	
+	
+	
 }

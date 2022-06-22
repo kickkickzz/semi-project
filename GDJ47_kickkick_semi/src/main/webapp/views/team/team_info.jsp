@@ -7,6 +7,8 @@
 	ArrayList<TeamMemberInfo> teamMemberArr=(ArrayList<TeamMemberInfo>)request.getAttribute("teamMemberArr");
 	Team teamInfo = (Team)request.getAttribute("teamInfo");
 	ArrayList<TeamMemberInfo> teamEnterMember=(ArrayList<TeamMemberInfo>)request.getAttribute("teamEnterMember");
+	
+	
 
 %>
 
@@ -30,9 +32,10 @@
 <script src='https://d3js.org/d3.v3.min.js'></script>
 
 <body>
+
 	<!-- BODY 시작 -->
 	<section id="content">
-
+	
 		<!-- container-for-carousel 시작-->
 		<div class="container-for-carousel">
 
@@ -224,7 +227,8 @@
 								<td><%= te.getGender() %></td>
 								<td><%= te.getAge() %></td>
 								<td><%= te.getPosition() %></td>
-								<td><%= te.getApplication_status() %></td>
+								<td><input type="button" id="acBtn" class="acBtn" supporter="<%=te.getSupporter_email() %>" value="수락">  
+								    <input type="button" id="caBtn" class="caBtn" supporter="<%=te.getSupporter_email() %>" value="취소"></td>
 							</tr>
 							<%}%>
 						<%}%>
@@ -259,21 +263,29 @@
 						</tr>
 					</thead>
 					<tbody>
-						<% if(teamMemberArr.isEmpty()){ %>
+			<%-- 			<% if(teamEnterMember.isEmpty()){ %>
 							<tr>
 								<td colspan="11">매칭팀이 없습니다.</td>
 							</tr>
 						<%} else { %>
 							
-							<%for(TeamMemberInfo t:teamMemberArr ) {%>
+							<%for(TeamMemberInfo t:teamEnterMember ) {%>
 							<tr>
-								<td><%= t.getName() %></td>
-								<td><%= t.getGender() %></td>
-								<td><%= t.getPhone() %></td>
-								<td><%= t.getPosition() %></td>
+								<td><%= t.getRegist_num() %></td>
+								<td><%= t.getBranch_address() %></td>
+								<td><%= t.getStadium_name() %></td>
+								<td><%= t.getStadium_match_member() %></td>
+								<td><%= t.getReservation_usage_start_time() %></td>
+								<td><%= t.getReservation_usage_end_time() %></td>
+								<td><%= t.getReservation_usage_start_date() %></td>
+								<td><%= t.getTeam_name %></td>
+								<td><%= t.getTeam_gender %></td>
+								<td><%= t.getTeam_age %></td>
+								<td><%= t.getTeam_point %></td>
+								
 							</tr>
 							<%}%>
-						<%}%>
+						<%}%> --%>
 						
 						
 						
@@ -308,7 +320,7 @@
 			   type = '1';
 			   if (confirm("추방하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'leader.me',
+						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
 						 data: {supporter:supporter, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -328,7 +340,7 @@
 			   type = '2';
 			   if (confirm("가입하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'leader.me',
+						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
 						 data: {supporter:supporter, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -348,7 +360,7 @@
 			   type = '3';
 			   if (confirm("가입거절하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'leader.me',
+						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
 						 data: {supporter:supporter, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -368,7 +380,7 @@
 			   type = '4';
 			   if (confirm("매치수락하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'leader.me',
+						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
 						 data: {match_regist_num:matchregistnum, team_code:teamcode, teamcode:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -391,7 +403,7 @@
 			   type = '5';
 			   if (confirm("매치취소하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'leader.me',
+						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
 						 data: {match_regist_num:matchregistnum, team_code:teamcode, teamcode:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);

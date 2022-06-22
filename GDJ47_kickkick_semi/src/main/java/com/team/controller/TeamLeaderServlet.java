@@ -48,7 +48,7 @@ public class TeamLeaderServlet extends HttpServlet {
 		}else if(type.equals("3")) { //취소
 			result = 3;
 			new TeamService().teamCancel(supporter, teamcode);
-		/*	
+		
 		}else if(type.equals("4")) { //매치수락
 			int statusCheck = new TeamService().teamMatchStatusCheck(match_regist_num);
 			if(statusCheck > 0) {
@@ -75,12 +75,12 @@ public class TeamLeaderServlet extends HttpServlet {
 			result = 5;
 			
 		}
-		*/
-		}
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(result, response.getWriter());
-		
 	}
+		
+		
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
