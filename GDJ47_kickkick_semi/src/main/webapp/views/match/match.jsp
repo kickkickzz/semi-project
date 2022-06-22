@@ -58,6 +58,21 @@
     margin-bottom: 10px;
    
 }
+.matchSearch{
+	width:300px; 
+  	height:50px;
+	border:3px solid #ccc;
+}
+.matchSearch::placeholder{
+	color: gray;
+	font-size: large;
+	font-weight:200;
+}
+.matchSearch2{
+	width:100px; 
+  	height:50px;
+	border:3px solid #ccc;
+}
 
 </style>
 <%@ include file="/views/common/header.jsp" %>
@@ -82,6 +97,46 @@ if(loginMember!=null){
 		<br>
 		<h1 style="text-align:center">매치 정보 보기</h1>
 		<br>
+		<div id="search-container" style="text-align:center">
+			<select id="searchType" class='matchSearch2'>
+				검색타입 : 
+        		<option value="team">팀명</option>
+        		<option value="place" >장소</option>
+        		<option value="gender">성별</option>
+        		<option value="age">연령대</option>
+        		<option value="member">매치인원</option>
+        	</select>
+        	<div id="search-team">
+        		<form action="<%=request.getContextPath()%>/matchsearch.do">
+        			<input type="hidden" name="searchType" value="team" >
+        			<input type="text" name="searchKeyword" size="25" 
+        			placeholder="검색할 팀명을 입력하세요"  class="matchSearch">
+        			
+        			</datalist>
+        			<button type="submit" class='simple'>검색</button>
+        		</form>
+        	</div>
+        	<div id="search-place">
+        		<form action="<%=request.getContextPath()%>/matchsearch.do">
+        			<input type="hidden" name="searchType" value="place">
+        			<input type="text" name="searchKeyword" size="25" 
+        			placeholder="검색할 장소를 입력하세요" class="matchSearch">
+        			<button type="submit" class='simple'>검색</button>
+        		</form>
+        	</div>
+        	<div id="search-gender" style="border:3px solid #ccc;height:55">
+        		<form action="<%=request.getContextPath()%>/matchsearch.do">
+        			
+        			<input type="hidden" name="searchType" value="gender">
+        			<label><input type="radio" name="searchKeyword" value="남자그룹" >남자그룹</label>
+        			<label><input type="radio" name="searchKeyword" value="여자그룹" >여자그룹</label>
+        			<label><input type="radio" name="searchKeyword" value="남녀그룹" >여자그룹</label>
+        			
+        			<button type="submit" class='simple'>검색</button>
+        		</form>
+        	</div>
+        	
+		</div>
 		
 		
 		<br><br>
@@ -158,6 +213,12 @@ if(loginMember!=null){
 	
 	
 	<script>
+		const fn_matchSearch=()=>{
+			
+		window.open("<%=request.getContextPath()%>/matchsearch.do", "matchSearch", "width=500, height=680");
+		
+	};
+	
 	const fn_enrollmatch=()=>{
 		var userId='<%=userId%>';
 		console.log(userId);
@@ -213,7 +274,23 @@ if(loginMember!=null){
 			   }
 	}
 		);
+	
 	</script>
+	<script>
+		$(()=>{//자동실행함수
+			$("#searchType").change(e=>{
+				const type = $(e.target).val();
+				console.log(type);
+				$("#search-container>div[id!=search-]").hide();
+				$("#search-"+type).css("display","inline-block");
+			});
+			$("#searchType").change();
+			
+		})
+	
+	
+	</script>
+		
 
 
 <%@ include file="/views/common/footer.jsp" %>
