@@ -54,7 +54,7 @@
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 			 <div class="col">
 			 	<div class="card">
-			    <%-- <img src="./images/<%=sArr[0].getBranch_img()%>" class="card-img-top" alt="..."> --%>
+			    <!-- <img src="./images/<%=sArr[0].getBranch_img()%>" class="card-img-top" alt="..."> -->
 			    	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
 			        	<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[0].getStadium_num()%>"><%=sArr[0].getStadium_name() %></a></h5>
