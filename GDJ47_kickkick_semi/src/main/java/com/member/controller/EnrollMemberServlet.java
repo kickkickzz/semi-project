@@ -86,7 +86,7 @@ public class EnrollMemberServlet extends HttpServlet {
 			request.setAttribute("msg", "회원가입에 실패하였습니다!ㅠㅠ");
 			request.setAttribute("loc","/loginPage.do");
 		}
-		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/msg/enrollEnd.jsp").forward(request, response);
 	}
 
 	/**

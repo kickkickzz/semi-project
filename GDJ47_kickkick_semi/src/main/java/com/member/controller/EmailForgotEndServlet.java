@@ -34,12 +34,14 @@ public class EmailForgotEndServlet extends HttpServlet {
 		Member m = new MemberService().selectEmail(name,phone);
 		
 		String msg="", script="";
+		String email = null; 
 		if(m!=null) {
-			String email = m.getEmail();
+			email = m.getEmail();
 			System.out.println(email);
 			msg += "찾으실 이메일 : "+email;
 			script += "close()";
 		}else if(m==null){
+			email = "";
 			msg += "조회된 이메일이 없습니다.";
 			script += "close()";
 		}
@@ -60,6 +62,7 @@ public class EmailForgotEndServlet extends HttpServlet {
 //		}else {
 //			조회된결과가 없습니다.
 //		}
+		request.setAttribute("email", email);
 		request.setAttribute("msg", msg);
 		request.setAttribute("script", script);
 		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
