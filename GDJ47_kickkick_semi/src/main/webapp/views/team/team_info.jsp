@@ -9,7 +9,12 @@
 	ArrayList<TeamMemberInfo> teamEnterMember=(ArrayList<TeamMemberInfo>)request.getAttribute("teamEnterMember");
 	List<Team> matchlist = (List<Team>)request.getAttribute("matchlist");
 	ArrayList<Match> registnum= (ArrayList<Match>)request.getAttribute("registnum");
-	int rnum =registnum.get(0).getRegist_num();
+	int rnum =0;
+	if(registnum!=null){
+		rnum =registnum.get(0).getRegist_num();
+	}
+	
+	
 	
 
 %>
@@ -266,14 +271,10 @@
 								<td><%= mt.getTeam_gender() %></td>
 								<td><%= mt.getTeam_region() %></td>
 								<td><%= mt.getTeam_age()%></td>
-<<<<<<< HEAD
 								<td><input type="button" id="macBtn" class="macBtn" matchregistnum="<%=rnum%>" value="수락">
                         		<input type="button" id="mcaBtn" class="mcaBtn" matchregistnum="<%=rnum%>" value="취소"></td></tr>
                         
-=======
-								<td><input type="button" id="macBtn" class="macBtn" matchregistnum="rnum" value="수락">
-								<input type="button" id="mcaBtn" class="mcaBtn" matchregistnum="rnum" value="취소"></td></tr>
->>>>>>> branch 'kickkick' of https://github.com/kickkickzz/semi-project.git
+							
 								
 								
 							
