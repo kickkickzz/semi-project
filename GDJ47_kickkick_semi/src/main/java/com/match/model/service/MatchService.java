@@ -100,5 +100,11 @@ public class MatchService {
 		return result;
 		
 	}
+	public Team selectteamcode2(String teamcode){
+		Connection conn = getConnection();
+		Team result = dao.selectteamcode2(conn, teamcode);
+		close(conn);
+		return result;
+	}
 	
 }
