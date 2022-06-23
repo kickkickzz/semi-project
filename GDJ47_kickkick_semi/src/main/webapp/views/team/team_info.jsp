@@ -102,13 +102,7 @@
 				<br>
 				<hr>
 
-				<div class="wrap3">
-					<nav class="navy">
-						<div class="nav-item2" onclick="">팀원 정보</div>
-						<div class="nav-item2" onclick="">용병 지원</div>
-						<div class="nav-item2" onclick="">매칭 신청</div>
-					</nav>
-				</div>
+				
 
 				<div class="wrap4" id="wrap4">
 
@@ -300,7 +294,6 @@
 	
 	<!--BODY 끝.-->
 
-	<%-- <%@include file="../common/footer.jsp"%> --%>
 
 
 </body>
