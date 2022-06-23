@@ -58,6 +58,10 @@ $(()=>{
 	    $(".container").css("height","700px");
 	    $("#idcheck").show();
 	    $(".password").val("");
+	    $(".email").css("border-bottom","1px solid lightgray");
+	    $(".password").css("border-bottom","1px solid lightgray");
+	    $(".name").css("border-bottom","1px solid lightgray");
+	    $(".phone").css("border-bottom","1px solid lightgray");
 	    setTimeout(function(){
 	      $(".title").text("회원가입");
 	      $(".icons").show();
@@ -69,6 +73,7 @@ $(()=>{
 	      $(".birthday").show();
 	      $(".p-button").text("로그인하기");
 	      $(".b-button").attr("value","회원가입하기");
+	      $(".b-button").attr("onclick","return enroll();");
 	      $(".forgot").hide();
 	      $(".form").css("border-radius","10px 0px 0px 10px");
 	      $(".move").css("border-radius","0px 10px 10px 0px");
@@ -85,12 +90,19 @@ $(()=>{
 	    $(".icons").show();
 	    $(".email").val("");
 	    $(".password").val("");
+	    $(".email").css("border-bottom","1px solid lightgray");
 	    $(".hello").hide();
 	    $(".welcome").show();
 	    $("#idcheck").hide();
 	    $(".move").css("background-position", "left");
 	    $(".container").css("height","500px");
 	    setTimeout(function(){
+		  $("#x-mark").hide();
+		  $("#p-mark").hide();
+		  $("#n-mark").hide();
+		  $(".name").val("");
+		  $(".phone").val("");
+		  $("#ph-mark").hide();
 	      $(".title").text("로그인");
 	      $(".name").hide();
 	      $(".phone").hide();
@@ -99,6 +111,7 @@ $(()=>{
 	      $(".birthday").hide();
 	      $(".p-button").text("회원가입하기");
 	      $(".b-button").attr("value","로그인하기");
+	      $(".b-button").attr("onclick","return logincheck();");
 	      $(".forgot").show();
 	      $(".form").css("border-radius","0px 10px 10px 0px");
 	      $(".move").css("border-radius","10px 0px 0px 10px");
@@ -160,11 +173,12 @@ function sample6_execDaumPostcode() {
 function logincheck(){
 	//패스워드 입력 했는지 
 	if($(".email").val().length<1 | !($(".email").val().match("@"))){
-		$("#msg").text("이메일을 입력하세요.").css({"color":"red","font-size":"10px"});
 		return false;
 	}else if($(".password").val().length<1){
 		$(".login-error-msg").text("비밀번호를 입력하세요.").css({"color":"red","font-size":"10px"});
 		$("#msg").text("").css({"color":"red","font-size":"10px"});
+		$(".email").css("border-bottom","1px solid lightgray");
+	    $("#x-mark").hide();
 		return false;
 	}else{
 		return true;
@@ -175,18 +189,35 @@ function logincheck(){
 function enroll(){
 		//이메일 최소 길이 / @포함 여부
 		if(($(".email").val().trim()).length<2 || !($(".email").val().match("@"))){
-			$("#msg").text("이메일을 형식에 맞춰 입력하세요").css({"color":"red","font-size":"10px"});
+			$("#x-mark").show();
+			$(".email").css("border-bottom","1px solid red");
 			return false;
 		}else if(($(".password").val().trim()).length<2){
 			//비밀번호 조건 / 길이
-			$("#msg").text("");
-			$("#pwmsg").text("비밀번호를 입력하세요").css({"color":"red","font-size":"10px"});
+			$("#x-mark").hide();
+			$("#p-mark").show();
+			$(".email").css("border-bottom","1px solid lightgray");
+			$(".password").css("border-bottom","1px solid red");
 			return false;
-		}else if($(".name").val().trim().length<1){
+		}else if($(".name").val().trim().length<3){
 			//이름 조건 / 길이
-			$("#msg").text("");
-			$("#pwmsg").text("");
-			$("#namemsg").text("이름를 입력하세요").css({"color":"red","font-size":"10px"});
+			$("#x-mark").hide();
+			$("#p-mark").hide();
+			$("#n-mark").show();
+			$(".email").css("border-bottom","1px solid lightgray");
+			$(".password").css("border-bottom","1px solid lightgray");
+			$(".name").css("border-bottom","1px solid red");
+			return false;
+		}else if($(".phone").val().trim().length<8){
+			//전화번호 조건 / 길이
+			$("#x-mark").hide();
+			$("#p-mark").hide();
+			$("#n-mark").hide();
+			$("#ph-mark").show();
+			$(".email").css("border-bottom","1px solid lightgray");
+			$(".password").css("border-bottom","1px solid lightgray");
+			$(".name").css("border-bottom","1px solid lightgray");
+			$(".phone").css("border-bottom","1px solid red");
 			return false;
 		}else{
 			return true;

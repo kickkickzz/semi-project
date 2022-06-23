@@ -1,40 +1,33 @@
-package com.team.controller;
+package com.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.team.model.service.TeamService;
-
 /**
- * Servlet implementation class deleteTeammemberServlet
+ * Servlet implementation class ExtraPasswordServlet
  */
-@WebServlet("/deleteteammember.do")
-public class deleteTeammemberServlet extends HttpServlet {
+@WebServlet("/extraPassword.do")
+public class ExtraPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public deleteTeammemberServlet() {
+    public ExtraPasswordServlet() {
         super();
-        
+        // TODO Auto-generated constructor stub
     }
 
-
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("supporterEmail");
-//		String email =  "wow7@daum.net";//나중에 할떄는 이거 주석처리
-		int result = new TeamService().deleteTeammember(email);
-		System.out.println(result);
-		if(result>0) {
-			response.setContentType("application/json;charset=utf-8");
-			response.getWriter().print(result);
-		}
+		request.getRequestDispatcher("/views/member/extraPasswordUpdate.jsp").forward(request, response);
+		
 	}
 
 	/**
