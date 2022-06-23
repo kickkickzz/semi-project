@@ -62,6 +62,7 @@ public class EmailForgotEndServlet extends HttpServlet {
 //		}else {
 //			조회된결과가 없습니다.
 //		}
+		
 		request.setAttribute("email", email);
 		request.setAttribute("msg", msg);
 		request.setAttribute("script", script);
