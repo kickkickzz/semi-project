@@ -57,7 +57,7 @@ public class TeamMemberInfoServlet extends HttpServlet {
 		}
 		
 		
-		
+		request.setAttribute("registnum", matchlist);
 		request.setAttribute("teamMemberArr", teamMemberArr);
 		request.setAttribute("teamEnterMember", list);
 		request.setAttribute("matchlist", t);
