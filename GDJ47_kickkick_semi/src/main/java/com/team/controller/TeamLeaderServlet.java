@@ -35,6 +35,7 @@ public class TeamLeaderServlet extends HttpServlet {
 		String team_code = request.getParameter("teamcode");
 		String match_regist_num = request.getParameter("match_regist_num");
 		String type = request.getParameter("type");
+		System.out.println(match_regist_num+"zz");
 		
 		int result = 0;
 		if(type.equals("1")) { //추방
