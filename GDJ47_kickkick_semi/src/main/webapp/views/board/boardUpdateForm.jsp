@@ -8,7 +8,7 @@
 <!-- 정적파일 css, js -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/boardWriter.css">
 <!-- header을 호출 -->
-<%@include file="/views/common/header.jsp" %>
+<%@include file="/views/common/header.jsp"%>
 
 <body>
 

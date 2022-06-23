@@ -15,7 +15,6 @@ import java.util.Properties;
 import com.board.model.dao.BoardDao;
 import com.board.model.vo.Board;
 import com.board.model.vo.BoardAttachment;
-import com.board.model.vo.Board_re;
 import com.board.model.vo.PageInfo;
 
 
@@ -41,12 +40,12 @@ public class BoardService {
 	
 	public Board selectBoard(int bId) {
 		// bId에 해당하는 공지사항 게시글정보를 갖고온다.
-				Connection conn=getConnection();
-				
-				Board board=null;
-				board=new BoardDao().selectBoard(conn, bId);
-				close(conn);
-				return board;
+		Connection conn=getConnection();
+		
+		Board board=null;
+		board=new BoardDao().selectBoard(conn, bId);
+		close(conn);
+		return board;
 	}
 
 	public int deleteBoard(int fId, int bId) {

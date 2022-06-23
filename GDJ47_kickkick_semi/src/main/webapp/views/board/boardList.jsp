@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
- import="com.member.model.vo.*, com.board.model.vo.* , java.util.ArrayList"%>
+ import="com.member.model.vo.*, com.board.model.vo.* , java.util.ArrayList, java.util.List"%>
 <%
 	//로그인 하지 않아도 다 열람 가능
 	//작성 권한은 관리자만
-	
-	
 	
 	List<Board> boards=(List<Board>)request.getAttribute("boardLists");
 	//페이지 정보//
@@ -30,14 +28,14 @@
 				</div>
 				<!-- 공지작성은 관리자만 회원 유형 적용해서 권한부여 가능 loginMember.getType().equals("M")-->
 				<%
-				if(loginMember!=null&& loginMember.getType().equals("M")){ //회원유형으로 설정
+				//if(loginMember!=null&& loginMember.getType().equals("M")){ //회원유형으로 설정
 				%>
 				<div class="board_button_box">
 					<div></div>
 					<button type="button" class="btn btn-primary" id="insertBtn" onclick="location.assign('<%=request.getContextPath()%>/writeBoardForm.do')">등록하기</button>
 				</div>
 				<%
-				}
+				//}
 				%>
 				
 				<!-- 테이블 형식으로 구성 -->
@@ -55,7 +53,7 @@
 						<!-- 데이터 삽입-->
 						<%
 						if(!boards.isEmpty()){ 
-											for(Board b : boards){
+							for(Board b : boards){
 						%>
 							<tr>
 								<th scope="row">
@@ -78,10 +76,7 @@
 						<%} %>
 						</tbody>
 					</table>
-					<%-- <div id="pageBar">
-						<%=pageBar %>
-					</div> --%>
-					<!-- pagenation을 담는 컨테이너이다. -->
+				<!-- pagenation을 담는 컨테이너이다. -->
 				<div class="notice_pagenation">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">

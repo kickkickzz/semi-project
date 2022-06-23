@@ -16,7 +16,6 @@ import java.util.Properties;
 
 import com.board.model.vo.Board;
 import com.board.model.vo.BoardAttachment;
-import com.board.model.vo.Board_re;
 import com.board.model.vo.PageInfo;
 
 public class BoardDao {
@@ -176,7 +175,7 @@ public class BoardDao {
 		return board;
 	}
 
-	public int updateBoard(Connection conn, Board_re b, int bId) {
+	public int updateBoard(Connection conn, Board b, int bId) {
 		int result=0;
 		PreparedStatement pstmt=null;
 		String query=prop.getProperty("updateBoard");

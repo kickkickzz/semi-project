@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-	import="com.member.model.vo.*,com.board.model.vo.Board_re,java.util.ArrayList"%>
+	import="com.member.model.vo.*,com.board.model.vo.Board,java.util.ArrayList"%>
 <!-- 정적파일 css, js-->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/boardWriter.css">
 

@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-import com.board.model.service.BoardService;
-import com.board.model.vo.Board_re;
+import com.board.model.vo.Board;
 import com.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -52,7 +51,7 @@ public class UpdateBoardServlet extends HttpServlet {
 			//내용: content
 			String content=multiRequest.getParameter("content");
 			
-			Board_re board=new Board_re();
+			Board board=new Board();
 			board.setBoardNum(bId);
 			board.setBoardTitle(title);
 			board.setBoardContent(content);

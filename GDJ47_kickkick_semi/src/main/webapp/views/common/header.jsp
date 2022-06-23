@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.member.model.vo.Member, com.reservation.model.vo.Stadium, com.reservation.model.service.ReservationService" %> 
-<%@ page import="java.util.List,com.board.model.vo.Board_re,com.board.model.service.BoardService,com.team.model.vo.Team,com.team.model.service.TeamService" %>
+<%@ page import="java.util.List,com.board.model.vo.Board,com.board.model.service.BoardService,com.team.model.vo.Team,com.team.model.service.TeamService" %>
 
 <%
 Member loginMember = (Member)session.getAttribute("loginMember");
 	
-	List<Board_re> boardList = new BoardService().mainNotice();
-	Board_re[] bArr = new Board_re[4];
+	List<Board> boardList = new BoardService().mainNotice();
+	Board[] bArr = new Board[4];
 	for(int i=0; i< bArr.length; i++){
 		if(!(boardList.isEmpty())){
 	bArr[i]=boardList.get(i);

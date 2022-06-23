@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
     
 <%@ include file="/views/common/header.jsp" %>
-<%@ page import="java.util.List,com.board.model.vo.Board_re" %>
+<%@ page import="java.util.List,com.board.model.vo.Board" %>
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
@@ -51,98 +51,29 @@
 
 <!-- 구장 리스트 시작 -->
 	<div id="stadium-list">
+	
 		<div class="row row-cols-1 row-cols-md-3 g-4">
+			 <%for(int i=0;i<sArr.length;i++){
+			 	if(sArr[i]!=null) {%>
 			 <div class="col">
 			 	<div class="card">
-			    <!-- <img src="./images/<%=sArr[0].getBranch_img()%>" class="card-img-top" alt="..."> -->
+			    	<img src="./images/<%=sArr[i].getBranch_img()%>" class="card-img-top" alt="...">
 			    	<img src="./images/달월.jpg" class="card-img-top" alt="...">
 			      	<div class="card-body">
-			        	<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[0].getStadium_num()%>"><%=sArr[0].getStadium_name() %></a></h5>
+			        	<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[i].getStadium_num()%>"><%=sArr[i].getStadium_name() %></a></h5>
 			        	<ul class="card-body-list">
-							<li class="place-name"><b class="place">주소</b> <div class="sch-rslt txt2 card-line"><%=sArr[0].getBranch_address() %></div></li>
-							<li class="li-user"><b class="user">매치인원</b> <div class="div-user txt2 card-line"><%=sArr[0].getStadium_match_member() %></div></li>
-							<li class="li-date"><b class="date1">전화번호</b> <%=sArr[0].getBranch_phone() %></li>
-							<li class="li-date"><b class="date2">이용시간</b> <%=sArr[0].getStadium_reservation_start_time() %>:00~<%=sArr[0].getStadium_reservation_end_time() %>:00</li>
+							<li class="place-name"><b class="place">주소</b> <div class="sch-rslt txt2 card-line"><%=sArr[i].getBranch_address() %></div></li>
+							<li class="li-user"><b class="user">매치인원</b> <div class="div-user txt2 card-line"><%=sArr[i].getStadium_match_member() %></div></li>
+							<li class="li-date"><b class="date1">전화번호</b> <%=sArr[i].getBranch_phone() %></li>
+							<li class="li-date"><b class="date2">이용시간</b> <%=sArr[i].getStadium_reservation_start_time() %>:00~<%=sArr[i].getStadium_reservation_end_time() %>:00</li>
 						</ul>
 			      	</div>
 			    </div>
 			  </div>
-			  <div class="col">
-			  	<div class="card">
-			      	<%-- <img src="./images/<%=sArr[1].getBranch_img()%>" class="card-img-top" alt="..."> --%>
-			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
-			      	<div class="card-body">
-			        	<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[1].getStadium_num()%>"><%=sArr[1].getStadium_name() %></a></h5>
-			        	<ul class="card-body-list">
-							<li class="place-name"><b class="place">주소</b> <div class="sch-rslt txt2 card-line"><%=sArr[1].getBranch_address() %></div></li>
-							<li class="li-user"><b class="user">매치인원</b> <div class="div-user txt2 card-line"><%=sArr[1].getStadium_match_member() %></div></li>
-							<li class="li-date"><b class="date1">전화번호</b> <%=sArr[1].getBranch_phone() %></li>
-							<li class="li-date"><b class="date2">이용시간</b> <%=sArr[1].getStadium_reservation_start_time() %>:00~<%=sArr[1].getStadium_reservation_end_time() %>:00</li>
-						</ul>
-			      	</div>
-			    </div>
-			  </div>
-			  <div class="col">
-			    <div class="card">
-			      	<%-- <img src="./images/<%=sArr[2].getBranch_img()%>" class="card-img-top" alt="..."> --%>
-			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
-			      	<div class="card-body">
-			        	<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[2].getStadium_num()%>"><%=sArr[2].getStadium_name() %></a></h5>
-			        	<ul class="card-body-list">
-							<li class="place-name"><b class="place">주소</b> <div class="sch-rslt txt2 card-line"><%=sArr[2].getBranch_address() %></div></li>
-							<li class="li-user"><b class="user">매치인원</b> <div class="div-user txt2 card-line"><%=sArr[2].getStadium_match_member() %></div></li>
-							<li class="li-date"><b class="date1">전화번호</b> <%=sArr[2].getBranch_phone() %></li>
-							<li class="li-date"><b class="date2">이용시간</b> <%=sArr[2].getStadium_reservation_start_time() %>:00~<%=sArr[2].getStadium_reservation_end_time() %>:00</li>
-						</ul>
-			      </div>
-			    </div>
-			  </div>
-			  <div class="col">
-			    <div class="card">
-			      	<%-- <img src="./images/<%=sArr[3].getBranch_img()%>" class="card-img-top" alt="..."> --%>
-			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
-			      	<div class="card-body">
-			       		<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[3].getStadium_num()%>"><%=sArr[3].getStadium_name() %></a></h5>
-			        	<ul class="card-body-list">
-							<li class="place-name"><b class="place">주소</b> <div class="sch-rslt txt2 card-line"><%=sArr[3].getBranch_address() %></div></li>
-							<li class="li-user"><b class="user">매치인원</b> <div class="div-user txt2 card-line"><%=sArr[3].getStadium_match_member() %></div></li>
-							<li class="li-date"><b class="date1">전화번호</b> <%=sArr[3].getBranch_phone() %></li>
-							<li class="li-date"><b class="date2">이용시간</b> <%=sArr[3].getStadium_reservation_start_time() %>:00~<%=sArr[3].getStadium_reservation_end_time() %>:00</li>
-						</ul>
-			      	</div>
-			    </div>
-			  </div>
-			  <div class="col">
-			    <div class="card">
-			      	<%-- <img src="./images/<%=sArr[4].getBranch_img()%>" class="card-img-top" alt="..."> --%>
-			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
-			      	<div class="card-body">
-			       		<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[4].getStadium_num()%>"><%=sArr[4].getStadium_name() %></a></h5>
-			        	<ul class="card-body-list">
-							<li class="place-name"><b class="place">주소</b> <div class="sch-rslt txt2 card-line"><%=sArr[4].getBranch_address() %></div></li>
-							<li class="li-user"><b class="user">매치인원</b> <div class="div-user txt2 card-line"><%=sArr[4].getStadium_match_member() %></div></li>
-							<li class="li-date"><b class="date1">전화번호</b> <%=sArr[4].getBranch_phone() %></li>
-							<li class="li-date"><b class="date2">이용시간</b> <%=sArr[4].getStadium_reservation_start_time() %>:00~<%=sArr[4].getStadium_reservation_end_time() %>:00</li>
-						</ul>
-			      	</div>
-			    </div>
-			  </div>
-			  <div class="col">
-			    <div class="card">
-			      	<%-- <img src="./images/<%=sArr[5].getBranch_img()%>" class="card-img-top" alt="..."> --%>
-			      	<img src="./images/달월.jpg" class="card-img-top" alt="...">
-			      	<div class="card-body">
-			       		<h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[5].getStadium_num()%>"><%=sArr[5].getStadium_name() %></a></h5>
-			        	<ul class="card-body-list">
-							<li class="place-name"><b class="place">주소</b> <div class="sch-rslt txt2 card-line"><%=sArr[5].getBranch_address() %></div></li>
-							<li class="li-user"><b class="user">매치인원</b> <div class="div-user txt2 card-line"><%=sArr[5].getStadium_match_member() %></div></li>
-							<li class="li-date"><b class="date1">전화번호</b> <%=sArr[5].getBranch_phone() %></li>
-							<li class="li-date"><b class="date2">이용시간</b> <%=sArr[5].getStadium_reservation_start_time() %>:00~<%=sArr[5].getStadium_reservation_end_time() %>:00</li>
-						</ul>
-			      	</div>
-			    </div>
-			  </div>
-		</div>
+			   <%}
+			 } %>
+
+ 		</div>
 	</div>
 <!-- 구장 리스트 끝 -->
 	
@@ -159,54 +90,23 @@
 						<dt>제목</dt>
 						<dt>등록날짜</dt>
 					</dl>
+					<% for(int i=0;i<bArr.length;i++){
+						if(bArr[i]!=null){%>
 					<div class="notice-list-item">
-						<a href="<%=request.getContextPath()%>/detailBoard.do?bId=<%=bArr[0].getBoardNum()%>">
+						<a href="<%=request.getContextPath()%>/detailBoard.do?bId=<%=bArr[i].getBoardNum()%>">
 							<dl>
 								<dt>
-									<%=bArr[0].getBoardTitle() %>
+									<%=bArr[i].getBoardTitle() %>
 								</dt>
 								<dd>
-									<%=bArr[0].getBoardDate() %>
+									<%=bArr[i].getBoardDate() %>
 								</dd>
 							</dl>
 						</a>
 					</div>
-					<div class="notice-list-item">
-						<a href="<%=request.getContextPath()%>/detailBoard.do?bId=<%=bArr[1].getBoardNum()%>">
-							<dl>
-								<dt>
-									<%=bArr[1].getBoardTitle() %>
-								</dt>
-								<dd>
-									<%=bArr[1].getBoardDate() %>
-								</dd>
-							</dl>
-						</a>
-					</div>
-					<div class="notice-list-item">
-						<a href="<%=request.getContextPath()%>/detailBoard.do?bId=<%=bArr[2].getBoardNum()%>">
-							<dl>
-								<dt>
-									<%=bArr[2].getBoardTitle() %>
-								</dt>
-								<dd>
-									<%=bArr[2].getBoardDate() %>
-								</dd>
-							</dl>
-						</a>
-					</div>
-					<div class="notice-list-item">
-						<a href="<%=request.getContextPath()%>/detailBoard.do?bId=<%=bArr[3].getBoardNum()%>">
-							<dl>
-								<dt>
-									<%=bArr[3].getBoardTitle() %>
-								</dt>
-								<dd>
-									<%=bArr[3].getBoardDate() %>
-								</dd>
-							</dl>
-						</a>
-					</div>
+					<%}
+					} %>
+					
 			</div>
 		</div>
 		<div class="main-sc9-review" style="margin-right:100px;">
@@ -215,7 +115,10 @@
 				팀 정보!
 			</div>
 			<div class="main-notice-list">
+			<%for(int i=0;i<tArr.length;i++){
+				if(tArr[i]!=null){%>
 					<div class="notice-list-item">
+				    <%if(i==0){ %>
 							<dl id="team-list-name">
 								<dd>팀로고</dd>
 								<dd>팀이름</dd>
@@ -223,105 +126,33 @@
 								<dd>활동지역</dd>
 								<dd>팀성별</dd>
 							</dl>
-						<a href="<%=request.getContextPath()%>/team/teamMemberInfo.do?team_code=<%=tArr[0].getTeam_code()%>">
+						<%} %>
+						<a href="<%=request.getContextPath()%>/team/teamMemberInfo.do?team_code=<%=tArr[i].getTeam_code()%>">
 							<dl>
 								<dd>
-									<%if(tArr[0].getTeam_mark_img()!=null){ %>
-										<img id="main-team-logo" src="./images/팀로고/<%=tArr[0].getTeam_mark_img() %>">
+									<%if(tArr[i].getTeam_mark_img()!=null){ %>
+										<img id="main-team-logo" src="./images/팀로고/<%=tArr[i].getTeam_mark_img() %>">
 									<%}else{ %>
 										<img src="./images/세미로고.png">
 									<%} %>
 								</dd>
 								<dd>
-									<%=tArr[0].getTeam_name() %>
+									<%=tArr[i].getTeam_name() %>
 								</dd>
 								<dd>
-									<%=tArr[0].getTeam_age()%>
+									<%=tArr[i].getTeam_age()%>
 								</dd>
 								<dd>
-									<%=tArr[0].getTeam_region() %>
+									<%=tArr[i].getTeam_region() %>
 								</dd>
 								<dd>
-									<%=tArr[0].getTeam_gender() %>
+									<%=tArr[i].getTeam_gender() %>
 								</dd>
 							</dl>
 						</a>
 					</div>
-					<div class="notice-list-item">
-						<a href="<%=request.getContextPath()%>/team/teamMemberInfo.do?team_code=<%=tArr[1].getTeam_code()%>">
-							<dl>
-								<dd>
-									<%if(tArr[1].getTeam_mark_img()!=null){ %>
-										<img id="main-team-logo" src="./images/팀로고/<%=tArr[1].getTeam_mark_img() %>">
-									<%}else{ %>
-										<img src="./images/세미로고.png">
-									<%} %>
-								</dd>
-								<dd>
-									<%=tArr[1].getTeam_name() %>
-								</dd>
-								<dd>
-									<%=tArr[1].getTeam_age()%>
-								</dd>
-								<dd>
-									<%=tArr[1].getTeam_region() %>
-								</dd>
-								<dd>
-									<%=tArr[1].getTeam_gender() %>
-								</dd>
-							</dl>
-						</a>
-					</div>
-					<div class="notice-list-item">
-					<a href="<%=request.getContextPath()%>/team/teamMemberInfo.do?team_code=<%=tArr[2].getTeam_code()%>">
-							<dl>
-								<dd>
-									<%if(tArr[2].getTeam_mark_img()!=null){ %>
-										<img id="main-team-logo" src="./images/팀로고/<%=tArr[2].getTeam_mark_img() %>">
-									<%}else{ %>
-										<img src="./images/세미로고.png">
-									<%} %>
-								</dd>
-								<dd>
-									<%=tArr[2].getTeam_name() %>
-								</dd>
-								<dd>
-									<%=tArr[2].getTeam_age()%>
-								</dd>
-								<dd>
-									<%=tArr[2].getTeam_region() %>
-								</dd>
-								<dd>
-									<%=tArr[2].getTeam_gender() %>
-								</dd>
-							</dl>
-						</a>
-					</div>
-					<div class="notice-list-item">
-						<a href="<%=request.getContextPath()%>/team/teamMemberInfo.do?team_code=<%=tArr[3].getTeam_code()%>">
-							<dl>
-								<dd>
-									<%if(tArr[3].getTeam_mark_img()!=null){ %>
-										<img id="main-team-logo" src="./images/팀로고/<%=tArr[3].getTeam_mark_img() %>">
-									<%}else{ %>
-										<img src="./images/세미로고.png">
-									<%} %>
-								</dd>
-								<dd>
-									<%=tArr[3].getTeam_name() %>
-								</dd>
-								<dd>
-									<%=tArr[3].getTeam_age()%>
-								</dd>
-								<dd>
-									<%=tArr[3].getTeam_region() %>
-								</dd>
-								<dd>
-									<%=tArr[3].getTeam_gender() %>
-								</dd>
-							</dl>
-						</a>
-					</div>
+					<%}
+					} %>
 			</div>
 		</div>
 </section>
