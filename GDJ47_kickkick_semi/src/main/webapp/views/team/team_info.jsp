@@ -275,9 +275,9 @@
 								<td><%= mt.getBranch_address() %></td>
 								<td><%= mt.getStadium_name() %></td>
 								<td><%= mt.getStadium_match_member() %></td>
-								<td><%= mt.getReservation_usage_start_time() %></td>
-								<td><%= mt.getReservation_usage_end_time() %></td>
+								<td><%= mt.getReservation_usage_start_time() %>:00-<%= mt.getReservation_usage_end_time() %>:00</td>
 								<td><%= mt.getReservation_usage_start_date() %></td>
+								<td><%= mt.getTeam_name()%></td>
 								
 								
 							</tr>

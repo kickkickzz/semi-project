@@ -44,6 +44,12 @@ public class MatchSearchServlet extends HttpServlet {
 		if(type.equals("team")) {
 			type="team_name";
 		}
+		if(type.equals("age")) {
+			type="team_age";
+		}
+		if(type.equals("member")) {
+			type="stadium_match_member";
+		}
 		System.out.println(type);
 		System.out.println(keyword);
 		

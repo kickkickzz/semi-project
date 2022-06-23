@@ -253,6 +253,12 @@ public class MatchDao {
 		sql=sql.replace("$COL", type);
 		try {
 			pstmt=conn.prepareStatement(sql);
+			if(type.equals("team_age")) {
+				pstmt.setString(1,keyword);
+			}
+			if(type.equals("stadium_match_member")) {
+				pstmt.setString(1,keyword);
+			}
 			if(type.equals("team_gender")) {
 				pstmt.setString(1,keyword);
 			}else {
