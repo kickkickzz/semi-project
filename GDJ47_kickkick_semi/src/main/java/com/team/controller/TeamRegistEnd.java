@@ -46,8 +46,8 @@ public class TeamRegistEnd extends HttpServlet {
 		 String userId = ((Member)request.getSession().getAttribute("loginMember")).getEmail();
 		 
 	      String root = request.getSession().getServletContext().getRealPath("/");
-	      //String savePath = root + "resources/storage/"+userId+"/team_img/";
-	      String savePath= "D:/projectfiles/"+userId+"/team_img";
+	      String savePath = root + "resources/storage/"+userId+"/team_img/";
+	      //String savePath= "D:/projectfiles/"+userId+"/team_img";
 	    
 	      File f = new File(savePath);
 	      if(!f.exists()) {

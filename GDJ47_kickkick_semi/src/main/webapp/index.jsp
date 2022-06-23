@@ -78,7 +78,7 @@
    
 
 <!-- 공지사항 목록 -->
-<section class="notice-container" style="padding-left : 100px;">
+<section class="notice-container" >
    <div class="main-sc9-notice">
          <div class="main-sc9-tit">
             <img id="megaphone" src="https://cdn-icons-png.flaticon.com/512/214/214347.png">
@@ -157,3 +157,5 @@
 <!-- 공지사항 목록 끝 -->
 
 </section>
+<%@ include file="/views/common/footer.jsp" %>
+>>>>>>> branch 'kickkick' of https://github.com/kickkickzz/semi-project.git
