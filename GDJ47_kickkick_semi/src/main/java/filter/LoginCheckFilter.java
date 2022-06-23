@@ -47,7 +47,7 @@ public class LoginCheckFilter extends HttpFilter implements Filter {
 			// pass the request along the filter chain
 			request.setAttribute("msg", "로그인 후 이용 가능합니다.");
 			request.setAttribute("loc", "/");
-			request.getRequestDispatcher("/views/msg/msg.jsp")
+			request.getRequestDispatcher("/views/msg/filtermsg.jsp")
 			.forward(request, response);
 		}else {
 				chain.doFilter(request, response);

@@ -10,7 +10,7 @@
 	List<Team> matchlist = (List<Team>)request.getAttribute("matchlist");
 	ArrayList<Match> registnum= (ArrayList<Match>)request.getAttribute("registnum");
 	int rnum =0;
-	if(registnum!=null){
+	if(!(registnum.isEmpty())){
 		rnum =registnum.get(0).getRegist_num();
 	}
 	
