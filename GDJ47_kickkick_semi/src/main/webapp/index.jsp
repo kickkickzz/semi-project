@@ -216,8 +216,8 @@
 			</div>
 			<div class="main-notice-list">
 					<div class="notice-list-item">
-							<dl id="team-list-name" style="margin-top:0px; margin-bottom:0px;">
-								<dd>팀마크</dd>
+							<dl id="team-list-name">
+								<dd>팀로고</dd>
 								<dd>팀이름</dd>
 								<dd>팀연령</dd>
 								<dd>활동지역</dd>
@@ -227,7 +227,7 @@
 							<dl>
 								<dd>
 									<%if(tArr[0].getTeam_mark_img()!=null){ %>
-										<img src="./images/<%=tArr[0].getTeam_mark_img() %>">
+										<img id="main-team-logo" src="./images/팀로고/<%=tArr[0].getTeam_mark_img() %>">
 									<%}else{ %>
 										<img src="./images/세미로고.png">
 									<%} %>
@@ -252,7 +252,7 @@
 							<dl>
 								<dd>
 									<%if(tArr[1].getTeam_mark_img()!=null){ %>
-										<img src="./images/<%=tArr[1].getTeam_mark_img() %>">
+										<img id="main-team-logo" src="./images/팀로고/<%=tArr[1].getTeam_mark_img() %>">
 									<%}else{ %>
 										<img src="./images/세미로고.png">
 									<%} %>
@@ -277,7 +277,7 @@
 							<dl>
 								<dd>
 									<%if(tArr[2].getTeam_mark_img()!=null){ %>
-										<img src="./images/<%=tArr[2].getTeam_mark_img() %>">
+										<img id="main-team-logo" src="./images/팀로고/<%=tArr[2].getTeam_mark_img() %>">
 									<%}else{ %>
 										<img src="./images/세미로고.png">
 									<%} %>
@@ -302,7 +302,7 @@
 							<dl>
 								<dd>
 									<%if(tArr[3].getTeam_mark_img()!=null){ %>
-										<img src="./images/<%=tArr[3].getTeam_mark_img() %>">
+										<img id="main-team-logo" src="./images/팀로고/<%=tArr[3].getTeam_mark_img() %>">
 									<%}else{ %>
 										<img src="./images/세미로고.png">
 									<%} %>

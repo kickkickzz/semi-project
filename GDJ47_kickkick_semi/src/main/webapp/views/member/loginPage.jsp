@@ -34,13 +34,17 @@
            </div>
            <div class="form">
                 <h4 class="bold title">로그인</h4>
-                <input type="email" placeholder="이메일" class="normal email" id="ema" value=""><input type="button" id="idcheck" value="이메일인증" onclick="fn_emailDuplicate();"><br>
+               	<input type="email" placeholder="이메일" class="normal email" id="ema" value="">
+               	<i id="x-mark" class="fa-solid fa-x"></i>
+                <input type="button" id="idcheck" value="이메일인증" onclick="fn_emailDuplicate();"><br>
                 <div id="msg"></div>
-                <input type="password" placeholder="비밀번호" class="normal password" onkeyup="javascript:enterkey();"><br>
+	            <input type="password" placeholder="비밀번호" class="normal password" onkeyup="javascript:enterkey();">
+	            <i id="p-mark" class="fa-solid fa-x"></i><br>
                 <div class="login-error-msg"><%=msg!=null?msg:"" %></div>
-                <input type="text" placeholder="이름" class="normal name"><br>
-                
-                <input type="tel" placeholder="전화번호" class="normal phone"><br>
+                <input type="text" placeholder="이름" class="normal name">
+                <i id="n-mark" class="fa-solid fa-x"></i><br>
+                <input type="tel" placeholder="전화번호" class="normal phone">
+				<i id="ph-mark" class="fa-solid fa-x"></i><br>
                 <input type="date" placeholder="생년월일" class="normal birthday"><br>
                 
                 <input type="text" id="sample6_postcode" placeholder="우편번호" class="address" style="margin-bottom : 3px;">
@@ -89,11 +93,11 @@ function fn_emailDuplicate(){
     emailDuplicate.submit();
 }
 function fn_passwordForgot(){
-	   open("<%=request.getContextPath()%>/passwordForgot.do?","_blank","width=400, height=210 ,left=500, top=200");
+	   open("<%=request.getContextPath()%>/passwordForgot.do?","_blank","width=450, height=400 ,left=700, top=300");
 	}
 
 function fn_emailForgot(){
-	open("<%=request.getContextPath()%>/emailForgot.do?","_blank","width=400, height=210 ,left=500, top=200");
+	open("<%=request.getContextPath()%>/emailForgot.do?","_blank","width=400, height=450 ,left=700, top=300");
 }
 </script>
 <%-- <%@ include file="/views/common/footer.jsp" %> --%>

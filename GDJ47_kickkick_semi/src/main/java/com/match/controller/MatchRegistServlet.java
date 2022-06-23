@@ -62,7 +62,7 @@ public class MatchRegistServlet extends HttpServlet {
 				}
 				
 			}else {//
-				
+				result=4;
 			}
 		}else { // 팀없음
 			result =0;

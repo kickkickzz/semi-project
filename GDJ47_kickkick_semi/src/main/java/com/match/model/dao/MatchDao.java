@@ -311,4 +311,25 @@ public class MatchDao {
 			close(pstmt);
 		}return result;
 	}
+	public Team selectteamcode2(Connection conn,String teamcode){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Team result = null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectteamcode2"));
+			pstmt.setString(1, teamcode);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result= Team.builder().team_name(rs.getString("team_name")).team_gender(rs.getString("team_gender"))
+						.team_age(rs.getString("team_age")).team_region(rs.getString("team_region")).build();
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
 }

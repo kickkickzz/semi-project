@@ -41,7 +41,6 @@ public class PasswordForgotEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
-		String phone = request.getParameter("phone");
 		String name = request.getParameter("name");
 //		System.out.println(email);
 //		System.out.println(phone);
@@ -55,6 +54,10 @@ public class PasswordForgotEndServlet extends HttpServlet {
 		if(m==null) {
 			msg+="정보와 일치하는 이메일이 없습니다.";
 			loc+="/passwordForgot.do";
+			script = "close();";
+			email = "";
+			request.setAttribute("email", email);
+			request.setAttribute("script", script);
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 			request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
@@ -127,27 +130,6 @@ public class PasswordForgotEndServlet extends HttpServlet {
 	        request.setAttribute("email", email);
 	        request.getRequestDispatcher("/views/msg/message.jsp").forward(request, response);
 		}
-
-//		if(m!=null) { //이메일과 전화번호 이름에 해당하는 멤버 찾으면 임시비밀번호 생성하고
-//			System.out.println(ranPassword);
-//			String ranPassword = new RandomPassword().getRamdomPassword(10);
-//			int result = new MemberService().randomPassword(email,ranPassword); //생성한 임시비밀번호로 업데이트 한다.
-//			if(result>0) { //임시비밀번호로 업데이트 완료되면
-//				msg += "임시 비밀번호 : "+ranPassword;
-//				script +="close()";
-//			}else { //임시비밀번호로 업데이트 실패하면
-//				msg += "임시비밀번호 발급 실패";
-//				loc += "/passwordForgot.do";
-//			}
-//		}else {
-//			msg += "임시비밀번호 발급 실패패";
-//			loc += "/passwordForgot.do";
-//		}
-//		
-//		request.setAttribute("msg", msg);
-//		request.setAttribute("loc", loc);
-//		request.setAttribute("script", script);
-//		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
 	}
 
 	/**

@@ -660,9 +660,7 @@ public class TeamDao {
 			list=new ArrayList<Match>();
 			while (rs.next()) {
 				
-				m=Match.builder().team_name(rs.getString("team_name")).team_gender(rs.getString("team_gender"))
-						.team_region(rs.getString("team_region")).team_age(rs.getString("team_age")).build();
-				
+				m=Match.builder().team_code(rs.getString("match_team")).regist_num(rs.getInt("match_regist_num")).build();
 				list.add(m);
 			}
 			

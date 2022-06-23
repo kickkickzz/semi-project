@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.match.model.service.MatchService;
 import com.match.model.vo.Match;
 import com.team.model.service.TeamService;
 import com.team.model.vo.Team;
@@ -49,11 +50,17 @@ public class TeamMemberInfoServlet extends HttpServlet {
 		ArrayList<TeamMemberInfo> teamMemberArr = new TeamService().selectTeamMemberList(team_code);
 		ArrayList<TeamMemberInfo> list = new TeamService().selectTeamApplication(team_code);
 		ArrayList<Match> matchlist=new TeamService().selectMatch(team_code);
-		System.out.println(matchlist.get(1).getTeam_age());
+		List<Team> t = new ArrayList<Team>();
+		for(Match m : matchlist) {
+			Team  t2= new MatchService().selectteamcode2(m.getTeam_code());
+			t.add(t2);
+		}
 		
+		
+		request.setAttribute("registnum", matchlist);
 		request.setAttribute("teamMemberArr", teamMemberArr);
 		request.setAttribute("teamEnterMember", list);
-		request.setAttribute("matchlist", matchlist);
+		request.setAttribute("matchlist", t);
 		
 		RequestDispatcher view = request.getRequestDispatcher("/views/team/team_info.jsp");
 		

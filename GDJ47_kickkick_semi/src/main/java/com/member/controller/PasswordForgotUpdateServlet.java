@@ -50,6 +50,7 @@ public class PasswordForgotUpdateServlet extends HttpServlet {
         	if(result>0) {
         		msg +="임시비밀번호로 변경되었습니다.";
         		String script = "close()";
+        		request.setAttribute("email", email);
         		request.setAttribute("msg", msg);
         		request.setAttribute("script", script);
         		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
