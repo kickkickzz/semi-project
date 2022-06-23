@@ -590,9 +590,9 @@ public class TeamDao {
 		String query = prop.getProperty("teamMatchAccept");
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, winlose);
-			pstmt.setString(2, match_regist_num);
-			pstmt.setString(3, team_code);
+			/* pstmt.setString(1, winlose); */
+			pstmt.setString(1, match_regist_num);
+			pstmt.setString(2, team_code);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

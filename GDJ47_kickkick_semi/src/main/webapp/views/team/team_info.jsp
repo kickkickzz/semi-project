@@ -271,8 +271,8 @@
 								<td><%= mt.getTeam_gender() %></td>
 								<td><%= mt.getTeam_region() %></td>
 								<td><%= mt.getTeam_age()%></td>
-								<td><input type="button" id="macBtn" class="macBtn" matchregistnum="<%=rnum%>" value="수락">
-                        		<input type="button" id="mcaBtn" class="mcaBtn" matchregistnum="<%=rnum%>" value="취소"></td></tr>
+								<td><input type="button" id="macBtn" class="macBtn" teamcode="<%=mt.getTeam_code() %>" matchregistnum="<%=rnum%>" value="수락">
+                        		<input type="button" id="mcaBtn" class="mcaBtn"  teamcode="<%=mt.getTeam_code() %>" matchregistnum="<%=rnum%>" value="취소"></td></tr>
                         
 							
 								
@@ -309,6 +309,8 @@
 	   var id = $(this).attr('id');
 	   var team_code = '<%= teamInfo.getTeam_code()%>';
 	   var type = '';
+	   const oriteam='<%=request.getParameter("team_code")%>';
+	   console.log("oriteam : "+oriteam);
 	   console.log(supporter);
 	   console.log(id);
 	   console.log(team_code);
@@ -379,7 +381,12 @@
 			   if (confirm("매치수락하시겠습니까?") == true){
 				   $.ajax({
 						 url: '<%=request.getContextPath()%>/team/leader.do',
-						 data: {match_regist_num:matchregistnum, team_code:teamcode, teamcode:team_code, type:type},
+						 data: {match_regist_num:matchregistnum, 
+							 team_code:team_code,
+							 teamcode:teamcode,
+							 type:type,
+							 oriteam:oriteam
+							 },
 						 success: function(data) {
 							 console.log(data);
 							 
@@ -402,7 +409,11 @@
 			   if (confirm("매치취소하시겠습니까?") == true){
 				   $.ajax({
 						 url: '<%=request.getContextPath()%>/team/leader.do',
-						 data: {match_regist_num:matchregistnum, team_code:teamcode, teamcode:team_code, type:type},
+						 data: {match_regist_num:matchregistnum,
+							 team_code:team_code,
+							 teamcode:teamcode,
+							 oriteam:oriteam,
+							 type:type},
 						 success: function(data) {
 							 console.log(data);
 							 
@@ -447,7 +458,7 @@
 							   
 						   } else {
 							   $.ajax({
-								   url : 'https://61.78.121.242:9999/GDJ47_kickkick_semi/teamMemberRegist.do',
+								   url : '<%=request.getContextPath()%>/teamMemberRegist.do',
 								   data : {
 									   userId : userId,
 									   position : position,
