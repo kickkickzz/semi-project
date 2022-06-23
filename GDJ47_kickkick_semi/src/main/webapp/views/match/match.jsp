@@ -135,6 +135,33 @@ if(loginMember!=null){
         			<button type="submit" class='simple'>검색</button>
         		</form>
         	</div>
+        	<div id="search-age" style="border:3px solid #ccc;height:55">
+        		<form action="<%=request.getContextPath()%>/matchsearch.do">
+        			
+        			<input type="hidden" name="searchType" value="age">
+        			<label><input type="radio" name="searchKeyword" value="10대" >10대</label>
+        			<label><input type="radio" name="searchKeyword" value="20대" >20대</label>
+        			<label><input type="radio" name="searchKeyword" value="30대" >30대</label>
+        			<label><input type="radio" name="searchKeyword" value="40대" >40대</label>
+        			<label><input type="radio" name="searchKeyword" value="50대" >50대</label>
+        			
+        			<button type="submit" class='simple'>검색</button>
+        		</form>
+        	</div>
+        	<div id="search-member" style="border:3px solid #ccc;height:55">
+        		<form action="<%=request.getContextPath()%>/matchsearch.do">
+        			
+        			<input type="hidden" name="searchType" value="member">
+        			<label><input type="radio" name="searchKeyword" value="3vs3" >3vs3</label>
+        			<label><input type="radio" name="searchKeyword" value="4vs4" >4vs4</label>
+        			<label><input type="radio" name="searchKeyword" value="5vs5" >5vs5</label>
+        			<label><input type="radio" name="searchKeyword" value="6vs6" >6vs6</label>
+        			<label><input type="radio" name="searchKeyword" value="7vs7" >7vs7</label>
+        			<label><input type="radio" name="searchKeyword" value="8vs8" >8vs8</label>
+        			
+        			<button type="submit" class='simple'>검색</button>
+        		</form>
+        	</div>
         	
 		</div>
 		

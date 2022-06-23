@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.match.model.vo.Match;
 import com.member.model.vo.Member;
 import com.team.model.vo.Team;
 import com.team.model.vo.TeamMember;
@@ -539,10 +540,204 @@ public class TeamDao {
 	}
 	
 	
+	public int teamMatchStatusCheck(Connection conn, String match_regist_num) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String query = prop.getProperty("teamMatchStatusCheck");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, match_regist_num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return result;
+	}
+	
+	
+	public int teamMatchAcStatus(Connection conn, String match_regist_num, String team_code) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("teamMatchAcStatus");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, match_regist_num);
+			pstmt.setString(2, team_code);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
+
+
+	public int teamMatchAccept(Connection conn, String match_regist_num, String team_code, String winlose) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("teamMatchAccept");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, winlose);
+			pstmt.setString(2, match_regist_num);
+			pstmt.setString(3, team_code);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+
+	public int teamMatchCaStatus(Connection conn, String match_regist_num, String team_code) {
+		PreparedStatement pstmt = null;
+
+		int result = 0;
+
+		String query = prop.getProperty("teamMatchCaStatus");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, match_regist_num);
+			pstmt.setString(2, team_code);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int teamMatchCancel(Connection conn, String match_regist_num, String team_code) {
+		PreparedStatement pstmt = null;
+
+		int result = 0;
+
+		String query = prop.getProperty("teamMatchCancel");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, match_regist_num);
+			pstmt.setString(2, team_code);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
+	public ArrayList<Match> selectMatch(Connection conn, String team_code) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<Match> list=null;
+		Match m = null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMatch"));
+			pstmt.setString(1, team_code);
+			rs=pstmt.executeQuery();
+			list=new ArrayList<Match>();
+			while (rs.next()) {
+				
+			
+				m = (TeamDao.getMatch(rs));
+				list.add(m);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		return list;
+	}
 	
 	
 	
 	
+	public static Match getMatch(ResultSet rs) {
+		Match m=null;
+		try {
+			m=Match.builder()
+					.regist_num(rs.getInt("regist_num"))
+					.regist_team(rs.getString("regist_team"))
+					.regist_reservation_code(rs.getString("regist_reservation_code"))
+					.regist_status(rs.getString("regist_status"))
+					.regist_branch_num(rs.getString("regist_branch_num"))
+					.regist_stadium_num(rs.getInt("regist_stadium_num"))
+					.team_code(rs.getString("team_code"))
+					.team_leader(rs.getString("team_leader"))
+					.team_num(rs.getInt("team_num"))
+					.team_name(rs.getString("team_name"))
+					.team_gender(rs.getString("team_gender"))
+					.team_age(rs.getString("team_age"))
+					.team_region(rs.getString("team_region"))		
+					.team_point(rs.getInt("team_point"))																		
+					.team_mark_img(rs.getString("team_mark_img"))
+					.team_active_lastday(rs.getDate("team_active_lastday"))
+					.team_delete_status(rs.getString("team_delete_status"))
+					.reservation_code(rs.getString("reservation_code"))
+					.reservation_email(rs.getString("reservation_email"))
+					.reservation_branch_num(rs.getString("reservation_branch_num"))
+					.reservation_stadium_num(rs.getInt("reservation_stadium_num"))
+					.reservation_num(rs.getInt("reservation_num"))
+					.reservation_price(rs.getInt("reservation_price"))
+					.reservation_usage_start_time(rs.getInt("reservation_usage_start_time"))
+					.reservation_usage_time(rs.getInt("reservation_usage_time"))
+					.reservation_usage_end_time(rs.getInt("reservation_usage_end_time"))
+					
+					.reservation_status(rs.getString("reservation_status"))
+					.branch_num(rs.getString("branch_num"))
+					.branch_manager_email(rs.getString("branch_manager_email"))
+					.branch_address(rs.getString("branch_address"))
+					.branch_phone(rs.getString("branch_phone"))
+					.branch_img(rs.getString("branch_img"))
+					.branch_website(rs.getString("branch_website"))
+					.branch_point(rs.getInt("branch_point"))
+					.branch_option_shower(rs.getString("branch_option_shower"))
+					.branch_option_park(rs.getString("branch_option_park"))
+					.branch_option_uniform(rs.getString("branch_option_uniform"))
+					.branch_option_shoes(rs.getString("branch_option_shoes"))
+					.branch_option_ball(rs.getString("branch_option_ball"))
+					.branch_option_inout(rs.getString("branch_option_inout"))
+					.branch_delete_status(rs.getString("branch_delete_status"))
+					.stadium_num(rs.getInt("stadium_num"))
+					.stadium_branch_num(rs.getString("stadium_branch_num"))
+					.stadium_name(rs.getString("stadium_name"))
+					.stadium_match_member(rs.getString("stadium_match_member"))
+					.stadium_reservation_start_time(rs.getInt("stadium_reservation_start_time"))
+					.stadium_reservation_end_time(rs.getInt("stadium_reservation_end_time"))
+					.stadium_delete_status(rs.getString("stadium_delete_status"))
+					.build();		
+																																									
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return m;
+	}
 	
 	
 	public static TeamMember getTeamMember(ResultSet rs) {

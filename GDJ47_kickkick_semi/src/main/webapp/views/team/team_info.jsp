@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-<%@ page import="java.util.List, java.util.ArrayList,com.team.model.vo.*,com.member.model.vo.* " %>
+<%@ page import="com.match.model.vo.*,java.util.List, java.util.ArrayList,com.team.model.vo.*,com.member.model.vo.* " %>
 <%
 	String loginUser = ((Member)session.getAttribute("loginMember")).getEmail();
 	ArrayList<TeamMemberInfo> teamMemberArr=(ArrayList<TeamMemberInfo>)request.getAttribute("teamMemberArr");
 	Team teamInfo = (Team)request.getAttribute("teamInfo");
 	ArrayList<TeamMemberInfo> teamEnterMember=(ArrayList<TeamMemberInfo>)request.getAttribute("teamEnterMember");
+	ArrayList<Match> matchlist = (ArrayList<Match>)request.getAttribute("matchlist");
+	
 
 %>
 
@@ -30,9 +32,10 @@
 <script src='https://d3js.org/d3.v3.min.js'></script>
 
 <body>
+
 	<!-- BODY 시작 -->
 	<section id="content">
-
+	
 		<!-- container-for-carousel 시작-->
 		<div class="container-for-carousel">
 
@@ -224,7 +227,8 @@
 								<td><%= te.getGender() %></td>
 								<td><%= te.getAge() %></td>
 								<td><%= te.getPosition() %></td>
-								<td><%= te.getApplication_status() %></td>
+								<td><input type="button" id="acBtn" class="acBtn" supporter="<%=te.getSupporter_email() %>" value="수락">  
+								    <input type="button" id="caBtn" class="caBtn" supporter="<%=te.getSupporter_email() %>" value="취소"></td>
 							</tr>
 							<%}%>
 						<%}%>
@@ -259,22 +263,29 @@
 						</tr>
 					</thead>
 					<tbody>
-						<% if(teamMemberArr.isEmpty()){ %>
+			 			<% if(matchlist.isEmpty()){ %>
 							<tr>
-								<td colspan="11">매칭팀이 없습니다.</td>
+								<td colspan="7">매칭팀이 없습니다.</td>
 							</tr>
 						<%} else { %>
 							
-							<%for(TeamMemberInfo t:teamMemberArr ) {%>
+							<%for(Match mt: matchlist ) {%>
 							<tr>
-								<td><%= t.getName() %></td>
-								<td><%= t.getGender() %></td>
-								<td><%= t.getPhone() %></td>
-								<td><%= t.getPosition() %></td>
+								<td><%= mt.getRegist_num() %></td>
+								<td><%= mt.getBranch_address() %></td>
+								<td><%= mt.getStadium_name() %></td>
+								<td><%= mt.getStadium_match_member() %></td>
+								<td><%= mt.getReservation_usage_start_time() %>:00-<%= mt.getReservation_usage_end_time() %>:00</td>
+								<td><%= mt.getReservation_usage_start_date() %></td>
+								<td><%= mt.getTeam_name()%></td>
+								
+								
 							</tr>
 							<%}%>
 						<%}%>
+						<div>
 						
+						</div>
 						
 						
 					</tbody>
@@ -308,7 +319,7 @@
 			   type = '1';
 			   if (confirm("추방하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'leader.me',
+						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
 						 data: {supporter:supporter, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -328,7 +339,7 @@
 			   type = '2';
 			   if (confirm("가입하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'leader.me',
+						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
 						 data: {supporter:supporter, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -348,7 +359,7 @@
 			   type = '3';
 			   if (confirm("가입거절하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'leader.me',
+						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
 						 data: {supporter:supporter, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -368,7 +379,7 @@
 			   type = '4';
 			   if (confirm("매치수락하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'leader.me',
+						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
 						 data: {match_regist_num:matchregistnum, team_code:teamcode, teamcode:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -391,7 +402,7 @@
 			   type = '5';
 			   if (confirm("매치취소하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'leader.me',
+						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
 						 data: {match_regist_num:matchregistnum, team_code:teamcode, teamcode:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);

@@ -210,9 +210,7 @@ public class MemberDao {
 				PayHistory p = PayHistory.builder().paycode(rs.getString("pay_code")).email(rs.getString("email")).reservation_code(rs.getString("reservation_code"))
 						.paymethod(rs.getString("pay_method")).paydate(rs.getDate("pay_date")).stadium_branch_num(rs.getString("stadium_branch_num")).starttime(rs.getInt("starttime")).
 						endtime(rs.getInt("endtime")).name(rs.getString("name")).build();
-
 				result.add(p);
-				
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
