@@ -141,4 +141,13 @@ public class MemberService {
 	}
 	
 	
+	//비밀번호 인증받았을떄 확인할 이메일
+	public Member emailCheck(String email) {
+		Connection conn = getConnection();
+		Member result = dao.emailCheck(conn,email);
+		close(conn);
+		return result;
+	}
+	
+	
 }

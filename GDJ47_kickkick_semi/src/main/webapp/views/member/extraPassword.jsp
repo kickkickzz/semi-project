@@ -14,10 +14,7 @@
 	<script>
 		alert("<%=msg%>");
 		/* close(); */
-		<%if(script!=null){%>
-			opener.document.getElementById("ema").value='<%=email%>';
-			<%=script%>
-		<%}%>
+		<%-- <%=script!=null?script:""%> --%>
 		location.replace("<%=request.getContextPath()%><%=loc%>");
 	</script>
 </body>

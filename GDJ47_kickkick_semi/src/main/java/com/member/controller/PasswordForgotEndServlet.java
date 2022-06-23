@@ -41,7 +41,6 @@ public class PasswordForgotEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
-		String phone = request.getParameter("phone");
 		String name = request.getParameter("name");
 //		System.out.println(email);
 //		System.out.println(phone);
@@ -62,6 +61,7 @@ public class PasswordForgotEndServlet extends HttpServlet {
 			String host = "smtp.naver.com";
 			String user = "kdh961129@naver.com";
 			String password = "rlaehdgns12";
+			msg += "입력하신 이메일로 임시비밀번호를 발송했습니다.";
 			Properties prop = new Properties();
 	
 			prop.put("mail.smtp.host", host);
@@ -125,6 +125,7 @@ public class PasswordForgotEndServlet extends HttpServlet {
 	        //임시비밀번호로 update하기 위한 email
 	        //패스워드 바꿀때 뭘 바꿀지 조건에 들어가는 id
 	        request.setAttribute("email", email);
+	        request.setAttribute("msg", msg);
 	        request.getRequestDispatcher("/views/msg/message.jsp").forward(request, response);
 		}
 	}
