@@ -277,12 +277,16 @@
 								<td><%= mt.getTeam_gender() %></td>
 								<td><%= mt.getTeam_region() %></td>
 								<td><%= mt.getTeam_age()%></td>
+								<td><input type="button" id="macBtn" class="macBtn" matchregistnum="rnum" value="수락">
+								<input type="button" id="mcaBtn" class="mcaBtn" matchregistnum="rnum" value="취소"></td></tr>
 								
 								
-								
-							</tr>
+							
 							<%}%>
 						<%}%>
+						
+						
+						</tr>		
 						<div>
 						
 						</div>
