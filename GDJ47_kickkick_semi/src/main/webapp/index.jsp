@@ -148,7 +148,7 @@
 	
 
 <!-- 공지사항 목록 -->
-<section class="notice-container">
+<section class="notice-container" style="padding-left : 100px;">
 	<div class="main-sc9-notice">
 			<div class="main-sc9-tit">
 				<img id="megaphone" src="https://cdn-icons-png.flaticon.com/512/214/214347.png">
@@ -209,14 +209,14 @@
 					</div>
 			</div>
 		</div>
-		<div class="main-sc9-review">
+		<div class="main-sc9-review" style="margin-right:100px;">
 			<div class="main-sc9-tit">
 				<img id="megaphone" src="https://cdn-icons-png.flaticon.com/512/921/921347.png">
 				팀 정보!
 			</div>
 			<div class="main-notice-list">
 					<div class="notice-list-item">
-							<dl id="team-list-name">
+							<dl id="team-list-name" style="margin-top:0px; margin-bottom:0px;">
 								<dd>팀마크</dd>
 								<dd>팀이름</dd>
 								<dd>팀연령</dd>
