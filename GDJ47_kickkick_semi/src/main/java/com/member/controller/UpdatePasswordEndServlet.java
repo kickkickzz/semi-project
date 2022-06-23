@@ -53,7 +53,7 @@ public class UpdatePasswordEndServlet extends HttpServlet {
 		request.setAttribute("email", email);
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/msg/updatepassword.jsp").forward(request, response);
 		
 		
 	}

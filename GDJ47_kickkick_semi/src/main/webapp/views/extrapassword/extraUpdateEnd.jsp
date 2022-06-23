@@ -4,7 +4,6 @@
 <% String loc = (String)request.getAttribute("loc"); %>
 <% String script=(String)request.getAttribute("script"); %>
 <% String email = (String)request.getAttribute("email"); %>
-<% String AuthenticationKey = (String)request.getAttribute("AuthenticationKey"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,13 +11,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="<%=request.getContextPath()%>/passwordForgotUpdate.do" method="post">
-		인증키 <input type="text" name="AuthenticationUser">
-		<input type="submit" value="확인">
-		<input type="hidden" value="<%=email%>" name="email">
-		<input type="hidden" value="<%=AuthenticationKey%>" name="AuthenticationKey">
-	</form>
+	<script>
+		alert("<%=msg%>");
+		<%=script!=null?script:""%>
+		<%-- location.replace("<%=request.getContextPath()%><%=loc%>"); --%>
+	</script>
 </body>
-<script>
-</script>
 </html>

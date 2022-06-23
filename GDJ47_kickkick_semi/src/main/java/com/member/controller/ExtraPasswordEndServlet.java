@@ -46,11 +46,13 @@ public class ExtraPasswordEndServlet extends HttpServlet {
 				msg +="비밀번호를 변경하였습니다.";
 				String script = "close()";
 				request.setAttribute("script", script);
-				//String script="opener.location.replace('"+request.getContextPath()+"/logoutMember.do');close();";
-				//request.setAttribute("script", script);
+				request.setAttribute("msg", msg);
+				request.getRequestDispatcher("/views/extrapassword/extraUpdateEnd.jsp").forward(request, response);
 			}else {
 				msg +="비밀번호 변경에 실패하였습니다.";
 				loc +="/member/updatePassword.do?email="+email;// ?email=추가해야함
+				
+				request.getRequestDispatcher("/views/extrapassword/extraUpdateEnd.jsp").forward(request, response);
 			}
 		}
 //		else {
@@ -59,10 +61,10 @@ public class ExtraPasswordEndServlet extends HttpServlet {
 //			loc+="/member/updatePassword.do?email="+email; // ?email=추가해야함
 //		}
 		
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		
-		request.getRequestDispatcher("/views/msg/exPassword.jsp").forward(request, response); //jsp 하나 만들어야함
+//		request.setAttribute("msg", msg);
+//		request.setAttribute("loc", loc);
+//		
+//		request.getRequestDispatcher("/views/extrapassword/extreaUpdateEnd.jsp").forward(request, response); //jsp 하나 만들어야함
 		
 		
 	}
