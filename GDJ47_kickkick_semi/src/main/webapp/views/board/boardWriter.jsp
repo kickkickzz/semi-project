@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-	import="com.member.model.vo.*, com.board.model.vo.Board,java.util.ArrayList"%>
+	import="com.member.model.vo.*,com.board.model.vo.Board_re,java.util.ArrayList"%>
 <!-- 정적파일 css, js-->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/boardWriter.css">
 
@@ -23,7 +23,7 @@
 						<hr class="my-4">
 					</div>
 					<!-- 이미지 등록박스-->
-					<!-- <div class="img-container">
+					<div class="img-container">
 						<div class="browse_img_box">
 							<label> <input type="file" class="file-input"
 								accept="image/*" name="img" id="board_img_file_import" onchange="loadImg(this);" />
@@ -33,7 +33,7 @@
 							</div>
 						</div>
 						<div></div>
-					</div> -->
+					</div>
 
 					<!--내용 영역-->
 					<div class="content-container">

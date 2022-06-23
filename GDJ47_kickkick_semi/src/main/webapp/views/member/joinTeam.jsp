@@ -2,8 +2,12 @@
     pageEncoding="UTF-8" %>
 <%@page import = "com.reservation.model.vo.PayHistory,java.util.List" %>
  
-<% List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist"); %>
-<%  List<Team> result = (List<Team>)request.getAttribute("result");%>
+<%
+ List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist");
+ %>
+<%
+List<Team> result = (List<Team>)request.getAttribute("result");
+%>
  
 <%@ include file="/views/common/header.jsp" %>
 

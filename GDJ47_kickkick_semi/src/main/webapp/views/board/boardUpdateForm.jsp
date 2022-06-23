@@ -3,10 +3,10 @@
 <%
 
 	Board b=(Board)request.getAttribute("board");
-	
+	BoardAttachment img=(BoardAttachment)request.getAttribute("img");
 %>
 <!-- 정적파일 css, js -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/boardWriter.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/boardWriter.css">
 <!-- header을 호출 -->
 <%@include file="/views/common/header.jsp" %>
 
@@ -32,7 +32,7 @@
 						<hr class="my-4">
 					</div>
 					<!-- 이미지 등록박스-->
-					<%-- <div class="img-container">
+					<<div class="img-container">
 						<div class="browse_img_box">
 							<%if(img!=null){ 
 								//이미지가 존재하면.. => fId를 받아라.
@@ -56,7 +56,7 @@
 							</div>
 						</div>
 						<div></div>
-					</div> --%>
+					</div>
 					<!--내용 영역-->
 					<div class="content-container">
 						<div class="content_text">

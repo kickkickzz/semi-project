@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
     
 <%@ include file="/views/common/header.jsp" %>
-<%@ page import="java.util.List, com.board.model.vo.Board" %>
+<%@ page import="java.util.List,com.board.model.vo.Board_re" %>
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">

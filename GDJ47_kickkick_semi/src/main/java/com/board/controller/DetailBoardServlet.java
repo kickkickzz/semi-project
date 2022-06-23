@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
+import com.board.model.vo.Board_re;
 
 @WebServlet("/detailBoard.do")
 public class DetailBoardServlet extends HttpServlet {

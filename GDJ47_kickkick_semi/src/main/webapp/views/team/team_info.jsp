@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-<%@ page import="com.match.model.vo.*,java.util.List, java.util.ArrayList,com.team.model.vo.*,com.member.model.vo.* " %>
+<%@ page import="com.match.model.vo.*,java.util.List,java.util.ArrayList,com.team.model.vo.*,com.member.model.vo.*" %>
 <%
 	String loginUser = ((Member)session.getAttribute("loginMember")).getEmail();
 	ArrayList<TeamMemberInfo> teamMemberArr=(ArrayList<TeamMemberInfo>)request.getAttribute("teamMemberArr");

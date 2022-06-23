@@ -2,7 +2,9 @@
     pageEncoding="UTF-8" %>
 <%@page import = "com.reservation.model.vo.PayHistory,java.util.List" %>
  
- <% List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist"); %>
+ <%
+  List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist");
+  %>
 <%@ include file="/views/common/header.jsp" %>
 
  <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
