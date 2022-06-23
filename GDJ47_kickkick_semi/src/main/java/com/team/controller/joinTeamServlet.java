@@ -29,9 +29,9 @@ public class joinTeamServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		String email = request.getParameter("email"); //로그인한 이메일
-		
-		String email = "wer2@daum.net";
+		String email = request.getParameter("email"); //로그인한 이메일
+		System.out.println(email);
+//		String email = "wer2@daum.net";
 		
 		//팀코드를 받아야함
 		List<Team> result = new TeamService().joinTeam(email); //로그인한 이메일하고 가입한 팀에 리더가 있으면 

@@ -67,7 +67,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<%=request.getContextPath()%>/member/reservationlist.do" style="color: black">
+            <a class="nav-link" href="<%=request.getContextPath()%>/member/reservationlist.do?email=<%=loginMember.getEmail()%>" style="color: black">
                 <i class="fa-solid fa-list"></i>
                 <span data-feather="file"></span>
               예약현황
@@ -170,11 +170,12 @@ const fn_delete = ()=>{
 
 
 $("#btn_teammember").click(e=>{
+	var email = '<%=loginMember.getEmail()%>';
 	if(confirm('한번 탈퇴한 팀은 다시 가입할 수 없습니다. 정말 탈퇴하시겠습니까?')){
 		$.ajax({
 			url : "<%=request.getContextPath()%>/deleteteammember.do",
 			type : "post",
-			data : {supporterEmail:'<%=loginMember.getEmail()%>'},
+			data : {supporterEmail:email},
 			success :(data)=>{
 				if(data>0){
 					alert('팀 탈퇴가 정상적으로 처리 되었습니다.');
