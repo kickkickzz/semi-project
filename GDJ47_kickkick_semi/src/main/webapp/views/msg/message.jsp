@@ -20,4 +20,11 @@
 		<input type="hidden" value="<%=AuthenticationKey%>" name="AuthenticationKey">
 	</form>
 </body>
+<script>
+	<%if(email!=null){%>
+		opener.document.getElementById("ema").value='<%=email%>';
+	<%}else{%>
+		opener.document.getElementById("ema").value=' ';
+	<%}%>
+</script>
 </html>

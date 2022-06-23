@@ -44,6 +44,7 @@ p#p2{
 	padding:50px 0px;
 	text-align: right;
 	font-size:50px;
+	line-height: 120px;
 }
 p>span{
 	font-size:60px;
@@ -77,6 +78,7 @@ p>span{
 	justify-content: space-between;
 	color:black;
 	margin-top:16px;
+	align-items:center;
 }
 dl:hover:not(#team-list-name, #notice-list-name) {
 	background-color:  rgb(229, 229, 229);
@@ -99,6 +101,7 @@ dt{
 	display:flex;
 	justify-content: space-between;
 	padding-left: 13%;
+	padding-right: 13%;
 	padding-bottom:10%;
 	border-top:1px solid gray;
 }
@@ -169,4 +172,7 @@ li>b{
 }
 #resertag:hover{
 	text-decoration:underline;
+}
+#main-team-logo{
+	width:40px;
 }

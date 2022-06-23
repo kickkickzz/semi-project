@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%String email = (String)request.getAttribute("email"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,4 +29,7 @@
 		}
 	</style>
 </body>
+<script>
+	opener.document.getElementById("ema").value="<%=email%>";
+</script>
 </html>
