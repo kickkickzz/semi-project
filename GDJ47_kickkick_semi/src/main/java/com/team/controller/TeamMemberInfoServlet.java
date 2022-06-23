@@ -49,6 +49,7 @@ public class TeamMemberInfoServlet extends HttpServlet {
 		ArrayList<TeamMemberInfo> teamMemberArr = new TeamService().selectTeamMemberList(team_code);
 		ArrayList<TeamMemberInfo> list = new TeamService().selectTeamApplication(team_code);
 		ArrayList<Match> matchlist=new TeamService().selectMatch(team_code);
+		System.out.println(matchlist.get(1).getTeam_age());
 		
 		request.setAttribute("teamMemberArr", teamMemberArr);
 		request.setAttribute("teamEnterMember", list);
