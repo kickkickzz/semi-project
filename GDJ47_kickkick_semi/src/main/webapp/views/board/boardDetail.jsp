@@ -7,17 +7,16 @@
 	//세션으로 로그인한 멤버부르기
 	//Member loginUser=(Member)session.getAttribute("loginUser");
 	Board board=(Board)request.getAttribute("board");
-	BoardAttachment img=(BoardAttachment)request.getAttribute("img");
 	
 	System.out.println("공지사항-상세보기");
  	
 	System.out.println(board);
-	System.out.println(img); 
+	/* System.out.println(img); 
 	
 	int fId=0;
 	if(img!=null){
 		fId=img.getFileId();
-	}
+	} */
 %>    
 <!-- 정적 파일 불러오기 css/js -->
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/css/boardDetail.css">
@@ -37,14 +36,14 @@
                 <div class="board-main-content-box">
 
                     <!-- 이미지 -->
-                    <div class="board-img-box">
+                    <%-- <div class="board-img-box">
                     	<%if(img!=null){ 
                     		//등록한 이미지 존재 시
                     	%>
                         	<img id="image" src="<%=request.getContextPath() %>/upload/storage/board_img/<%=img.getChangeName() %>" alt="게시판 이미지">
                         <%} %>
                     </div>
-
+ --%>
                     <!-- 내용 -->
                     <div class="board-content-box">
                         <textarea name="content" id="content" cols=30 style="resize:none;" readonly><%=board.getBoardContent() %></textarea>
@@ -83,7 +82,7 @@
 	}
 
 
-	function deleteBoard(){
+	<%-- function deleteBoard(){
 		let bId=<%=board.getBoardNum()%>;
 		let fId=<%=fId%>;
 		let result=confirm('삭제하시겠습니까?');
@@ -104,7 +103,7 @@
 					return location.href='<%=request.getContextPath() %>/showBoardList.do';
 				}
 				
-			});
+			}); --%>
 		}else{
 			alert('공지사항 삭제를 취소합니다.');
 		}

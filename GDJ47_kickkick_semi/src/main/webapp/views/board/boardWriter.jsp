@@ -23,7 +23,7 @@
 						<hr class="my-4">
 					</div>
 					<!-- 이미지 등록박스-->
-					<div class="img-container">
+					<!-- <div class="img-container">
 						<div class="browse_img_box">
 							<label> <input type="file" class="file-input"
 								accept="image/*" name="img" id="board_img_file_import" onchange="loadImg(this);" />
@@ -33,7 +33,7 @@
 							</div>
 						</div>
 						<div></div>
-					</div>
+					</div> -->
 
 					<!--내용 영역-->
 					<div class="content-container">

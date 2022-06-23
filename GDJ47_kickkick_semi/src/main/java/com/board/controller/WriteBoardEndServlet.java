@@ -31,21 +31,20 @@ public class WriteBoardEndServlet extends HttpServlet {
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			throw new LoginCheckException("enctype에러");
 		}else {
-			String root=getServletContext().getRealPath("/upload/");
+			String root=getServletContext().getRealPath("/");
 			String path=root+"/board"; //경로확인 할것
-			File f=new File(path);
-			if(!f.exists()) f.mkdirs();
+//			File f=new File(path);
+//			if(!f.exists()) f.mkdirs();
 			
 			MultipartRequest mr=new MultipartRequest(request,path,(1024*1024*10),"UTF-8",
 					new MyFileRenamedPolicy());
 
-			Board b=Board.builder()
-					.boardTitle(mr.getParameter("boardTitle"))
-					.boardContent(mr.getParameter("boardContent"))
-					.boardWriter(mr.getParameter("boardWriter"))
-					.boardOriginalFilename(mr.getOriginalFileName("upfile"))
-					.boardRenamedFilename(mr.getFilesystemName("upfile"))
-					.build();
+			Board b= new Board();
+				b.setBoardTitle(mr.getParameter("boardTitle"));
+				b.setBoardContent(mr.getParameter("boardContent"));
+				b.setBoardWriter(mr.getParameter("boardWriter"));
+//				b.setBoardOriginalFilename(mr.getOriginalFileName("upfile"));
+//				b.setBoardRenamedFilename(mr.getFilesystemName("upfile"));
 			
 			int result=new BoardService().insertBoard(b);
 			String msg="",loc="";

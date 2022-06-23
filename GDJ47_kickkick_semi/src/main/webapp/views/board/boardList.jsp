@@ -50,15 +50,13 @@
 									<input type="hidden" value="<%=b.getBoardNum()%>"/>
 								</th>
 								<!--번호-->
-								<td><%b.getBoardNum(); %></td>
+								<td><%=b.getBoardNum() %></td>
 								<!--작성날짜 -->
-								<td><%b.getBoardDate(); %></td>
+								<td><%=b.getBoardDate() %></td>
 								<!-- 공지내용 요약-제목 -->
-								<td colspan=3><%b.getBoardTitle(); %></td>
+								<td colspan=3><%=b.getBoardTitle() %></td>
 								<!-- 작성자 -->
-								<td><%b.getBoardWriter(); %></td>
-								<!-- 조회수 -->
-								<%-- <td><%=b.getBoardReadCount() %></td> --%>
+								<td><%=b.getBoardWriter() %></td>
 							</tr>
 						<%	}
 						 }else{ %>

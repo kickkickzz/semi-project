@@ -39,7 +39,15 @@ public class BoardDao {
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
-				boardList.add(getBoard(rs) );
+				Board board=new Board(
+					rs.getInt("BOARD_NUM"),
+					rs.getString("WRITER_EMAIL"),
+					rs.getString("BOARD_TITLE"),
+					rs.getString("BOARD_CONTENT"),
+					rs.getDate("BOARD_DATE"),
+					rs.getString("BOARD_DELETE_STATUS"),
+					rs.getString("BOARD_WRITER"));
+					boardList.add(board);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -75,9 +83,9 @@ public class BoardDao {
 			pstmt.setString(1,b.getBoardWriterEmail());
 			pstmt.setString(2,b.getBoardTitle());
 			pstmt.setString(3,b.getBoardContent());
-			pstmt.setString(4, b.getBoardOriginalFilename());
-			pstmt.setString(5, b.getBoardRenamedFilename());
-//			pstmt.setString(6,b.getBoardWriter());
+//			pstmt.setString(4, b.getBoardOriginalFilename());
+//			pstmt.setString(5, b.getBoardRenamedFilename());
+			pstmt.setString(4,b.getBoardWriter());
 			result=pstmt.executeUpdate();
 			
 		}catch(SQLException e) {
@@ -126,7 +134,7 @@ public class BoardDao {
 			pstmt.setInt(1, bId);
 			rs=pstmt.executeQuery();
 			if(rs.next()){
-				board= getBoard(rs);
+				//이건 풀로 받아와서 바꾸기
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -174,20 +182,6 @@ public class BoardDao {
 		return result;
 	}
 	
-	public int updateReadCount(Connection conn, int bId) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		try {
-			pstmt=conn.prepareStatement(prop.getProperty("updateReadcount")); //쿼리 입력 필요
-			pstmt.setInt(1, bId);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}return result;
-	}
-	
 	//메인 공지사항에 뿌릴 공지사항 상위 4개 리스트
 	public List<Board> mainNotice(Connection conn){
 		PreparedStatement pstmt = null;
@@ -200,8 +194,15 @@ public class BoardDao {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				Board b=getBoard(rs);
-				list.add(b);
+				Board board=new Board(
+					rs.getInt("BOARD_NUM"),
+					rs.getString("WRITER_EMAIL"),
+					rs.getString("BOARD_TITLE"),
+					rs.getString("BOARD_CONTENT"),
+					rs.getDate("BOARD_DATE"),
+					rs.getString("BOARD_DELETE_STATUS"),
+					rs.getString("BOARD_WRITER"));
+					list.add(board);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -209,19 +210,6 @@ public class BoardDao {
 		return list;
 		
 	}
-	
-	private Board getBoard(ResultSet rs) throws SQLException{
-		return Board.builder()
-				.boardNum(rs.getInt("board_no"))
-				.boardWriterEmail(rs.getString("writer_email"))
-				.boardTitle(rs.getString("board_title"))
-				.boardContent(rs.getString("board_content"))
-				.boardWriter(rs.getString("board_writer"))
-				.boardOriginalFilename(rs.getString("board_original_filename"))
-				.boardRenamedFilename(rs.getString("board_renamed_filename"))
-				.boardDate(rs.getDate("board_date"))
-				.boardReadCount(rs.getInt("board_readcount"))
-				.build();
-	}
+
 	
 }

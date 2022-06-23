@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,36 +20,27 @@ public class DetailBoardServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. 클라이트가 요청한 게시글번호에 해당하는 데이터를 DB에서 가져옴
-		int boardNo=Integer.parseInt(request.getParameter("no"));
+		//boardList.jsp의 공지사항 게시물 테이블에서 선택한 게시물
+		int bId= Integer.parseInt(request.getParameter("bId"));
 		
-		//Board b=new BoardService().selectBoard(boardNo);
-		//읽은게시글인지 아닌지 확인하기
-		boolean isRead=false;
-		String preBoard="";//이전게시글과 새로운 게시글을 누적시킬 변수
-		Cookie[] cookies=request.getCookies();
-		if(cookies!=null) {
-			for(Cookie c : cookies) {
-				String name=c.getName();//쿠키key값
-				String value=c.getValue();//value
-				if(name.equals("readboard")) {
-					preBoard=value;
-					if(preBoard.contains("|"+boardNo+"|")) {
-						isRead=true;
-						break;
-					}
-				}
-			}
+		BoardService bService= new BoardService();
+		
+		// bId에 해당하는 Board를 선택한다.
+		Board board= bService.selectBoard(bId);
+		
+		String page=null;
+		if(board!=null) {
+			// bId에 해당하는 Board가 존재한다면
+			// bId에 해당하는 Attachment를 가져온다.
+			request.setAttribute("board", board);
+			page="/views/board/boardDetail.jsp";
+			
+		}else {
+			// bId에 해당하는 Board가 존재하지 않는다면
+			request.setAttribute("msg", "공지게시판 상세보기에 실패하였습니다.");
+			page="/views/common/errorPage.jsp";
 		}
-		if(!isRead) {
-			Cookie c=new Cookie("readboard",preBoard+"|"+boardNo+"|");
-			c.setMaxAge(24*60*60);//1일동안유지
-			response.addCookie(c);
-		}
-		
-		
-		request.setAttribute("board", new BoardService().selectBoard(boardNo,isRead));
-		request.getRequestDispatcher("/views/board/detailView.jsp").forward(request, response);		
+		request.getRequestDispatcher(page).forward(request, response);	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

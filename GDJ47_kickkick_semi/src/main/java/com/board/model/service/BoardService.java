@@ -29,21 +29,14 @@ public class BoardService {
 		return result;
 	}
 	
-	public Board selectBoard(int bId, boolean isRead) {
-		Connection conn = getConnection();
-		Board b = dao.selectBoard(conn, bId);
-		if(b!=null&&!isRead) {
-			int result=dao.updateReadCount(conn,bId);
-			if(result>0) {
-				commit(conn);
-				b.setBoardReadCount(b.getBoardReadCount()+1);
-			}
-			else rollback(conn);
-			
-		}
+	public Board selectBoard(int bId) {
+		// bId에 해당하는 공지사항 게시글정보를 갖고온다.
+		Connection conn=getConnection();
 		
+		Board board=null;
+		board=dao.selectBoard(conn, bId);
 		close(conn);
-		return b;
+		return board;
 	}
 
 
