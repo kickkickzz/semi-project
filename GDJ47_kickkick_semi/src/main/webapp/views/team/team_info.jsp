@@ -7,7 +7,7 @@
 	ArrayList<TeamMemberInfo> teamMemberArr=(ArrayList<TeamMemberInfo>)request.getAttribute("teamMemberArr");
 	Team teamInfo = (Team)request.getAttribute("teamInfo");
 	ArrayList<TeamMemberInfo> teamEnterMember=(ArrayList<TeamMemberInfo>)request.getAttribute("teamEnterMember");
-	ArrayList<Match> matchlist = (ArrayList<Match>)request.getAttribute("matchlist");
+	List<Team> matchlist = (List<Team>)request.getAttribute("matchlist");
 	
 
 %>
@@ -269,7 +269,7 @@
 							</tr>
 						<%} else { %>
 							
-							<%for(Match mt: matchlist ) {%>
+							<%for(Team mt: matchlist ) {%>
 							<tr>
 								<td><%= mt.getTeam_name() %></td>
 								<td><%= mt.getTeam_gender() %></td>
