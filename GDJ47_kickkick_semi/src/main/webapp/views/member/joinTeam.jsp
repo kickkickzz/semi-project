@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" %>
 <%@page import = "com.reservation.model.vo.PayHistory,java.util.List" %>
  
- <% List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist"); %>
+<% List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist"); %>
 <%  List<Team> result = (List<Team>)request.getAttribute("result");%>
  
 <%@ include file="/views/common/header.jsp" %>
@@ -82,7 +82,7 @@
           </li>
       	<li class="nav-item">
 	       	 <a class="nav-link" href="<%=request.getContextPath()%>" style="color: black">
-	         <i class="fa-solid fa-people-group"></i>
+	         <i class="fa-solid fa-user-plus"></i>
 	         <span data-feather="shopping-cart"></span>
 	         가입한 팀
 	         </a>
@@ -96,7 +96,7 @@
       	   </li>
       	  <li class="nav-item">
             <a class="nav-link" href="" onclick="fn_delete();" style="color: black"> <!-- request.getContextPath()%>/deleteMember.do?email=loginMember.getEmail()%> -->
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <i class="fa-solid fa-user-minus"></i>
             <span data-feather="users"></span>
             회원탈퇴
             </a>
@@ -128,7 +128,7 @@
           		<td><%=t.getTeam_mark_img()%></td>
           		<td><%=t.getTeam_name()%></td>
           		<td><%=t.getTeam_region()%></td>
-          		<td><input type="button" value="탈퇴"></td>
+          		<td><input id="btn_teammember" type="button" value="탈퇴"></td>
           	</tr>
           	<%} %>
           <%}else{%>
@@ -167,8 +167,27 @@ header{
 const fn_delete = ()=>{
 	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=210 ,left=500, top=200");
 }
+
+
+$("#btn_teammember").click(e=>{
+	if(confirm('한번 탈퇴한 팀은 다시 가입할 수 없습니다. 정말 탈퇴하시겠습니까?')){
+		$.ajax({
+			url : "<%=request.getContextPath()%>/deleteteammember.do",
+			type : "post",
+			data : {supporterEmail:'<%=loginMember.getEmail()%>'},
+			success :(data)=>{
+				if(data>0){
+					alert('팀 탈퇴가 정상적으로 처리 되었습니다.');
+				}else{
+					alert('팀 탈퇴가 정상적으로 처리 되지 않았습니다.');
+				}
+			}
+		})
+	}else{
+	}
+})
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
 
-<%@ include file="/views/common/footer.jsp" %>
+<%@ include file="/views/common/footer.jsp"%>

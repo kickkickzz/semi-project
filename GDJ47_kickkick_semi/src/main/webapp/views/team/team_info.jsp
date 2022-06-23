@@ -7,7 +7,7 @@
 	ArrayList<TeamMemberInfo> teamMemberArr=(ArrayList<TeamMemberInfo>)request.getAttribute("teamMemberArr");
 	Team teamInfo = (Team)request.getAttribute("teamInfo");
 	ArrayList<TeamMemberInfo> teamEnterMember=(ArrayList<TeamMemberInfo>)request.getAttribute("teamEnterMember");
-	ArrayList<Match> matchlist = (ArrayList<Match>)request.getAttribute("matchlist");
+	List<Team> matchlist = (List<Team>)request.getAttribute("matchlist");
 	
 
 %>
@@ -269,15 +269,13 @@
 							</tr>
 						<%} else { %>
 							
-							<%for(Match mt: matchlist ) {%>
+							<%for(Team mt: matchlist ) {%>
 							<tr>
-								<td><%= mt.getRegist_num() %></td>
-								<td><%= mt.getBranch_address() %></td>
-								<td><%= mt.getStadium_name() %></td>
-								<td><%= mt.getStadium_match_member() %></td>
-								<td><%= mt.getReservation_usage_start_time() %></td>
-								<td><%= mt.getReservation_usage_end_time() %></td>
-								<td><%= mt.getReservation_usage_start_date() %></td>
+								<td><%= mt.getTeam_name() %></td>
+								<td><%= mt.getTeam_gender() %></td>
+								<td><%= mt.getTeam_region() %></td>
+								<td><%= mt.getTeam_age()%></td>
+								
 								
 								
 							</tr>

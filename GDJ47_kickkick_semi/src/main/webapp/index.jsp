@@ -148,7 +148,7 @@
 	
 
 <!-- 공지사항 목록 -->
-<section class="notice-container">
+<section class="notice-container" style="padding-left : 100px;">
 	<div class="main-sc9-notice">
 			<div class="main-sc9-tit">
 				<img id="megaphone" src="https://cdn-icons-png.flaticon.com/512/214/214347.png">
@@ -209,7 +209,7 @@
 					</div>
 			</div>
 		</div>
-		<div class="main-sc9-review">
+		<div class="main-sc9-review" style="margin-right:100px;">
 			<div class="main-sc9-tit">
 				<img id="megaphone" src="https://cdn-icons-png.flaticon.com/512/921/921347.png">
 				팀 정보!

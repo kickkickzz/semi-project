@@ -293,4 +293,47 @@ public class TeamService {
 		close(conn);
 		return result;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public int deleteTeammember(String email) {
+		Connection conn=getConnection();
+		int result=dao.deleteTeammember(conn,email);
+		close(conn);
+		return result;
+	}
 }
