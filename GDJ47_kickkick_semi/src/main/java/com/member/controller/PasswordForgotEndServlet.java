@@ -54,6 +54,10 @@ public class PasswordForgotEndServlet extends HttpServlet {
 		if(m==null) {
 			msg+="정보와 일치하는 이메일이 없습니다.";
 			loc+="/passwordForgot.do";
+			script = "close();";
+			email = "";
+			request.setAttribute("email", email);
+			request.setAttribute("script", script);
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 			request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);

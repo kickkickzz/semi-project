@@ -52,8 +52,9 @@ public class PasswordForgotUpdateServlet extends HttpServlet {
         		loc +="/extraPassword.do?email="+email;
 //        		String script = "close()";
 //        		request.setAttribute("script", script);
-        		request.setAttribute("msg", msg);
+        		String script = "close()";
         		request.setAttribute("email", email);
+        		request.setAttribute("msg", msg);
         		request.setAttribute("loc", loc);
         		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response); //이메일도 넘겨야함
         	//}

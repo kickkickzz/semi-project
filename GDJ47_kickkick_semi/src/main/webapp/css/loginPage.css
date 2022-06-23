@@ -304,3 +304,10 @@ div.login-error-msg{
 #naverlogin a{
 	padding-right: 10px;
 }
+#x-mark, #p-mark, #n-mark, #ph-mark{
+	display: none;
+	position:absolute;
+	padding-top:12px;
+	padding-left: 10px;
+	color: red;
+}
