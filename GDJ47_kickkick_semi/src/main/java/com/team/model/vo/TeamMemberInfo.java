@@ -23,7 +23,7 @@ public class TeamMemberInfo {
 	private String type;
 	private String deletestatus;
 	private String address;
-	
+	private int age;
 	
 	
 	

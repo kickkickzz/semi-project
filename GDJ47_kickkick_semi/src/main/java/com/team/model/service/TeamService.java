@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.match.model.vo.Match;
 import com.team.model.dao.TeamDao;
 import com.team.model.vo.Team;
 import com.team.model.vo.TeamMember;
@@ -175,7 +176,164 @@ public class TeamService {
 		List<Team> result = new TeamDao().fourTeam(conn);
 		close(conn);
 		return result;
+	}
+
+	public int getTeamApplicationCount(String team_code) {
+		Connection conn=getConnection();
+		int result=dao.getTeamApplicationCount(conn,team_code);
+		close(conn);
+		return result;
+	}
+	
+	public ArrayList<TeamMemberInfo> selectTeamApplication(String team_code){
+		Connection conn=getConnection();
+		ArrayList<TeamMemberInfo> list=dao.selectTeamApplication(conn,team_code);
+		close(conn);
+		return list;
+	}
+	
+	
+	
+	
+	
+	public void teamExpulsion(String supporter, String team_code) {
+		Connection conn=getConnection();
+		int result=dao.teamExpulsion(conn, supporter, team_code);
+		if(result>0) commit(conn);
+		close(conn);
+	}
+	
+	
+	public void teamAccept(String supporter, String team_code) {
+		Connection conn=getConnection();
+		int result=new TeamDao().teamAccept(conn, supporter, team_code);
+		if(result>0) commit(conn);
+		close(conn);
+	}
+	public void teamCancel(String supporter, String team_code) {
+		Connection conn=getConnection();
+		int result=new TeamDao().teamCancel(conn, supporter, team_code);
+		if(result>0) commit(conn);
+		close(conn);
+	}
+	
+	public int teamMatchStatusCheck(String match_regist_num) {
+		Connection conn = getConnection();
+
+		int result = dao.teamMatchStatusCheck(conn, match_regist_num);
+
+		close(conn);
+
+		return result;
+	}
+
+	public void teamMatchAcStatus(String match_regist_num, String team_code) {
+		Connection conn = getConnection();
+
+		int result = dao.teamMatchAcStatus(conn, match_regist_num, team_code);
+
+		if (result > 0) {
+			commit(conn);
+		}
+
+		close(conn);
+
 		
 	}
 
+	public void teamMatchAccept(String match_regist_num, String team_code, String winlose) {
+		Connection conn = getConnection();
+
+		int result =dao.teamMatchAccept(conn, match_regist_num, team_code, winlose);
+
+		if (result > 0) {
+			commit(conn);
+		}
+
+		close(conn);
+
+	}
+	public void teamMatchCaStatus(String match_regist_num, String team_code) {
+		Connection conn = getConnection();
+
+		int result =dao.teamMatchCaStatus(conn, match_regist_num, team_code);
+
+		if (result > 0) {
+			commit(conn);
+		}
+
+		close(conn);
+	}
+
+	public void teamMatchCancel(String match_regist_num, String team_code) {
+		Connection conn = getConnection();
+
+		int result = dao.teamMatchCancel(conn, match_regist_num, team_code);
+
+		if (result > 0) {
+			commit(conn);
+		}
+
+		close(conn);
+	}
+	
+	public ArrayList<Match> selectMatch(String team_code) {
+		Connection conn=getConnection();
+		ArrayList<Match> m= dao.selectMatch(conn, team_code);
+		close(conn);
+		return m;
+	}
+	
+	
+	
+	//로그인한 유저가 가입한 팀 정보보기
+	public List<Team> joinTeam(String email){
+		Connection conn = getConnection();
+		List<Team> result = new TeamDao().joinTeam(conn,email);
+		close(conn);
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public int deleteTeammember(String email) {
+		Connection conn=getConnection();
+		int result=dao.deleteTeammember(conn,email);
+		close(conn);
+		return result;
+	}
 }

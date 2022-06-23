@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-<%@ page import="java.util.List, java.util.ArrayList,com.team.model.vo.*,com.member.model.vo.* " %>
+<%@ page import="com.match.model.vo.*,java.util.List, java.util.ArrayList,com.team.model.vo.*,com.member.model.vo.* " %>
 <%
 	String loginUser = ((Member)session.getAttribute("loginMember")).getEmail();
 	ArrayList<TeamMemberInfo> teamMemberArr=(ArrayList<TeamMemberInfo>)request.getAttribute("teamMemberArr");
 	Team teamInfo = (Team)request.getAttribute("teamInfo");
+	ArrayList<TeamMemberInfo> teamEnterMember=(ArrayList<TeamMemberInfo>)request.getAttribute("teamEnterMember");
+	ArrayList<Match> matchlist = (ArrayList<Match>)request.getAttribute("matchlist");
 	
+
 %>
 
 <link rel="stylesheet"
@@ -29,10 +32,10 @@
 <script src='https://d3js.org/d3.v3.min.js'></script>
 
 <body>
-	<%-- <%@ include file="../common/navbar.jsp"%> --%>
+
 	<!-- BODY 시작 -->
 	<section id="content">
-
+	
 		<!-- container-for-carousel 시작-->
 		<div class="container-for-carousel">
 
@@ -57,8 +60,8 @@
 								id="team_leader" value="<%= teamInfo.getTeam_leader()%>">
 							<h2><%= teamInfo.getTeam_name()%></h2>
 							<a href="#"> 
-							<img src="./resources/storage/<%= teamInfo.getTeam_leader()%>/team_img/<%= teamInfo.getTeam_mark_img()%>"
-								width="250px" height="200px">
+							 <img src="./resources/storage/<%= teamInfo.getTeam_leader()%>/team_img/<%= teamInfo.getTeam_mark_img()%>"
+								width="250px" height="200px"> 
 							</a>
 						</div>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -99,9 +102,9 @@
 
 				<div class="wrap3">
 					<nav class="navy">
-						<div class="nav-item2" onclick="teamInfo(1);">팀 정보</div>
-						<div class="nav-item2" onclick="support(1);">용병 지원</div>
-						<div class="nav-item2" onclick="match(1);">매칭 신청</div>
+						<div class="nav-item2" onclick="">팀원 정보</div>
+						<div class="nav-item2" onclick="">용병 지원</div>
+						<div class="nav-item2" onclick="">매칭 신청</div>
 					</nav>
 				</div>
 
@@ -129,7 +132,7 @@
 							<tbody>
 								<% if(teamMemberArr.isEmpty()){ %>
 									<tr>
-										<td colspan="5">존재하는용병이없습니다</td>
+										<td colspan="4">존재하는 팀원이 없습니다</td>
 									</tr>
 								<%} else { %>
 							
@@ -146,7 +149,11 @@
 							</tbody>
 						</table>
 					</div>
+				</div>
+				
 					<br> <br>
+					
+					
 				
 		<!--container-for-content 끝-->
 		<!-- modal -->
@@ -190,7 +197,101 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="wrap5" id="wrap5">
+			<hr>
+			<h1>용병 신청</h1>
+			<hr>
+
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">이름</th>
+							<th scope="col">성별</th>
+							<th scope="col">나이</th>
+							<th scope="col">포지션</th>
+							<th scope="col">신청</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% if(teamEnterMember.isEmpty()){ %>
+							<tr>
+								<td colspan="5">신청한 용병이 없습니다.</td>
+							</tr>
+						<%} else { %>
+							
+							<%for(TeamMemberInfo te:teamEnterMember ) {%>
+							<tr>
+								<td><%= te.getName() %></td>
+								<td><%= te.getGender() %></td>
+								<td><%= te.getAge() %></td>
+								<td><%= te.getPosition() %></td>
+								<td><input type="button" id="acBtn" class="acBtn" supporter="<%=te.getSupporter_email() %>" value="수락">  
+								    <input type="button" id="caBtn" class="caBtn" supporter="<%=te.getSupporter_email() %>" value="취소"></td>
+							</tr>
+							<%}%>
+						<%}%>
+						
+						
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<div class="wrap6" id="wrap6">
+			<hr>
+			<h1>신청 받은 매칭</h1>
+			<hr>
+
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">등록</th>
+							<th scope="col">위치</th>
+							<th scope="col">구장</th>
+							<th scope="col">매치</th>
+							<th scope="col">시간</th>
+							<th scope="col">날짜</th>
+							<th scope="col">신청팀</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+							<th scope="col">별점</th>
+							<th scope="col">상태</th>
+						</tr>
+					</thead>
+					<tbody>
+			 			<% if(matchlist.isEmpty()){ %>
+							<tr>
+								<td colspan="7">매칭팀이 없습니다.</td>
+							</tr>
+						<%} else { %>
+							
+							<%for(Match mt: matchlist ) {%>
+							<tr>
+								<td><%= mt.getTeam_name() %></td>
+								<td><%= mt.getTeam_gender() %></td>
+								<td><%= mt.getTeam_region() %></td>
+								<td><%= mt.getTeam_age()%></td>
+								
+								
+								
+							</tr>
+							<%}%>
+						<%}%>
+						<div>
+						
+						</div>
+						
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</section>
+	
 	<!--BODY 끝.-->
 
 	<%-- <%@include file="../common/footer.jsp"%> --%>
@@ -216,7 +317,7 @@
 			   type = '1';
 			   if (confirm("추방하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'leader.me',
+						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
 						 data: {supporter:supporter, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -236,7 +337,7 @@
 			   type = '2';
 			   if (confirm("가입하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'leader.me',
+						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
 						 data: {supporter:supporter, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -256,7 +357,7 @@
 			   type = '3';
 			   if (confirm("가입거절하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'leader.me',
+						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
 						 data: {supporter:supporter, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -276,7 +377,7 @@
 			   type = '4';
 			   if (confirm("매치수락하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'leader.me',
+						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
 						 data: {match_regist_num:matchregistnum, team_code:teamcode, teamcode:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -299,7 +400,7 @@
 			   type = '5';
 			   if (confirm("매치취소하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'leader.me',
+						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
 						 data: {match_regist_num:matchregistnum, team_code:teamcode, teamcode:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -345,7 +446,7 @@
 							   
 						   } else {
 							   $.ajax({
-								   url : '/teamMemberRegist.do',
+								   url : 'http://localhost:9090/GDJ47_kickkick_semi/teamMemberRegist.do',
 								   data : {
 									   userId : userId,
 									   position : position,
@@ -558,248 +659,6 @@
 				lines(dataset));
 	}
 
-	function teamInfo(x) {
-		var userId = '<%= loginUser%>';
-		if(userId != null) {
-		   if($('#team_leader').val() == userId) {
-			   var type = '1';
-			   var page = x;
-			   var team_code = '<%= teamInfo.getTeam_code()%>';
-			   var path = '<%= request.getContextPath()%>';
-			   console.log(team_code);
-			   console.log(path);
-			   var testEval = "";
-			   $.ajax({
-					 url: 'teamPageInfo.me',
-					 data: {team_code:team_code, page:page, type:type},
-					 success: function(data) {
-						 console.log(data);
-						 console.log(data.pi.listCount);
-						 if(data.pi.listCount == 0) {
-							 testEval += '<div class="wrap4" id="wrap4"><hr><br><h1>팀 정보</h1><hr><div class="table-responsive"><table class="table table-hover"><thead class="thead-dark">';
-							 testEval += '<tr><th scope="col">이름</th><th scope="col">성별</th><th scope="col">연락처</th><th scope="col">나이</th><th scope="col">포지션</th><th scope="col"></th></tr></thead><tbody>';
-							 testEval += '<tr><th colspan="6">존재하는용병이없습니다</th></tr></tbody></table></div><br><br>';
-							 testEval += '<div id="paging"><nav aria-label="Page navigation example"><ul class="pagination">';
-							 testEval += '<li class="page-item"><a class="page-link">&lt;&lt;</a></li>';
-							 testEval += '<li class="page-item"><a class="page-link">&lt;</a></li>';
-							 testEval += '<li class="page-item"><a class="page-link">&gt;</a></li>';
-							 testEval += '<li class="page-item"><a class="page-link">&gt;&gt;</a></li>';
-						     testEval += '</ul></nav></div></div>';
-							 
-						 }else {
-							 $.each(data, function(key, value) {
-								 if(key == "teamMember" && key.listCount != 0) {
-									 testEval += '<div class="wrap4" id="wrap4"><hr><br><h1>팀 정보</h1><hr><div class="table-responsive"><table class="table table-hover"><thead class="thead-dark">';
-									 testEval += '<tr><th scope="col">이름</th><th scope="col">성별</th><th scope="col">연락처</th><th scope="col">나이</th><th scope="col">포지션</th><th scope="col"></th></tr></thead><tbody>';
-									 for (var i = 0; i < value.length; i++) {
-										 testEval += '<tr><td>'+ value[i].name +'</td><td>'+ value[i].gender +'</td><td>'+ value[i].phone +'</td><td>'+ value[i].birthday +'</td><td>'+ value[i].position +'</td><td><input type="button" supporter="'+ value[i].supporter_email +'" value="추방" id="exBtn" class="exBtn"></td></tr>';
-									 }
-									 testEval += '</tbody></table></div><br><br>';
-								 } else if (key == "pi" && key.listCount != 0) {
-									 testEval += '<div id="paging"><nav aria-label="Page navigation example"><ul class="pagination">';
-									 testEval += '<li class="page-item"><button class="page-link" onclick="goPage1();">&lt;&lt;</button></li>';
-									 testEval += '<li class="page-item"><button class="page-link" onclick="goPage1('+ (value.currentPage-1) +');">&lt;</button></li>';
-									 for(var p = value.startPage; p <= value.endPage; p++) {
-										 if(p == value.currentPage){
-											 testEval += '<li class="page-item"><button class="page-link" id="choosen" style="color: gray;" disabled>'+ p +'</button></li>';
-											 
-										 }else {
-											 testEval += '<li class="page-item"><button class="page-link" onclick="goPage1('+ p +');">'+ p +'</button></li>';
-										 }
-										 
-									 }
-									 testEval += '<li class="page-item"><button class="page-link" onclick="goPage1('+ (value.currentPage+1) +');">&gt;</button></li>'; 
-									 testEval += '<li class="page-item"><button class="page-link" onclick="goPage1('+ value.maxPage +');">&gt;&gt;</button></li>';
-									 testEval += '</ul></nav></div></div>';
-									 
-								 } else {
-									 
-								 }
-							 });
-						 }
-						 $('#wrap4').html(testEval);
-					 }
-			   });
-		   }else {
-			   alert('팀장만볼수있음');
-		   }
-		   
-	   }else {
-		   alert('로그인후이용가능');
-	   }
-	   
-   }
- 	
-   function goPage1(page){
-	   var page = page;
-	   teamInfo(page);
-   };
-   
-   function support(x) {
-	   var userId = '<%= loginUser%>';
-	   if(userId != null) {
-		   if($('#team_leader').val() == userId) {
-			   var type = '2';
-			   var page = x;
-			   var team_code = '<%= teamInfo.getTeam_code()%>';
-			   var path = '<%= request.getContextPath()%>';
-			   console.log(team_code);
-			   console.log(path);
-			   var testEval = "";
-			   $.ajax({
-					 url: 'teamPageInfo.me',
-					 data: {team_code:team_code, page:page, type:type},
-					 success: function(data) {
-						 
-						 console.log(data.pi.listCount);
-						 if(data.pi.listCount == 0) {
-							 testEval += '<div class="wrap4" id="wrap4"><hr><br><h1>용병 지원</h1><hr><div class="table-responsive"><table class="table table-hover"><thead class="thead-dark">';
-							 testEval += '<tr><th scope="col">이름</th><th scope="col">성별</th><th scope="col">나이</th><th scope="col">포지션</th><th scope="col">신청</th></tr></thead><tbody>';
-							 testEval += '<tr><th colspan="5">지원한용병이없습니다</th></tr></tbody></table></div><br><br>';
-							 testEval += '<div id="paging"><nav aria-label="Page navigation example"><ul class="pagination">';
-							 testEval += '<li class="page-item"><a class="page-link">&lt;&lt;</a></li>';
-							 testEval += '<li class="page-item"><a class="page-link">&lt;</a></li>';
-							 testEval += '<li class="page-item"><a class="page-link">&gt;</a></li>';
-							 testEval += '<li class="page-item"><a class="page-link">&gt;&gt;</a></li>';
-						     testEval += '</ul></nav></div></div>';
-							 
-						 }else {
-							 $.each(data, function(key, value) {
-								 if(key == "teamMember" && key.listCount != 0) {
-									 testEval += '<div class="wrap4" id="wrap4"><hr><br><h1>용병 지원</h1><hr><div class="table-responsive"><table class="table table-hover"><thead class="thead-dark">';
-									 testEval += '<tr><th scope="col">이름</th><th scope="col">성별</th><th scope="col">나이</th><th scope="col">포지션</th><th scope="col">신청</th></tr></thead><tbody>';
-									 for (var i = 0; i < value.length; i++) {
-										 testEval += '<tr><td>'+ value[i].name +'</td><td>'+ value[i].gender +'</td><td>'+ value[i].birthday +'</td><td>'+ value[i].position +'</td><td><input type="button" id="acBtn" class="acBtn" supporter="'+ value[i].supporter_email +'" value="수락"> / <input type="button" id="caBtn" class="caBtn" supporter="'+ value[i].supporter_email +'" value="취소"></td></tr>';
-									 }
-									 testEval += '</tbody></table></div><br><br>';
-								 } else if (key == "pi" && key.listCount != 0) {
-									 testEval += '<div id="paging"><nav aria-label="Page navigation example"><ul class="pagination">';
-									 testEval += '<li class="page-item"><button class="page-link" onclick="goPage2();">&lt;&lt;</button></li>';
-									 testEval += '<li class="page-item"><button class="page-link" onclick="goPage2('+ (value.currentPage-1) +');">&lt;</button></li>';
-									 for(var p = value.startPage; p <= value.endPage; p++) {
-										 if(p == value.currentPage){
-											 testEval += '<li class="page-item"><button class="page-link" id="choosen" style="color: gray;" disabled>'+ p +'</button></li>';
-											 
-										 }else {
-											 testEval += '<li class="page-item"><button class="page-link" onclick="goPage2('+ p +');">'+ p +'</button></li>';
-										 }
-										 
-									 }
-									 testEval += '<li class="page-item"><button class="page-link" onclick="goPage2('+ (value.currentPage+1) +');">&gt;</button></li>'; 
-									 testEval += '<li class="page-item"><button class="page-link" onclick="goPage2('+ value.maxPage +');">&gt;&gt;</button></li>';
-									 testEval += '</ul></nav></div></div>';
-									 
-								 } else {
-									 
-								 }
-								 
-							 });
-							 
-						 }
-						 
-						 $('#wrap4').html(testEval);
-					 }
-			   });
-		   }else {
-			   alert('팀장만볼수있음');
-		   }
-		   
-	   }else {
-		   alert('로그인후이용가능');
-	   }
-
-   }
-   
-   function goPage2(page){
-	   var page = page;
-	   support(page);
-   };
-   
-   
-   function match(x) {
-	   var userId = '<%= loginUser%>';
-	   if(userId != null) {
-		   if($('#team_leader').val() == userId) {
-			   var type = '3';
-			   var page = x;
-			   var team_code = '<%= teamInfo.getTeam_code()%>';
-			   var path = '<%= request.getContextPath()%>';
-			   console.log(team_code);
-			   console.log(path);
-			   var testEval = "";
-			   $.ajax({
-					 url: 'teamPageInfo.me',
-					 data: {team_code:team_code, page:page, type:type},
-					 success: function(data) {
-						 
-						 console.log(data.pi.listCount);
-						 if(data.pi.listCount == 0) {
-							 testEval += '<div class="wrap4" id="wrap4"><hr><br><h1>매칭 신청</h1><hr><div class="table-responsive"><table class="table table-hover"><thead class="thead-dark">';
-							 testEval += '<tr><th scope="col">등록no</th><th scope="col">위치</th><th scope="col">구장</th><th scope="col">매치</th><th scope="col">시간</th><th scope="col">날짜</th><th scope="col">신청팀</th><th scope="col">-</th><th scope="col">-</th><th scope="col">별점</th><th scope="col">상태</th></tr></thead><tbody>';
-							 testEval += '<tr><th colspan="11">매칭팀이없습니다</th></tr></tbody></table></div><br><br>';
-							 testEval += '<div id="paging"><nav aria-label="Page navigation example"><ul class="pagination">';
-							 testEval += '<li class="page-item"><a class="page-link">&lt;&lt;</a></li>';
-							 testEval += '<li class="page-item"><a class="page-link">&lt;</a></li>';
-							 testEval += '<li class="page-item"><a class="page-link">&gt;</a></li>';
-							 testEval += '<li class="page-item"><a class="page-link">&gt;&gt;</a></li>';
-						     testEval += '</ul></nav></div></div>';
-							 
-						 }else {
-							 $.each(data, function(key, value) {
-								 if(key == "teamMatch" && key.listCount != 0) {
-									 testEval += '<div class="wrap4" id="wrap4"><hr><br><h1>매칭 신청</h1><hr><div class="table-responsive"><table class="table table-hover"><thead class="thead-dark">';
-									 testEval += '<tr><th scope="col">등록no</th><th scope="col">위치</th><th scope="col">구장</th><th scope="col">매치</th><th scope="col">시간</th><th scope="col">날짜</th><th scope="col">신청팀</th><th scope="col">-</th><th scope="col">-</th><th scope="col">별점</th><th scope="col">상태</th></tr></thead><tbody>';
-									 for (var i = 0; i < value.length; i++) {
-										 testEval += '<tr><th scope="row">'+ value[i].regist_num +'</th><td>'+ value[i].branch_address+'<br>'+ value[i].branch_num +'지점</td><td>'+ value[i].stadium_name +'</td><td>'+ value[i].stadium_match_member +'</td><td>'+ value[i].reservation_usage_start_time +':00 ~ '+ value[i].reservation_usage_end_time +':00</td><td>'+ value[i].reservation_usage_start_date +'</td><td>'+ value[i].team_name +'</td><td>'+ value[i].team_gender +'</td><td>'+ value[i].team_age +'</td><td>'+ value[i].team_point +'</td>';
-									 	 if(value[i].match_application_status == 'W' || value[i].match_application_status == 'N'){
-									 		testEval += '<td><input type="button" id="macBtn" class="acBtn" matchregistnum="'+ value[i].match_regist_num +'" teamcode="'+ value[i].team_code +'" value="수락"></td></tr>';
-									 	 }else {
-									 		testEval += '<td><input type="button" id="mcaBtn" class="caBtn" matchregistnum="'+ value[i].match_regist_num +'" teamcode="'+ value[i].team_code +'" value="취소"></td></tr>';
-									 	 }
-									 }
-									 testEval += '</tbody></table></div><br><br>';
-								 } else if (key == "pi" && key.listCount != 0) {
-									 testEval += '<div id="paging"><nav aria-label="Page navigation example"><ul class="pagination">';
-									 testEval += '<li class="page-item"><button class="page-link" onclick="goPage3();">&lt;&lt;</button></li>';
-									 testEval += '<li class="page-item"><button class="page-link" onclick="goPage3('+ (value.currentPage-1) +');">&lt;</button></li>';
-									 for(var p = value.startPage; p <= value.endPage; p++) {
-										 if(p == value.currentPage){
-											 testEval += '<li class="page-item"><button class="page-link" id="choosen" style="color: gray;" disabled>'+ p +'</button></li>';
-											 
-										 }else {
-											 testEval += '<li class="page-item"><button class="page-link" onclick="goPage3('+ p +');">'+ p +'</button></li>';
-										 }
-										 
-									 }
-									 testEval += '<li class="page-item"><button class="page-link" onclick="goPage3('+ (value.currentPage+1) +');">&gt;</button></li>'; 
-									 testEval += '<li class="page-item"><button class="page-link" onclick="goPage3('+ value.maxPage +');">&gt;&gt;</button></li>';
-									 testEval += '</ul></nav></div></div>';
-									 
-								 } else {
-									 
-								 }
-								 
-							 });
-							 
-						 }
-						 
-						 $('#wrap4').html(testEval);
-					 }
-			   });
-		   }else {
-			   alert('팀장만볼수있음');
-		   }
-		   
-	   }else {
-		   alert('로그인후이용가능');
-	   }
-   }
-   
-   function goPage3(page){
-	   var page = page;
-	   match(page);
-   };
-   
 </script>
 
 

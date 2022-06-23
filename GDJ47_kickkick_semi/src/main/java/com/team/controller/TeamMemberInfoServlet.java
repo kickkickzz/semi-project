@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.match.model.vo.Match;
 import com.team.model.service.TeamService;
 import com.team.model.vo.Team;
 import com.team.model.vo.TeamMemberInfo;
@@ -40,25 +41,22 @@ public class TeamMemberInfoServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String team_code=request.getParameter("team_code");
-		System.out.println(request.getParameter("team_code"));
+		
 		
 		Team teamInfo=new TeamService().selectTeam(team_code);
-		System.out.println(teamInfo);
 		request.setAttribute("teamInfo", teamInfo);
+		
 		ArrayList<TeamMemberInfo> teamMemberArr = new TeamService().selectTeamMemberList(team_code);
-		
-		
-		System.out.println(teamInfo);
-		
-		System.out.println(teamMemberArr);
-		
-		
-		
-		
+		ArrayList<TeamMemberInfo> list = new TeamService().selectTeamApplication(team_code);
+		ArrayList<Match> matchlist=new TeamService().selectMatch(team_code);
+		System.out.println(matchlist.get(1).getTeam_age());
 		
 		request.setAttribute("teamMemberArr", teamMemberArr);
+		request.setAttribute("teamEnterMember", list);
+		request.setAttribute("matchlist", matchlist);
 		
 		RequestDispatcher view = request.getRequestDispatcher("/views/team/team_info.jsp");
+		
 		view.forward(request, response);
 	}
 

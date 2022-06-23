@@ -24,7 +24,7 @@
 			<button type="button">닫기</button>
 			<br> --%>
 			<form action="<%=request.getContextPath()%>/emailCertification.do" method="post">
-			<input type="text" readonly value="<%=request.getParameter("email")%>"><br>
+			<input type="text" value="<%=request.getParameter("email")%>"><br>
 			<input type="hidden" value="<%=request.getParameter("email")%>" name="email">
 			<input type="submit" style="text-align : center;"value="이메일인증보내기">
 			</form>

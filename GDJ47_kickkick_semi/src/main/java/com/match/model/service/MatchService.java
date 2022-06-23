@@ -67,6 +67,38 @@ public class MatchService {
 		close(conn);
 		return result;
 	}
-	
+	public int matchApplicationCheck(String regist_num,String teamcode) {
+		Connection conn = getConnection();
+		int result = dao.matchApplicationCheck(conn,regist_num,teamcode);
+		close(conn);
+		return result;
+		
+	}
+	public int matchReApplicationCheck(String regist_num,String teamcode) {
+		Connection conn = getConnection();
+		int result = dao.matchReApplicationCheck(conn,regist_num,teamcode);
+		close(conn);
+		return result;
+		
+	}
+	public int matchApplication(String regist_num,String teamcode,String branch_num,String stadium_num,String reservation_code) {
+		Connection conn = getConnection();
+		int result = dao.matchApplication(conn,regist_num,teamcode,branch_num,stadium_num,reservation_code);
+		close(conn);
+		return result;
+	}
+	public List<Match> searchMatch(String type,String keyword,int cPage,int numPerpage){
+		Connection conn = getConnection();
+		List<Match> result = dao.searchMatch(conn,type,keyword,cPage,numPerpage);
+		close(conn);
+		return result;
+	}
+	public int searchMatchCount(String type,String keyword) {
+		Connection conn = getConnection();
+		int result = dao.searchMatchCount(conn, type, keyword);
+		close(conn);
+		return result;
+		
+	}
 	
 }

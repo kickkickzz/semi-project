@@ -100,7 +100,7 @@ userId = (loginMember.getEmail());
 								<img
 									src="<%=request.getContextPath()%>/images/option/shower.png"
 									alt="shower">
-								<p>샤워</p>
+								<p>샤워실 이용가능</p>
 							</div>
 							<%
 								}
@@ -113,7 +113,7 @@ userId = (loginMember.getEmail());
 								<img
 									src="<%=request.getContextPath()%>/images/option/parking.png"
 									alt="parking">
-								<p>주차장 유무</p>
+								<p>주차가능</p>
 							</div>
 							<%
 								}	
@@ -126,7 +126,7 @@ userId = (loginMember.getEmail());
 								<img
 									src="<%=request.getContextPath()%>/images/option/uniform.png"
 									alt="uniform">
-								<p>유니폼 대여 가능 여부</p>
+								<p>유니폼 대여 가능</p>
 							</div>
 							<%
 								
@@ -144,7 +144,7 @@ userId = (loginMember.getEmail());
 								<img
 									src="<%=request.getContextPath()%>/images/option/shoes.png"
 									alt="shoes">
-								<p>풋살화 대여 가능 여부</p>
+								<p>풋살화 대여 가능</p>
 							</div>
 							<%
 								}%>
@@ -158,7 +158,7 @@ userId = (loginMember.getEmail());
 								<img
 									src="<%=request.getContextPath() %>/images/option/ball.png"
 									alt="ball">
-								<p>볼 대여 가능 여부</p>
+								<p>볼 대여 가능</p>
 							</div>
 							<%
 								} %>
@@ -908,6 +908,7 @@ reservationMap.set('price',0);
 						}
 					}else{
 						alert("로그인후 이용하세요");
+						location.assign('<%=request.getContextPath()%>/loginPage.do');
 					}
 				
 				
