@@ -28,15 +28,14 @@
 				</div>
 				<!-- 공지작성은 관리자만 회원 유형 적용해서 권한부여 가능 loginMember.getType().equals("M")-->
 				<%
-				//if(loginMember!=null&& loginMember.getType().equals("M")){ //회원유형으로 설정
+				if(loginMember!=null&& loginMember.getType().equals("M")){ //회원유형으로 설정
 				%>
 				<div class="board_button_box">
 					<div></div>
 					<button type="button" class="btn btn-primary" id="insertBtn" onclick="location.assign('<%=request.getContextPath()%>/writeBoardForm.do')">등록하기</button>
 				</div>
 				<%
-				//}
-				%>
+				}%>
 				
 				<!-- 테이블 형식으로 구성 -->
 				<div class="board_table_container">
@@ -60,7 +59,7 @@
 									<input type="hidden" value="<%=b.getBoardNum()%>"/>
 								</th>
 								<!--번호-->
-								<td><%=b.getBoardNum() %></td>
+								
 								<!--작성날짜 -->
 								<td><%=b.getBoardDate() %></td>
 								<!-- 공지내용 요약-제목 -->
@@ -82,16 +81,14 @@
 						<ul class="pagination">
 
 							<%-- 가장처음버튼: 현재페이지를 1로 한다. --%>
-							<li class="page-item"><button id="initial_previous"
-								class="page-link" 
-								onclick="location.href='<%=request.getContextPath()%>/showBoardList.do?currentPage=1'"> &lt;&lt;
-							</button></li>
+							<li class="page-item">
+							<button id="initial_previous" class="page-link" 
+								onclick="location.href='<%=request.getContextPath()%>/showBoardList.do?currentPage=1'"> &lt;&lt;</button></li>
 
 							<%-- 이전버튼 --%>
 							<li class="page-item">
 								<button id="previous" class="page-link"
-									onclick="location.href='<%=request.getContextPath()%>/showBoardList.do?currentPage<%=currentPage-1%>'"> &lt;</button>
-									</li>
+									onclick="location.href='<%=request.getContextPath()%>/showBoardList.do?currentPage<%=currentPage-1%>'"> &lt;</button></li>
 							
 							
 							<%--현재페이지에서 10개를 불러온다. --%>
@@ -133,12 +130,12 @@
 <%@include file="/views/common/footer.jsp"%>
 <script>
 	
-	//현재페이지가 1일때, 이전페이지를 클릭하지 못하도록한다.
+	//현재페이지가 1일때, 이전페이지를 클릭하지 못하도록
 	if(<%=currentPage%><=1){
 		$('#previous').attr('disabled', 'true');
 	}
 	
-	//첫페이지와 끝페이지가 같다면...
+	//첫페이지와 끝페이지 동일
 	if(<%=startPage%>==1 && <%=startPage%>==<%=endPage%>){
 		$('#next').attr('disabled', 'true');
 		$('#previous').attr('disabled', 'true');

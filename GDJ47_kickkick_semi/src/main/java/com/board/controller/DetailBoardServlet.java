@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
+import com.board.model.vo.BoardAttachment;
 
 @WebServlet("/detailBoard.do")
 public class DetailBoardServlet extends HttpServlet {
@@ -27,12 +28,14 @@ public class DetailBoardServlet extends HttpServlet {
 		
 		// bId에 해당하는 Board를 선택한다.
 		Board board= bService.selectBoard(bId);
+		BoardAttachment bat=null;
 		
 		String page=null;
 		if(board!=null) {
 			// bId에 해당하는 Board가 존재한다면
 			// bId에 해당하는 Attachment를 가져온다.
 			request.setAttribute("board", board);
+			request.setAttribute("img", bat);
 			page="/views/board/boardDetail.jsp";
 			
 		}else {

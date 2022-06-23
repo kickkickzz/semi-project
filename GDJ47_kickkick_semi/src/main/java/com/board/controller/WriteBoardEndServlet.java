@@ -78,7 +78,7 @@ public class WriteBoardEndServlet extends HttpServlet {
 			board.setBoardContent(content);
 			board.setBoardWriterEmail(email);
 			
-			ArrayList<BoardAttachment> fileList= new ArrayList<BoardAttachment>();
+			List<BoardAttachment> fileList= new ArrayList<BoardAttachment>();
 			for(int i=originFiles.size()-1; i>=0; i--) {
 				BoardAttachment bat= new BoardAttachment();
 				bat.setFilePath(saveBoardPath);

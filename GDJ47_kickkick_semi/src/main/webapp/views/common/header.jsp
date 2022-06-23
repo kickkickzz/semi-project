@@ -9,7 +9,7 @@ Member loginMember = (Member)session.getAttribute("loginMember");
 	List<Board> boardList = new BoardService().mainNotice();
 	Board[] bArr = new Board[4];
 	for(int i=0; i< bArr.length; i++){
-		if(!(boardList.isEmpty())){
+		if(!(boardList.isEmpty())||boardList.size()==4){
 	bArr[i]=boardList.get(i);
 		}
 	}
