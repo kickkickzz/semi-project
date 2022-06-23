@@ -32,13 +32,13 @@ public class EmailForgotEndServlet extends HttpServlet {
 		String phone = request.getParameter("phone");
 		
 		Member m = new MemberService().selectEmail(name,phone);
-		
 		String msg="", script="";
 		String email = null; 
 		if(m!=null) {
 			email = m.getEmail();
-			System.out.println(email);
-			msg += "찾으실 이메일 : "+email;
+			String userName = m.getName();
+			//System.out.println(email);
+			msg += userName+"회원님의 이메일 : "+email;
 			script += "close()";
 		}else if(m==null){
 			email = "";
@@ -65,7 +65,7 @@ public class EmailForgotEndServlet extends HttpServlet {
 		request.setAttribute("email", email);
 		request.setAttribute("msg", msg);
 		request.setAttribute("script", script);
-		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/searchEndEmail.jsp").forward(request, response);
 	}
 
 	/**

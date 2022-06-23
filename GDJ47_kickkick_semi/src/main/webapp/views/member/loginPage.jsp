@@ -93,11 +93,11 @@ function fn_emailDuplicate(){
     emailDuplicate.submit();
 }
 function fn_passwordForgot(){
-	   open("<%=request.getContextPath()%>/passwordForgot.do?","_blank","width=400, height=210 ,left=500, top=200");
+	   open("<%=request.getContextPath()%>/passwordForgot.do?","_blank","width=450, height=400 ,left=700, top=300");
 	}
 
 function fn_emailForgot(){
-	open("<%=request.getContextPath()%>/emailForgot.do?","_blank","width=400, height=210 ,left=500, top=200");
+	open("<%=request.getContextPath()%>/emailForgot.do?","_blank","width=400, height=450 ,left=700, top=300");
 }
 </script>
 <%-- <%@ include file="/views/common/footer.jsp" %> --%>
