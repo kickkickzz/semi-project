@@ -671,4 +671,58 @@ public class TeamDao {
 	
 	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public int deleteTeammember(Connection conn, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String query = prop.getProperty("deleteTeammember");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, email);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return result;
+	}
 }

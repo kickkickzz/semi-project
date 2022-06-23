@@ -76,7 +76,7 @@
       </li>
       <li class="nav-item">
        	 <a class="nav-link" href="<%=request.getContextPath()%>/joinTeam.do?email=<%=loginMember.getEmail()%>" style="color: black">
-         <i class="fa-solid fa-people-group"></i>
+         <i class="fa-solid fa-user-plus"></i>
          <span data-feather="shopping-cart"></span>
          가입한 팀
          </a>
@@ -90,7 +90,7 @@
       </li>
       <li class="nav-item">
        <a class="nav-link" href="" onclick="fn_delete();" style="color: black"> <!-- request.getContextPath()%>/deleteMember.do?email=loginMember.getEmail()%> -->
-       <i class="fa-solid fa-arrow-right-from-bracket"></i>
+       <i class="fa-solid fa-user-minus"></i>
        <span data-feather="users"></span>
        회원탈퇴
        </a>
