@@ -311,7 +311,7 @@
 			   type = '1';
 			   if (confirm("추방하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
+						 url: 'https://61.78.121.242:9999/GDJ47_kickkick_semi/team/leader.do',
 						 data: {supporter:supporter, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -331,7 +331,7 @@
 			   type = '2';
 			   if (confirm("가입하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
+						 url: 'https://61.78.121.242:9999/GDJ47_kickkick_semi/team/leader.do',
 						 data: {supporter:supporter, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -351,7 +351,7 @@
 			   type = '3';
 			   if (confirm("가입거절하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
+						 url: 'https://61.78.121.242:9999/GDJ47_kickkick_semi/team/leader.do',
 						 data: {supporter:supporter, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -371,7 +371,7 @@
 			   type = '4';
 			   if (confirm("매치수락하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
+						 url: 'https://61.78.121.242:9999/GDJ47_kickkick_semi/team/leader.do',
 						 data: {match_regist_num:matchregistnum, team_code:teamcode, teamcode:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -394,7 +394,7 @@
 			   type = '5';
 			   if (confirm("매치취소하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
+						 url: 'https://61.78.121.242:9999/GDJ47_kickkick_semi/team/leader.do',
 						 data: {match_regist_num:matchregistnum, team_code:teamcode, teamcode:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -440,7 +440,7 @@
 							   
 						   } else {
 							   $.ajax({
-								   url : 'http://localhost:9090/GDJ47_kickkick_semi/teamMemberRegist.do',
+								   url : 'https://61.78.121.242:9999/GDJ47_kickkick_semi/teamMemberRegist.do',
 								   data : {
 									   userId : userId,
 									   position : position,
