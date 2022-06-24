@@ -67,7 +67,7 @@
                         id="team_leader" value="<%= teamInfo.getTeam_leader()%>">
                      <h2><%= teamInfo.getTeam_name()%></h2>
                      <a href="#"> 
-                      <img src="./resources/storage/<%= teamInfo.getTeam_leader()%>/team_img/<%= teamInfo.getTeam_mark_img()%>"
+                      <img src="<%= request.getContextPath() %>/resources/storage/<%= teamInfo.getTeam_leader()%>/team_img/<%= teamInfo.getTeam_mark_img()%>"
                         width="250px" height="200px"> 
                      </a>
                   </div>
