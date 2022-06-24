@@ -25,8 +25,63 @@
 	crossorigin="anonymous"></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+#content{
+	width:100%;
+	margin: 0 auto;
+	text-align: center;
+	/* font-size: 1.2vw; */
+}
+.container-for-carousel{
+	width:100%;
+}
+.container-for-content{
+		padding-top: 3%;
+		margin-left: 5%;
+		margin-right: 5%;
+		padding-left: 10%;
+		padding-right: 10%;
+		padding-bottom: 5%;
+		/*내용 컴포넌트를 넣는 곳*/
+		background-color: rgba(223,232,225,0.1); 
+}
+td{
+	font-size: 1.4em;
+	margin:auto 0;
+	color: gray;
+}
+.search-teamName{
+	width:300px; 
+  	height:50px;
+	border:3px solid #ccc;
+	
+}
+.search-teamName::placeholder{
+	color: gray;
+	font-size: large;
+	font-weight:200;
+}
+.simple {
+    display: inline-block;
+    font: inherit;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #5ca1cd;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 25px;
+    border: none;
+    border-bottom: 3px solid #3f84b0;
+    border-radius: 3px;
+}
+.simple:hover {background-color: #61a8d5;}
+
+
+</style>
 
 <section id="notice-container">
+
         
 	<!-- BODY 시작 -->
 	<section id="content">
@@ -89,7 +144,14 @@
 				
 						</tbody>
 					</table>
-					
+					<div style="left : 35%;">
+		<form action="<%=request.getContextPath()%>/team/searchTeam.do">
+			<input type="hidden" name="searchType" value="team_name">
+			<input type="text" name="searchKeyword" size="40" style="float: left; " class="search-teamName"
+			placeholder="검색할 이름을 입력하세요">
+			<button type="submit" class="simple" style="float: left; margin-left:10px;">검색</button>
+		</form>
+    </div>
 				</div>
 			</div>
 		</div>
@@ -189,15 +251,8 @@
 	</div>
 			
 
-	<div id="search-teamName">
-		<form action="<%=request.getContextPath()%>/team/searchTeam.do">
-			<input type="hidden" name="searchType" value="team_name">
-			<input type="text" name="searchKeyword" size="25" 
-			placeholder="검색할 이름을 입력하세요">
-			<button type="submit">검색</button>
-		</form>
-    </div>
-
+	
+</section>
 
 <script type="text/javascript">
 	
