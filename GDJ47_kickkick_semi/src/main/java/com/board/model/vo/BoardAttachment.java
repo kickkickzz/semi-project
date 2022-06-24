@@ -2,21 +2,26 @@ package com.board.model.vo;
 
 import java.sql.Date;
 
-///clear
 public class BoardAttachment {
-	private int fileId;
-	private int boardId;
+
+	private int fileId; //파일번호
+	private int boardId;//게시판 번호
 	private String originName;
 	private String changeName;
 	private String filePath;
 	private Date updateDate;
 	private String status;
 	
-	public BoardAttachment() {
-		// TODO Auto-generated constructor stub
+	public BoardAttachment() {}
+	
+	public BoardAttachment(int boardId, String changeName) {
+		this();
+		this.boardId= boardId;
+		this.changeName= changeName;
 	}
-
-	public BoardAttachment(int fileId, int boardId, String originName, String changeName, String filePath,
+	
+	public BoardAttachment(int fileId, int boardId, String originName, 
+			String changeName, String filePath,
 			Date updateDate, String status) {
 		super();
 		this.fileId = fileId;
@@ -90,6 +95,4 @@ public class BoardAttachment {
 				+ ", changeName=" + changeName + ", filePath=" + filePath + ", updateDate=" + updateDate + ", status="
 				+ status + "]";
 	}
-	
-
 }

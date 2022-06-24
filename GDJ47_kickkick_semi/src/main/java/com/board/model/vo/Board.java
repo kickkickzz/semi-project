@@ -3,30 +3,31 @@ package com.board.model.vo;
 import java.sql.Date;
 
 public class Board {
+
 	private int boardNum;
-	private String boardWriterEmail;
-	private String boardTitle;
-	private String boardContent;
-	private String boardImgPath;
-	private Date boardDate;
-	private String boardDeleteStatus;
-	private String boardWriter;
+	private String boardWriter; //작성자이름
+	private String boardWriterEmail; //작성자 이메일
+	private String boardTitle; //제목
+	private String boardContent; //내용
+	private String boardImgPath; //이미지파일 경로
+	private Date boardDate; //공지사항 등록날짜
+	private String boardDeleteStatus; //게시판 삭제여부
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public Board(int boardNum, String boardWriterEmail, String boardTitle, String boardContent, String boardImgPath,
-			Date boardDate, String boardDeleteStatus, String boardWriter) {
+	
+	public Board(int boardNum, String boardWriter, String boardWriterEmail, String boardTitle, String boardContent,
+			String boardImgPath, Date boardDate, String boardDeleteStatus) {
 		super();
 		this.boardNum = boardNum;
+		this.boardWriter = boardWriter;
 		this.boardWriterEmail = boardWriterEmail;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.boardImgPath = boardImgPath;
 		this.boardDate = boardDate;
 		this.boardDeleteStatus = boardDeleteStatus;
-		this.boardWriter = boardWriter;
 	}
 
 	public int getBoardNum() {
@@ -35,6 +36,14 @@ public class Board {
 
 	public void setBoardNum(int boardNum) {
 		this.boardNum = boardNum;
+	}
+
+	public String getBoardWriter() {
+		return boardWriter;
+	}
+
+	public void setBoardWriter(String boardWriter) {
+		this.boardWriter = boardWriter;
 	}
 
 	public String getBoardWriterEmail() {
@@ -85,22 +94,12 @@ public class Board {
 		this.boardDeleteStatus = boardDeleteStatus;
 	}
 
-	public String getBoardWriter() {
-		return boardWriter;
-	}
-
-	public void setBoardWriter(String boardWriter) {
-		this.boardWriter = boardWriter;
-	}
-
 	@Override
 	public String toString() {
-		return "Board [boardNum=" + boardNum + ", boardWriterEmail=" + boardWriterEmail + ", boardTitle=" + boardTitle
-				+ ", boardContent=" + boardContent + ", boardImgPath=" + boardImgPath + ", boardDate=" + boardDate
-				+ ", boardDeleteStatus=" + boardDeleteStatus + ", boardWriter=" + boardWriter + "]";
+		return "Board [boardNum=" + boardNum + ", boardWriter=" + boardWriter + ", boardWriterEmail=" + boardWriterEmail
+				+ ", boardTitle=" + boardTitle + ", boardContent=" + boardContent + ", boardImgPath=" + boardImgPath
+				+ ", boardDate=" + boardDate + ", boardDeleteStatus=" + boardDeleteStatus + "]";
 	}
-	
-	
 	
 	
 }

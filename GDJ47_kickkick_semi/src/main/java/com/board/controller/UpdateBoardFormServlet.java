@@ -23,25 +23,29 @@ public class UpdateBoardFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int bId=Integer.parseInt(request.getParameter("bId"));
 		//bId에 해당하는 Board와 Attachment를 구한다.
-		BoardService bDao=new BoardService();
-		Board board=bDao.selectBoard(bId);
-		BoardAttachment img=null;
+		BoardService bDao= new BoardService();
+		Board board= bDao.selectBoard(bId);
+		BoardAttachment img= null;
 		String page=null;
 		
+		
 		if(board!=null) {
-			// bId에 해당하는 게시판이 존재
+			// bId에 해당하는 게시판이 존재한다.
 			page="/views/board/boardUpdateForm.jsp";
 			
-			// bId에 해당하는 게시판 이미지가 존재 확인
-			img=bDao.selectBoardAttachment(bId);
-			request.setAttribute("board",board);
-			request.setAttribute("img",img);
+			// bId에 해당하는 게시판 이미지가 존재하는지 확인한다.
+			img= bDao.selectBoardAttachment(bId);
 			
-		}else{
+			request.setAttribute("board", board);
+			request.setAttribute("img", img);
+	
+		}else {
 			page="/views/common/errorPage.jsp";
-			request.setAttribute("msg","공지사항 수정에 실패하였습니다.");
+			request.setAttribute("msg", "공지사항 수정에 실패하였습니다.");
 		}
+		
 		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
