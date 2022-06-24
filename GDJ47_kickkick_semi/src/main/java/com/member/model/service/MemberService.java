@@ -83,9 +83,9 @@ public class MemberService {
 	}
 
 	//예약내역
-	public List<PayHistory> selectpayhistory(String email){
+	public List<PayHistory> selectpayhistory(String email,int cPage, int numPerpage){
 		Connection conn = getConnection();
-		List<PayHistory> result = dao.selectpayhistory(conn,email);
+		List<PayHistory> result = dao.selectpayhistory(conn,email,cPage,numPerpage);
 		close(conn);
 		return result;
 		
@@ -159,4 +159,12 @@ public class MemberService {
 	}
 	
 	
+	
+	//예약현황 페이징처리
+	public int payHistorylist(String email) {
+		Connection conn = getConnection();
+		int result = dao.payHistroylist(conn,email);
+		close(conn);
+		return result;
+	}
 }

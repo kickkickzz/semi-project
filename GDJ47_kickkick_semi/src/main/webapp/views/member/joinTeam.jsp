@@ -198,6 +198,7 @@ $("#btn_teammember").click(e=>{
 			success :(data)=>{
 				if(data>0){
 					alert('팀 탈퇴가 정상적으로 처리 되었습니다.');
+					opener.location.reload();
 				}else{
 					alert('팀 탈퇴가 정상적으로 처리 되지 않았습니다.');
 				}

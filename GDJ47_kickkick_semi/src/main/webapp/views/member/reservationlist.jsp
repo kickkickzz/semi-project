@@ -2,12 +2,16 @@
     pageEncoding="UTF-8" %>
 <%@page import = "com.reservation.model.vo.PayHistory,java.util.List" %>
  
- <%
-  List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist");
- 
- 
-  %>
+
+
+
+ <% 
+ List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist"); 
+ String pageBar = (String)request.getAttribute("pageBar");%>
+
+
 <%@ include file="/views/common/header.jsp" %>
+
 <%
 String type=null;
 if(loginMember!=null){
@@ -17,6 +21,11 @@ if(loginMember!=null){
  <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
 
     
+=======
+
+<link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
+  
+>>>>>>> branch 'kickkick' of https://github.com/kickkickzz/semi-project.git
 
     <!-- Bootstrap core CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -144,10 +153,8 @@ if(loginMember!=null){
           <tbody>
           <!-- 이메일로 검색해서 구장을 리스트로 갖고온다음 여기서 리스트 for문써서 활용 -->
           <%if(list.size()!=0){
-        	  for(PayHistory p:list){%>
-				          
+        	  for(PayHistory p:list){%>       
           <tr>
-          
           		<td><%=p.getPaycode() %></td>
           		<td><%=p.getReservation_code() %></td>
              	<td><%=p.getStadium_branch_num() %></td>
@@ -169,6 +176,13 @@ if(loginMember!=null){
        <%} %>
             	</tbody>
               </table>
+      </div>
+      <div id="pageBar">
+      <nav aria-label="Page navigation example">
+  		<ul class="pagination">
+        	<%=request.getAttribute("pageBar")%>
+        </ul>
+      </nav>
       </div>
     </main>
   </div>

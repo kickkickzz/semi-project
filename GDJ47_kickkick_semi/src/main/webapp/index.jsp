@@ -79,7 +79,7 @@
 
 <!-- 공지사항 목록 -->
 <section class="notice-container" >
-   <div class="main-sc9-notice">
+   <div class="main-sc9-notice" style="justify-content:left;">
          <div class="main-sc9-tit">
             <img id="megaphone" src="https://cdn-icons-png.flaticon.com/512/214/214347.png">
             알려드립니다!
@@ -107,7 +107,7 @@
                } %>
          </div>
       </div>
-      <div class="main-sc9-review" style="margin-right:100px;">
+      <div class="main-sc9-review" style="justify-content:right;">
          <div class="main-sc9-tit">
             <img id="megaphone" src="https://cdn-icons-png.flaticon.com/512/921/921347.png">
             팀 정보!
@@ -158,3 +158,4 @@
 
 </section>
 <%@ include file="/views/common/footer.jsp" %>
+>>>>>>> branch 'kickkick' of https://github.com/kickkickzz/semi-project.git

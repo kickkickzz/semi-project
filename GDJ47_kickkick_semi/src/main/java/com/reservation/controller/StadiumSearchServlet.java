@@ -22,7 +22,7 @@ import com.reservation.model.vo.Stadium;
  */
 @WebServlet("/stadiumSearch.do")
 public class StadiumSearchServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -32,36 +32,36 @@ public class StadiumSearchServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//stadium이 구장, branch가 지점 지점안에 구장이 여러개가 있음
-		String email = request.getParameter("email");
-		System.out.println(email);
-		List<Stadium> result = new ReservationService().stadiumSearch(email); //{stadim[0],stadium[1]...}
-		List<String> s1 = new ArrayList<String>();
-		if(!result.isEmpty()) {
-			for(Stadium s : result) { //
-				
-				s1.add(s.getBranch_num());
-				
-			}
-		}else {
-			System.out.println("result 가없습니다.");
-			System.out.println(result);
-//			list = null;
-		}
-		System.out.println(s1);
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(s1,response.getWriter());
-		
-	
-	}
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      //stadium이 구장, branch가 지점 지점안에 구장이 여러개가 있음
+      String email = request.getParameter("email");
+      System.out.println(email);
+      List<Stadium> result = new ReservationService().stadiumSearch(email); //{stadim[0],stadium[1]...}
+      List<String> s1 = new ArrayList<String>();
+      if(!result.isEmpty()) {
+         for(Stadium s : result) { //
+            
+            s1.add(s.getBranch_num());
+            
+         }
+      }else {
+         System.out.println("result 가없습니다.");
+         System.out.println(result);
+//         list = null;
+      }
+      System.out.println(s1);
+      response.setContentType("application/json; charset=utf-8");
+      new Gson().toJson(s1,response.getWriter());
+      
+   
+   }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }
