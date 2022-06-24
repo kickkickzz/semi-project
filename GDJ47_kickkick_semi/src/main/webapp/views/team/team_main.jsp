@@ -109,7 +109,7 @@
 				</div>
 				<form action="<%= request.getContextPath() %>/team/teamRegistEnd.do" method="post" encType="multipart/form-data" onsubmit="return validate();">
 					<div class="modal-body">
-							<%-- <input type="hidden" size="50" name="userId" id="userId" value="<%= userId%>"> --%>
+							
 							<div class="form-group">
 								<label for="recipient-name" class="control-label"
 										style="font-size: 25px;">팀이름</label>

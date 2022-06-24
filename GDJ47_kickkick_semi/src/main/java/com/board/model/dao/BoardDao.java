@@ -176,7 +176,15 @@ public class BoardDao {
 			pstmt.setInt(1, bId);
 			rs=pstmt.executeQuery();
 			if(rs.next()){
-				//이건 풀로 받아와서 바꾸기
+				board= new Board(
+				rs.getInt("BOARD_NUM"),
+				rs.getString("BOARD_WRITER"),
+				rs.getString("WRITER_EMAIL"),
+				rs.getString("BOARD_TITLE"),
+				rs.getString("BOARD_CONTENT"),
+				rs.getString("BOARD_IMG"),
+				rs.getDate("BOARD_DATE"),
+				rs.getString("BOARD_DELETE_STATUS"));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();

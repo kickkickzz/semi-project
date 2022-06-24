@@ -32,7 +32,7 @@ public class DetailBoardServlet extends HttpServlet {
 		
 		String page=null;
 		if(board!=null) {
-			// bId에 해당하는 Board가 존재한다면
+			// bId에 해당하는 Board가 존재
 			// bId에 해당하는 Attachment를 가져온다.
 			request.setAttribute("board", board);
 			request.setAttribute("img", bat);
