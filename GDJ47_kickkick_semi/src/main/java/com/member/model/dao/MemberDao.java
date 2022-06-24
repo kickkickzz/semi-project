@@ -199,13 +199,15 @@ public class MemberDao {
 		return m;
 	}
 
-	public List<PayHistory> selectpayhistory(Connection conn,String email){
+	public List<PayHistory> selectpayhistory(Connection conn,String email,int cPage,int numPerpage){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<PayHistory> result = new ArrayList<PayHistory>();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectpayhistoryinsert"));
-			pstmt.setString(1, email);
+			pstmt.setInt(1,(cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
+			pstmt.setString(3, email);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				PayHistory p = PayHistory.builder().paycode(rs.getString("pay_code")).email(rs.getString("email")).reservation_code(rs.getString("reservation_code"))
@@ -344,6 +346,34 @@ public class MemberDao {
 		}
 		return m;
 	}
+
+	
+	
+	
+	
+	//페이징 처리
+	public int payHistroylist(Connection conn, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("payHistorylist"));
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("COUNT(*)");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
 	public int insertbranch(Connection conn,Branch branch) {
 		PreparedStatement pstmt = null;
 		int result =0;
@@ -374,5 +404,4 @@ public class MemberDao {
 		 }
 		 return result;
 	}
-	
 }

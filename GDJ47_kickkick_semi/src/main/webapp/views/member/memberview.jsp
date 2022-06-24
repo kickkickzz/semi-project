@@ -176,7 +176,7 @@ header{
 
 <script>
 const updatePw = ()=>{
-	open("<%=request.getContextPath()%>/member/updatePassword.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=210 ,left=500, top=200"); /* 주소에 ?email=loginMember.getEmail() 추가해야함 */
+	open("<%=request.getContextPath()%>/member/updatePassword.do?email=<%=loginMember.getEmail()%>","_blank","width=500, height=500 ,left=800, top=200"); /* 주소에 ?email=loginMember.getEmail() 추가해야함 */
 }
 
 const fn_delete = ()=>{
@@ -188,8 +188,11 @@ const fn_update= ()=>{
 }
 
 const updateAddress = ()=>{
-	open("<%=request.getContextPath()%>/updateAddress.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=300 ,left=500, top=200");
+	open("<%=request.getContextPath()%>/updateAddress.do?email=<%=loginMember.getEmail()%>","_blank","width=500, height=500 ,left=800, top=200");
 }
+
+
+
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
