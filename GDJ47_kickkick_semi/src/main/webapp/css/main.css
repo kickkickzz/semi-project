@@ -133,6 +133,7 @@ div.card-body{
 	margin-bottom: 0;
 	height:60px;
 	text-align:center;
+	border-bottom: 1px solid gray;
 }
 .card-body-list{
 	padding-left:0;
@@ -149,6 +150,9 @@ li>b{
 }
 .place{
 	position:absolute;
+}
+.card-img-top{
+	height:270px;
 }
 #team-list-name>dd{
 	font-weight: bold;

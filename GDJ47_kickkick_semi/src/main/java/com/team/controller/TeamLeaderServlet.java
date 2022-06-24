@@ -35,9 +35,13 @@ public class TeamLeaderServlet extends HttpServlet {
 		String team_code = request.getParameter("oriteam");
 		String match_regist_num = request.getParameter("match_regist_num");
 		String type = request.getParameter("type");
-		System.out.println(match_regist_num+"zz");
+		
 		System.out.println("수락할팀 : "+teamcode);
 		System.out.println("받아주는팀 : "+team_code);
+		
+		System.out.println("지원자 : "+supporter);
+		System.out.println();
+		
 		
 		
 		
@@ -48,7 +52,7 @@ public class TeamLeaderServlet extends HttpServlet {
 			
 		}else if(type.equals("2")) { //수락
 			result = 2;
-			new TeamService().teamAccept(supporter, teamcode);
+			new TeamService().teamAccept(supporter, team_code);
 			
 		}else if(type.equals("3")) { //취소
 			result = 3;

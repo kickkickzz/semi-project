@@ -34,6 +34,7 @@ public class DetailBoardServlet extends HttpServlet {
 		if(board!=null) {
 			// bId에 해당하는 Board가 존재
 			// bId에 해당하는 Attachment를 가져온다.
+			bat= bService.selectBoardAttachment(bId);
 			request.setAttribute("board", board);
 			request.setAttribute("img", bat);
 			page="/views/board/boardDetail.jsp";

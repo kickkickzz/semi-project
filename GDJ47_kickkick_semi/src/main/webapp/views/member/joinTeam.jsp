@@ -10,6 +10,12 @@ List<Team> result = (List<Team>)request.getAttribute("result");
 %>
  
 <%@ include file="/views/common/header.jsp" %>
+<%
+String type=null;
+if(loginMember!=null){
+	type=loginMember.getType();	 
+}
+%>
 
  <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
 
@@ -77,13 +83,15 @@ List<Team> result = (List<Team>)request.getAttribute("result");
               예약현황
             </a>
           </li>
-           <li class="nav-item">
+           <%if(type.equals("M")){ %>
+          <li class="nav-item">
             <a class="nav-link" href="<%=request.getContextPath()%>/branch.do" style="color: black">
                 <i class="fa-solid fa-list"></i>
                 <span data-feather="file"></span>
               지점정보
             </a>
           </li>
+          <%} %>
           <li class="nav-item">
             <a class="nav-link" href="<%=request.getContextPath()%>/member/myteam.do" style="color: black">
               <i class="fa-solid fa-people-group"></i>
@@ -190,6 +198,7 @@ $("#btn_teammember").click(e=>{
 			success :(data)=>{
 				if(data>0){
 					alert('팀 탈퇴가 정상적으로 처리 되었습니다.');
+					opener.location.reload();
 				}else{
 					alert('팀 탈퇴가 정상적으로 처리 되지 않았습니다.');
 				}

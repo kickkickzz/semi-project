@@ -8,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.member.model.service.MemberService;
-import com.member.model.vo.Member;
 
 /**
- * Servlet implementation class CheckEmailServlet
+ * Servlet implementation class CheckBranchServlet
  */
-@WebServlet("/checkEmail.do")
-public class CheckEmailServlet extends HttpServlet {
+@WebServlet("/checkbranch.do")
+public class CheckBranchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckEmailServlet() {
+    public CheckBranchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +30,14 @@ public class CheckEmailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("email");
-		Member m = new MemberService().selectMemberByEmail(email);
-		System.out.println(email.length());
-		if(m!=null && email.trim().contains("@")) {
-			request.setAttribute("msg", "1");
-			request.getRequestDispatcher("/views/member/emailDup.jsp").forward(request, response);
-		}else if(email.trim().length()==0 || !(email.trim().contains("@"))){
-			request.setAttribute("msg", "3");
-			request.getRequestDispatcher("/views/member/emailDup.jsp").forward(request, response);
-		}else {
-			request.setAttribute("msg", "2");
-			request.setAttribute("email", email);
-			request.getRequestDispatcher("/views/member/emailDup.jsp").forward(request, response);
-		}
+		// TODO Auto-generated method stub
+		String branchName = request.getParameter("branchname");
+	      
+	      int result = new MemberService().checkBranch(branchName);
+	      
+	      response.setContentType("application/json; charset=utf-8");
+	      new Gson().toJson(result,response.getWriter());
+	      
 	}
 
 	/**

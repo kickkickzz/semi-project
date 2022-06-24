@@ -61,7 +61,7 @@ public class updateAddressEndServlet extends HttpServlet {
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/address/updateAddress.jsp").forward(request, response);
 		
 	}
 
