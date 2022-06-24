@@ -210,6 +210,7 @@ if(loginMember!=null){
 </div>
 </div>
 
+<<<<<<< HEAD
 <script>
 <<<<<<< HEAD
 		const fn_searchDataa=e=>{
@@ -297,7 +298,9 @@ if(loginMember!=null){
 				})
 			}
 		})
-=======
+
+<script>
+
       const fn_searchDataa=e=>{
          if($(e.target).find("input").val().length==0){
             alert("값을 입력하고 조회하세요.");
@@ -383,6 +386,10 @@ if(loginMember!=null){
                }
             })
          }
+<<<<<<< HEAD
+      })
+>>>>>>> branch 'kickkick' of https://github.com/kickkickzz/semi-project.git
+=======
       })
 >>>>>>> branch 'kickkick' of https://github.com/kickkickzz/semi-project.git
 </script>

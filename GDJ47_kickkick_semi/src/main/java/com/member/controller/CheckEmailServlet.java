@@ -32,8 +32,12 @@ public class CheckEmailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		Member m = new MemberService().selectMemberByEmail(email);
-		if(m!=null) {
+		System.out.println(email.length());
+		if(m!=null && email.trim().contains("@")) {
 			request.setAttribute("msg", "1");
+			request.getRequestDispatcher("/views/member/emailDup.jsp").forward(request, response);
+		}else if(email.trim().length()==0 || !(email.trim().contains("@"))){
+			request.setAttribute("msg", "3");
 			request.getRequestDispatcher("/views/member/emailDup.jsp").forward(request, response);
 		}else {
 			request.setAttribute("msg", "2");
