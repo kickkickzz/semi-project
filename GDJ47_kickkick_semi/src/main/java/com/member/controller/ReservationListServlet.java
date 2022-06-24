@@ -43,7 +43,7 @@ public class ReservationListServlet extends HttpServlet {
 		
 		int totalData = new MemberService().payHistorylist(email); //이메일에 해당하는 예약현황을 모두 갖고옴
 		int totalPage = (int)Math.ceil((double)totalData/numPerpage);
-		int pageBarSize = 5;
+		int pageBarSize = 3;
 		int pageNo = ((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd = pageNo+pageBarSize-1;
 		String pageBar ="";
