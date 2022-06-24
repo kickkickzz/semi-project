@@ -102,8 +102,8 @@ Member loginMember = (Member)session.getAttribute("loginMember");
 		<div id="header-bottom">
 			<ul id="header-menu">
 				<li id="notice" onclick="fn_board();">공지사항</li>
-				<li>구장</li>
-				<li onclick="fn_stadium();">예약</li>
+				
+				<li onclick="fn_stadium();">구장</li>
 				<li onclick="fn_team();">팀 관리</li>
 				<li onclick="fn_match();">매칭</li>
 			</ul>
