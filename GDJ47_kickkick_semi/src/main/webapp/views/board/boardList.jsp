@@ -56,7 +56,7 @@
 						%>
 							<tr>
 								<th scope="row">
-									<input type="hidden" value="<%=b.getBoardNum()%>"/>
+									<input type="hidden" value="<%=b.getBoardNum()%>"/><%=b.getBoardNum()%>
 								</th>
 								<!--번호-->
 								
@@ -80,18 +80,18 @@
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
 
-							<%-- 가장처음버튼: 현재페이지를 1로 한다. --%>
+							<!-- 가장처음버튼: 현재페이지를 1로 -->
 							<li class="page-item">
 							<button id="initial_previous" class="page-link" 
 								onclick="location.href='<%=request.getContextPath()%>/showBoardList.do?currentPage=1'"> &lt;&lt;</button></li>
 
-							<%-- 이전버튼 --%>
+							<!-- 이전버튼 -->
 							<li class="page-item">
 								<button id="previous" class="page-link"
 									onclick="location.href='<%=request.getContextPath()%>/showBoardList.do?currentPage<%=currentPage-1%>'"> &lt;</button></li>
 							
 							
-							<%--현재페이지에서 10개를 불러온다. --%>
+							<!-- 현재페이지에서 10개를 불러오기 -->
 							<%for(int p=startPage; p<=endPage; p++){ 
 								if(p==currentPage){
 									//p가 현재페이지(currentPage)와 같다면
@@ -108,13 +108,13 @@
 							<%} %>
 	
 
-							<%-- 다음버튼 --%>
+							<!-- 다음버튼 -->
 							<li class="page-item">
 								<button id="next" class="page-link"	onclick="location.href='<%=request.getContextPath()%>/showBoardList.do?currentPage=<%=currentPage+1%>'">&gt; </button>
 							</li>
 							
 
-							<%-- 가장마지막 버튼 --%>
+							<!-- 마지막 버튼 -->
 							<li class="page-item">
 								<button id="last_next" class="page-link"	onclick="location.href='<%=request.getContextPath()%>/showBoardList.do?currentPage=<%=maxPage%>'">&gt;&gt; </button>
 							</li>
@@ -129,6 +129,18 @@
 	</div>
 <%@include file="/views/common/footer.jsp"%>
 <script>
+	$(function(){
+		//페이지 상세보기
+		$('#listArea td, #listArea th').mouseenter(function(){
+			// 공지사항 테이블 마우스호버
+			$(this).parent().css('cursor','pointer');
+		}).click(function(){
+			let bId= $(this).parent().children().children('input').val();
+			
+			//클릭하면,  bId에 해당하는 상세페이지로 이동.
+			location.href='<%=request.getContextPath()%>/detailBoard.do?bId='+bId;
+		});
+	});
 	
 	//현재페이지가 1일때, 이전페이지를 클릭하지 못하도록
 	if(<%=currentPage%><=1){
