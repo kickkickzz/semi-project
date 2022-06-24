@@ -84,7 +84,7 @@ function fn_emailDuplicate(){
 	console.log(email);
 	const url = "<%=request.getContextPath()%>/views/member/emailDup.jsp";
     const title="emailDuplicate";
-    open("",title,"width=500,height=200");
+    open("",title,"width=500,height=300");
     console.log(emailDuplicate);
     emailDuplicate.email.value=email;
     emailDuplicate.method="post";

@@ -8,17 +8,38 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
-	<form action="<%=request.getContextPath()%>/updateaddressend.do" method="post">
-	  <input type="text" id="sample6_postcode" placeholder="우편번호" style="margin-bottom : 3px;">
-	  <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" ><br>
-	  <input type="text" id="sample6_address" name="address2" placeholder="주소" size="29" style="margin-bottom : 3px;">
-	  <input type="text" id="sample6_extraAddress" name="address3"placeholder="참고항목"><br>
-	  <input type="text" id="sample6_detailAddress" name="address4" placeholder="상세주소" size="29" style="margin-bottom : 13px;">
-	  <input type="hidden" name="email" value="<%=request.getParameter("email")%>">
-	  <input type="submit" value="수정">
+	<div class="hh">
+		<h2>주소 변경</h2>
+		<hr/>
+		<br>
+		<p>
+			새로운 주소를 검색하시고<br>
+			변경을 누르면 주소가 변경됩니다.
+		</p>
+	</div>
+	<form action="<%=request.getContextPath()%>/updateaddressend.do" method="post" onsubmit="return addSubmit();">
+	  <div style="margin-left:65px">
+	  <input type="text" id="sample6_postcode" placeholder="우편번호" size="45" style="margin-bottom : 7px; height:30px;" readonly><br>
+	  <input type="text" id="sample6_address" name="address2" placeholder="주소" size="45" style="margin-bottom : 7px;  height:30px;" readonly>
+	  <input type="text" id="sample6_extraAddress" size="45" name="address3"placeholder="참고항목" style="margin-bottom : 7px;  height:30px;" readonly><br>
+	  <input type="text" id="sample6_detailAddress" name="address4" placeholder="상세주소" size="45" style="margin-bottom : 7px;  height:30px;"><br>
+	  </div>
+	  <div style="text-align:center;">
+	  <input type="button" onclick="sample6_execDaumPostcode()" value="주소 검색">
+	  <input type="submit" value="변경">
 	  <input type="reset" value="취소">
+	  </div>
+	  <input type="hidden" name="email" value="<%=request.getParameter("email")%>">
 	</form>
-	
+<style>
+	.pw{
+		margin-top:10%;
+	}
+
+	.hh{
+		text-align : center;
+	}
+</style>
 <script>
 function sample6_execDaumPostcode() {
     new daum.Postcode({
@@ -66,7 +87,23 @@ function sample6_execDaumPostcode() {
             document.getElementById("sample6_detailAddress").focus();
         }
     }).open();
+  
 }
+
+function addSubmit() {
+	var post = document.getElementById('sample6_postcode').value;
+    var detail = document.getElementById('sample6_detailAddress').value;
+    if (post=="") {
+      alert('주소를 검색하지 않으셨습니다.')
+      return false;
+    }else if(detail==""){
+  	  alert('상세주소를 입력해주세요.');
+    	return false;
+    }else{
+    	return true;
+    }
+ }
+
 </script>
 </body>
 </html>

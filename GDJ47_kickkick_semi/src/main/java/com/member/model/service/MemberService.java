@@ -12,6 +12,7 @@ import java.util.List;
 
 import com.member.model.dao.MemberDao;
 import com.member.model.vo.Member;
+import com.reservation.model.vo.Branch;
 import com.reservation.model.vo.PayHistory;
 
 public class MemberService {
@@ -82,9 +83,9 @@ public class MemberService {
 	}
 
 	//예약내역
-	public List<PayHistory> selectpayhistory(String email){
+	public List<PayHistory> selectpayhistory(String email,int cPage, int numPerpage){
 		Connection conn = getConnection();
-		List<PayHistory> result = dao.selectpayhistory(conn,email);
+		List<PayHistory> result = dao.selectpayhistory(conn,email,cPage,numPerpage);
 		close(conn);
 		return result;
 		
@@ -148,6 +149,22 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	//지점등록
+	public int insertbranch(Branch b){
+		Connection conn = getConnection();
+		int result = dao.insertbranch(conn,b);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
 	
 	
+	
+	//예약현황 페이징처리
+	public int payHistorylist(String email) {
+		Connection conn = getConnection();
+		int result = dao.payHistroylist(conn,email);
+		close(conn);
+		return result;
+	}
 }

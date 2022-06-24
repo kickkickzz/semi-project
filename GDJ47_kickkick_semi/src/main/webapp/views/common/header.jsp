@@ -10,7 +10,7 @@ Member loginMember = (Member)session.getAttribute("loginMember");
 	Board[] bArr = new Board[4];
 	for(int i=0; i< bArr.length; i++){
 		if(!(boardList.isEmpty())||boardList.size()==4){
-	bArr[i]=boardList.get(i);
+			bArr[i]=boardList.get(i);
 		}
 	}
 	
@@ -32,6 +32,13 @@ Member loginMember = (Member)session.getAttribute("loginMember");
 	System.out.println("데이터 없음");
 		}
 	}
+
+	String email=null;
+	if(loginMember!=null){
+		email=loginMember.getEmail();
+	}
+
+
 %>
 
 <!DOCTYPE html>

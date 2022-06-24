@@ -57,7 +57,7 @@
              if(sArr[i]!=null) {%>
           <div class="col">
              <div class="card">
-                <img src="./images/<%=sArr[i].getBranch_img()%>" class="card-img-top" alt="...">
+                <img src="<%=request.getContextPath() %>/resources/storage/branch_img/<%=sArr[i].getBranch_img()%>" class="card-img-top" alt="...">
                 <!-- <img src="./images/달월.jpg" class="card-img-top" alt="..."> -->
                   <div class="card-body">
                     <h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[i].getStadium_num()%>"><%=sArr[i].getStadium_name() %></a></h5>
@@ -79,7 +79,7 @@
 
 <!-- 공지사항 목록 -->
 <section class="notice-container" >
-   <div class="main-sc9-notice">
+   <div class="main-sc9-notice" style="justify-content:left;">
          <div class="main-sc9-tit">
             <img id="megaphone" src="https://cdn-icons-png.flaticon.com/512/214/214347.png">
             알려드립니다!
@@ -107,7 +107,7 @@
                } %>
          </div>
       </div>
-      <div class="main-sc9-review" style="margin-right:100px;">
+      <div class="main-sc9-review" style="justify-content:right;">
          <div class="main-sc9-tit">
             <img id="megaphone" src="https://cdn-icons-png.flaticon.com/512/921/921347.png">
             팀 정보!
@@ -129,7 +129,7 @@
                      <dl>
                         <dd>
                            <%if(tArr[i].getTeam_mark_img()!=null){ %>
-                              <img id="main-team-logo" src="./images/팀로고/<%=tArr[i].getTeam_mark_img() %>">
+                              <img id="main-team-logo" src="<%=request.getContextPath() %>/resources/storage/<%=tArr[i].getTeam_leader()%>/team_img/<%=tArr[i].getTeam_mark_img() %>">
                            <%}else{ %>
                               <img src="./images/세미로고.png">
                            <%} %>
@@ -158,3 +158,4 @@
 
 </section>
 <%@ include file="/views/common/footer.jsp" %>
+>>>>>>> branch 'kickkick' of https://github.com/kickkickzz/semi-project.git
