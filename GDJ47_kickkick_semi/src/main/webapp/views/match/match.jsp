@@ -130,7 +130,7 @@ if(loginMember!=null){
         			<input type="hidden" name="searchType" value="gender">
         			<label><input type="radio" name="searchKeyword" value="남자그룹" >남자그룹</label>
         			<label><input type="radio" name="searchKeyword" value="여자그룹" >여자그룹</label>
-        			<label><input type="radio" name="searchKeyword" value="남녀그룹" >여자그룹</label>
+        			<label><input type="radio" name="searchKeyword" value="남녀그룹" >남녀그룹</label>
         			
         			<button type="submit" class='simple'>검색</button>
         		</form>

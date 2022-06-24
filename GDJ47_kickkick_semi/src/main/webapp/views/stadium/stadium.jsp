@@ -211,94 +211,7 @@ if(loginMember!=null){
 </div>
 
 
-<script>
 
-		const fn_searchDataa=e=>{
-			if($(e.target).find("input").val().length==0){
-				alert("값을 입력하고 조회하세요.");
-				return false;
-			}
-		}
-	
-		
-		function fn_stadiuminsert(){
-			open("<%=request.getContextPath()%>/views/stadium/stadiuminsert.jsp","_blank","width=500, height=600 ,left=700, top=250");
-		}
-		
-		
-		//지점 등록 버튼
-		$("#branchBtn").click(e=>{
-			var branchNum = "";
-			
-			var email = '<%=userId%>';
-			$.ajax({
-				url: "<%=request.getContextPath()%>/stadiumSearch.do",
-				type :"post",
-				data : {email:email},
-				success :(data)=>{ //json을 이용해서 배열로 data를 받아올려고 하는데 그러면
-					console.log(data);
-					if(data.length!=0){
-						alert("지점이 조회되었습니다.");
-						 $('#branch_num').empty();  //받아온 데이터를 for문 돌릴려고 하는데
-						$.each(data , function(key,value){ 
-							
-							
-							
-							console.log(key+data[key])
-							//value가 서블릿에서 받아온 data를 value에 하나씩 넣어줌
-							branchNum += "<option value="+ value+">"+ value+"지점</option>";
-						});
-						$('#branch_num').html(branchNum);//branchNum 배열에 하나씩 들어감 option 값이 그러면 이제 append로 select 에 추가
-					}else{
-						alert("조회된 지점이 없습니다.");
-						branchNum += '<option value="------">'+"------"+'</option>';
-					}
-					
-				}
-			});
-		});
-		
-		
-		//구장 등록하기 버튼 
-		$("#stadiumRegistBtn").click(e=>{
-			var email = '<%=userId%>'
-			const stadiumName = $("#stadium_name").val(); //구장이름
-			const stadiumMatchMember = $("#stadium_matchMember").val();//구장매치 인원
-			const branchNum = $("#branch_num").val();//지점 이름
-			const starttime = $("#startTime").val();
-			const startTime = parseInt(starttime); 
-			const endtime =  $("#endTime").val();
-			const endTime = parseInt(endtime); 
-			if(stadiumName == ""){
-				alert("구장이름을 입력하세요");
-			}else if(stadiumMatchMember == ""){
-				alert("구장 매치 인원을 선택하세요");
-			}else if(branchNum =="------"){ //나중에 여기 != > == 로 바꿔야함!!
-				alert("지점을 선택하세요");
-			}else if(startTime>endTime){
-				alert("예약가능시간이 잘못되었습니다 다시 선택해주세요.");
-			}else{
-				$.ajax({
-					url : "<%=request.getContextPath()%>/insertStadium.do",
-					type : "post",
-					data : {
-						email:email
-						,stadiumName:stadiumName
-						,stadiumMatchMember:stadiumMatchMember
-						,branchNum:branchNum
-						,startTime:startTime
-						,endTime:endTime},
-					success :(data)=>{  //data에 result값이 넘어옴
-						if(data>0){
-							alert("구장 등록이 완료되었습니다.");
-						}else{
-							alert("구장 등록에 실패하였습니다.");
-						}
-					}
-				})
-			}
-		})
-		</script>
 
 <script>
 
@@ -327,7 +240,7 @@ if(loginMember!=null){
             success :(data)=>{ //json을 이용해서 배열로 data를 받아올려고 하는데 그러면
                console.log(data);
                if(data.length!=0){
-            	   console.log(data);
+                  console.log(data);
                   alert("지점이 조회되었습니다.");
                    $('#branch_num').empty();  //받아온 데이터를 for문 돌릴려고 하는데
                   $.each(data , function(key,value){ 

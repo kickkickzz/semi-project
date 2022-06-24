@@ -6,12 +6,16 @@
    String loginUser = ((Member)session.getAttribute("loginMember")).getEmail();
    ArrayList<TeamMemberInfo> teamMemberArr=(ArrayList<TeamMemberInfo>)request.getAttribute("teamMemberArr");
    Team teamInfo = (Team)request.getAttribute("teamInfo");
-   ArrayList<TeamMemberInfo> teamEnterMember=(ArrayList<TeamMemberInfo>)request.getAttribute("teamEnterMember");
+  
    List<Team> matchlist = (List<Team>)request.getAttribute("matchlist");
    ArrayList<Match> registnum= (ArrayList<Match>)request.getAttribute("registnum");
    int rnum =0;
    if(!(registnum.isEmpty())){
       rnum =registnum.get(0).getRegist_num();
+   }
+   ArrayList<TeamMemberInfo> teamEnterMember = new ArrayList();
+   if(teamEnterMember!=null){
+	   teamEnterMember =(ArrayList<TeamMemberInfo>)request.getAttribute("teamEnterMember");
    }
    
    
@@ -42,69 +46,69 @@
 }
 
 @media(max-width:1000px) {
-	#wrap2{
-		display:none;
-	}
+   #wrap2{
+      display:none;
+   }
 }
 @media(max-width:1200px) {
-	.media-body{
-		display:none;
-	}
-	.media{
-	}
+   .media-body{
+      display:none;
+   }
+   .media{
+   }
 }
 @media(max-width:800px) {
-	.container-content{
-		display:none;
-	}
+   .container-content{
+      display:none;
+   }
 }
 #content{
-	width:100%;
-	margin: 0 auto;
-	text-align: center;
-	/* font-size: 1.2vw; */
+   width:100%;
+   margin: 0 auto;
+   text-align: center;
+   /* font-size: 1.2vw; */
 }
 .container-for-carousel{
-	width:100%;
+   width:100%;
 }
 .container-for-content{
-		padding-top: 3%;
-		margin-left: 5%;
-		margin-right: 5%;
-		padding-left: 10%;
-		padding-right: 10%;
-		padding-bottom: 5%;
-		/*내용 컴포넌트를 넣는 곳*/
-		background-color: rgba(223,232,225,0.1); 
+      padding-top: 3%;
+      margin-left: 5%;
+      margin-right: 5%;
+      padding-left: 10%;
+      padding-right: 10%;
+      padding-bottom: 5%;
+      /*내용 컴포넌트를 넣는 곳*/
+      background-color: rgba(223,232,225,0.1); 
 }
 td{
-	font-size: 1.0em;
-	margin:auto 0;
-	color: gray;
+   font-size: 1.0em;
+   margin:auto 0;
+   color: gray;
 }
 
 .wrap {
-	width: 70%;
-	margin-left: 140px;
+   width: 70%;
+   margin-left: 140px;
 }
 .wrap2 {
 }
 .wrap3 {
-	background: rgba(223, 232, 225, 0.1);
-	width: 100%;
-	height: 50px;
+   background: rgba(223, 232, 225, 0.1);
+   width: 100%;
+   height: 50px;
 }
 
 .navy {
-	width: 400px;
-	margin-left: auto;
-	margin-right: auto;
+   width: 400px;
+   margin-left: auto;
+   margin-right: auto;
 }
 .nav-item2:hover {
-	background: beige;
-	color: orangered;
-	font-weight: bold;
-	cursor: pointer;
+   background: beige;
+   color: orangered;
+   font-weight: bold;
+   cursor: pointer;
 }
 
 .exBtn {
@@ -124,7 +128,7 @@ td{
     
 }
 .exBtn:hover{
-	background: #ff4000;
+   background: #ff4000;
 }
 .acBtn {
     background-color: #33DF5E;
@@ -143,7 +147,7 @@ td{
     
 }
 .acBtn:hover{
-	background: #36BF59;
+   background: #36BF59;
 }
 .caBtn {
     background-color: #f8585b;
@@ -162,7 +166,7 @@ td{
    
 }
 .caBtn:hover{
-	background: #ff4000;
+   background: #ff4000;
 }
 
 .macBtn {
@@ -182,7 +186,7 @@ td{
     
 }
 .macBtn:hover{
-	background: #36BF59;
+   background: #36BF59;
 }
 .mcaBtn {
     background-color: #f8585b;
@@ -201,7 +205,7 @@ td{
    
 }
 .mcaBtn:hover{
-	background: #ff4000;
+   background: #ff4000;
 }
 .simple {
     display: inline-block;
@@ -419,7 +423,7 @@ td{
                </tbody>
             </table>
             <%}else{%>
-            <h4>팀장만 조회 가능합니다.</h4>	
+            <h4>팀장만 조회 가능합니다.</h4>   
             <%} %>
          </div>
       </div>
@@ -428,7 +432,7 @@ td{
          <hr>
          <h1>신청 받은 매칭</h1>
          <hr>
-		 <% if(loginUser.equals(teamInfo.getTeam_leader())){ %>
+       <% if(loginUser.equals(teamInfo.getTeam_leader())){ %>
          <div class="table-responsive">
             <table class="table table-hover">
                <thead class="thead-dark">
@@ -474,7 +478,7 @@ td{
             </table>
          </div>
           <%}else{%>
-            <h4>팀장만 조회 가능합니다.</h4>	
+            <h4>팀장만 조회 가능합니다.</h4>   
             <%} %>
         
       </div>
@@ -548,7 +552,7 @@ td{
             if (confirm("가입거절하시겠습니까?") == true){
                $.ajax({
                    url: '<%=request.getContextPath()%>/team/leader.do',
-                   data: {supporter:supporter, team_code:team_code, type:type,oriteam,oriteam},
+                   data: {supporter:supporter, team_code:team_code, type:type},
                    success: function(data) {
                       console.log(data);
                       
