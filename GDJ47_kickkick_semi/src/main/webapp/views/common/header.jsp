@@ -2,28 +2,40 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.member.model.vo.Member, com.reservation.model.vo.Stadium, com.reservation.model.service.ReservationService" %> 
 <%@ page import="java.util.List,com.board.model.vo.Board,com.board.model.service.BoardService,com.team.model.vo.Team,com.team.model.service.TeamService" %>
-
+<%@ page import="java.util.ArrayList" %>
 <%
 Member loginMember = (Member)session.getAttribute("loginMember");
+	BoardService bs = new BoardService();
+	ReservationService rs = new ReservationService();
+	TeamService ts = new TeamService();
 	
-	List<Board> boardList = new BoardService().mainNotice();
-	Board[] bArr = new Board[4];
+	
+	List<Board> boardList = new ArrayList();
+	if(bs.mainNotice()!=null){
+		boardList = bs.mainNotice();
+	}
+	Board[] bArr = new Board[boardList.size()];
 	for(int i=0; i< bArr.length; i++){
 		if(!(boardList.isEmpty())||boardList.size()==4){
 			bArr[i]=boardList.get(i);
 		}
 	}
-	
-	List<Stadium> stadiumList = (List<Stadium>)new ReservationService().sixStadium();
-	Stadium[] sArr = new Stadium[6];
+	List<Stadium> stadiumList = new ArrayList();
+	if(rs.sixStadium()!=null){
+		stadiumList = rs.sixStadium();
+	}
+	Stadium[] sArr = new Stadium[stadiumList.size()];
 	for(int i=0; i<sArr.length; i++){
 		if(!(stadiumList.isEmpty())){
 	sArr[i]=stadiumList.get(i);
 		}
 	}
 	
-	List<Team> teamList = (List<Team>) new TeamService().fourTeam();
-	Team[] tArr = new Team[4];
+	List<Team> teamList = new ArrayList();
+	if(ts.fourTeam()!=null){
+		teamList = ts.fourTeam();
+	}
+	Team[] tArr = new Team[teamList.size()];
 	for(int i=0; i<tArr.length; i++){
 		if(!(teamList.isEmpty())){
 	tArr[i] = teamList.get(i);
