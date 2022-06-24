@@ -56,7 +56,7 @@ public class TeamLeaderServlet extends HttpServlet {
 			
 		}else if(type.equals("3")) { //취소
 			result = 3;
-			new TeamService().teamCancel(supporter, teamcode);
+			new TeamService().teamCancel(supporter, team_code);
 		
 		}else if(type.equals("4")) { //매치수락
 			int statusCheck = new TeamService().teamMatchStatusCheck(match_regist_num);

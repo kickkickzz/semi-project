@@ -548,7 +548,7 @@ td{
             if (confirm("가입거절하시겠습니까?") == true){
                $.ajax({
                    url: '<%=request.getContextPath()%>/team/leader.do',
-                   data: {supporter:supporter, team_code:team_code, type:type},
+                   data: {supporter:supporter, team_code:team_code, type:type,oriteam,oriteam},
                    success: function(data) {
                       console.log(data);
                       
