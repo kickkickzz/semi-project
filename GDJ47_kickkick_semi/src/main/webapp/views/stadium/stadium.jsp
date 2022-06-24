@@ -235,7 +235,7 @@ if(loginMember!=null){
 				success :(data)=>{ //json을 이용해서 배열로 data를 받아올려고 하는데 그러면
 					if(data){
 						alert("지점이 조회되었습니다.");
-						$('#branch_num').empty(); //받아온 데이터를 for문 돌릴려고 하는데
+						 //받아온 데이터를 for문 돌릴려고 하는데
 						$.each(data , function(index,value){ //value가 서블릿에서 받아온 data를 value에 하나씩 넣어줌
 							branchNum += '<option value="'+value.branch_num+">"+value.branch_num+" 지점</option>";
 						}); //branchNum 배열에 하나씩 들어감 option 값이 그러면 이제 append로 select 에 추가

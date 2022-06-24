@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.google.gson.Gson;
 import com.reservation.model.service.ReservationService;
 import com.reservation.model.vo.Stadium;
 
@@ -37,15 +38,15 @@ public class StadiumSearchServlet extends HttpServlet {
 		//stadium이 구장, branch가 지점 지점안에 구장이 여러개가 있음
 		String email = request.getParameter("email");
 		System.out.println(email);
-		List<Stadium> result = new ReservationService().stadiumSearch(email); //{stadim[0],stadium[1]...}
-		JSONArray list = null;
-		if(!result.isEmpty()) {
-			for(Stadium s : result) { //
-				list = new JSONArray();
+		List<Stadium> list = new ReservationService().stadiumSearch(email); //{stadim[0],stadium[1]...}
+		JSONArray result = null; 
+		if(!list.isEmpty()) {
+			for(Stadium s : list) { //
+				result = new JSONArray();
 				JSONObject sta = new JSONObject();
 				System.out.println();
 				sta.put("branch_num",s.getBranch_num());
-				list.add(sta);
+				result.add(sta);
 			}
 		}else {
 			System.out.println("result 가없습니다.");
@@ -54,7 +55,8 @@ public class StadiumSearchServlet extends HttpServlet {
 		}
 		
 		response.setContentType("application/json;charset=utf-8");
-		response.getWriter().print(list); //조회된 지점이 없으면 list가 null값이 나오는데 왜 안되징
+		new Gson().toJson(result,response.getWriter());
+//		response.getWriter().print(result); //조회된 지점이 없으면 list가 null값이 나오는데 왜 안되징
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

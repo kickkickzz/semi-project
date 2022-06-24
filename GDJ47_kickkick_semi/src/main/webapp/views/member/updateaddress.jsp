@@ -19,9 +19,9 @@
 	</div>
 	<form action="<%=request.getContextPath()%>/updateaddressend.do" method="post" onsubmit="return addSubmit();">
 	  <div style="margin-left:65px">
-	  <input type="text" id="sample6_postcode" placeholder="우편번호" size="45" style="margin-bottom : 7px; height:30px;"><br>
-	  <input type="text" id="sample6_address" name="address2" placeholder="주소" size="45" style="margin-bottom : 7px;  height:30px;">
-	  <input type="text" id="sample6_extraAddress" size="45" name="address3"placeholder="참고항목" style="margin-bottom : 7px;  height:30px;"><br>
+	  <input type="text" id="sample6_postcode" placeholder="우편번호" size="45" style="margin-bottom : 7px; height:30px;" readonly><br>
+	  <input type="text" id="sample6_address" name="address2" placeholder="주소" size="45" style="margin-bottom : 7px;  height:30px;" readonly>
+	  <input type="text" id="sample6_extraAddress" size="45" name="address3"placeholder="참고항목" style="margin-bottom : 7px;  height:30px;" readonly><br>
 	  <input type="text" id="sample6_detailAddress" name="address4" placeholder="상세주소" size="45" style="margin-bottom : 7px;  height:30px;"><br>
 	  </div>
 	  <div style="text-align:center;">
@@ -87,15 +87,23 @@ function sample6_execDaumPostcode() {
             document.getElementById("sample6_detailAddress").focus();
         }
     }).open();
+  
 }
 
 function addSubmit() {
-    var post = document.getElementById('sample6_postcode').value;
+	var post = document.getElementById('sample6_postcode').value;
+    var detail = document.getElementById('sample6_detailAddress').value;
     if (post=="") {
-      alert('주소를 검색하지 않으셨습니다.');
+      alert('주소를 검색하지 않으셨습니다.')
       return false;
+    }else if(detail==""){
+  	  alert('상세주소를 입력해주세요.');
+    	return false;
+    }else{
+    	return true;
     }
-  }
+ }
+
 </script>
 </body>
 </html>
