@@ -170,7 +170,7 @@
 							</div>
 							
 							<div class="selectCover" style="padding-left: 0;">
-								<img id="cover" src="<%= request.getContextPath() %>/resources/common/images/마크등록.png"
+								<img id="cover" src="<%= request.getContextPath() %>/views/common/images/마크등록.png"
 									style="width: 282px; height: 268px;" />
 							</div>
 							<br>

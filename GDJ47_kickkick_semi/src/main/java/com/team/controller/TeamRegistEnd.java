@@ -116,7 +116,7 @@ public class TeamRegistEnd extends HttpServlet {
 				
 						if(result>0) {
 							msg="팀이 등록되었습니다.";
-							loc="/";
+							loc="/team.do";
 						}else {
 							msg="팀 등록에 실패하였습니다.";
 							loc="/";
