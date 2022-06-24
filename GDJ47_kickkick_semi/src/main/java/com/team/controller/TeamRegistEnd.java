@@ -116,14 +116,14 @@ public class TeamRegistEnd extends HttpServlet {
 				
 						if(result>0) {
 							msg="팀이 등록되었습니다.";
-							loc="/team.do";
+							loc="";
 						}else {
 							msg="팀 등록에 실패하였습니다.";
-							loc="/";
+							loc="/team/teamRegistEnd.do";
 						}
 						request.setAttribute("msg", msg);
 						request.setAttribute("loc", loc);
-						request.getRequestDispatcher("/views/msg/msg.jsp")
+						request.getRequestDispatcher("/views/msg/enrollEnd.jsp")
 						.forward(request, response);
 	           
 		         }
