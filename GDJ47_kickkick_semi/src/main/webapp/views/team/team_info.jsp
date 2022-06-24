@@ -36,7 +36,190 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">     
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src='https://d3js.org/d3.v3.min.js'></script>
+<style>
+.checked {
+  color: orange;
+}
 
+@media(max-width:1000px) {
+	#wrap2{
+		display:none;
+	}
+}
+@media(max-width:1200px) {
+	.media-body{
+		display:none;
+	}
+	.media{
+	}
+}
+@media(max-width:800px) {
+	.container-content{
+		display:none;
+	}
+}
+#content{
+	width:100%;
+	margin: 0 auto;
+	text-align: center;
+	/* font-size: 1.2vw; */
+}
+.container-for-carousel{
+	width:100%;
+}
+.container-for-content{
+		padding-top: 3%;
+		margin-left: 5%;
+		margin-right: 5%;
+		padding-left: 10%;
+		padding-right: 10%;
+		padding-bottom: 5%;
+		/*내용 컴포넌트를 넣는 곳*/
+		background-color: rgba(223,232,225,0.1); 
+}
+td{
+	font-size: 1.0em;
+	margin:auto 0;
+	color: gray;
+}
+
+.wrap {
+	width: 70%;
+	margin-left: 140px;
+}
+.wrap2 {
+}
+.wrap3 {
+	background: rgba(223, 232, 225, 0.1);
+	width: 100%;
+	height: 50px;
+}
+
+.navy {
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.nav-item2:hover {
+	background: beige;
+	color: orangered;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.exBtn {
+    background-color: #f8585b;
+    display: inline-block;
+    font: inherit;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    padding: 4px 10px;
+    border: none;
+    border-bottom: 3px solid #3f84b0;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    
+}
+.exBtn:hover{
+	background: #ff4000;
+}
+.acBtn {
+    background-color: #33DF5E;
+    display: inline-block;
+    font: inherit;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    padding: 4px 10px;
+    border: none;
+    border-bottom: 3px solid #3f84b0;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    
+}
+.acBtn:hover{
+	background: #36BF59;
+}
+.caBtn {
+    background-color: #f8585b;
+    display: inline-block;
+    font: inherit;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    padding: 4px 10px;
+    border: none;
+    border-bottom: 3px solid #3f84b0;
+    border-radius: 3px;
+    margin-bottom: 10px;
+   
+}
+.caBtn:hover{
+	background: #ff4000;
+}
+
+.macBtn {
+    background-color: #33DF5E;
+    display: inline-block;
+    font: inherit;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    padding: 4px 10px;
+    border: none;
+    border-bottom: 3px solid #3f84b0;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    
+}
+.macBtn:hover{
+	background: #36BF59;
+}
+.mcaBtn {
+    background-color: #f8585b;
+    display: inline-block;
+    font: inherit;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    padding: 4px 10px;
+    border: none;
+    border-bottom: 3px solid #3f84b0;
+    border-radius: 3px;
+    margin-bottom: 10px;
+   
+}
+.mcaBtn:hover{
+	background: #ff4000;
+}
+.simple {
+    display: inline-block;
+    font: inherit;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #5ca1cd;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 25px;
+    border: none;
+    border-bottom: 3px solid #3f84b0;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+.simple:hover {background-color: #61a8d5;}
+</style>
 <body>
 
    <!-- BODY 시작 -->
@@ -90,7 +273,7 @@
                            <th>팀별점</th>
                            <td>
                               <%for (int i = 0; i < teamInfo.getTeam_point(); i++) { %><span class="fa fa-star checked"></span> <%}%>
-                                     <%for (int i = 0; i < 5-teamInfo.getTeam_point(); i++) { %><span class="fa fa-star"></span> <% }%></h1>
+                              <%for (int i = 0; i < 5-teamInfo.getTeam_point(); i++) { %><span class="fa fa-star"></span> <% }%></h1>
                            </td>
                         </tr>
 
@@ -236,7 +419,7 @@
                </tbody>
             </table>
             <%}else{%>
-            <h3>팀장만 조회 가능합니다.</h1>	
+            <h4>팀장만 조회 가능합니다.</h4>	
             <%} %>
          </div>
       </div>
@@ -291,7 +474,7 @@
             </table>
          </div>
           <%}else{%>
-            <h3>팀장만 조회 가능합니다.</h1>	
+            <h4>팀장만 조회 가능합니다.</h4>	
             <%} %>
         
       </div>

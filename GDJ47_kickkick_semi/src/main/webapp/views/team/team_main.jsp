@@ -55,6 +55,7 @@ td{
   	height:50px;
 	border:3px solid #ccc;
 	
+	
 }
 .search-teamName::placeholder{
 	color: gray;
@@ -146,7 +147,7 @@ td{
 					</table>
 					<div style="left : 35%;">
 		<form action="<%=request.getContextPath()%>/team/searchTeam.do">
-			<input type="hidden" name="searchType" value="team_name">
+			<input type="hidden" name="searchType" value="team_name" class="search-teamName">
 			<input type="text" name="searchKeyword" size="40" style="float: left; " class="search-teamName"
 			placeholder="검색할 이름을 입력하세요">
 			<button type="submit" class="simple" style="float: left; margin-left:10px;">검색</button>
@@ -159,7 +160,6 @@ td{
         	<%=request.getAttribute("pageBar") %>
         </div>
 	</section>
-	<%-- <%@include file="../common/footer.jsp"%> --%>	
 	
 	<!-- modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"

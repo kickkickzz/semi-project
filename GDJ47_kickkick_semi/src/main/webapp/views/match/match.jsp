@@ -213,9 +213,9 @@ if(loginMember!=null){
 				<td>5</td>
 				<td><%=m1.getBranch_address() %></td>
 				<td><% if(m1.getRegist_status().equals("Y")){%>
-				<input type="button" id="acBtn" class="acBtn" registnum="<%=m1.getRegist_num()%>" branchnum="<%=m1.getRegist_branch_num()%>" stadiumnum="<%= m1.getRegist_stadium_num()%>" reservationcode=<%=m1.getRegist_reservation_code()%> value="가능">
+				<input type="button" id="acBtn" class="acBtn" registnum="<%=m1.getRegist_num()%>" branchnum="<%=m1.getRegist_branch_num()%>" stadiumnum="<%= m1.getRegist_stadium_num()%>" reservationcode=<%=m1.getRegist_reservation_code()%> value="신청하기">
 				 <%}else{ %>
-				 	<input type="button" id="caBtn" class="caBtn" value="불가능">
+				 	<input type="button" id="caBtn" class="caBtn" value="신청불가">
 					<%} %>
 				</td>
 			

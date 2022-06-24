@@ -2,23 +2,17 @@
     pageEncoding="UTF-8" %>
 <%@page import = "com.reservation.model.vo.PayHistory,java.util.List" %>
  
-<%
- List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist");
- %>
-<%
-List<Team> result = (List<Team>)request.getAttribute("result");
-%>
- 
+ <% List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist"); %>
 <%@ include file="/views/common/header.jsp" %>
 
  <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
 
     
 
-
+    <!-- Bootstrap core CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-
+    <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
 <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
@@ -31,6 +25,21 @@ List<Team> result = (List<Team>)request.getAttribute("result");
 <script src="https://kit.fontawesome.com/3de5dd50e8.js" crossorigin="anonymous"></script>
 
     <style>
+    .simple {
+    display: inline-block;
+    font: inherit;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: gray;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 25px;
+    border: none;
+    border-bottom: 3px solid black;
+    border-radius: 3px;
+}
+.simple:hover {background-color: lightgray;}
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -71,14 +80,14 @@ List<Team> result = (List<Team>)request.getAttribute("result");
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<%=request.getContextPath()%>/member/reservationlist.do?email=<%=loginMember.getEmail()%>" style="color: black">
+            <a class="nav-link" href="" style="color: black">
                 <i class="fa-solid fa-list"></i>
                 <span data-feather="file"></span>
               예약현황
             </a>
           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="<%=request.getContextPath()%>/branch.do" style="color: black">
+          <li class="nav-item">
+            <a class="nav-link" href="<%=request.getContextPath()%>/branch.do?emamil=<%=email %>" style="color: black">
                 <i class="fa-solid fa-list"></i>
                 <span data-feather="file"></span>
               지점정보
@@ -92,7 +101,7 @@ List<Team> result = (List<Team>)request.getAttribute("result");
             </a>
           </li>
       	<li class="nav-item">
-	       	 <a class="nav-link" href="<%=request.getContextPath()%>" style="color: black">
+	       	 <a class="nav-link" href="<%=request.getContextPath()%>/joinTeam.do?email=<%=loginMember.getEmail()%>" style="color: black">
 	         <i class="fa-solid fa-user-plus"></i>
 	         <span data-feather="shopping-cart"></span>
 	         가입한 팀
@@ -118,37 +127,14 @@ List<Team> result = (List<Team>)request.getAttribute("result");
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <br><br>
-      <h2>가입한 팀</h2>
+      <h2>지점정보</h2>
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">로고</th>
-              <th scope="col">이름</th>
-              <th scope="col">정보</th>
-              <th scope="col">탈퇴</th>
-            </tr>
-          </thead>
-          <tbody>
-          <%if(result!=null&&result.size()>0) {%>
-          	<%for(Team t : result){%>
-          	<tr>
-          		<td><%=t.getTeam_code()%></td>
-          		<td><%=t.getTeam_mark_img()%></td>
-          		<td><%=t.getTeam_name()%></td>
-          		<td><%=t.getTeam_region()%></td>
-          		<td><input id="btn_teammember" type="button" value="탈퇴"></td>
-          	</tr>
-          	<%} %>
-          <%}else{%>
-          <tr>
-          		<td colspan="5" style="text-align:center;">가입한 팀이 없습니다.</td>
-          </tr>
-          <%} %>
-         </tbody>
-        </table>
+      
+      	   <div style="text-align:center">
+   	   		  <button class="simple" type="button" onclick="fn_enrollbranch();">지점등록</button>		
+      		
+      		</div>
+       
       </div>
     </main>
   </div>
@@ -179,27 +165,11 @@ const fn_delete = ()=>{
 	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=210 ,left=500, top=200");
 }
 
-
-$("#btn_teammember").click(e=>{
-	var email = '<%=loginMember.getEmail()%>';
-	if(confirm('한번 탈퇴한 팀은 다시 가입할 수 없습니다. 정말 탈퇴하시겠습니까?')){
-		$.ajax({
-			url : "<%=request.getContextPath()%>/deleteteammember.do",
-			type : "post",
-			data : {supporterEmail:email},
-			success :(data)=>{
-				if(data>0){
-					alert('팀 탈퇴가 정상적으로 처리 되었습니다.');
-				}else{
-					alert('팀 탈퇴가 정상적으로 처리 되지 않았습니다.');
-				}
-			}
-		})
-	}else{
-	}
-})
+const fn_enrollbranch=()=>{
+	window.open("<%=request.getContextPath()%>/enrollbranch.do", "enrollbranch", "width=500, height=680");
+}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
 
-<%@ include file="/views/common/footer.jsp"%>
+<%@ include file="/views/common/footer.jsp" %>

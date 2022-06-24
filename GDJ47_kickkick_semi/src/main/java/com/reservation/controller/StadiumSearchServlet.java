@@ -1,6 +1,7 @@
 package com.reservation.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.google.gson.Gson;
 import com.reservation.model.service.ReservationService;
 import com.reservation.model.vo.Stadium;
 
@@ -38,23 +40,23 @@ public class StadiumSearchServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		System.out.println(email);
 		List<Stadium> result = new ReservationService().stadiumSearch(email); //{stadim[0],stadium[1]...}
-		JSONArray list = null;
+		List<String> s1 = new ArrayList<String>();
 		if(!result.isEmpty()) {
 			for(Stadium s : result) { //
-				list = new JSONArray();
-				JSONObject sta = new JSONObject();
-				System.out.println();
-				sta.put("branch_num",s.getBranch_num());
-				list.add(sta);
+				
+				s1.add(s.getBranch_num());
+				
 			}
 		}else {
 			System.out.println("result 가없습니다.");
 			System.out.println(result);
 //			list = null;
 		}
+		System.out.println(s1);
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(s1,response.getWriter());
 		
-		response.setContentType("application/json;charset=utf-8");
-		response.getWriter().print(list); //조회된 지점이 없으면 list가 null값이 나오는데 왜 안되징
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

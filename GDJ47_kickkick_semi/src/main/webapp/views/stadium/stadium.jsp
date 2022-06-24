@@ -33,7 +33,7 @@ if(loginMember!=null){
 <script src="https://kit.fontawesome.com/7bb5347123.js" crossorigin="anonymous"></script>
 		
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/3de5dd50e8.js" crossorigin="anonymous"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -227,23 +227,31 @@ if(loginMember!=null){
 		//지점 등록 버튼
 		$("#branchBtn").click(e=>{
 			var branchNum = "";
+			
 			var email = '<%=userId%>';
 			$.ajax({
 				url: "<%=request.getContextPath()%>/stadiumSearch.do",
 				type :"post",
 				data : {email:email},
 				success :(data)=>{ //json을 이용해서 배열로 data를 받아올려고 하는데 그러면
+					console.log(data);
 					if(data){
 						alert("지점이 조회되었습니다.");
-						$('#branch_num').empty(); //받아온 데이터를 for문 돌릴려고 하는데
-						$.each(data , function(index,value){ //value가 서블릿에서 받아온 data를 value에 하나씩 넣어줌
-							branchNum += '<option value="'+value.branch_num+">"+value.branch_num+" 지점</option>";
-						}); //branchNum 배열에 하나씩 들어감 option 값이 그러면 이제 append로 select 에 추가
+						 $('#branch_num').empty();  //받아온 데이터를 for문 돌릴려고 하는데
+						$.each(data , function(key,value){ 
+							
+							
+							
+							console.log(key+data[key])
+							//value가 서블릿에서 받아온 data를 value에 하나씩 넣어줌
+							branchNum += "<option value="+ value+">"+ value+"지점</option>";
+						});
+						$('#branch_num').html(branchNum);//branchNum 배열에 하나씩 들어감 option 값이 그러면 이제 append로 select 에 추가
 					}else{
 						alert("조회된 지점이 없습니다.");
 						branchNum += '<option value="------">'+"------"+'</option>';
 					}
-					$('#branch_num').html(branchNum);
+					
 				}
 			});
 		});
@@ -263,7 +271,7 @@ if(loginMember!=null){
 				alert("구장이름을 입력하세요");
 			}else if(stadiumMatchMember == ""){
 				alert("구장 매치 인원을 선택하세요");
-			}else if(branchNum !="------"){ //나중에 여기 != > == 로 바꿔야함!!
+			}else if(branchNum =="------"){ //나중에 여기 != > == 로 바꿔야함!!
 				alert("지점을 선택하세요");
 			}else if(startTime>endTime){
 				alert("예약가능시간이 잘못되었습니다 다시 선택해주세요.");

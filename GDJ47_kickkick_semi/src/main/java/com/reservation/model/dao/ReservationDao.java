@@ -294,7 +294,7 @@ public class ReservationDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Stadium s = Stadium.builder()
-						.branch_num(rs.getString("stadium_branch_num"))
+						.branch_num(rs.getString("branch_num"))
 						.build();
 				result.add(s);
 			}

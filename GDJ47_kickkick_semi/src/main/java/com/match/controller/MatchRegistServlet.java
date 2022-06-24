@@ -50,10 +50,10 @@ public class MatchRegistServlet extends HttpServlet {
                int codeCheck3 = new MatchService().check(userId,reservation_code);//사용자 예약내역이 있는지확인
                if(codeCheck3>0) {//사용자의 구장예약 내역이 있으면
                   Team team = new MatchService().selectteamcode(userId);//사용자의 팀코드 가져옴
-                  PayHistory ph = new MatchService().selectpayhistoryinfo(reservation_code);
+                  PayHistory ph = new MatchService().selectpayhistoryinfo(reservation_code);//예약코드를 가지고 구장의번호,지점명을가져옴
                   Match m = Match.builder().team_code(team.getTeam_code()).reservation_code(reservation_code)
                         .branch_num(ph.getStadium_branch_num()).stadium_num(ph.getStadium_num()).build();
-                  new MatchService().matchRegist(m);
+                  new MatchService().matchRegist(m);//매치레지스트테이블에 인서트
                   result =2;
                   }else {
                      result =3; //내역이 없기 때문에 예약 불가
@@ -61,8 +61,8 @@ public class MatchRegistServlet extends HttpServlet {
 
             }
 
-         }else {//
-
+         }else {//예약코드없음
+        	 result=4;
          }
       }else { // 팀없음
          result =0;
