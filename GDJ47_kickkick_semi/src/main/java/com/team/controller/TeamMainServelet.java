@@ -37,12 +37,17 @@ public class TeamMainServelet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		int cPage;
+		int numPerpage;
 		try{
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		int numPerpage=5;
+		try {
+			numPerpage=Integer.parseInt(request.getParameter("numPerpage"));
+		}catch(NumberFormatException e) {
+			numPerpage=10;
+		}
 		
 		List<Team> list=new TeamService().selectTeamList(cPage, numPerpage);
 		request.setAttribute("list", list);
@@ -51,36 +56,46 @@ public class TeamMainServelet extends HttpServlet {
 		int totalData=new TeamService().selectTeamCount();
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		
-		int pageBarSize=5;
+		int pageBarSize=10;
 		
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
 		
 		
 		String pageBar="";
+
+		
+		
+		
+		
 		if(pageNo==1) {
-			pageBar+="<span>[이전]</span>";
+			
 		}else {
 			pageBar+="<a href='"+request.getContextPath()
-					+"/team.do?cPage="+(pageNo-1)+"'>[이전]</a>";
+					+"/team.do?cPage="+(pageNo-1)+"'></a>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(cPage==pageNo) {
-				pageBar+="<span>"+pageNo+"<span>";
+				pageBar+="<span>"+pageNo+"</span>";
+				
 			}else {
-				pageBar+="<a href='"+request.getContextPath()
-				+"/team.do?cPage="+pageNo+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getContextPath()+
+						"/team.do?cPage="+(pageNo)
+						+"&numPerPage="+numPerpage+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 		
 		if(pageNo>totalPage) {
-			pageBar+="<span>[다음]</span>";
+		
 		}else {
 			pageBar+="<a href='"+request.getContextPath()
-			+"/team.do?cPage="+pageNo+"'>[다음]</a>";
+			+"/team.do?cPage="+(pageNo)
+					+"&numPerPage="+numPerpage+"'></a>";
 		}
+		
+		
 		
 		request.setAttribute("pageBar", pageBar);
 
