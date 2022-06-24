@@ -43,7 +43,7 @@ public class PasswordForgotUpdateServlet extends HttpServlet {
             request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
             return;
         }else {
-        	System.out.println("인증번호 일치합니다.");
+        	System.out.println("인증번호가 일치합니다.");
         	//int result = new MemberService().extraPassword(email,AuthenticationUser);
         	String email = request.getParameter("email");
 //        	int result = new MemberService().extraPassword(email,AuthenticationKey);

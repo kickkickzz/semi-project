@@ -12,13 +12,32 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div class="hh">
+		<h2>비밀번호 찾기</h2>
+		<hr/>
+		<br>
+		<p>
+			인증번호를 입력하시면<br>
+			비밀번호를 재변경 가능합니다.
+		</p>
+	</div>
+	<br>
+	<br>
 	<form action="<%=request.getContextPath()%>/passwordForgotUpdate.do" method="post">
-		인증키 <input type="text" name="AuthenticationUser">
+	<div style="text-align : center;">
+		> 인증키 <input type="text" name="AuthenticationUser" style="margin-left:10px">
 		<input type="submit" value="확인">
+	</div>
 		<input type="hidden" value="<%=email%>" name="email">
 		<input type="hidden" value="<%=AuthenticationKey%>" name="AuthenticationKey">
 	</form>
 </body>
+<style>
+.hh{
+			text-align:center;
+		}
+</style>
 <script>
+
 </script>
 </html>
