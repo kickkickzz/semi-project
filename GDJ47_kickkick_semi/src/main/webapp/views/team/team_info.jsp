@@ -15,7 +15,6 @@
    }
    
    
-   
 
 %>
 
@@ -193,13 +192,16 @@
             </div>
          </div>
       </div>
-      
+     
       <div class="wrap5" id="wrap5">
          <hr>
          <h1>용병 신청</h1>
+          
          <hr>
 
          <div class="table-responsive">
+        
+         <% if(loginUser.equals(teamInfo.getTeam_leader())){ %>
             <table class="table table-hover">
                <thead class="thead-dark">
                   <tr>
@@ -233,6 +235,9 @@
                   
                </tbody>
             </table>
+            <%}else{%>
+            <h3>팀장만 조회 가능합니다.</h1>	
+            <%} %>
          </div>
       </div>
       
@@ -240,28 +245,22 @@
          <hr>
          <h1>신청 받은 매칭</h1>
          <hr>
-
+		 <% if(loginUser.equals(teamInfo.getTeam_leader())){ %>
          <div class="table-responsive">
             <table class="table table-hover">
                <thead class="thead-dark">
                   <tr>
-                     <th scope="col">등록</th>
-                     <th scope="col">위치</th>
-                     <th scope="col">구장</th>
-                     <th scope="col">매치</th>
-                     <th scope="col">시간</th>
-                     <th scope="col">날짜</th>
-                     <th scope="col">신청팀</th>
-                     <th scope="col"></th>
-                     <th scope="col"></th>
-                     <th scope="col">별점</th>
+                     <th scope="col">신청 팀 이름</th>
+                     <th scope="col">팀 성별</th>
+                     <th scope="col">지역</th>
+                     <th scope="col">팀 연령대</th>
                      <th scope="col">상태</th>
                   </tr>
                </thead>
                <tbody>
                    <% if(matchlist.isEmpty()){ %>
                      <tr>
-                        <td colspan="7">매칭팀이 없습니다.</td>
+                        <td colspan="5">매칭팀이 없습니다.</td>
                      </tr>
                   <%} else { %>
                      
@@ -291,7 +290,12 @@
                </tbody>
             </table>
          </div>
+          <%}else{%>
+            <h3>팀장만 조회 가능합니다.</h1>	
+            <%} %>
+        
       </div>
+      
    </section>
    
    <!--BODY 끝.-->
