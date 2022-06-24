@@ -25,7 +25,7 @@ $(()=>{
 			$("#address4").val(address4);
 			$("#gender").val(gender);
 			form.attr("onsubmit","return enroll();")
-			form.attr("action","http://localhost:9090/GDJ47_kickkick_semi/enrollMember.do");
+			form.attr("action","/GDJ47_kickkick_semi/enrollMember.do");
 			form.submit();
 		}else{
 			const form = $("#h-form");
