@@ -129,7 +129,7 @@
                      <dl>
                         <dd>
                            <%if(tArr[i].getTeam_mark_img()!=null){ %>
-                              <img id="main-team-logo" src="./images/팀로고/<%=tArr[i].getTeam_mark_img() %>">
+                              <img id="main-team-logo" src="./resources/storage/<%=tArr[i].getTeam_leader()%>/team_img/<%=tArr[i].getTeam_mark_img() %>">
                            <%}else{ %>
                               <img src="./images/세미로고.png">
                            <%} %>
