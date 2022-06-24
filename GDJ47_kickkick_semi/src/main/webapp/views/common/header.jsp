@@ -32,7 +32,10 @@
 			System.out.println("데이터 없음");
 		}
 	}
-	
+	String email=null;
+	if(loginMember!=null){
+		email=loginMember.getEmail();
+	}
 %>
 
 <!DOCTYPE html>

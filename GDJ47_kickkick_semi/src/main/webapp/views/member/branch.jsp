@@ -25,6 +25,21 @@
 <script src="https://kit.fontawesome.com/3de5dd50e8.js" crossorigin="anonymous"></script>
 
     <style>
+    .simple {
+    display: inline-block;
+    font: inherit;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: gray;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 25px;
+    border: none;
+    border-bottom: 3px solid black;
+    border-radius: 3px;
+}
+.simple:hover {background-color: lightgray;}
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -72,7 +87,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<%=request.getContextPath()%>/branch.do" style="color: black">
+            <a class="nav-link" href="<%=request.getContextPath()%>/branch.do?emamil=<%=email %>" style="color: black">
                 <i class="fa-solid fa-list"></i>
                 <span data-feather="file"></span>
               지점정보
@@ -112,52 +127,14 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <br><br>
-      <h2>예약 현황</h2>
+      <h2>지점정보</h2>
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-           		
-            <th scope="col">결제코드</th>
-            <th scope="col">예약코드</th>	 
-              <th scope="col">구장이름</th>
-              <th scope="col">예약자명</th>
-              <th scope="col">예약날짜</th>
-              <th scope="col">이용시간</th>
-              <th scope="col">결제수단</th>
-              
-             
-              
-            </tr>
-          </thead>
-          <tbody>
-          <!-- 이메일로 검색해서 구장을 리스트로 갖고온다음 여기서 리스트 for문써서 활용 -->
-          <%if(list.size()!=0){
-        	  for(PayHistory p:list){%>
-				          
-          <tr>
-          
-          		<td><%=p.getPaycode() %></td>
-          		<td><%=p.getReservation_code() %></td>
-             	<td><%=p.getStadium_branch_num() %></td>
-             	<td><%=loginMember.getName()%></td>
-             	<td><%=p.getPaydate() %></td>
-             	<td><%=p.getStarttime()%> : 00 ~ <%=p.getEndtime()%> : 00 </td>
-             	<td><%=p.getPaymethod() %></td>
-             </tr>
-             <%} %>
-        
-          <%}else{ %>
-             
-             <tr>
-             	<td=colspan="7">조회된 결과가 없습니다.</td>
-            
-             </tr>
-            
+      
+      	   <div style="text-align:center">
+   	   		  <button class="simple" type="button" onclick="fn_enrollbranch();">지점등록</button>		
+      		
+      		</div>
        
-       <%} %>
-            	</tbody>
-              </table>
       </div>
     </main>
   </div>
@@ -186,6 +163,10 @@ header{
 <script>
 const fn_delete = ()=>{
 	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=210 ,left=500, top=200");
+}
+
+const fn_enrollbranch=()=>{
+	window.open("<%=request.getContextPath()%>/enrollbranch.do", "enrollbranch", "width=500, height=680");
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
