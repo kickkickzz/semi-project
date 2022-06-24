@@ -115,7 +115,7 @@ $(()=>{
 	      $(".forgot").show();
 	      $(".form").css("border-radius","0px 10px 10px 0px");
 	      $(".move").css("border-radius","10px 0px 0px 10px");
-	    }, 200);
+	    }, 0);
 	    
 	    flag=0;
 	  }

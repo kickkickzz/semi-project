@@ -320,7 +320,7 @@ public class MatchDao {
 			pstmt.setString(1, teamcode);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				result= Team.builder().team_name(rs.getString("team_name")).team_gender(rs.getString("team_gender"))
+				result= Team.builder().team_code(rs.getString("team_code")).team_name(rs.getString("team_name")).team_gender(rs.getString("team_gender"))
 						.team_age(rs.getString("team_age")).team_region(rs.getString("team_region")).build();
 				
 			}

@@ -227,7 +227,7 @@ public class TeamService {
 		return result;
 	}
 
-	public void teamMatchAcStatus(String match_regist_num, String team_code) {
+	public int teamMatchAcStatus(String match_regist_num, String team_code) {
 		Connection conn = getConnection();
 
 		int result = dao.teamMatchAcStatus(conn, match_regist_num, team_code);
@@ -237,11 +237,12 @@ public class TeamService {
 		}
 
 		close(conn);
+		return result;
 
 		
 	}
 
-	public void teamMatchAccept(String match_regist_num, String team_code, String winlose) {
+	public int teamMatchAccept(String match_regist_num, String team_code, String winlose) {
 		Connection conn = getConnection();
 
 		int result =dao.teamMatchAccept(conn, match_regist_num, team_code, winlose);
@@ -251,6 +252,7 @@ public class TeamService {
 		}
 
 		close(conn);
+		return result;
 
 	}
 	public void teamMatchCaStatus(String match_regist_num, String team_code) {

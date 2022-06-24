@@ -271,8 +271,8 @@
 								<td><%= mt.getTeam_gender() %></td>
 								<td><%= mt.getTeam_region() %></td>
 								<td><%= mt.getTeam_age()%></td>
-								<td><input type="button" id="macBtn" class="macBtn" matchregistnum="<%=rnum%>" value="수락">
-                        		<input type="button" id="mcaBtn" class="mcaBtn" matchregistnum="<%=rnum%>" value="취소"></td></tr>
+								<td><input type="button" id="macBtn" class="macBtn" teamcode="<%=mt.getTeam_code() %>" matchregistnum="<%=rnum%>" value="수락">
+                        		<input type="button" id="mcaBtn" class="mcaBtn"  teamcode="<%=mt.getTeam_code() %>" matchregistnum="<%=rnum%>" value="취소"></td></tr>
                         
 							
 								
@@ -309,10 +309,11 @@
 	   var id = $(this).attr('id');
 	   var team_code = '<%= teamInfo.getTeam_code()%>';
 	   var type = '';
+	   const oriteam='<%=request.getParameter("team_code")%>';
+	   console.log("oriteam : "+oriteam);
 	   console.log(supporter);
 	   console.log(id);
 	   console.log(team_code);
-	   console.log(teamregistnum);
 	   var userId = '<%= loginUser%>';
 	   if(userId != null) {
 		   if(id == "exBtn") {

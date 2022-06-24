@@ -31,11 +31,15 @@ public class TeamLeaderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String supporter = request.getParameter("supporter");
-		String teamcode = request.getParameter("team_code");
-		String team_code = request.getParameter("teamcode");
+		String teamcode = request.getParameter("teamcode");
+		String team_code = request.getParameter("oriteam");
 		String match_regist_num = request.getParameter("match_regist_num");
 		String type = request.getParameter("type");
 		System.out.println(match_regist_num+"zz");
+		System.out.println("수락할팀 : "+teamcode);
+		System.out.println("받아주는팀 : "+team_code);
+		
+		
 		
 		int result = 0;
 		if(type.equals("1")) { //추방
@@ -53,9 +57,7 @@ public class TeamLeaderServlet extends HttpServlet {
 		}else if(type.equals("4")) { //매치수락
 			int statusCheck = new TeamService().teamMatchStatusCheck(match_regist_num);
 			if(statusCheck > 0) {
-				result = 0; //1개팀만수락가능
-			}else {
-				new TeamService().teamMatchAcStatus(match_regist_num ,team_code);
+				int test2 = new TeamService().teamMatchAcStatus(match_regist_num ,teamcode);
 				int ran =(int)(Math.random()*(3-1+1)+1);
 				String winlose = "";
 				if(ran == 1) {
@@ -65,14 +67,20 @@ public class TeamLeaderServlet extends HttpServlet {
 				}else {
 					winlose = "D";				
 				}
-				new TeamService().teamMatchAccept(match_regist_num, teamcode, winlose);
+				
+				int test = new TeamService().teamMatchAccept(match_regist_num, team_code, winlose);
+				System.out.println(test2+"check");
+				System.out.println(test);
 				result = 4;	
+				
+			}else {
+				result = 0; //1개팀만수락가능
 			}
 			
 			
 		}else if(type.equals("5")) { //매치취소
-			new TeamService().teamMatchCaStatus(match_regist_num ,team_code);
-			new TeamService().teamMatchCancel(match_regist_num, teamcode);
+			new TeamService().teamMatchCaStatus(match_regist_num ,teamcode);
+			new TeamService().teamMatchCancel(match_regist_num, team_code);
 			result = 5;
 			
 		}
