@@ -269,7 +269,7 @@ public class ReservationDao {
 						.branch_option_park(rs.getString("branch_option_park")).branch_option_uniform(rs.getString("branch_option_uniform"))
 						.branch_option_shoes(rs.getString("branch_option_shoes")).branch_option_ball(rs.getString("branch_option_ball"))
 						.branch_option_inout(rs.getString("branch_option_inout")).branch_branchInfo(rs.getString("branch_branchInfo"))
-						.branch_detailInfo(rs.getString("branch_detailInfo")).branch_notes(rs.getString("branch_notes")).build();;
+						.branch_detailInfo(rs.getString("branch_detailInfo")).branch_notes(rs.getString("branch_notes")).build();
 				list.add(s);
 			}
 		}catch(SQLException e) {

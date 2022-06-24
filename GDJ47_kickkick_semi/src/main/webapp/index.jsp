@@ -57,7 +57,7 @@
              if(sArr[i]!=null) {%>
           <div class="col">
              <div class="card">
-                <img src="./images/<%=sArr[i].getBranch_img()%>" class="card-img-top" alt="...">
+                <img src="./resources/storage/branch_img/<%=sArr[i].getBranch_img()%>" class="card-img-top" alt="...">
                 <!-- <img src="./images/달월.jpg" class="card-img-top" alt="..."> -->
                   <div class="card-body">
                     <h5 class="card-title"><a id="resertag" href="<%=request.getContextPath() %>/reservation.do?stanum=<%=sArr[i].getStadium_num()%>"><%=sArr[i].getStadium_name() %></a></h5>
