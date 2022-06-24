@@ -4,10 +4,11 @@
 %>
 
 <%
+
 	//세션으로 로그인한 멤버부르기
 	//Member loginUser=(Member)session.getAttribute("loginUser");
-	Board board=(Board)request.getAttribute("board");
-	BoardAttachment img=(BoardAttachment)request.getAttribute("img");
+	Board board= (Board)request.getAttribute("board");
+	BoardAttachment img= (BoardAttachment)request.getAttribute("img");
 	
 	System.out.println("공지사항-상세보기");
  	
@@ -21,7 +22,7 @@
 %>    
 <!-- 정적 파일 불러오기 css/js -->
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/css/boardDetail.css">
-<script src="<%=request.getContextPath()%>/js/boardDetail.js"></script>
+<script src="<%=request.getContextPath() %>/js/boardDetail.js"></script>
 <%@include file="/views/common/header.jsp"%>
 <body>
 	<!-- 본내용 -->
@@ -37,14 +38,14 @@
                 <div class="board-main-content-box">
 
                     <!-- 이미지 -->
-                    <div class="board-img-box">
+                   <div class="board-img-box">
                     	<%if(img!=null){ 
                     		//등록한 이미지 존재 시
                     	%>
                         	<img id="image" src="<%=request.getContextPath() %>/upload/storage/board_img/<%=img.getChangeName() %>" alt="게시판 이미지">
                         <%} %>
                     </div>
-
+                    
                     <!-- 내용 -->
                     <div class="board-content-box">
                         <textarea name="content" id="content" cols=30 style="resize:none;" readonly><%=board.getBoardContent() %></textarea>
@@ -54,7 +55,7 @@
                 <!-- 버튼박스 목록: 모든회원 가능//// 수정/삭제: 관리자만 가능 -->
                 <div class="board-btn-box">
                     	
-                    <%if( loginMember!=null&& loginMember.getEmail().equals("admin@kickick.com") ) {
+                    <%if( loginMember!=null&& loginMember.getType().equals("M") ) {
                     	//관리자 회원인경우에만 버튼을 클릭
                     %>
                     	<button id="goListBoardAd" type="button" class="btn btn-secondary btn-lg"

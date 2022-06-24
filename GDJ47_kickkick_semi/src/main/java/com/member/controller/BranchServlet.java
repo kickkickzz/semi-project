@@ -1,4 +1,4 @@
-package com.match.controller;
+package com.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class EnrollMatchServlet
+ * Servlet implementation class BranchServlet
  */
-@WebServlet("/enrollmatch.do")
-public class EnrollMatchServlet extends HttpServlet {
+@WebServlet("/branch.do")
+public class BranchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnrollMatchServlet() {
+    public BranchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,8 +27,7 @@ public class EnrollMatchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/views/match/enrollmatch.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("/views/member/branch.jsp").forward(request, response);
 	}
 
 	/**

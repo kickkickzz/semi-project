@@ -4,6 +4,7 @@
  <%List<Match> m = (List<Match>)request.getAttribute("matcharr");
 
  String pagebar = (String)request.getAttribute("pageBar");%>
+<%@ include file="/views/common/header.jsp" %>
  <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/7bb5347123.js" crossorigin="anonymous"></script>
@@ -75,7 +76,6 @@
 }
 
 </style>
-<%@ include file="/views/common/header.jsp" %>
 <%
 String userId = null;
 if(loginMember!=null){
@@ -213,9 +213,9 @@ if(loginMember!=null){
 				<td>5</td>
 				<td><%=m1.getBranch_address() %></td>
 				<td><% if(m1.getRegist_status().equals("Y")){%>
-				<input type="button" id="acBtn" class="acBtn" registnum="<%=m1.getRegist_num()%>" branchnum="<%=m1.getRegist_branch_num()%>" stadiumnum="<%= m1.getRegist_stadium_num()%>" reservationcode=<%=m1.getRegist_reservation_code()%> value="가능">
+				<input type="button" id="acBtn" class="acBtn" registnum="<%=m1.getRegist_num()%>" branchnum="<%=m1.getRegist_branch_num()%>" stadiumnum="<%= m1.getRegist_stadium_num()%>" reservationcode=<%=m1.getRegist_reservation_code()%> value="신청하기">
 				 <%}else{ %>
-				 	<input type="button" id="caBtn" class="caBtn" value="불가능">
+				 	<input type="button" id="caBtn" class="caBtn" value="신청불가">
 					<%} %>
 				</td>
 			

@@ -12,6 +12,7 @@ import java.util.List;
 
 import com.member.model.dao.MemberDao;
 import com.member.model.vo.Member;
+import com.reservation.model.vo.Branch;
 import com.reservation.model.vo.PayHistory;
 
 public class MemberService {
@@ -146,6 +147,14 @@ public class MemberService {
 		Connection conn = getConnection();
 		Member result = dao.emailCheck(conn,email);
 		close(conn);
+		return result;
+	}
+	//지점등록
+	public int insertbranch(Branch b){
+		Connection conn = getConnection();
+		int result = dao.insertbranch(conn,b);
+		if(result>0)commit(conn);
+		else rollback(conn);
 		return result;
 	}
 	

@@ -1,22 +1,22 @@
 package common;
 
 import java.io.File;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
-public class BoardImgFileRenamePolicy  implements FileRenamePolicy{
+public class BoardImgFileRenamePolicy implements FileRenamePolicy{
 
 	@Override
-	public File rename(File originFile) { //originFile: ¿øº»ÆÄÀÏ
+	public File rename(File originFile) { //originFile: ì›ë³¸íŒŒì¼
 		long currentTime= System.currentTimeMillis();
-		SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMddHHmmss"); //³âµµ/¿ù/ÀÏ/½Ã/ºĞ/ÃÊ ÇüÅÂ·Î currentTimeÀÇ Çü½ÄÀ» ¹Ù²Ş.
+		SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMddHHmmss"); //ë…„ë„/ì›”/ì¼/ì‹œ/ë¶„/ì´ˆ í˜•íƒœë¡œ currentTimeì˜ í˜•ì‹ì„ ë°”ê¿ˆ.
 		
 		
 		int randNum= (int)(Math.random()*100000);
 		
-		String name= originFile.getName(); //name: ¿øº»ÆÄÀÏ ÆÄÀÏÀÌ¸§
+		String name= originFile.getName(); //name: ì›ë³¸íŒŒì¼ íŒŒì¼ì´ë¦„
 		String ext=null;
 		int dot=name.lastIndexOf(".");
 		if(dot!=-1) {
@@ -25,7 +25,7 @@ public class BoardImgFileRenamePolicy  implements FileRenamePolicy{
 			ext="";
 		}
 		
-		// java.util.Date ¸¦ ÀÌ¿ë.
+		// java.util.Date ë¥¼ ì´ìš©.
 		String fileName= "BOARD_"+sdf.format(new Date(currentTime))+randNum+ext;
 		File newFile= new File(originFile.getParent(), fileName);
 		return newFile;

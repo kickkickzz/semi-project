@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.member.model.vo.Member;
+import com.reservation.model.vo.Branch;
 import com.reservation.model.vo.PayHistory;
 
 public class MemberDao {
@@ -345,7 +346,7 @@ public class MemberDao {
 		}
 		return m;
 	}
-	
+
 	
 	
 	
@@ -369,5 +370,38 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	
+	
+	public int insertbranch(Connection conn,Branch branch) {
+		PreparedStatement pstmt = null;
+		int result =0;
+		 try {
+			 pstmt =conn.prepareStatement(prop.getProperty("insertBranch"));
+			 pstmt.setString(1, branch.getBranch_num());
+	         pstmt.setString(2, branch.getBranch_manager_email());
+	         pstmt.setString(3, branch.getBranch_address());
+	         pstmt.setString(4, branch.getBranch_phone());
+	         pstmt.setString(5, branch.getBranch_img());
+	         pstmt.setString(6, branch.getBranch_website());
+	         pstmt.setString(7, branch.getBranch_Info());
+	         pstmt.setString(8, branch.getDetail_Info());
+	         pstmt.setString(9, branch.getNotes());
+	         pstmt.setInt(10, branch.getBranch_point());
+	         pstmt.setString(11, branch.getBranch_option_shower());
+	         pstmt.setString(12, branch.getBranch_option_park());
+	         pstmt.setString(13, branch.getBranch_option_uniform());
+	         pstmt.setString(14, branch.getBranch_option_shoes());
+	         pstmt.setString(15, branch.getBranch_option_ball());
+	         pstmt.setString(16, branch.getBranch_option_inout());
+	         pstmt.setString(17, branch.getBranch_delete_status());
+			 result = pstmt.executeUpdate();
+		 }catch(SQLException e) {
+			 e.printStackTrace();
+		 }finally {
+			 close(pstmt);
+		 }
+		 return result;
 	}
 }

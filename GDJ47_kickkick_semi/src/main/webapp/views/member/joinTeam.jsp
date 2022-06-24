@@ -2,8 +2,12 @@
     pageEncoding="UTF-8" %>
 <%@page import = "com.reservation.model.vo.PayHistory,java.util.List" %>
  
-<% List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist"); %>
-<%  List<Team> result = (List<Team>)request.getAttribute("result");%>
+<%
+ List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist");
+ %>
+<%
+List<Team> result = (List<Team>)request.getAttribute("result");
+%>
  
 <%@ include file="/views/common/header.jsp" %>
 
@@ -71,6 +75,13 @@
                 <i class="fa-solid fa-list"></i>
                 <span data-feather="file"></span>
               예약현황
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="<%=request.getContextPath()%>/branch.do" style="color: black">
+                <i class="fa-solid fa-list"></i>
+                <span data-feather="file"></span>
+              지점정보
             </a>
           </li>
           <li class="nav-item">
