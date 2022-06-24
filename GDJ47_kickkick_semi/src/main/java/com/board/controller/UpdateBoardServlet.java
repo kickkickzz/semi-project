@@ -1,5 +1,6 @@
 package com.board.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.Enumeration;
@@ -11,10 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.jni.File;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
 import com.board.model.vo.BoardAttachment;
 import com.member.model.vo.Member;
@@ -33,15 +32,16 @@ public class UpdateBoardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int result=0;
 		if(ServletFileUpload.isMultipartContent(request)) {
-			int maxSize= 1024*1024*10; //10MB
-			String root=request.getSession().getServletContext().getRealPath("/");
-			String saveBoardPath=root+"/images/board_img/";
 			
-			MultipartRequest multiRequest=new MultipartRequest(request,saveBoardPath,maxSize,"UTF-8",new BoardImgFileRenamePolicy() );
-//			File file=new File(saveBoardPath);//물리적 경로 오류 생각해보기
-//			if(!file.exists()) {
-//				file.mkdirs();
-//			}
+			int maxSize= 1024*1024*10; //10MB
+			String root=getServletContext().getRealPath("/upload/");
+			String path=root+"/board"; //경로확인 할것
+			
+			MultipartRequest multiRequest=new MultipartRequest(request, path, maxSize, "UTF-8", new BoardImgFileRenamePolicy() );
+			File file=new File(path);
+			if(!file.exists()) {
+				file.mkdirs();
+			}
 			
 			String saveFile=null;
 			String originFile=null;
@@ -55,19 +55,11 @@ public class UpdateBoardServlet extends HttpServlet {
 				}
 			}
 			
-			
-			//폼에서 입력받은 값들을 모두 갖고온다.
-			int bId= Integer.parseInt(multiRequest.getParameter("bId")); //게시글번호: bId
-			int fId= Integer.parseInt(multiRequest.getParameter("fId")); //파일번호: fId
-			
-			//작성자 이메일, 이름.
+			//폼에서 입력받은 값들을 모두
+			int bId= Integer.parseInt(multiRequest.getParameter("bId"));
 			String email=((Member) request.getSession().getAttribute("loginMember")).getEmail();
 			String name=((Member) request.getSession().getAttribute("loginMember")).getName();
-			
-			//제목:title
 			String title=multiRequest.getParameter("title");
-			
-			//내용: content
 			String content=multiRequest.getParameter("content");
 			
 			Board board=new Board();
@@ -77,32 +69,25 @@ public class UpdateBoardServlet extends HttpServlet {
 			board.setBoardWriter(name);
 			board.setBoardWriterEmail(email);
 
-			//수정날짜로 갱신
+			//수정날짜 갱신
 			Date date=new Date(new GregorianCalendar().getTimeInMillis());
 			board.setBoardDate(date);
-			
+		
 			//이미지: img
-			BoardAttachment bat=new BoardAttachment();
-			bat.setFilePath(saveBoardPath);
+			BoardAttachment bat= new BoardAttachment();
+			bat.setFilePath(path);
 			bat.setOriginName(originFile);
 			bat.setChangeName(saveFile);
 			bat.setUpdateDate(date);
 			
-			//이미지 이름
-			board.setBoardImgPath(originFile);
-			
-			result=new BoardService().updateBoard(board,bId,fId,bat);
 			System.out.println("bId=> "+bId);
 			System.out.println("UpdateBoard/updateBoard.do\n게시판=>"+board);
-			System.out.println("게시판이미지 =>"+bat);
-			System.out.println("fId=> "+fId);
-			
 			if(result>0) {
 				response.sendRedirect("detailBoard.do?bId="+bId);
 			}else {
-//				File failedFile=new File(saveBoardPath+saveFile);
-//				failedFile.delete();
-				request.setAttribute("msg","공지사항 게시판 게시글 수정에 실패하였습니다.");
+				File failedFile=new File(path+ saveFile);
+				failedFile.delete();
+				request.setAttribute("msg", "공지사항 게시판 게시글 수정에 실패하였습니다.");
 				request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
 			}
 		}

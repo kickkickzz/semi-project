@@ -4,15 +4,13 @@
 
 	Board b=(Board)request.getAttribute("board");
 	BoardAttachment img=(BoardAttachment)request.getAttribute("img");
-	
 %>
 <!-- 정적파일 css, js -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/boardWriter.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/boardWriter.css">
 <!-- header을 호출 -->
-<%@include file="/views/common/header.jsp" %>
+<%@include file="/views/common/header.jsp"%>
 
 <body>
-
 	<!-- 메인페이지 컨테이너-->
 	<div class="main-content-container"><br>
 		<div class="board_writer-total-container"><br>
@@ -33,7 +31,7 @@
 						<hr class="my-4">
 					</div>
 					<!-- 이미지 등록박스-->
-					<div class="img-container">
+					<<div class="img-container">
 						<div class="browse_img_box">
 							<%if(img!=null){ 
 								//이미지가 존재하면.. => fId를 받아라.
@@ -116,12 +114,28 @@
 		reader.readAsDataURL(photo.files[0]);
 	}
 	
-	function cancelUpdate(){
-		let result=confirm('수정을 취소하시겠습니까?');
-		if(result==true){
-			alert('수정을 취소합니다.');
-			//수정 취소
-			location.href='<%=request.getContextPath()%>/showBoardList.do';
+	let limitByte = 1000; //byte최대 크기
+	function countContentLength(content) {
+		//byte check : textarea에 입력한 길이를 여기에 출력
+		let check_length = document
+				.getElementById('Byte');
+		let message = content.value;
+		// console.log(messageLength);
+
+		let totalByte = 0;
+		for (var i = 0; i < message.length; i++) {
+			var currentByte = message.charCodeAt(i);
+			if (currentByte > 128)
+				totalByte += 2;
+			else
+				totalByte++;
+		}
+
+		check_length.innerText = totalByte;
+
+		//최대 바이트크기를 넘으면 못쓰게한다.
+		if (totalByte > limitByte) {
+			alert('1000Byte 이내로 작성해주세요!');
 		}
 	}
 	
@@ -147,6 +161,15 @@
 		//최대 바이트크기를 넘으면 못쓰게한다.
 		if (totalByte > limitByte) {
 			alert('1000Byte 이내로 작성해주세요!');
+		}
+	}
+	
+	function cancelUpdate(){
+		let result=confirm('수정을 취소하시겠습니까?');
+		if(result==true){
+			alert('수정을 취소합니다.');
+			//수정 취소
+			location.href='<%=request.getContextPath()%>/showBoardList.do';
 		}
 	}
 </script>

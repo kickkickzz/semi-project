@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.member.model.vo.Member, com.reservation.model.vo.Stadium, com.reservation.model.service.ReservationService" %> 
-<%@ page import="java.util.List, com.board.model.vo.Board, com.board.model.service.BoardService, com.team.model.vo.Team, com.team.model.service.TeamService" %>
+<%@ page import="java.util.List,com.board.model.vo.Board,com.board.model.service.BoardService,com.team.model.vo.Team,com.team.model.service.TeamService" %>
 
-<% 
-	Member loginMember = (Member)session.getAttribute("loginMember");
+<%
+Member loginMember = (Member)session.getAttribute("loginMember");
 	
 	List<Board> boardList = new BoardService().mainNotice();
 	Board[] bArr = new Board[4];
 	for(int i=0; i< bArr.length; i++){
-		if(!(boardList.isEmpty())){
-			bArr[i]=boardList.get(i);
+		if(!(boardList.isEmpty())||boardList.size()==4){
+	bArr[i]=boardList.get(i);
 		}
 	}
 	
@@ -18,7 +18,7 @@
 	Stadium[] sArr = new Stadium[6];
 	for(int i=0; i<sArr.length; i++){
 		if(!(stadiumList.isEmpty())){
-			sArr[i]=stadiumList.get(i);
+	sArr[i]=stadiumList.get(i);
 		}
 	}
 	
@@ -26,13 +26,12 @@
 	Team[] tArr = new Team[4];
 	for(int i=0; i<tArr.length; i++){
 		if(!(teamList.isEmpty())){
-			tArr[i] = teamList.get(i);
-			System.out.println("데이터 있음");
+	tArr[i] = teamList.get(i);
+	System.out.println("데이터 있음");
 		}else{
-			System.out.println("데이터 없음");
+	System.out.println("데이터 없음");
 		}
 	}
-	
 %>
 
 <!DOCTYPE html>
