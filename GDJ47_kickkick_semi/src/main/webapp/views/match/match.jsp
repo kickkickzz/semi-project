@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@ page import = "com.match.model.vo.*" %>
- <%
- List<Match> m = (List<Match>)request.getAttribute("matcharr");
+ <%List<Match> m = (List<Match>)request.getAttribute("matcharr");
 
-  String pagebar = (String)request.getAttribute("pageBar");
- %>
+ String pagebar = (String)request.getAttribute("pageBar");%>
+<%@ include file="/views/common/header.jsp" %>
  <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/7bb5347123.js" crossorigin="anonymous"></script>
@@ -77,7 +76,6 @@
 }
 
 </style>
-<%@ include file="/views/common/header.jsp" %>
 <%
 String userId = null;
 if(loginMember!=null){

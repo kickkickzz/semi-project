@@ -30,11 +30,6 @@
 		<div class="hh">
 		<input type="submit" value="찾기">
 		</div>
-		
-		
-		<!-- 이메일 &nbsp&nbsp&nbsp&nbsp<input type="text" name="email" class="pw"><br>
-		이름 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" name="name" class="pw"><br>
-		<input type="submit" value="찾기"> -->
 	</form>
 	<style>
 		.hh{

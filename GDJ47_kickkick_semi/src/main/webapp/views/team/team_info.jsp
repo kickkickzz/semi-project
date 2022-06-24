@@ -9,7 +9,12 @@
 	ArrayList<TeamMemberInfo> teamEnterMember=(ArrayList<TeamMemberInfo>)request.getAttribute("teamEnterMember");
 	List<Team> matchlist = (List<Team>)request.getAttribute("matchlist");
 	ArrayList<Match> registnum= (ArrayList<Match>)request.getAttribute("registnum");
-	int rnum =registnum.get(0).getRegist_num();
+	int rnum =0;
+	if(!(registnum.isEmpty())){
+		rnum =registnum.get(0).getRegist_num();
+	}
+	
+	
 	
 
 %>
@@ -95,20 +100,9 @@
 					</div>
 				</div>
 
-				<hr>
-				<div class="wrap2" id="wrap2">
-				</div>
-				<br>
-				<br>
-				<hr>
+				
 
-				<div class="wrap3">
-					<nav class="navy">
-						<div class="nav-item2" onclick="">팀원 정보</div>
-						<div class="nav-item2" onclick="">용병 지원</div>
-						<div class="nav-item2" onclick="">매칭 신청</div>
-					</nav>
-				</div>
+				
 
 				<div class="wrap4" id="wrap4">
 
@@ -277,12 +271,18 @@
 								<td><%= mt.getTeam_gender() %></td>
 								<td><%= mt.getTeam_region() %></td>
 								<td><%= mt.getTeam_age()%></td>
+								<td><input type="button" id="macBtn" class="macBtn" matchregistnum="<%=rnum%>" value="수락">
+                        		<input type="button" id="mcaBtn" class="mcaBtn" matchregistnum="<%=rnum%>" value="취소"></td></tr>
+                        
+							
 								
 								
-								
-							</tr>
+							
 							<%}%>
 						<%}%>
+						
+						
+						</tr>		
 						<div>
 						
 						</div>
@@ -296,7 +296,6 @@
 	
 	<!--BODY 끝.-->
 
-	<%-- <%@include file="../common/footer.jsp"%> --%>
 
 
 </body>
@@ -319,7 +318,7 @@
 			   type = '1';
 			   if (confirm("추방하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
+						 url: '<%=request.getContextPath()%>/team/leader.do',
 						 data: {supporter:supporter, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -339,7 +338,7 @@
 			   type = '2';
 			   if (confirm("가입하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
+						 url: '<%=request.getContextPath()%>/team/leader.do',
 						 data: {supporter:supporter, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -359,7 +358,7 @@
 			   type = '3';
 			   if (confirm("가입거절하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
+						 url: '<%=request.getContextPath()%>/team/leader.do',
 						 data: {supporter:supporter, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -379,7 +378,7 @@
 			   type = '4';
 			   if (confirm("매치수락하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
+						 url: '<%=request.getContextPath()%>/team/leader.do',
 						 data: {match_regist_num:matchregistnum, team_code:teamcode, teamcode:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -402,7 +401,7 @@
 			   type = '5';
 			   if (confirm("매치취소하시겠습니까?") == true){
 				   $.ajax({
-						 url: 'http://localhost:9090/GDJ47_kickkick_semi/team/leader.do',
+						 url: '<%=request.getContextPath()%>/team/leader.do',
 						 data: {match_regist_num:matchregistnum, team_code:teamcode, teamcode:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
@@ -448,7 +447,7 @@
 							   
 						   } else {
 							   $.ajax({
-								   url : 'http://localhost:9090/GDJ47_kickkick_semi/teamMemberRegist.do',
+								   url : 'https://61.78.121.242:9999/GDJ47_kickkick_semi/teamMemberRegist.do',
 								   data : {
 									   userId : userId,
 									   position : position,
@@ -505,161 +504,8 @@
 
 	[ 0, 20 ], [ 1, 80 ], [ 2, 20 ], [ 3, 40 ], [ 4, 40 ] ];
 
-	/*create svg element*/
-	let svg = d3.select("#wrap2").append("svg").attr("width", w).attr("height",
-			h).attr("id", "chart");
-
-	let drag = d3.behavior.drag().on("dragstart", dragstarted).on("drag",
-			dragged).on("dragend", dragended);
-
-	/*x scale*/
-	let xScale = d3.scale.linear().domain([ 0, d3.max(dataset, function(d) {
-		return d[0]
-	}) ]).range([ padding, w - padding ]);
-
-	/*y scale*/
-	let yScale = d3.scale.linear().domain([ 0, 100 ]).range(
-			[ h - padding, padding ]);
-
-	/*x axis*/
-	let xAxis = d3.svg.axis().scale(xScale).orient("bottom");
-
-	/*y axis*/
-	let yAxis = d3.svg.axis().scale(yScale).orient("left");
-
-	let today = new Date();
-
-	let year = today.getFullYear(); // 년도
-	let month = today.getMonth() + 1; // 월
-	let date = today.getDate(); // 날짜
-	let day = today.getDay(); // 요일
-
-	var data = [ {
-		"date" : new Date(year, month - 1, date - 4),
-		"value" : 0
-	}, {
-		"date" : new Date(year, month - 1, date),
-		"value" : 100
-	} ];
-
-	var x_domain = d3.extent(data, function(d) {
-		return d.date;
-	}), y_domain = d3.extent(data, function(d) {
-		return d.value;
-	});
-
-	var xScale2 = d3.time.scale().domain(x_domain) // values between for month of january
-	.range([ padding, w - padding ]); // map these sides of the chart, in this case 100 and 600
-
-	// define the y scale  (vertical)
-	var yScale2 = d3.scale.linear().domain(y_domain).nice() // make axis end in round number
-	.range([ h - padding, padding ]); // map these to the chart height, less padding.  In this case 300 and 100
-	//REMEMBER: y axis range has the bigger number first because the y value of zero is at the top of chart and increases as you go down.
-
-	var date_format = d3.time.format('%m/%d');
-	//var  date_format = d3.time.format("%d %b");
-
-	var yAxis2 = d3.svg.axis().orient("left").scale(yScale2);
-
-	// define the x axis
-	var xAxis2 = d3.svg.axis().orient("bottom").scale(xScale2).tickFormat(
-			date_format);
-
-	svg.append("g").attr("class", "yaxis axis").attr("transform",
-			"translate(" + padding + ",0)").call(yAxis2);
-
-	// draw x axis with labels and move to the bottom of the chart area
-	svg.append("g").attr("class", "xaxis axis") // two classes, one for css formatting, one for selection below
-	.attr("transform", "translate(0," + (h - padding) + ")").call(xAxis2);
-
-	/* svg.append("text")
-	.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
-	.attr("transform", "translate("+ (padding/2) +","+(h/2)+")rotate(0)")  // text is drawn off the screen top left, move down and out and rotate
-	.text("승률");
 	
-	svg.append("text")
-	.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
-	.attr("transform", "translate("+ (w/2) +","+(420-(padding/2))+")")  // centre below axis
-	.text("최근날짜");    */
-
-	/*define line*/
-	let lines = d3.svg.line().x(function(d) {
-		return xScale(d[0])
-	}).y(function(d) {
-		return yScale(d[1])
-	}).interpolate("monotone");
-
-	/*append line*/
-	let path = svg.append("path").attr({
-		d : lines(dataset),
-		'class' : "lineChart"
-	});
-
-	console.log(path);
-
-	svg.select(".lineChart").style("opacity", 0).transition().duration(2500)
-			.delay(1000).style("opacity", 1);
-
-	/*add points*/
-	let points = svg.selectAll("circle").data(dataset).enter().append("circle")
-			.call(drag);
-
-	console.log(points);
-
-	/*point attributes*/
-	points.attr("cy", 0).transition().duration(1500).delay(function(d, i) {
-		return i * 100 + 500
-	}).ease("elastic").attr({
-		cx : function(d) {
-			return xScale(d[0])
-		},
-		cy : function(d) {
-			return yScale(d[1])
-		},
-		r : 7,
-		'class' : "datapoint",
-		id : function(d, i) {
-			return i
-		}
-
-	}).style("opacity", 1);
-
-	let xMax = d3.max(dataset, function(d) {
-		return d[0]
-	}), yMax = d3.max(dataset, function(d) {
-		return d[1]
-	});
-
-	function dragstarted() {
-		d3.event.sourceEvent.stopPropagation();
-		d3.select(this).classed("dragging datapoint", true);
-	}
-
-	function dragged() {
-		d3.select(this).attr({
-			cx : Math.max(padding, Math.min(d3.event.x, w - padding)),
-			cy : Math.max(padding, Math.min(d3.event.y, h - padding))
-		});
-	}
-
-	function dragended() {
-		d3.select(this).classed("datapoint", true);
-		// get id of dragged point
-		let id = d3.select(this).attr("id"),
-		// get new absolute position coordinates of the point
-		xPos = d3.select(this).attr("cx"), yPos = h
-				- d3.select(this).attr("cy");
-
-		// convert absolute position coordinates relative to scales
-		xPos = (xPos - padding) * (xMax / (w - padding * 2));
-		yPos = (yPos - padding) * (yMax / (h - padding * 2));
-		dataset[id][0] = xPos;
-		dataset[id][1] = yPos;
-
-		// update line
-		svg.select(".lineChart").transition().duration(500).attr("d",
-				lines(dataset));
-	}
+	
 
 </script>
 

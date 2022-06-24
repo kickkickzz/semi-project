@@ -12,19 +12,8 @@
 </head>
 <body>
 	<script>
-	console.log(<%=script%>);
 		alert("<%=msg%>");
 		/* close(); */
-		<%if(script!=null){%>
-			opener.document.getElementById("ema").value='<%=email%>';
-			<%=script%>
-		<%}%>
-		<%if(email!=null){%>
-			opener.document.getElementById("ema").value='<%=email%>';
-		<%}
-		else{%>
-			opener.document.getElementById("ema").value='';
-		<%}%>
 		<%-- <%=script!=null?script:""%> --%>
 		location.replace("<%=request.getContextPath()%><%=loc%>");
 	</script>

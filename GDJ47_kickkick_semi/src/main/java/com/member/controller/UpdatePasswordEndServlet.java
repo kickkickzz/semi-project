@@ -50,10 +50,10 @@ public class UpdatePasswordEndServlet extends HttpServlet {
 			msg+="현재비밀번호가 틀립니다.";
 			loc+="/member/updatePassword.do?email="+email; // ?email=추가해야함
 		}
-		
+		request.setAttribute("email", email);
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/msg/msg.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/msg/updatepassword.jsp").forward(request, response);
 		
 		
 	}

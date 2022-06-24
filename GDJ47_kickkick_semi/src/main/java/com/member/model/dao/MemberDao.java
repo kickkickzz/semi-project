@@ -320,5 +320,29 @@ public class MemberDao {
 		}
 		return result;
 	}
-
+	
+	
+	
+	
+	public Member emailCheck(Connection conn,String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member m = null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("emailCheck"));
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m =getMember(rs);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	
 }
