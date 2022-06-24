@@ -68,7 +68,7 @@ td{
     font-weight: bold;
     font-size: 20px;
     cursor: pointer;
-    background-color: #5ca1cd;
+    background-color: gray;
     color: #fff;
     text-decoration: none;
     padding: 10px 25px;
@@ -76,7 +76,7 @@ td{
     border-bottom: 3px solid #3f84b0;
     border-radius: 3px;
 }
-.simple:hover {background-color: #61a8d5;}
+.simple:hover {background-color: lightgray;}
 
 
 </style>
