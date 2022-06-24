@@ -312,6 +312,7 @@
 	   console.log(supporter);
 	   console.log(id);
 	   console.log(team_code);
+	   console.log(teamregistnum);
 	   var userId = '<%= loginUser%>';
 	   if(userId != null) {
 		   if(id == "exBtn") {
@@ -379,9 +380,10 @@
 			   if (confirm("매치수락하시겠습니까?") == true){
 				   $.ajax({
 						 url: '<%=request.getContextPath()%>/team/leader.do',
-						 data: {match_regist_num:matchregistnum, team_code:teamcode, teamcode:team_code, type:type},
+						 data: {match_regist_num:matchregistnum, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
+							 console.log(team_code);
 							 
 							 if(data == 4) {
 								 alert('매치수락되었습니다');
@@ -402,7 +404,7 @@
 			   if (confirm("매치취소하시겠습니까?") == true){
 				   $.ajax({
 						 url: '<%=request.getContextPath()%>/team/leader.do',
-						 data: {match_regist_num:matchregistnum, team_code:teamcode, teamcode:team_code, type:type},
+						 data: {match_regist_num:matchregistnum, team_code:team_code, type:type},
 						 success: function(data) {
 							 console.log(data);
 							 
@@ -447,7 +449,7 @@
 							   
 						   } else {
 							   $.ajax({
-								   url : 'https://61.78.121.242:9999/GDJ47_kickkick_semi/teamMemberRegist.do',
+								   url : '<%=request.getContextPath()%>/teamMemberRegist.do',
 								   data : {
 									   userId : userId,
 									   position : position,
