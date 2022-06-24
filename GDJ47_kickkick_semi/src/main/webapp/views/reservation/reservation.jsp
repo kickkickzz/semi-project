@@ -79,7 +79,7 @@ userId = (loginMember.getEmail());
                         ./img/fb.png는 샘플 이미지입니다.
                     -->
 					<img
-						src=""
+						src="<%=request.getContextPath()%>/resources/storage/branch_img/<%=s.getBranch_img() %>"
 						alt="BRANCH_IMG" id="BRANCH_IMG">
 				</div>
 
