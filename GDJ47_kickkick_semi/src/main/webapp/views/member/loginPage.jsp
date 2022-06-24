@@ -43,7 +43,7 @@
                 <div class="login-error-msg"><%=msg!=null?msg:"" %></div>
                 <input type="text" placeholder="이름" class="normal name">
                 <i id="n-mark" class="fa-solid fa-x"></i><br>
-                <input type="tel" placeholder="전화번호" class="normal phone">
+                <input type="tel" placeholder="전화번호(-없이)" class="normal phone" maxlength="11">
 				<i id="ph-mark" class="fa-solid fa-x"></i><br>
                 <input type="date" placeholder="생년월일" class="normal birthday"><br>
                 
