@@ -173,7 +173,7 @@
       <div class="form-group">
          <label for="branchName">지점명</label>
          <input type="text" name="branchName" id="branchName"/>
-         <input type="button" id="branchCheck" value="중복확인" onclick="checkBranch();" style="border:none; margin-top:5px; box-sizing:conten-box; padding:0px;">
+         <input type="button" id="branchCheck" value="중복확인" style="border:none; margin-top:5px; box-sizing:conten-box; padding:0px;">
       </div><br><br>
       <div class="form-group">
          <label for="placeInfo">지점 한줄 소개 <span id="count1">(0 / 최대 20자)</span></label>
@@ -343,9 +343,10 @@
             
          }
       }
-      function checkBranch(){
-         window.open("checkBranchForm.br", "checkBranchForm", "width=300, height=200");
-       }
+      const fn_checkBranch=()=>{
+    	  window.open("<%=request.getContextPath()%>/checkbranch.do", "checkBranchForm", "width=300, height=200");
+      }
+      
    
       $('#branchInfo').keyup(function (e){
           var content = $(this).val();
@@ -506,6 +507,35 @@
 		    
 		      });
 		});
+      
+      
+      $("#branchCheck").click(e=>{
+    	  
+    	  var branchname = $("#branchName").val();
+    	  console.log(branchname);
+    	  
+    	  $.ajax({
+    		  url:"<%=request.getContextPath()%>/checkbranch.do",
+    		  type:'post',
+    		  data:{branchname:branchname},
+    		  success:(data)=>{
+    			  console.log(data);
+    			  if(data==1){
+    				  alert("중복된 지점명입니다.");
+    				  $("#branchName").text("");
+    			  }else if(data==0){
+    				  alert("사용가능한 지점명입니다.")
+    				  $("#branchName").text(branchname);
+    			  }
+    		  }
+    	  });
+      })
+      
+      const fn_branchcheck=()=>{
+    	 
+    	 
+      }
+      
    </script>
 </body>
 </html>

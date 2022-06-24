@@ -404,4 +404,23 @@ public class MemberDao {
 		 }
 		 return result;
 	}
+	public int checkBranch(Connection conn,String branchname) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("checkbranch"));
+			pstmt.setString(1, branchname);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
 }

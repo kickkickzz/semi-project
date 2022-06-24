@@ -86,7 +86,7 @@ if(loginMember!=null){
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="" style="color: black">
+            <a class="nav-link" href="<%=request.getContextPath()%>/member/reservationlist.do?email=<%=loginMember.getEmail()%>" style="color: black">
                 <i class="fa-solid fa-list"></i>
                 <span data-feather="file"></span>
               예약현황

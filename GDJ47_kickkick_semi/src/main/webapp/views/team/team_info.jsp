@@ -294,7 +294,7 @@ td{
                <% if(loginUser != null) { %>
                <button type="button" id="supporter" style="float: right;"
                   class="simple" data-toggle="modal"
-                  data-target="#exampleModal" data-whatever="@mdo">용병지원</button>
+                  data-target="#exampleModal" data-whatever="@mdo" >용병지원</button>
                <% }%>
 
                <div class="table-responsive">
@@ -528,7 +528,7 @@ td{
             if (confirm("가입하시겠습니까?") == true){
                $.ajax({
                    url: '<%=request.getContextPath()%>/team/leader.do',
-                   data: {supporter:supporter, team_code:team_code, type:type},
+                   data: {supporter:supporter, teamcode:teamcode, type:type,oriteam,oriteam},
                    success: function(data) {
                       console.log(data);
                       
