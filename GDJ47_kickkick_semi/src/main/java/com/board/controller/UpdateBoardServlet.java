@@ -34,8 +34,8 @@ public class UpdateBoardServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
 			int maxSize= 1024*1024*10; //10MB
-			String root=getServletContext().getRealPath("/upload/");
-			String path=root+"/board"; //경로확인 할것
+			String root=getServletContext().getRealPath("/");
+			String path=root+"/upload/storage/board"; //경로확인 할것
 			
 			MultipartRequest multiRequest=new MultipartRequest(request, path, maxSize, "UTF-8", new BoardImgFileRenamePolicy() );
 			File file=new File(path);
