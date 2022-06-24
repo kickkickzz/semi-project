@@ -81,7 +81,7 @@ if(loginMember!=null){
          
          <tr onclick="location.assign('<%=request.getContextPath()%>/reservation.do?stanum=<%=s.getStadium_num()%>')">
             <td><%=s.getStadium_num() %></td>
-            <td><%=s.getBranch_img() %></td>
+            <td><img src="<%=request.getContextPath()%>/resources/storage/branch_img/<%=s.getBranch_img() %>" width="100" height="80"></td>
             <td><%=s.getBranch_address() %></td>
             <td><%=s.getBranch_num() %></td>
             <td><%=s.getStadium_name() %></td>
@@ -210,9 +210,9 @@ if(loginMember!=null){
 </div>
 </div>
 
-<<<<<<< HEAD
+
 <script>
-<<<<<<< HEAD
+
 		const fn_searchDataa=e=>{
 			if($(e.target).find("input").val().length==0){
 				alert("값을 입력하고 조회하세요.");
@@ -298,6 +298,7 @@ if(loginMember!=null){
 				})
 			}
 		})
+		</script>
 
 <script>
 
@@ -386,12 +387,12 @@ if(loginMember!=null){
                }
             })
          }
-<<<<<<< HEAD
+
       })
->>>>>>> branch 'kickkick' of https://github.com/kickkickzz/semi-project.git
-=======
-      })
->>>>>>> branch 'kickkick' of https://github.com/kickkickzz/semi-project.git
+
+
+  
+
 </script>
    
 
