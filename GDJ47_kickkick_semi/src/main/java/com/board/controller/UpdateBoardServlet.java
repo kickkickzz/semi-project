@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
 import com.board.model.vo.BoardAttachment;
 import com.member.model.vo.Member;
@@ -34,14 +35,15 @@ public class UpdateBoardServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
 			int maxSize= 1024*1024*10; //10MB
-			String root=getServletContext().getRealPath("/upload/");
-			String path=root+"/board"; //경로확인 할것
+			String root=getServletContext().getRealPath("/");
+			String path=root+"/upload/storage/board_img"; //경로확인 할것
 			
-			MultipartRequest multiRequest=new MultipartRequest(request, path, maxSize, "UTF-8", new BoardImgFileRenamePolicy() );
 			File file=new File(path);
 			if(!file.exists()) {
 				file.mkdirs();
 			}
+			
+			MultipartRequest multiRequest=new MultipartRequest(request, path, maxSize, "UTF-8", new BoardImgFileRenamePolicy() );
 			
 			String saveFile=null;
 			String originFile=null;
@@ -57,6 +59,8 @@ public class UpdateBoardServlet extends HttpServlet {
 			
 			//폼에서 입력받은 값들을 모두
 			int bId= Integer.parseInt(multiRequest.getParameter("bId"));
+			int fId= Integer.parseInt(multiRequest.getParameter("fId"));
+			
 			String email=((Member) request.getSession().getAttribute("loginMember")).getEmail();
 			String name=((Member) request.getSession().getAttribute("loginMember")).getName();
 			String title=multiRequest.getParameter("title");
@@ -80,10 +84,18 @@ public class UpdateBoardServlet extends HttpServlet {
 			bat.setChangeName(saveFile);
 			bat.setUpdateDate(date);
 			
+			board.setBoardImgPath(originFile);
+			
+			result=new BoardService().updateBoard( board, bId, fId, bat);
+			
 			System.out.println("bId=> "+bId);
 			System.out.println("UpdateBoard/updateBoard.do\n게시판=>"+board);
+			System.out.println("게시판이미지 =>"+bat);
+			System.out.println("fId=> "+fId);
+			System.out.println(result);
 			if(result>0) {
 				response.sendRedirect("detailBoard.do?bId="+bId);
+				request.getRequestDispatcher("");
 			}else {
 				File failedFile=new File(path+ saveFile);
 				failedFile.delete();

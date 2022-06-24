@@ -74,6 +74,13 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="<%=request.getContextPath()%>/branch.do" style="color: black">
+                <i class="fa-solid fa-list"></i>
+                <span data-feather="file"></span>
+              지점정보
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="<%=request.getContextPath()%>/member/myteam.do" style="color: black">
               <i class="fa-solid fa-people-group"></i>
               <span data-feather="shopping-cart"></span>

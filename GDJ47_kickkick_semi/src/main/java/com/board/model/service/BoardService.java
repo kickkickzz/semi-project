@@ -97,7 +97,7 @@ public class BoardService {
 		
 		//게시판 수정	
 		int result=dao.updateBoard(conn, board, bId);
-	
+		System.out.println(result);
 		//변경전에 이미지를 가지고있는가?
 		if(fId>0) {
 			//변경전에 이미지를 가졌다.
