@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-<%@ page import="java.util.List,com.team.model.vo.Team " %>
+<%@ page import="java.util.List,com.team.model.vo.Team" %>
 <%
 	String loginUser = ((Member)session.getAttribute("loginMember")).getEmail();
 	List<Team> list=(List<Team>)request.getAttribute("list");
@@ -170,7 +170,7 @@
 							</div>
 							
 							<div class="selectCover" style="padding-left: 0;">
-								<img id="cover" src="<%= request.getContextPath() %>/resources/common/images/마크등록.png"
+								<img id="cover" src="<%= request.getContextPath() %>/views/common/images/마크등록.png"
 									style="width: 282px; height: 268px;" />
 							</div>
 							<br>

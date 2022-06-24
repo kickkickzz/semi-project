@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-	import="com.member.model.vo.*, com.board.model.vo.Board,java.util.ArrayList"%>
+	import="com.member.model.vo.*,com.board.model.vo.Board,java.util.ArrayList"%>
 <!-- 정적파일 css, js-->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/boardWriter.css">
 
@@ -7,7 +7,6 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/lib/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 
 <body>
-<!-- naver smartediter 적용 방안 찾는 중 -->
 	<!-- 메인페이지 컨테이너-->
 	<div class="main-content-container"><br>
 		<div class="board_writer-total-container">
@@ -56,7 +55,6 @@
 						</div>
 						<div></div>
 						<div class="insert_write_board-box">
-							<!-- button은 input:submit 과 동일함-->
 							<button type="submit" form="write_board_form" class="btn btn-primary">작성</button>
 						</div>
 					</div>
@@ -78,7 +76,6 @@
 			$filename='파일을 선택해주세요';
 		$('.filename').text($filename);
 	});
-
 	
 	//이미지 로딩
 	function loadImg(photo){

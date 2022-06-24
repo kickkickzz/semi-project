@@ -2,6 +2,7 @@ package com.board.model.dao;
 
 import static common.JDBCTemplate.close;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,124 +17,131 @@ import java.util.Properties;
 import com.board.model.vo.Board;
 import com.board.model.vo.BoardAttachment;
 import com.board.model.vo.PageInfo;
-//clear
+
 public class BoardDao {
+	
 	private Properties prop=new Properties();
 	
 	public BoardDao() {
-		String path=BoardDao.class.getResource("/sql/board_sql.properties").getPath();
+		String fileName=BoardDao.class.getResource("/sql/board_sql.properties").getPath();
+		
 		try {
-			prop.load(new FileReader(path));
-		}catch(IOException e) {
+			prop.load(new FileReader(fileName));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 	}
+
 	public List<Board> selectBoardList(Connection conn, PageInfo pi) {
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		List<Board> boardList = new ArrayList();
+		ResultSet rset = null;
+		List<Board> boardList = null;
+		
 		String query= prop.getProperty("selectBoardList");
-		int startPage= (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;//시작
-		int endPage=startPage +pi.getBoardLimit()-1;//끝
-		System.out.println("시작페이지 : "+startPage+"/ 마지막페이지 : "+endPage);
-		try{
+		int startPage= (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;//시작페이지
+		int endPage=startPage +pi.getBoardLimit()-1;//끝페이지
+		System.out.println("시작페이지: "+startPage+"/ 끝페이지: "+endPage);
+		try {
 			pstmt=conn.prepareStatement(query);
 			pstmt.setInt(1, startPage);
 			pstmt.setInt(2, endPage);
-			rs=pstmt.executeQuery();
+			rset=pstmt.executeQuery();
 			
-			while(rs.next()){
+			boardList= new ArrayList<Board>();
+			while(rset.next()) {
 				Board board=new Board(
-					rs.getInt("BOARD_NUM"),
-					rs.getString("WRITER_EMAIL"),
-					rs.getString("BOARD_TITLE"),
-					rs.getString("BOARD_CONTENT"),
-					rs.getString("BOARD_IMG"),
-					rs.getDate("BOARD_DATE"),
-					rs.getString("BOARD_DELETE_STATUS"),
-					rs.getString("BOARD_WRITER"));
+				rset.getInt("BOARD_NUM"),
+				rset.getString("BOARD_WRITER"),
+				rset.getString("WRITER_EMAIL"),
+				rset.getString("BOARD_TITLE"),
+				rset.getString("BOARD_CONTENT"),
+				rset.getString("BOARD_IMG"),
+				rset.getDate("BOARD_DATE"),
+				rset.getString("BOARD_DELETE_STATUS"));
 				boardList.add(board);
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-			close(rs);
+		} finally {
+			close(rset);
 			close(pstmt);
 		}
 		return boardList;
 	}
-
+	
 	public int insertBoard(Connection conn, Board b) {
+		
 		PreparedStatement pstmt=null;
 		int result=0;
 		String query=prop.getProperty("insertBoard");
 		
-		try{
+		try {
 			pstmt=conn.prepareStatement(query);
-			pstmt.setString(1,b.getBoardWriterEmail());
-			pstmt.setString(2,b.getBoardTitle());
-			pstmt.setString(3,b.getBoardContent());
-			pstmt.setString(4,b.getBoardImgPath());
-			pstmt.setString(5,b.getBoardWriter());
+			pstmt.setString(1, b.getBoardWriterEmail());
+			pstmt.setString(2, b.getBoardTitle());
+			pstmt.setString(3, b.getBoardContent());
+			pstmt.setString(4, b.getBoardImgPath());
+			pstmt.setString(5, b.getBoardWriter());
 			result=pstmt.executeUpdate();
 			
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		}finally {
 			close(pstmt);
 		}
 		
-		return result;
-	}
-
-	public int insertBoardAttachment(Connection conn, List<BoardAttachment> fileList) {
-		int result=0;
-		PreparedStatement pstmt=null;
-		
-		String query=prop.getProperty("insertBoardAttachment");
-		try {
-			for(int i=0;i<fileList.size();i++){
-				BoardAttachment bat= fileList.get(i);
-				pstmt=conn.prepareStatement(query);
-				pstmt.setString(1,bat.getOriginName());
-				pstmt.setString(2,bat.getChangeName());
-				pstmt.setString(3,bat.getFilePath());
-				
-				result+=pstmt.executeUpdate();
-			}
-			
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally{
-			close(pstmt);
-			System.out.println("result=> "+ result);
-		}
 		return result;
 	}
 	
-	public int insertBoardAttachment(Connection conn, BoardAttachment bat) {
+	public int insertBoardAttachment(Connection conn, List<BoardAttachment> fileList) {
 		int result=0;
-		PreparedStatement pstmt=null;
+		PreparedStatement pstmt= null;
 		
-		String query=prop.getProperty("insertBoardAttachment");
-		try{
+		String query= prop.getProperty("insertBoardAttachment");
+		try {
+			for(int i=0; i<fileList.size(); i++) {
+				BoardAttachment bat= fileList.get(i);
+				pstmt=conn.prepareStatement(query);
+				pstmt.setString(1, bat.getOriginName());
+				pstmt.setString(2, bat.getChangeName());
+				pstmt.setString(3, bat.getFilePath());
+				
+				result+= pstmt.executeUpdate();
+			}
 			
-			pstmt=conn.prepareStatement(query);
-			pstmt.setString(1,bat.getOriginName());
-			pstmt.setString(2,bat.getChangeName());
-			pstmt.setString(3,bat.getFilePath());
-			result+= pstmt.executeUpdate();
-			
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			close(pstmt);
 			System.out.println("result=> "+ result);
 		}
 		return result;
 	}
 
+	public int insertBoardAttachmentBid(Connection conn, BoardAttachment bat, int bId) {
+		int result=0;
+		PreparedStatement pstmt= null;
+		
+		String query= prop.getProperty("insertBoardAttachmentBid");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, bId);
+			pstmt.setString(2, bat.getOriginName());
+			pstmt.setString(3, bat.getChangeName());
+			pstmt.setString(4, bat.getFilePath());
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	public int getBoardListCount(Connection conn) {
 		int result=0;
@@ -168,15 +176,7 @@ public class BoardDao {
 			pstmt.setInt(1, bId);
 			rs=pstmt.executeQuery();
 			if(rs.next()){
-				board= new Board(
-					rs.getInt("BOARD_NUM"),
-					rs.getString("WRITER_EMAIL"),
-					rs.getString("BOARD_TITLE"),
-					rs.getString("BOARD_CONTENT"),
-					rs.getString("BOARD_IMG"),
-					rs.getDate("BOARD_DATE"),
-					rs.getString("BOARD_DELETE_STATUS"),
-					rs.getString("BOARD_WRITER"));
+				//이건 풀로 받아와서 바꾸기
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -186,72 +186,54 @@ public class BoardDao {
 		}
 		return board;
 	}
-
-
-	public BoardAttachment selectBoardAttachment(Connection conn, int bId) {
-		BoardAttachment bat=null;
+	
+	public int selectBoardCount(Connection conn) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectBoardCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+
+	public BoardAttachment selectBoardAttachment(Connection conn, int bId) {
+		BoardAttachment bat = null;
+		PreparedStatement pstmt= null;
+		ResultSet rset=null;
 		
 		String query=prop.getProperty("selectBoardAttachmentBid");
 		try {
 			pstmt=conn.prepareStatement(query);
 			pstmt.setInt(1,bId);
-			rs=pstmt.executeQuery();
+			rset=pstmt.executeQuery();
 			
-			if(rs.next()) {
+			if(rset.next()) {
 				bat=new BoardAttachment(
-					rs.getInt("FILE_ID"),
-					rs.getInt("BOARD_NUM"),
-					rs.getString("ORIGIN_NAME"),
-					rs.getString("CHANGE_NAME"),
-					rs.getString("FILE_PATH"),
-					rs.getDate("UPLOAD_DATE"),
-					rs.getString("FILE_DELETED_STATUS"));
+						rset.getInt("FILE_ID"),
+						rset.getInt("BOARD_NUM"),
+						rset.getString("ORIGIN_NAME"),
+						rset.getString("CHANGE_NAME"),
+						rset.getString("FILE_PATH"),
+						rset.getDate("UPLOAD_DATE"),
+						rset.getString("FILE_DELETED_STATUS"));
 			}
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		}finally {
 			close(pstmt);
-			close(rs);
+			close(rset);
 		}
 		
 		return bat;
 	}
-
-	public List<Board> selectList(Connection conn) {
-		Statement stmt=null;
-		ResultSet rs=null;
-		List<Board> list=new ArrayList();
-		
-		String query=prop.getProperty("showMainTop5");
-		
-		try{
-			stmt=conn.createStatement();
-			rs=stmt.executeQuery(query);
-			
-			while(rs.next()){
-				Board b=new Board(					
-					rs.getInt("BOARD_NUM"),
-					rs.getString("WRITER_EMAIL"),
-					rs.getString("BOARD_TITLE"),
-					rs.getString("BOARD_CONTENT"),
-					rs.getString("BOARD_IMG"),
-					rs.getDate("BOARD_DATE"),
-					rs.getString("BOARD_DELETE_STATUS"),
-					rs.getString("BOARD_WRITER"));
-				list.add(b);
-			}
-			
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally{
-			close(rs);
-			close(stmt);
-		}
-		return list;
-	}
-
+	
 	public int updateBoard(Connection conn, Board b, int bId) {
 		int result=0;
 		PreparedStatement pstmt=null;
@@ -276,14 +258,31 @@ public class BoardDao {
 		int result=0;
 		PreparedStatement pstmt=null;
 		String query=prop.getProperty("updateBoardAttachment");
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, bat.getOriginName());
+			pstmt.setString(2, bat.getChangeName());
+			pstmt.setString(3, bat.getFilePath());
+			pstmt.setDate(4, bat.getUpdateDate());
+			pstmt.setInt(5, bId);
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int deleteBoard(Connection conn, int bId) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String query=prop.getProperty("deleteBoard");
 		try{
 			pstmt=conn.prepareStatement(query);
-			pstmt.setString(1,bat.getOriginName());
-			pstmt.setString(2,bat.getChangeName());
-			pstmt.setString(3,bat.getFilePath());
-			pstmt.setDate(4,bat.getUpdateDate());
-			pstmt.setInt(5,bId);
-			
+			pstmt.setInt(1,bId);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -301,78 +300,101 @@ public class BoardDao {
 			pstmt=conn.prepareStatement(query);
 			pstmt.setInt(1, bId);
 			result=pstmt.executeUpdate();
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		}finally {
 			close(pstmt);
 		}
+		
 		return result;
 	}
-
-	public int insertBoardAttachmentBid(Connection conn, BoardAttachment bat, int bId) {
-		int result=0;
-		PreparedStatement pstmt=null;
-		String query=prop.getProperty("insertBoardAttachmentBid");
-		try{
-			pstmt=conn.prepareStatement(query);
-			pstmt.setInt(1,bId);
-			pstmt.setString(2,bat.getOriginName());
-			pstmt.setString(3,bat.getChangeName());
-			pstmt.setString(4,bat.getFilePath());
-			
-			result=pstmt.executeUpdate();
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally{
-			close(pstmt);
-		}
-		return result;
-	}
-
-	public int deleteBoard(Connection conn, int bId) {
-		int result=0;
-		PreparedStatement pstmt=null;
-		String query=prop.getProperty("deleteBoard");
-		try{
-			pstmt=conn.prepareStatement(query);
-			pstmt.setInt(1,bId);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally{
-			close(pstmt);
-		}
-		return result;
-	}
-	
 	
 	//메인 공지사항에 뿌릴 공지사항 상위 4개 리스트
-	public List<Board> mainNotice(Connection conn){
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		List<Board> list = new ArrayList();
-		try {
-			pstmt = conn.prepareStatement(prop.getProperty("mainNotice"));
-			pstmt.setInt(1, 1);
-			pstmt.setInt(2, 4);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				Board b=new Board(					
-					rs.getInt("BOARD_NUM"),
-					rs.getString("WRITER_EMAIL"),
-					rs.getString("BOARD_TITLE"),
-					rs.getString("BOARD_CONTENT"),
-					rs.getString("BOARD_IMG"),
-					rs.getDate("BOARD_DATE"),
-					rs.getString("BOARD_DELETE_STATUS"),
-					rs.getString("BOARD_WRITER"));
-				list.add(b);
+		public List<Board> mainNotice(Connection conn){
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			List<Board> list = new ArrayList();
+			try {
+				pstmt = conn.prepareStatement(prop.getProperty("mainNotice"));
+				pstmt.setInt(1, 1);
+				pstmt.setInt(2, 4);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					Board board=new Board(
+						rs.getInt("BOARD_NUM"),
+						rs.getString("BOARD_WRITER"),
+						rs.getString("WRITER_EMAIL"),
+						rs.getString("BOARD_TITLE"),
+						rs.getString("BOARD_CONTENT"),
+						rs.getString("BOARD_IMG"),
+						rs.getDate("BOARD_DATE"),
+						rs.getString("BOARD_DELETE_STATUS"));
+						list.add(board);
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
 			}
-		}catch(SQLException e) {
-			e.printStackTrace();
+			return list;
+			
 		}
-		return list;
 		
-	}
+		
+		
+		
+//		PreparedStatement pstmt=null;
+//		int result=0;
+//		
+//		try{
+//			pstmt=conn.prepareStatement(prop.getProperty("insertBoard"));
+//			pstmt.setString(1,b.getBoardWriterEmail());
+//			pstmt.setString(2,b.getBoardTitle());
+//			pstmt.setString(3,b.getBoardContent());
+////			pstmt.setString(4, b.getBoardOriginalFilename());
+////			pstmt.setString(5, b.getBoardRenamedFilename());
+//			pstmt.setString(4,b.getBoardWriter());
+//			result=pstmt.executeUpdate();
+//			
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally{
+//			close(pstmt);
+//		}
+//		
+//		return result;
+
+//	public List<Board> selectBoardList(Connection conn, int cPage, int numPerpage) {
+//	PreparedStatement pstmt = null;
+//	ResultSet rs = null;
+//	List<Board> boardList = new ArrayList();
+//	
+//	try{
+//		pstmt=conn.prepareStatement(prop.getProperty("selectBoardList"));
+//		pstmt.setInt(1, (cPage-1)*numPerpage+1);
+//		pstmt.setInt(2, cPage*numPerpage);
+//		rs=pstmt.executeQuery();
+//		
+//		while(rs.next()){
+//			Board board=new Board(
+//				rs.getInt("BOARD_NUM"),
+//				rs.getString("WRITER_EMAIL"),
+//				rs.getString("BOARD_TITLE"),
+//				rs.getString("BOARD_CONTENT"),
+//				rs.getDate("BOARD_DATE"),
+//				rs.getString("BOARD_DELETE_STATUS"),
+//				rs.getString("BOARD_WRITER"));
+//				boardList.add(board);
+//		}
+//	}catch(SQLException e) {
+//		e.printStackTrace();
+//	}finally{
+//		close(rs);
+//		close(pstmt);
+//	}
+//	return boardList;
+//}
+	
+	
+
+	
 }
