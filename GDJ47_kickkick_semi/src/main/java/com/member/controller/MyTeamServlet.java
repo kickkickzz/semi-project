@@ -35,17 +35,12 @@ public class MyTeamServlet extends HttpServlet {
 		//where email=? (팀리더이메일) 즉 팀 유저 한명당 팀을 하나밖에 만들지 못함 그 유저한명이 만들면 팀리더가 됨
 		//팀 가입은 3개까지 가능
 		
-		
-		Member m = (Member)request.getSession().getAttribute("loginMember");
-		System.out.println(m);
-		String email = m.getEmail();
-		//Team team = new TeamService().getTeamLeader(email);
-		
-		//ArrayList<Team> teamArr = new TeamService().getTeam(userId);
-		
-		//request.setAttribute("team", team);
-		//request.setAttribute("teamArr", teamArr);
+		String email = request.getParameter("email");
 
+		Team result = new TeamService().teamLeader(email);
+
+		
+		request.setAttribute("team", result);
 		request.getRequestDispatcher("/views/member/myteam.jsp").forward(request, response);
 	}
 

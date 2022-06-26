@@ -338,4 +338,42 @@ public class TeamService {
 		close(conn);
 		return result;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public Team teamLeader(String email) {
+		Connection conn = getConnection();
+		Team result = dao.teamLeader(conn, email);
+		close(conn);
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	public int teamUpdate(String email,String teamMark, String name, String teamAge,String teamGender,String region) {
+		Connection conn = getConnection();
+		int result = dao.teamUpdate(conn, email,teamMark,name,teamAge,teamGender,region);
+		if(result>0) {
+			close(conn);
+		}else {
+			rollback(conn);
+		}
+		return result;
+	}
 }

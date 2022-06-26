@@ -919,4 +919,63 @@ public class TeamDao {
 		}
 		return result;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//팀리더일떄 마이페이지에서 로그인한 유저가 만든 팀 정보 보기
+	public Team teamLeader(Connection conn, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Team result = null;
+		String query = prop.getProperty("teamLeader");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = (TeamDao.getTeam(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	public int teamUpdate(Connection conn, String email,String teamMark,String name,String teamAge,String teamGender,String region) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String query = prop.getProperty("teamUpdate");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, name);
+			pstmt.setString(2, teamAge);
+			pstmt.setString(3, teamGender);
+			pstmt.setString(4, region);
+			pstmt.setString(5, teamMark);
+			pstmt.setString(6, email);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return result;
+	}
 }

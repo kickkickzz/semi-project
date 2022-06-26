@@ -112,7 +112,7 @@ if(loginMember!=null){
 <div class="modal-dialog">
 
  <!-- Modal content-->
-<div class="modal-content">
+<div class="modal-content" id="mod">
 <div class="modal-header">
    <h4 class="modal-title" id="exampleModalLabel">&lt;구장등록&gt;</h4>
    
@@ -203,7 +203,7 @@ if(loginMember!=null){
                </form>
 </div>
 <div class="modal-footer">
-<button type="button" id="stadiumRegistBtn" class="btn btn-default" data-dismiss="">구장등록하기</button>
+<button type="button" id="stadiumRegistBtn" class="btn btn-default" data-dismiss="modal">구장등록하기</button>
 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 </div>
@@ -290,6 +290,10 @@ if(loginMember!=null){
                success :(data)=>{  //data에 result값이 넘어옴
                   if(data>0){
                      alert("구장 등록이 완료되었습니다.");
+                     //$("#mod").addClass('','');
+                     opener.location.reload();
+                     $("#mod").attr('data-dismiss','modal');
+                     
                   }else{
                      alert("구장 등록에 실패하였습니다.");
                   }

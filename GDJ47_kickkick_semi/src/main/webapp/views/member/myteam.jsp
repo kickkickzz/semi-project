@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/views/common/header.jsp" %>
+<%@
+ include file="/views/common/header.jsp" 
+%>
+<%
+	Team team = (Team)request.getAttribute("team");
+	String[] newStr = team.getTeam_region().split("\\s+");
+	String si = newStr[0];
+	String gu = newStr[1];
+%>
 <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
 
 <!-- Bootstrap core CSS -->
@@ -67,13 +75,13 @@
       </li>
       <li class="nav-item">
             <a class="nav-link" href="<%=request.getContextPath()%>/branch.do" style="color: black">
-                <i class="fa-solid fa-list"></i>
+                <i class="fa-solid fa-location-dot"></i>
                 <span data-feather="file"></span>
               지점정보
             </a>
           </li>
       <li class="nav-item">
-       <a class="nav-link" href="<%=request.getContextPath()%>/member/myteam.do" style="color: black">
+       <a class="nav-link" href="<%=request.getContextPath()%>/member/myteam.do?email=<%=loginMember.getEmail()%>" style="color: black">
         <i class="fa-solid fa-people-group"></i>
         <span data-feather="shopping-cart"></span>
         나의 팀
@@ -106,35 +114,54 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <br><br>
-      <h2>나의 팀 정보</h2>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">로고</th>
-              <th scope="col">이름</th>
-              <th scope="col">정보</th>
-              <th scope="col">탈퇴</th>
-            </tr>
-          </thead>
-          <tbody>
-             <tr>
-             	<td>13</td>
-             	<td>1111</td>
-             	<td>김동훈</td>
-             	<td>안녕하세요 안녕하세요 안녕하세요</td>
-             	<td>탈퇴</td>
-             </tr>
-              <tr>
-             	<td></td>
-             	<td></td>
-             	<td></td>
-             	<td>2</td>
-             	<td>2</td>
-             </tr>
-        </table>
-      </div>
+      <h2>나의 팀 정보</h2><br>
+      <%if(team==null){%>
+      		<h2>조회된 팀이 없습니다.</h2>
+      <%}else{ %>
+      <form id="updateForm" action="<%=request.getContextPath()%>/teamUpdate.do" method="post">
+      		<div>
+		      <p style="margin-bottom : 3px;">팀마크</p>
+		      <img src="<%=request.getContextPath() %>/resources/storage/<%= team.getTeam_leader()%>/team_img/<%= team.getTeam_mark_img()%>"
+                        width="250px" height="200px" style="margin-bottom: 30px;"><br>
+              <input id="fileName" name="fileName" class="upload-name" value="파일선택" style="width: 200px;" readonly>
+							
+			  <input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" style="margin-bottom:20px;">
+		     </div>
+      		<div>
+		      <p style="margin-bottom : 3px;" class="pp">팀 이름</p>
+		      <input type="text" value="<%=team.getTeam_name()%>" name="name" size="40" style="margin-bottom: 20px;">
+		     </div>  
+		     <div>
+		      <p style="margin-bottom : 3px;" class="pp">팀 그룹</p>
+		      <select name='team_gender' style="margin-bottom: 20px;">
+				  <option value='<%=team.getTeam_gender()%>' selected><%=team.getTeam_gender()%></option>
+				  <option value='남자그룹'>남자그룹</option>
+				  <option value='여자그룹'>여자그룹</option>
+				  <option value='남녀그룹'>남녀그룹</option>
+			  </select>
+		     </div>
+		     <div>
+		      <p style="margin-bottom : 3px;">팀 평균나이</p>
+		      <select id="team_age" name="team_age" style="margin-bottom: 20px;">
+					<option value='<%=team.getTeam_age() %>'><%=team.getTeam_age() %></option>
+					<option value="10대">10대</option>
+					<option value="20대">20대</option>
+					<option value="30대">30대</option>
+					<option value="40대">40대</option>
+					<option value="50대">50대</option>
+			  </select>
+		     </div>  
+		     <div>
+		      <p style="margin-bottom : 3px;">지역</p>
+		      <input type="text" name="region" value="<%=team.getTeam_region() %>" size="40" style="margin-bottom: 20px;">
+		     </div>
+		     <div>
+		     <input type="button" onclick="fn_update();" value="수정">
+      	     <input type="reset" value="취소">
+      	     </div>
+      	     <input type="hidden" name="email" value="<%=team.getTeam_leader()%>">
+      	     </form>
+      <%} %>
     </main>
   </div>
 </div>
@@ -165,5 +192,25 @@ header{
 const fn_delete = ()=>{
 	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=210 ,left=500, top=200");
 }
+const fn_update= ()=>{
+	$("#updateForm").submit();
+}
+
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+            $('#cover').attr('src', e.target.result);
+            $('#fileName').val(input.files[0].name);
+            console.log($('#fileName').val());
+        }
+      reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$('#thumbnailImg1').change(function() {
+	readURL(this);
+});
 </script>
 <%@ include file="/views/common/footer.jsp" %>

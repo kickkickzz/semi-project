@@ -79,13 +79,13 @@ List<Team> result = (List<Team>)request.getAttribute("result");
           </li>
            <li class="nav-item">
             <a class="nav-link" href="<%=request.getContextPath()%>/branch.do" style="color: black">
-                <i class="fa-solid fa-list"></i>
+               <i class="fa-solid fa-location-dot"></i>
                 <span data-feather="file"></span>
               지점정보
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<%=request.getContextPath()%>/member/myteam.do" style="color: black">
+            <a class="nav-link" href="<%=request.getContextPath()%>/member/myteam.do?email=<%=loginMember.getEmail()%>" style="color: black">
               <i class="fa-solid fa-people-group"></i>
               <span data-feather="shopping-cart"></span>
               나의 팀

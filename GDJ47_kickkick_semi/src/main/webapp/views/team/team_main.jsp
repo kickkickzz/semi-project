@@ -236,10 +236,14 @@ td{
 									style="width: 282px; height: 268px;" />
 							</div>
 							<br>
-						
+							
+							
+							
+							
 							<input id="fileName" name="fileName" class="upload-name" value="파일선택" style="width: 200px;" readonly>
-							<!-- <input type="file" id="" multiple="multiple"> -->
-							<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1">
+							
+						  <input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" style="margin-bottom:20px;">
+							
 					</div>
 					<div class="modal-footer">
 						<button type="submit" id="teamRegistBtn" class="simple">팀 등록하기</button>

@@ -57,7 +57,6 @@ public class ReservationListServlet extends HttpServlet {
 		while(!(pageNo>pageEnd||pageNo>totalPage)) { //totalPage가 23이면 5로 나눌떄 3개가 남음로 totalPage도 설정해줌
 			if(cPage==pageNo) {
 				pageBar += "<span>"+pageNo+"</span>"; //1일때는 아무것도 클릭이안댐
-				//pageBar += "<li class="+'"page-item'"+"><a class="page-link" href="#">Previous</a></li>";
 			}else {
 				pageBar += "<a href='"+request.getContextPath()
 						+"/member/reservationlist.do?cPage="+pageNo+"&numPerpage="+numPerpage+"&email="+email+"'>"+pageNo+"</a>";
