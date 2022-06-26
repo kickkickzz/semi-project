@@ -76,6 +76,9 @@ td{
     border-bottom: 3px solid #3f84b0;
     border-radius: 3px;
 }
+.pageBar{
+	font-size: 25px;
+}
 .simple:hover {background-color: lightgray;}
 
 
@@ -156,7 +159,7 @@ td{
 				</div>
 			</div>
 		</div>
-		<div id="pageBar">
+		<div class="pageBar">
         	<%=request.getAttribute("pageBar") %>
         </div>
 	</section>

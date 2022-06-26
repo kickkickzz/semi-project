@@ -25,7 +25,7 @@ $(()=>{
 			$("#address4").val(address4);
 			$("#gender").val(gender);
 			form.attr("onsubmit","return enroll();")
-			form.attr("action","http://localhost:9090/GDJ47_kickkick_semi/enrollMember.do");
+			form.attr("action","/GDJ47_kickkick_semi/enrollMember.do");
 			form.submit();
 		}else{
 			const form = $("#h-form");
@@ -33,7 +33,7 @@ $(()=>{
 			const password = $(".password").val();
 			$("#email").val(email);
 			$("#password").val(password);
-			form.attr("action","http://localhost:9090/GDJ47_kickkick_semi/loginMember.do");
+			form.attr("action","/GDJ47_kickkick_semi/loginMember.do");
 			form.submit();
 		}
 	});
@@ -231,7 +231,7 @@ function enterkey(){
 			const password = $(".password").val();
 			$("#email").val(email);
 			$("#password").val(password);
-			form.attr("action","http://localhost:9090/GDJ47_kickkick_semi/loginMember.do");
+			form.attr("action","/GDJ47_kickkick_semi/loginMember.do");
 			form.submit();
 		}
 }

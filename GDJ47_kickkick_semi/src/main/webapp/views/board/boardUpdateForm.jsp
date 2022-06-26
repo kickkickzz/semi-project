@@ -27,7 +27,7 @@
 					<!-- 타이틀 영역박스-->
 					<div class="title-container">
 						<input id="board-write-title" type="text" name="title"
-							placeholder="<%=b.getBoardTitle() %>">
+							placeholder="<%=b.getBoardTitle() %>"><%=b.getBoardTitle() %>
 						<hr class="my-4">
 					</div>
 					<!-- 이미지 등록박스-->

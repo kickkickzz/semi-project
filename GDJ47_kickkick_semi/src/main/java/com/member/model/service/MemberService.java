@@ -167,4 +167,10 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	public int checkBranch(String branchname) {
+		Connection conn = getConnection();
+		int result = dao.checkBranch(conn,branchname);
+		close(conn);
+		return result;
+	}
 }

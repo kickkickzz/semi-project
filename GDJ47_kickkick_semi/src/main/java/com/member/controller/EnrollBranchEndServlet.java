@@ -41,12 +41,12 @@ public class EnrollBranchEndServlet extends HttpServlet {
 		String userId = ((Member)request.getSession().getAttribute("loginMember")).getEmail();
 	      String root = request.getSession().getServletContext().getRealPath("/");
 	      //String savePath = root + "resources/storage/"+userId;
-	      String savePath = root+"/resources/storage/"+userId+"/branch_img";
+	      String savePath = root+"/resources/storage/branch_img";
 	      File f = new File(savePath);
 	      if(!f.exists()) {
 	         f.mkdirs();
 	      }
-	      String savePath2 = root + "resources/storage/"+userId+"/";
+	      String savePath2 = root + "resources/storage/branch_img";
 	     
 	      System.out.println(savePath2);
 	      int maxSize = 1024 * 1024 * 10;

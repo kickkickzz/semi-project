@@ -38,6 +38,8 @@
 				<input type="hidden" name="email" value="<%=email%>">
 				<input type="submit" value="인증하기">
 			</form>
+		<%}else if(msg=="3"){ %>
+			<p style="color:red">올바른 이메일을 입력해주세요.</p>
 		<%} %>
 		</div>
 	</div>

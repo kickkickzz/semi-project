@@ -81,7 +81,7 @@ if(loginMember!=null){
          
          <tr onclick="location.assign('<%=request.getContextPath()%>/reservation.do?stanum=<%=s.getStadium_num()%>')">
             <td><%=s.getStadium_num() %></td>
-            <td><%=s.getBranch_img() %></td>
+            <td><img src="<%=request.getContextPath()%>/resources/storage/branch_img/<%=s.getBranch_img() %>" width="100" height="80"></td>
             <td><%=s.getBranch_address() %></td>
             <td><%=s.getBranch_num() %></td>
             <td><%=s.getStadium_name() %></td>
@@ -210,7 +210,11 @@ if(loginMember!=null){
 </div>
 </div>
 
+
+
+
 <script>
+
       const fn_searchDataa=e=>{
          if($(e.target).find("input").val().length==0){
             alert("값을 입력하고 조회하세요.");
@@ -236,7 +240,7 @@ if(loginMember!=null){
             success :(data)=>{ //json을 이용해서 배열로 data를 받아올려고 하는데 그러면
                console.log(data);
                if(data.length!=0){
-            	   console.log(data);
+                  console.log(data);
                   alert("지점이 조회되었습니다.");
                    $('#branch_num').empty();  //받아온 데이터를 for문 돌릴려고 하는데
                   $.each(data , function(key,value){ 
@@ -300,7 +304,12 @@ if(loginMember!=null){
                }
             })
          }
+
       })
+
+
+  
+
 </script>
    
 

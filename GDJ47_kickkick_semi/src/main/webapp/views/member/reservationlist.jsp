@@ -3,14 +3,29 @@
 <%@page import = "com.reservation.model.vo.PayHistory,java.util.List" %>
  
 
+
+
  <% 
  List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist"); 
  String pageBar = (String)request.getAttribute("pageBar");%>
 
+
 <%@ include file="/views/common/header.jsp" %>
+
+<%
+String type=null;
+if(loginMember!=null){
+	type=loginMember.getType();	 
+}
+%>
+ <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
+
+    
+
 
 <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
   
+
 
     <!-- Bootstrap core CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -74,6 +89,7 @@
               예약현황
             </a>
           </li>
+          <%if(type.equals("M")){ %>
           <li class="nav-item">
             <a class="nav-link" href="<%=request.getContextPath()%>/branch.do" style="color: black">
                 <i class="fa-solid fa-location-dot"></i>
@@ -81,6 +97,7 @@
               지점정보
             </a>
           </li>
+          <%} %>
           <li class="nav-item">
             <a class="nav-link" href="<%=request.getContextPath()%>/member/myteam.do?email=<%=loginMember.getEmail()%>" style="color: black">
               <i class="fa-solid fa-people-group"></i>

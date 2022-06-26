@@ -51,10 +51,13 @@ public class TeamMemberInfoServlet extends HttpServlet {
 		ArrayList<TeamMemberInfo> list = new TeamService().selectTeamApplication(team_code);
 		ArrayList<Match> matchlist=new TeamService().selectMatch(team_code);
 		List<Team> t = new ArrayList<Team>();
-		for(Match m : matchlist) {
-			Team  t2= new MatchService().selectteamcode2(m.getTeam_code());
-			t.add(t2);
+		if(matchlist!=null) {
+			for(Match m : matchlist) {
+				Team  t2= new MatchService().selectteamcode2(m.getTeam_code());
+				t.add(t2);
+			}
 		}
+		
 		
 		
 		request.setAttribute("registnum", matchlist);

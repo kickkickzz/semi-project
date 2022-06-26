@@ -68,10 +68,10 @@ public class EnrollMemberServlet extends HttpServlet {
 		System.out.println(birthday);
 		System.out.println(address);
 		Member m = Member.builder()
-				.email(request.getParameter("email"))
-				.password(request.getParameter("password"))
-				.name(request.getParameter("name"))
-				.phone(request.getParameter("phone"))
+				.email(request.getParameter("email").trim())
+				.password(request.getParameter("password").trim())
+				.name(request.getParameter("name").trim())
+				.phone(request.getParameter("phone").trim())
 				.birthday(birth)
 				.gender(request.getParameter("gender"))
 				.address(address)

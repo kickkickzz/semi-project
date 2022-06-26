@@ -4,6 +4,12 @@
  
  <% List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist"); %>
 <%@ include file="/views/common/header.jsp" %>
+<%
+String type=null;
+if(loginMember!=null){
+	type=loginMember.getType();	 
+}
+%>
 
  <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
 
@@ -86,13 +92,20 @@
               예약현황
             </a>
           </li>
+         <%if(type.equals("M")){ %>
           <li class="nav-item">
+<<<<<<< HEAD
             <a class="nav-link" href="<%=request.getContextPath()%>/branch.do?emamil=<%=email %>" style="color: black">
                 <i class="fa-solid fa-location-dot"></i>
+=======
+            <a class="nav-link" href="<%=request.getContextPath()%>/branch.do" style="color: black">
+                <i class="fa-solid fa-list"></i>
+>>>>>>> branch 'kickkick' of https://github.com/kickkickzz/semi-project.git
                 <span data-feather="file"></span>
               지점정보
             </a>
           </li>
+          <%} %>
           <li class="nav-item">
             <a class="nav-link" href="<%=request.getContextPath()%>/member/myteam.do?email=<%=loginMember.getEmail()%>" style="color: black">
               <i class="fa-solid fa-people-group"></i>
