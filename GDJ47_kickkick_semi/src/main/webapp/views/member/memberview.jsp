@@ -166,20 +166,7 @@ if(loginMember!=null){
      <div>
       <p style="margin-bottom : 3px;">비밀번호</p>
       <input type="button" onclick="updatePw()" value="비밀번호 변경" style="margin-bottom : 10px;">
-     </div>  
- 
-     <div>
-      <p style="margin-bottom : 3px;">연락처</p>
-      <input type="text" name="phone" value="1588-1588" placeholder="-없이 입력" maxlength="11" style="margin-bottom : 10px;" size="63" readonly>
      </div>
-     <div>
-      <p style="margin-bottom : 3px;">주소</p>
-      <input type="text" value="ㅋ킥킥ㅋ" size="63" readonly>
-      <input type="button" onclick="updateAddress()" value="주소 변경" style="margin-bottom : 10px;">
-     </div>
-
-     <input type="button" onclick="fn_update();" value="수정"/>
-      <input type="reset" value="취소">
 	<%} %>
    </main>
   </div>
@@ -216,7 +203,7 @@ const updatePw = ()=>{
 }
 
 const fn_delete = ()=>{
-	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=400 ,left=800, top=200");
+	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=470, height=400 ,left=800, top=200");
 }
 
 const fn_update= ()=>{

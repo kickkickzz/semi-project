@@ -16,8 +16,8 @@
 			회원탈퇴가 완료 됩니다.
 		</p>
 	</div>
-	<form action="<%=request.getContextPath()%>/deletememberend.do" method="post">
-		<div style="margin-left:50px;">
+	<form action="<%=request.getContextPath()%>/deletememberend.do" method="post" onsubmit="return confirm('정말 탈퇴하시겠습니까?');">
+		<div style="margin-left:70px;">
 		현재 비밀번호 &nbsp&nbsp&nbsp<input type="password" name="oriPw" class="pw" style="margin-bottom:10px"><br>
 		</div>
 		<div style="text-align : center;">

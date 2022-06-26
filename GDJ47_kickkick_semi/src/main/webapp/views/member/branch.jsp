@@ -138,7 +138,7 @@ if(loginMember!=null){
       <h2>지점정보</h2>
       <div class="table-responsive">
       
-      	   <div style="text-align:center">
+      	   <div>
    	   		  <button class="simple" type="button" onclick="fn_enrollbranch();">지점등록</button>		
       		
       		</div>
@@ -170,11 +170,11 @@ header{
 </style>
 <script>
 const fn_delete = ()=>{
-	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=400 ,left=800, top=200");
+	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=470, height=400 ,left=800, top=200");
 }
 
 const fn_enrollbranch=()=>{
-	window.open("<%=request.getContextPath()%>/enrollbranch.do", "enrollbranch", "width=500, height=680");
+	window.open("<%=request.getContextPath()%>/enrollbranch.do", "enrollbranch", "width=500, height=680, left=800, top=200");
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

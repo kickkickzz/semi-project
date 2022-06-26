@@ -184,7 +184,7 @@ header{
 </style>
 <script>
 const fn_delete = ()=>{
-	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=400 ,left=800, top=200");
+	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=470, height=400 ,left=800, top=200");
 }
 
 $("#btn_teammember").click(e=>{

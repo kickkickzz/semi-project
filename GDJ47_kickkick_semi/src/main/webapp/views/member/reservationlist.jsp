@@ -7,16 +7,15 @@
 
  <% 
  List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist"); 
- String pageBar = (String)request.getAttribute("pageBar");%>
+ String pageBar = (String)request.getAttribute("pageBar");
+ String type=null;
+ if(loginMember!=null){
+ 	type=loginMember.getType();	 
+ }
+ %>
 
 
 
-<%
-String type=null;
-if(loginMember!=null){
-	type=loginMember.getType();	 
-}
-%>
  <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
 
     
@@ -154,7 +153,7 @@ if(loginMember!=null){
           <%if(list.size()==0){%>
 
               <tr>
-           		<td=colspan="7">조회된 결과가 없습니다.</td>
+           		<td colspan="7">조회된 결과가 없습니다.</td>
           
            	  </tr>
           <%}else{ %>
@@ -170,7 +169,7 @@ if(loginMember!=null){
              	<td><%=p.getPaymethod() %></td>
              </tr>
             
-       
+       		<%} %>
        <%} %>
            </tbody>
            </table>
@@ -181,6 +180,7 @@ if(loginMember!=null){
     			<%=pageBar %>
   			</ul>
 	  </nav>
+	  
       </div>
     </main>
   </div>
@@ -208,7 +208,7 @@ header{
 </style>
 <script>
 const fn_delete = ()=>{
-	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=400 ,left=800, top=200");
+	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=470, height=400 ,left=800, top=200");
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
