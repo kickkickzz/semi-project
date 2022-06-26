@@ -29,6 +29,7 @@
 		</div><br>
 		<div class="hh">
 		<input type="submit" value="찾기">
+		<input type="reset" value="취소" onclick="window.close();">
 		</div>
 	</form>
 	<style>

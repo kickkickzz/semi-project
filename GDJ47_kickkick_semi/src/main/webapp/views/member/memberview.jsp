@@ -116,6 +116,7 @@ if(loginMember!=null){
    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <br><br>
     <h2>회원 정보</h2>
+    <%if(type.equals("G")) {%>
     <form></form>
     <form id="updateForm" action="<%=request.getContextPath()%>/updatemember.do" method="post">
      <div>
@@ -153,7 +154,33 @@ if(loginMember!=null){
       <input type="button" onclick="fn_update();" value="수정"/>
       <input type="reset" value="취소">
     </form>
+	<%} else{%>
+	<div>
+      <p style="margin-bottom : 3px;" class="pp">이메일</p>
+      <input type="text" name="email" value="<%=loginMember.getEmail()%>" style="margin-bottom : 7px; background-color:lightgray" size="63" readonly>
+     </div>  
+     <div>
+      <p style="margin-bottom : 3px;" class="pp">이름</p>
+      <input type="text" name="name" value="<%=loginMember.getName()%>" readonly style="margin-bottom : 10px; background-color:lightgray" size="63" >
+     </div>
+     <div>
+      <p style="margin-bottom : 3px;">비밀번호</p>
+      <input type="button" onclick="updatePw()" value="비밀번호 변경" style="margin-bottom : 10px;">
+     </div>  
+ 
+     <div>
+      <p style="margin-bottom : 3px;">연락처</p>
+      <input type="text" name="phone" value="1588-1588" placeholder="-없이 입력" maxlength="11" style="margin-bottom : 10px;" size="63" readonly>
+     </div>
+     <div>
+      <p style="margin-bottom : 3px;">주소</p>
+      <input type="text" value="ㅋ킥킥ㅋ" size="63" readonly>
+      <input type="button" onclick="updateAddress()" value="주소 변경" style="margin-bottom : 10px;">
+     </div>
 
+     <input type="button" onclick="fn_update();" value="수정"/>
+      <input type="reset" value="취소">
+	<%} %>
    </main>
   </div>
 </div>

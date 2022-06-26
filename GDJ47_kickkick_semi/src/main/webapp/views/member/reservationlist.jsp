@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8"%>
 <%@page import = "com.reservation.model.vo.PayHistory,java.util.List" %>
  
 
@@ -175,7 +175,7 @@ if(loginMember!=null){
            </tbody>
            </table>
       </div>
-      <div id="pageBar">
+      <div id="pageBar" style="text-align:center;">
       <nav aria-label="Page navigation example">
   			<ul class="pagination">
     			<%=pageBar %>
