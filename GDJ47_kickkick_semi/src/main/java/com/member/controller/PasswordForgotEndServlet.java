@@ -115,7 +115,7 @@ public class PasswordForgotEndServlet extends HttpServlet {
 	            //메일 제목
 	            msgg.setSubject("안녕하세요 ㅋ킥킥ㅋ 인증 메일입니다.");
 	            //메일 내용
-	            msgg.setText("임시비밀번호 : "+temp);
+	            msgg.setText("인증 번호 : "+temp);
 	            
 	            Transport.send(msgg);
 	            System.out.println("이메일 전송");

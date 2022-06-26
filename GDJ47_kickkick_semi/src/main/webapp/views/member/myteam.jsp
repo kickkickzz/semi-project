@@ -7,9 +7,6 @@ if(loginMember!=null){
 	type=loginMember.getType();	 
 }
 Team team = (Team)request.getAttribute("team");
-String[] newStr = team.getTeam_region().split("\\s+");
-String si = newStr[0];
-String gu = newStr[1];
 %>
 <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/dashboard/">
 
@@ -127,7 +124,7 @@ String gu = newStr[1];
 		      <p style="margin-bottom : 3px;">팀마크</p>
 		      <img src="<%=request.getContextPath() %>/resources/storage/<%= team.getTeam_leader()%>/team_img/<%= team.getTeam_mark_img()%>"
                         width="250px" height="200px" style="margin-bottom: 30px;"><br>
-              <input id="fileName" name="fileName" class="upload-name" value="파일선택" style="width: 200px;" readonly>
+              <input id="fileName" name="fileName" class="upload-name" value="<%=team.getTeam_mark_img() %>" style="width: 200px;" readonly>
 							
 			  <input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" style="margin-bottom:20px;">
 		     </div>
@@ -194,7 +191,7 @@ header{
 </style>
 <script>
 const fn_delete = ()=>{
-	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=210 ,left=500, top=200");
+	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=400 ,left=800, top=200");
 }
 const fn_update= ()=>{
 	$("#updateForm").submit();

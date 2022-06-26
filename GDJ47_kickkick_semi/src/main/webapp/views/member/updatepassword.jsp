@@ -28,7 +28,7 @@
 		</div>
 		<div style="text-align:center; margin-top: 10px;" >
 		<input type="submit" value="변경">
-		<input type="reset" value="취소">
+		<input type="reset" value="취소" onclick="window.close()">
 		</div>
 		<input type="hidden" name="email" value="<%=request.getParameter("email")%>"/>
 	</form>

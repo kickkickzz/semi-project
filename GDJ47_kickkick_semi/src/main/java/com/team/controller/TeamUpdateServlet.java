@@ -34,28 +34,28 @@ public class TeamUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = ((Member)request.getSession().getAttribute("loginMember")).getEmail();
-		 
-	      String root = request.getSession().getServletContext().getRealPath("/");
-	      String savePath = root + "resources/storage/"+userId+"/team_img/";
-	      
-	    
-	      File f = new File(savePath);
-	      if(!f.exists()) {
-	         f.mkdirs();
-	      }
-
-	      int maxSize = 1024 * 1024 * 10;
-	      
-	    MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamedPolicy());
-	      
-	    
-		String teamMark = multiRequest.getParameter("fileName");
-		String teamAge = multiRequest.getParameter("team_age");
-		String name = multiRequest.getParameter("name");
-		String teamGender = multiRequest.getParameter("team_gender");
-		String region = multiRequest.getParameter("region");
-		String email = multiRequest.getParameter("email");
+//		String userId = ((Member)request.getSession().getAttribute("loginMember")).getEmail();
+//		 
+//	    String root = request.getSession().getServletContext().getRealPath("/");
+//	    String savePath = root + "resources/storage/"+userId+"/team_img/";
+//	      
+//	    
+//	      File f = new File(savePath);
+//	      if(!f.exists()) {
+//	         f.mkdirs();
+//	      }
+//
+//	      int maxSize = 1024 * 1024 * 10;
+//	      
+//	    MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamedPolicy());
+//	      
+//	    
+		String teamMark = request.getParameter("fileName");
+		String teamAge = request.getParameter("team_age");
+		String name = request.getParameter("name");
+		String teamGender = request.getParameter("team_gender");
+		String region = request.getParameter("region");
+		String email = request.getParameter("email");
 		System.out.println(teamMark);
 		int result = new TeamService().teamUpdate(email,teamMark,name,teamAge,teamGender,region);
 		

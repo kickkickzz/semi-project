@@ -3,14 +3,13 @@
 <%@page import = "com.reservation.model.vo.PayHistory,java.util.List" %>
  
 
-
+<%@ include file="/views/common/header.jsp" %>
 
  <% 
  List<PayHistory> list = (List<PayHistory>)request.getAttribute("paylist"); 
  String pageBar = (String)request.getAttribute("pageBar");%>
 
 
-<%@ include file="/views/common/header.jsp" %>
 
 <%
 String type=null;
@@ -152,9 +151,16 @@ if(loginMember!=null){
           </thead>
           <tbody>
           <!-- 이메일로 검색해서 구장을 리스트로 갖고온다음 여기서 리스트 for문써서 활용 -->
-          <%if(list.size()!=0){
-        	  for(PayHistory p:list){%>       
-          <tr>
+          <%if(list.size()==0){%>
+
+              <tr>
+           		<td=colspan="7">조회된 결과가 없습니다.</td>
+          
+           	  </tr>
+          <%}else{ %>
+             
+            <% for(PayHistory p:list){%>       
+             <tr>
           		<td><%=p.getPaycode() %></td>
           		<td><%=p.getReservation_code() %></td>
              	<td><%=p.getStadium_branch_num() %></td>
@@ -163,19 +169,11 @@ if(loginMember!=null){
              	<td><%=p.getStarttime()%> : 00 ~ <%=p.getEndtime()%> : 00 </td>
              	<td><%=p.getPaymethod() %></td>
              </tr>
-             <%} %>
-        
-          <%}else{ %>
-             
-             <tr>
-             	<td=colspan="7">조회된 결과가 없습니다.</td>
-            
-             </tr>
             
        
        <%} %>
-            	</tbody>
-              </table>
+           </tbody>
+           </table>
       </div>
       <div id="pageBar">
       <nav aria-label="Page navigation example">
@@ -210,7 +208,7 @@ header{
 </style>
 <script>
 const fn_delete = ()=>{
-	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=210 ,left=500, top=200");
+	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=400 ,left=800, top=200");
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

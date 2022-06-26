@@ -94,13 +94,8 @@ if(loginMember!=null){
           </li>
          <%if(type.equals("M")){ %>
           <li class="nav-item">
-<<<<<<< HEAD
             <a class="nav-link" href="<%=request.getContextPath()%>/branch.do?emamil=<%=email %>" style="color: black">
                 <i class="fa-solid fa-location-dot"></i>
-=======
-            <a class="nav-link" href="<%=request.getContextPath()%>/branch.do" style="color: black">
-                <i class="fa-solid fa-list"></i>
->>>>>>> branch 'kickkick' of https://github.com/kickkickzz/semi-project.git
                 <span data-feather="file"></span>
               지점정보
             </a>
@@ -175,7 +170,7 @@ header{
 </style>
 <script>
 const fn_delete = ()=>{
-	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=210 ,left=500, top=200");
+	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=400 ,left=800, top=200");
 }
 
 const fn_enrollbranch=()=>{

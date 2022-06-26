@@ -27,7 +27,7 @@
 	  <div style="text-align:center;">
 	  <input type="button" onclick="sample6_execDaumPostcode()" value="주소 검색">
 	  <input type="submit" value="변경">
-	  <input type="reset" value="취소">
+	  <input type="reset" value="취소" onclick="window.close()">
 	  </div>
 	  <input type="hidden" name="email" value="<%=request.getParameter("email")%>">
 	</form>

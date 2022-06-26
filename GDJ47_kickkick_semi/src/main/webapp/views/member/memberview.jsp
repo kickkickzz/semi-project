@@ -189,7 +189,7 @@ const updatePw = ()=>{
 }
 
 const fn_delete = ()=>{
-	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=210 ,left=500, top=200");
+	open("<%=request.getContextPath()%>/deletemember.do?email=<%=loginMember.getEmail()%>","_blank","width=400, height=400 ,left=800, top=200");
 }
 
 const fn_update= ()=>{
