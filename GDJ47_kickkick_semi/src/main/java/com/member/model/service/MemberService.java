@@ -173,4 +173,18 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
+	
+	
+	//teamDelete
+	public int teamDelete(String email) {
+		Connection conn = getConnection();
+		int result = dao.teamDelete(conn,email);
+		if(result>0) {
+			close(conn);
+		}else {
+			rollback(conn);
+		}
+		return result;
+	}
 }

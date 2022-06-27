@@ -423,4 +423,23 @@ public class MemberDao {
 		}
 		return result;
 	}
+	
+	
+	
+	
+	public int teamDelete(Connection conn,String email) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("teamDelete"));
+			pstmt.setString(1, email);
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+
+			close(pstmt);
+		}
+		return result;
+	}
 }

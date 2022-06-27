@@ -115,9 +115,9 @@ Team team = (Team)request.getAttribute("team");
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <br><br>
-      <h2>나의 팀 정보</h2><br>
+      <h2>나의 팀 정보</h2><hr/><br>
       <%if(team==null){%>
-      		<h2>조회된 팀이 없습니다.</h2>
+      		<p>조회된 팀이 없습니다.</p>
       <%}else{ %>
       <form id="updateForm" action="<%=request.getContextPath()%>/teamUpdate.do" method="post">
       		<div>
@@ -156,12 +156,16 @@ Team team = (Team)request.getAttribute("team");
 		      <p style="margin-bottom : 3px;">지역</p>
 		      <input type="text" name="region" value="<%=team.getTeam_region() %>" size="40" style="margin-bottom: 20px;">
 		     </div>
-		     <div>
+		     <div style="margin-bottom:10px;">
 		     <input type="button" onclick="fn_update();" value="수정">
       	     <input type="reset" value="취소">
-      	     </div>
       	     <input type="hidden" name="email" value="<%=team.getTeam_leader()%>">
+      	     </div>
       	     </form>
+      	     <form action="<%=request.getContextPath()%>/teamDeleteEnd.do?email=<%=loginMember.getEmail()%>" method="post" onsubmit="return confirm('정말 팀을 탈퇴하시겠습니까?');">
+      	     	<input type="submit"  value="탈퇴" style="margin-bottom:10px;">
+      	     </form>
+      	     </div>
       <%} %>
     </main>
   </div>
@@ -196,7 +200,9 @@ const fn_delete = ()=>{
 const fn_update= ()=>{
 	$("#updateForm").submit();
 }
-
+const fn_teamdelete= ()=>{
+	open("<%=request.getContextPath()%>/teamDelete.do?email=<%=loginMember.getEmail()%>","_blank","width=470, height=400 ,left=800, top=200");
+}
 
 function readURL(input) {
     if (input.files && input.files[0]) {
